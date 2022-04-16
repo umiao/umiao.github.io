@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2022/04/16/SQL-Study-Note-Basics/sql.jpg">
 <meta property="article:published_time" content="2022-04-16T21:05:53.000Z">
-<meta property="article:modified_time" content="2022-04-16T22:38:44.933Z">
+<meta property="article:modified_time" content="2022-04-16T23:54:12.612Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="SQL">
 <meta property="article:tag" content="DataScience">
@@ -185,7 +185,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/04/16/SQL-Study-Note-Basics/" class="article-date">
-     <time datetime="2022-04-16T22:38:44.933Z" itemprop="dateModified">2022-04-16</time>
+     <time datetime="2022-04-16T23:54:12.612Z" itemprop="dateModified">2022-04-16</time>
   </a>
 </div>
 
@@ -356,11 +356,9 @@
 <p> In this case, you do not need to assign the values to the order (of columns) defined by the table.<br> The number of affected rows would be returned after successful insertion.</p>
 </li>
 <li><p><strong>Insert Multi-rows</strong>:</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> shippers (name) <span class="keyword">VALUES</span> (‘S1’), (‘S2’), (‘S3’);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> shippers (name) <span class="keyword">VALUES</span> (<span class="string">&#x27;S1&#x27;</span>), (<span class="string">&#x27;S2&#x27;</span>), (<span class="string">&#x27;S3&#x27;</span>);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>LAST_INSERT_ID</strong>:</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">	</span><br></pre></td></tr></table></figure>
-<p> Returns the most recently generated Auto Incremental ID. Enable hierarchical data insertion. <em>I.E.</em>, find the ID of the latest inserted data, and then use the id to associate &#x2F; update other tables.<br> This syntax feature can eliminate ambiguity, and it is also convenient to correspond a main table record to multiple sub table records.</p>
+<li><p><strong>LAST_INSERT_ID</strong>:<br> Returns the most recently generated Auto Incremental ID. Enable hierarchical data insertion. <em>I.E.</em>, find the ID of the latest inserted data, and then use the id to associate &#x2F; update other tables.<br> This syntax feature can eliminate ambiguity, and it is also convenient to correspond a main table record to multiple sub table records.</p>
 </li>
 <li><p><strong>Duplicate Table</strong>:</p>
  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> orders_archived <span class="keyword">AS</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
@@ -368,7 +366,87 @@
 </li>
 <li><p><strong>Batch Insertion with Select</strong>:</p>
  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> orders_archived <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> order_date <span class="operator">&lt;</span> ’<span class="number">2019</span><span class="number">-01</span><span class="number">-01</span>’;</span><br></pre></td></tr></table></figure>
-<p> Use the selected partial &#x2F; entire data of other table to create a duplicate.</p>
+<p> Column attributes (constraints) like PK, AI would be ignored as well.</p>
+</li>
+<li><p><strong>Truncate Table in workbench</strong>:<br> Right click a table and select ‘truncate table’ would remove all the data (records) but would not remove the table itself.</p>
+</li>
+<li><p><strong>Update a single row</strong>:</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> invoices <span class="keyword">SET</span> payment_total <span class="operator">=</span> <span class="number">10</span>, payment_date<span class="operator">=</span>’<span class="number">2019</span><span class="number">-03</span><span class="number">-01</span>’ <span class="keyword">WHERE</span> invoice_id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p> Filter the results (single line) that meet the conditions and update the filtered results.<br> It is also allowed to use default, arithmetic expression, etc. as the new value of the selected row.</p>
+<p> <em><strong>Note that even if multiple statements are selected for your filter criteria, MySQL workbench runs in the security update mode by default, allowing you to update only one row at a time. However, in other environments, there is no such problem.</strong></em></p>
+<p> <em>You can drag it to the bottom of SQL editor and choose to uncheck the safe updates option. After changing the settings, you need to reconnect for the settings to take effect.</em></p>
+<p> <strong>WHERE attribute IN (1,2,3)</strong> can be used to filter multiple records.</p>
+</li>
+<li><p><strong>Use SELECT to UPDATE (apply sub-query in UPDATE)</strong>:</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> invoices <span class="keyword">SET</span> payment_total <span class="operator">=</span> <span class="number">10</span>, payment_date<span class="operator">=</span>’<span class="number">2019</span><span class="number">-03</span><span class="number">-01</span>’ <span class="keyword">WHERE</span> client_id <span class="operator">=</span> ( <span class="keyword">SELECT</span> client_id <span class="keyword">FROM</span> clients <span class="keyword">WHERE</span> name<span class="operator">=</span>’Myworks’ );</span><br></pre></td></tr></table></figure>
+<p> In this manner, a single logical judgement is replaced with a sub-query to update multiple values at a time. </p>
+<p> If multiple values would be returned in your sub-query, the WHERE clause should be changed to <strong>WHERE client_id IN (sub-query)</strong>.<br> You should test the sub-query before update the table.<br> You <strong>CANNOT</strong> update the same table where you conduct your sub-query —- If you have to do so, create a duplicate and give it an alias.</p>
+</li>
+<li><p><strong>DELETE</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> (invoice_id<span class="operator">=</span><span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>Obviously, the condition within the parenthesis can be a sub-query, too.</p>
+</li>
+<li><p><strong>Rebuild the Database</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> DB If <span class="keyword">EXISTS</span> DB;</span><br><span class="line"><span class="comment">-- Conduct the script of DB building then.</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Function-and-the-Aggregate-Function"><a href="#Function-and-the-Aggregate-Function" class="headerlink" title="Function and the Aggregate Function"></a>Function and the Aggregate Function</h2><ol>
+<li><p><strong>Aggregate Function</strong>:</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">COUNT</span>(), <span class="built_in">MAX</span>(), <span class="built_in">MIN</span>(), <span class="built_in">AVG</span>(), <span class="built_in">SUM</span>()</span><br></pre></td></tr></table></figure>
+<p> It should be noted that <strong>COUNT(row_name)</strong> only returns the number of the non-empty records. If you need to find out the total number of rows, you shoud use <strong>COUNT(*)</strong>.<br> You can use <strong>COUNT (DISTINCT client_id)</strong> to find out the number of unique client_id, too.</p>
+</li>
+<li><p><strong>Non-Aggregate Function</strong>:</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RAND() <span class="comment">-- Generate a random number within (0, 1)</span></span><br><span class="line">RAND(seed) <span class="comment">-- Specify the rand seed</span></span><br><span class="line"><span class="built_in">SQRT</span>() <span class="comment">-- Find the square root for each value</span></span><br><span class="line">CONCAT(a, b) <span class="comment">-- Concat two strings into one</span></span><br></pre></td></tr></table></figure>
+<p> Non-aggregate function would return a same-lengthed sequence for the input values. These functions are element-wised.</p>
+</li>
+<li><p><strong>GROUP BY clause:</strong></p>
+<ul>
+<li>Group the rows according to a given column name. Rows with the same value in the very column would be aggregated together.</li>
+<li>The order of query clause: IMPORTANT: SELECT -&gt; FROM -&gt; WHERE -&gt; ORDER BY</li>
+<li>Grouping based on multiple attributes: <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> state, city</span><br></pre></td></tr></table></figure>
+ In this case, the grouping would based on the tuple: (state, city)</li>
+</ul>
+</li>
+<li><p><strong>Having:</strong></p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(res) <span class="keyword">AS</span> aggregated_res <span class="keyword">FROM</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> state <span class="keyword">HAVING</span> aggregated_res <span class="operator">&gt;</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p> You cannot use WHERE clause to filter the result of the aggreate function, because at that time, the query is not yet completed and the aggregate result is not yet calculated.</p>
+<p> It should be noted that HAVING clause supports the filtering on <strong>Composite Condition</strong>, <em>e.g.</em> HAVING aggre_res1 &gt; 10 AND aggre_res2 &lt; 10.</p>
+<p> The HAVING clause is execute after the query is finished. So that it can only filter the <strong>selected</strong> columns. The columns not selected cannot be used in the filtering constraint.<br> HAVING <strong>does NOT support alias</strong>.</p>
+</li>
+<li><p><strong>WITH ROLLUP:</strong></p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(res) <span class="keyword">AS</span> aggregated_res <span class="keyword">FROM</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> state <span class="keyword">HAVING</span> aggregated_res <span class="operator">&gt;</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p> Conduct an extra aggregate operation for all the aggregated results.<br> <em>E.g.</em>, the SUM &#x2F; MEAN of the aggregated results.<br> This is <strong>only supported by MySQL</strong>.<br> If composite grouping is applied, <em>e.g.</em>, GROUP BY col_a, col_b, each group identified by a unique (col_a, col_b) would conduct an extra aggregation.</p>
+</li>
+<li><p><strong>Nesting Sub-query:</strong></p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> ...);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> col_name <span class="keyword">IN</span> <span class="operator">/</span> <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> ...);</span><br></pre></td></tr></table></figure>
+<p> <em>I.E.</em>, select from the result of another select operation.</p>
+</li>
+<li><p><strong>ALL VS ANY &#x2F; SOME</strong></p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> invoice_total <span class="operator">&gt;</span> <span class="keyword">ALL</span>(<span class="keyword">SELECT</span> invoice_total <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> client_id <span class="operator">=</span> <span class="number">3</span>);</span><br><span class="line"><span class="comment">-- Require the records to be greater than ANY of the sub-query results in order to be selected</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> invoice_total <span class="operator">&gt;</span> <span class="keyword">ANY</span> <span class="operator">/</span> <span class="keyword">SOME</span>(<span class="keyword">SELECT</span> invoice_total <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> client_id <span class="operator">=</span> <span class="number">3</span>);</span><br><span class="line"><span class="comment">-- Require the records to be greater than ONE of the sub-query results in order to be selected</span></span><br></pre></td></tr></table></figure>
+<p> ANY &#x2F; SOME are completely <strong>equivalent</strong>. If one value of the sub-query satisfies the logical expression, the ‘&gt; ANY’ expression is satisfied.<br> For ALL, only if all the values of the sub-query satisfies the logical expression, the ‘&gt; ALL’ expression can be satisfied.<br> <strong>‘&#x3D; ANY’</strong> also equals to <strong>‘IN’</strong>.</p>
+</li>
+<li><p><strong>Correlated sub-query</strong></p>
+ <img src="/2022/04/16/SQL-Study-Note-Basics/asso.jpg" class="" title="Associated sub-query">
+<ul>
+<li><strong>Code-writing Order</strong>: SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY</li>
+<li><strong>Executing Order</strong>: FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY<br> The marked line is crucial, as the logic of correlated subquery would <strong>retrive one value from the main query at a time</strong>, working in an <em><strong>iterative manner</strong></em>, input the value into the sub-query to ge the result and pass the result back to the main query.<br> The main query would check the constraint of WHERE clause and return the result;</li>
+<li>This means that different alias are required even they points to the same table.</li>
+<li>Sub-query can touch the alias of the main &#x2F; outer query.</li>
+</ul>
+</li>
+<li><p><strong>EXISTS</strong></p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> c <span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> I <span class="keyword">WHERE</span> c_id <span class="operator">=</span> c.c_id)</span><br></pre></td></tr></table></figure>
+<p> EXISTS keyword has advantage against the ‘IN (sub-query)’ manner. This is because the ‘IN (sub-query)’ needs to finish the sub-query first before the sub-query can return any result to the outer query. However, EXISTS can work as a <strong>short-circuiting operator</strong> which stops immediately when the first results is found.</p>
+</li>
+<li><p><strong>Write Sub-query in SELECT &#x2F; FROM clause</strong></p>
+<ul>
+<li>Use SELECT to duplicate the result of aggregate function <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> (<span class="keyword">SELECT</span> <span class="built_in">AVG</span>() <span class="keyword">FROM</span> t) <span class="keyword">AS</span> average <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
+ This query makes sense because, the aggregate function would only return one single value. If you want to conduct row-wise calculation on the aggregate value, you have to duplicate it.</li>
+<li>You can also SELECT FROM a sub-query like it is a real-table. However, an alias is required.<br>  <strong>This may make the query too complicated and should be used with care.</strong></li>
+</ul>
+</li>
+<li><p><strong>Numerical Function</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> (<span class="keyword">SELECT</span> <span class="built_in">AVG</span>() <span class="keyword">FROM</span> t) <span class="keyword">AS</span> average <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
+<p>This</p>
 </li>
 </ol>
 
@@ -378,7 +456,7 @@
 
 
 
-    <a data-url="http://example.com/2022/04/16/SQL-Study-Note-Basics/" data-id="cl22fz02v00017ctj19qk2u3w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://example.com/2022/04/16/SQL-Study-Note-Basics/" data-id="cl22io2bt0002e8tj8mxqbejr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -461,7 +539,7 @@
 Overview
 The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).
 ",
-        "wordCount": 1570
+        "wordCount": 2800
     }
 </script>
 
