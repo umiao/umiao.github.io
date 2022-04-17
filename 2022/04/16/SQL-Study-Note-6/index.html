@@ -6,27 +6,27 @@
     
 
     
-    <title>SQL-Study-Note-4 - View | The blog of Blur</title>
+    <title>SQL-Study-Note-6 - Trigger and Events | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="keywords" content="SQL,DataScience" />
     
-    <meta name="description" content="ViewIntroduction to ViewWith the introduction of View, middle &#x2F; query results can be stored for further query and use, just like a real table.">
+    <meta name="description" content="TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL-Study-Note-4 - View">
-<meta property="og:url" content="http://example.com/2022/04/16/SQL-Study-Note-4/index.html">
+<meta property="og:title" content="SQL-Study-Note-6 - Trigger and Events">
+<meta property="og:url" content="http://example.com/2022/04/16/SQL-Study-Note-6/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="ViewIntroduction to ViewWith the introduction of View, middle &#x2F; query results can be stored for further query and use, just like a real table.">
+<meta property="og:description" content="TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/04/16/SQL-Study-Note-4/sql.jpg">
-<meta property="article:published_time" content="2022-04-17T01:39:43.000Z">
-<meta property="article:modified_time" content="2022-04-17T02:00:31.084Z">
+<meta property="og:image" content="http://example.com/2022/04/16/SQL-Study-Note-6/sql.jpg">
+<meta property="article:published_time" content="2022-04-17T04:46:07.000Z">
+<meta property="article:modified_time" content="2022-04-17T05:05:21.886Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="SQL">
 <meta property="article:tag" content="DataScience">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/04/16/SQL-Study-Note-4/sql.jpg">
+<meta name="twitter:image" content="http://example.com/2022/04/16/SQL-Study-Note-6/sql.jpg">
     
 
     
@@ -158,14 +158,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-SQL-Study-Note-4" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-SQL-Study-Note-6" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        SQL-Study-Note-4 - View
+        SQL-Study-Note-6 - Trigger and Events
         </h1>
     
 
@@ -176,16 +176,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2022/04/16/SQL-Study-Note-4/" class="article-date">
-       <time datetime="2022-04-17T01:39:43.000Z" itemprop="datePublished">2022-04-16</time>
+    <a href="/2022/04/16/SQL-Study-Note-6/" class="article-date">
+       <time datetime="2022-04-17T04:46:07.000Z" itemprop="datePublished">2022-04-16</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2022/04/16/SQL-Study-Note-4/" class="article-date">
-     <time datetime="2022-04-17T02:00:31.084Z" itemprop="dateModified">2022-04-16</time>
+  <a href="/2022/04/16/SQL-Study-Note-6/" class="article-date">
+     <time datetime="2022-04-17T05:05:21.886Z" itemprop="dateModified">2022-04-16</time>
   </a>
 </div>
 
@@ -212,42 +212,27 @@
 
             
 
-            <img src="/2022/04/16/SQL-Study-Note-4/sql.jpg" class="" title="SQL Note of blur!">
+            <img src="/2022/04/16/SQL-Study-Note-6/sql.jpg" class="" title="SQL Note of blur!">
 
-<h1 id="View"><a href="#View" class="headerlink" title="View"></a>View</h1><h2 id="Introduction-to-View"><a href="#Introduction-to-View" class="headerlink" title="Introduction to View"></a>Introduction to View</h2><p>With the introduction of View, middle &#x2F; query results can be stored for further query and use, just like a real table.</p>
+<h1 id="Trigger"><a href="#Trigger" class="headerlink" title="Trigger"></a>Trigger</h1><p>Triggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.</p>
 <span id="more"></span>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> payments_after_insert </span><br><span class="line">AFTER<span class="operator">/</span>BEFORE </span><br><span class="line"><span class="keyword">INSERT</span><span class="operator">/</span><span class="keyword">UPDATE</span><span class="operator">/</span><span class="keyword">DELETE</span> </span><br><span class="line"><span class="keyword">ON</span> payments <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span>   <span class="comment">-- You can either write SQL codes here or call the existing procedure</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Creation-and-Manipulation-on-View"><a href="#Creation-and-Manipulation-on-View" class="headerlink" title="Creation and Manipulation on View"></a>Creation and Manipulation on View</h2><ol>
-<li><strong>Creation of View</strong>: <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> view_name <span class="keyword">AS</span> (<span class="keyword">SELECT</span> …)</span><br></pre></td></tr></table></figure>
- Created Views <strong>would NOT</strong> be stored with the tables. It would be stored in ‘Views’ instead.</li>
-</ol>
-<br>
+<h2 id="Extensive-syntax"><a href="#Extensive-syntax" class="headerlink" title="Extensive syntax"></a>Extensive syntax</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">NEW</span> <span class="comment">-- Return the just inserted line.</span></span><br><span class="line"><span class="keyword">OLD</span> <span class="comment">-- Return the just deleted line.</span></span><br><span class="line">NEW.amount <span class="comment">-- Can use . to specify a column</span></span><br></pre></td></tr></table></figure>
+<p>These two (NEW &#x2F; OLD) are keywords of MySQL.<br>Triggers can be used to modify data of any table <strong>EXCEPT</strong> the table which is being listened by the trigger. This is because trigger can trigger itself and results in <strong>infinite loop</strong>.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> TRIGGERS <span class="comment">-- Show all the created triggers.</span></span><br><span class="line"><span class="keyword">ShOW</span> TRIGGERS <span class="keyword">LIKE</span> <span class="string">&#x27;c%&#x27;</span> <span class="comment">-- Filter the triggers.</span></span><br></pre></td></tr></table></figure>
+<p>Triggers can be also used for auditing purpose, <em>i.e.</em>, record the executor, attribute and timestamp when an operation is done.</p>
+<h1 id="EVENT"><a href="#EVENT" class="headerlink" title="EVENT"></a>EVENT</h1><p>Events are periodically triggered codes for multiple tasks.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="comment">-- Show all system variables.</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> event_scheduler<span class="operator">=</span><span class="keyword">ON</span> <span class="operator">/</span> OFF <span class="comment">-- Switch the event_scheduler</span></span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li><p><strong>Alter &#x2F; Drop of View</strong>:</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> sales_by_client;</span><br><span class="line"><span class="comment">-- Drop / delete Operation.</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="operator">/</span> REPLACE <span class="keyword">VIEW</span> <span class="keyword">AS</span> ...;</span><br><span class="line"><span class="comment">-- REPLACE has the advantage against CREATE that it does not require the view to be dropped in advance.</span></span><br></pre></td></tr></table></figure>
-<p> Created Views <strong>would NOT</strong> be stored with the tables. It would be stored in ‘Views’ instead.</p>
-<p> In fact, the Views should be viewed as <em><strong>stored query code</strong></em>. When you need to use them, you can simply rerun the script to retrieve the result. So you can use <em>version control tools</em> to store and share them.</p>
-</li>
-</ol>
-<br>
+<p><strong>Create Event</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> EVENT yearly_delete_state_audit_rows <span class="keyword">ON</span> SCHEDULE</span><br><span class="line"><span class="keyword">EVERY</span> <span class="number">1</span> <span class="keyword">YEAR</span> </span><br><span class="line">STARTS ‘<span class="number">2020</span><span class="number">-01</span><span class="number">-01</span>’ ENDS ’<span class="number">2029</span><span class="number">-01</span><span class="number">-01</span>’</span><br><span class="line">DO <span class="keyword">BEGIN</span>  <span class="comment">-- Note that DO is required here.</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li><strong>Updatable Views</strong>:<ul>
-<li><p>Updatable Views stand for those Views who <strong>DO NOT</strong> contain the keywords of <strong>DISTINCT &#x2F; aggregate functions &#x2F; GROUP BY &#x2F; HAVING &#x2F; UNION</strong>.<br> In this case, these Views can be updated via <strong>CREATE &#x2F; REPLACE</strong>.</p>
-</li>
-<li><p><strong>Update Opertion</strong>: </p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> view_name <span class="keyword">SET</span> due_date <span class="operator">=</span> DATE_ADD(due_date, <span class="type">INTERVAL</span> <span class="number">2</span> <span class="keyword">DAY</span>) <span class="keyword">WHERE</span> invoice_id <span class="operator">=</span> <span class="number">1</span>l</span><br></pre></td></tr></table></figure>
-<p> Point of updatable views: If you <strong>DO NOT</strong> have the authorization to modify a table, you can still create a View based on that table and update the View, as long as it is <strong>Updatable</strong>.</p>
-</li>
-</ul>
-</li>
-</ol>
-<br>
+<p><strong>Two ways to calculate the diff of time</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NOW() – <span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>;</span><br><span class="line">DATESUB(NOW(), <span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>);</span><br></pre></td></tr></table></figure>
 
-<ol start="4">
-<li><strong>WITH CHECK OPTION</strong>:<br> If the UPDATE operation may cause some rows to be deleted, you can add <strong>WITH CHECK OPTION</strong> to the end of the <strong>UPDATE</strong> code to prevent this from happening.</li>
-</ol>
+<p><strong>Activate &#x2F; Deactivate Events</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> EVENT e_name DISABLE;</span><br></pre></td></tr></table></figure>
 <hr>
 
         </div>
@@ -256,7 +241,7 @@
 
 
 
-    <a data-url="http://example.com/2022/04/16/SQL-Study-Note-4/" data-id="cl22trlky00062gtj0jmvgvor" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://example.com/2022/04/16/SQL-Study-Note-6/" data-id="cl22trll1000a2gtja5275die" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -326,18 +311,18 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "SQL-Study-Note-4 - View",
-        "image": "http://example.com/2022/04/16/SQL-Study-Note-4/sql.jpg",
+        "headline": "SQL-Study-Note-6 - Trigger and Events",
+        "image": "http://example.com/2022/04/16/SQL-Study-Note-6/sql.jpg",
         "keywords": "SQL DataScience",
         "genre": "Data Science SQL Job Search SQL",
         "datePublished": "2022-04-16",
         "dateCreated": "2022-04-16",
         "dateModified": "2022-04-16",
-        "url": "http://example.com/2022/04/16/SQL-Study-Note-4/",
+        "url": "http://example.com/2022/04/16/SQL-Study-Note-6/",
         "description": "
 
-ViewIntroduction to ViewWith the introduction of View, middle &#x2F; query results can be stored for further query and use, just like a real table.",
-        "wordCount": 331
+TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.",
+        "wordCount": 356
     }
 </script>
 
@@ -418,20 +403,10 @@ ViewIntroduction to ViewWith the introduction of View, middle &#x2F; query resul
         
 <nav id="article-nav">
     
-        <a href="/2022/04/16/SQL-Study-Note-5/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            SQL-Study-Note-5 - Stored Procedure and User Defined Functions
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2022/04/16/SQL-Study-Note-3/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2022/04/16/SQL-Study-Note-5/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">SQL Study Note - 3 - Function and the Aggregate Function</p>
+        <p class="article-nav-title">SQL-Study-Note-5 - Stored Procedure and User Defined Functions</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -648,7 +623,7 @@ ViewIntroduction to ViewWith the introduction of View, middle &#x2F; query resul
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://example.com/2022/04/16/SQL-Study-Note-4/';
+    var disqus_url = 'http://example.com/2022/04/16/SQL-Study-Note-6/';
     
     (function() {
     var dsq = document.createElement('script');
