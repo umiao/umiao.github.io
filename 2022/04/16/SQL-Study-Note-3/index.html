@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>SQL Study Note - 3 - Function and the Aggregate Function | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="SQL,DataScience" />
+    
+    <meta name="description" content="Function and the Aggregate Function Aggregate Function: 1COUNT(), MAX(), MIN(), AVG(), SUM()  It should be noted that COUNT(row_name) only returns the number of the non-empty records. If you need to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL Study Note - 3 - Function and the Aggregate Function">
+<meta property="og:url" content="http://example.com/2022/04/16/SQL-Study-Note-3/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Function and the Aggregate Function Aggregate Function: 1COUNT(), MAX(), MIN(), AVG(), SUM()  It should be noted that COUNT(row_name) only returns the number of the non-empty records. If you need to">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/04/16/SQL-Study-Note-3/sql.jpg">
+<meta property="article:published_time" content="2022-04-17T01:34:31.000Z">
+<meta property="article:modified_time" content="2022-04-17T01:36:34.632Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="DataScience">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/04/16/SQL-Study-Note-3/sql.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/Hexo/">Hexo</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Tools/">Tools</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Tools/PHP/">PHP</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/SQL/">SQL</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-SQL-Study-Note-3" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        SQL Study Note - 3 - Function and the Aggregate Function
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/04/16/SQL-Study-Note-3/" class="article-date">
+       <time datetime="2022-04-17T01:34:31.000Z" itemprop="datePublished">2022-04-16</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/04/16/SQL-Study-Note-3/" class="article-date">
+     <time datetime="2022-04-17T01:36:34.632Z" itemprop="dateModified">2022-04-16</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <img src="/2022/04/16/SQL-Study-Note-3/sql.jpg" class="" title="SQL Note of blur!">
+
+<h1 id="Function-and-the-Aggregate-Function"><a href="#Function-and-the-Aggregate-Function" class="headerlink" title="Function and the Aggregate Function"></a>Function and the Aggregate Function</h1><ol>
+<li><strong>Aggregate Function</strong>: <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">COUNT</span>(), <span class="built_in">MAX</span>(), <span class="built_in">MIN</span>(), <span class="built_in">AVG</span>(), <span class="built_in">SUM</span>()</span><br></pre></td></tr></table></figure>
+ It should be noted that <strong>COUNT(row_name)</strong> only returns the number of the non-empty records. If you need to find out the total number of rows, you shoud use <strong>COUNT(*)</strong>.<br> You can use <strong>COUNT (DISTINCT client_id)</strong> to find out the number of unique client_id, too.</li>
+</ol>
+<br>
+
+<ol start="2">
+<li><strong>Non-Aggregate Function</strong>: <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RAND() <span class="comment">-- Generate a random number within (0, 1)</span></span><br><span class="line">RAND(seed) <span class="comment">-- Specify the rand seed</span></span><br><span class="line"><span class="built_in">SQRT</span>() <span class="comment">-- Find the square root for each value</span></span><br><span class="line">CONCAT(a, b) <span class="comment">-- Concat two strings into one</span></span><br></pre></td></tr></table></figure>
+ Non-aggregate function would return a same-lengthed sequence for the input values. These functions are element-wised.</li>
+</ol>
+<br>
+
+<ol start="3">
+<li><strong>GROUP BY clause:</strong><ul>
+<li>Group the rows according to a given column name. Rows with the same value in the very column would be aggregated together.</li>
+<li>The order of query clause: IMPORTANT: SELECT -&gt; FROM -&gt; WHERE -&gt; ORDER BY</li>
+<li>Grouping based on multiple attributes: <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> state, city</span><br></pre></td></tr></table></figure>
+ In this case, the grouping would based on the tuple: (state, city)</li>
+</ul>
+</li>
+</ol>
+<br>
+
+<ol start="4">
+<li><p><strong>Having:</strong></p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(res) <span class="keyword">AS</span> aggregated_res <span class="keyword">FROM</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> state <span class="keyword">HAVING</span> aggregated_res <span class="operator">&gt;</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p> You cannot use WHERE clause to filter the result of the aggreate function, because at that time, the query is not yet completed and the aggregate result is not yet calculated.</p>
+<p> It should be noted that HAVING clause supports the filtering on <strong>Composite Condition</strong>, <em>e.g.</em> HAVING aggre_res1 &gt; 10 AND aggre_res2 &lt; 10.</p>
+<p> The HAVING clause is execute after the query is finished. So that it can only filter the <strong>selected</strong> columns. The columns not selected cannot be used in the filtering constraint.<br> HAVING <strong>does NOT support alias</strong>.</p>
+</li>
+</ol>
+<br>
+
+<ol start="5">
+<li><strong>WITH ROLLUP:</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(res) <span class="keyword">AS</span> aggregated_res <span class="keyword">FROM</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> state <span class="keyword">HAVING</span> aggregated_res <span class="operator">&gt;</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+ Conduct an extra aggregate operation for all the aggregated results.<br> <em>E.g.</em>, the SUM &#x2F; MEAN of the aggregated results.<br> This is <strong>only supported by MySQL</strong>.<br> If composite grouping is applied, <em>e.g.</em>, GROUP BY col_a, col_b, each group identified by a unique (col_a, col_b) would conduct an extra aggregation.</li>
+</ol>
+<br>
+
+<ol start="6">
+<li><strong>Nesting Sub-query:</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> ...);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> col_name <span class="keyword">IN</span> <span class="operator">/</span> <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> ...);</span><br></pre></td></tr></table></figure>
+ <em>I.E.</em>, select from the result of another select operation.</li>
+</ol>
+<br>
+
+<ol start="7">
+<li><strong>ALL VS ANY &#x2F; SOME</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> invoice_total <span class="operator">&gt;</span> <span class="keyword">ALL</span>(<span class="keyword">SELECT</span> invoice_total <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> client_id <span class="operator">=</span> <span class="number">3</span>);</span><br><span class="line"><span class="comment">-- Require the records to be greater than ANY of the sub-query results in order to be selected</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> invoice_total <span class="operator">&gt;</span> <span class="keyword">ANY</span> <span class="operator">/</span> <span class="keyword">SOME</span>(<span class="keyword">SELECT</span> invoice_total <span class="keyword">FROM</span> invoices <span class="keyword">WHERE</span> client_id <span class="operator">=</span> <span class="number">3</span>);</span><br><span class="line"><span class="comment">-- Require the records to be greater than ONE of the sub-query results in order to be selected</span></span><br></pre></td></tr></table></figure>
+ ANY &#x2F; SOME are completely <strong>equivalent</strong>. If one value of the sub-query satisfies the logical expression, the ‘&gt; ANY’ expression is satisfied.<br> For ALL, only if all the values of the sub-query satisfies the logical expression, the ‘&gt; ALL’ expression can be satisfied.<br> <strong>‘&#x3D; ANY’</strong> also equals to <strong>‘IN’</strong>.</li>
+</ol>
+<br>
+
+<ol start="8">
+<li><strong>Correlated sub-query</strong> <img src="/2022/04/16/SQL-Study-Note-3/asso.jpg" class="" title="Associated sub-query">
+<ul>
+<li><strong>Code-writing Order</strong>: SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY</li>
+<li><strong>Executing Order</strong>: FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY<br> The marked line is crucial, as the logic of correlated subquery would <strong>retrive one value from the main query at a time</strong>, working in an <em><strong>iterative manner</strong></em>, input the value into the sub-query to ge the result and pass the result back to the main query.<br> The main query would check the constraint of WHERE clause and return the result;</li>
+<li>This means that different alias are required even they points to the same table.</li>
+<li>Sub-query can touch the alias of the main &#x2F; outer query.</li>
+</ul>
+</li>
+</ol>
+<br>
+
+<ol start="9">
+<li><strong>EXISTS</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> c <span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> I <span class="keyword">WHERE</span> c_id <span class="operator">=</span> c.c_id)</span><br></pre></td></tr></table></figure>
+ EXISTS keyword has advantage against the ‘IN (sub-query)’ manner. This is because the ‘IN (sub-query)’ needs to finish the sub-query first before the sub-query can return any result to the outer query. However, EXISTS can work as a <strong>short-circuiting operator</strong> which stops immediately when the first results is found.</li>
+</ol>
+<br>
+
+<ol start="10">
+<li><strong>Write Sub-query in SELECT &#x2F; FROM clause</strong><ul>
+<li>Use SELECT to duplicate the result of aggregate function<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> (<span class="keyword">SELECT</span> <span class="built_in">AVG</span>() <span class="keyword">FROM</span> t) <span class="keyword">AS</span> average <span class="keyword">FROM</span> t;</span><br></pre></td></tr></table></figure>
+This query makes sense because, the aggregate function would only return one single value. If you want to conduct row-wise calculation on the aggregate value, you have to duplicate it.</li>
+<li>You can also SELECT FROM a sub-query like it is a real-table. However, an alias is required.<br>  <strong>This may make the query too complicated and should be used with care.</strong></li>
+</ul>
+</li>
+</ol>
+<br>
+
+<ol start="11">
+<li><strong>Numerical Function</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ROUND(num, mantissas_n); </span><br><span class="line"><span class="comment">-- Round the given number, and mantissas_n decimal places are preserved.</span></span><br><span class="line"><span class="keyword">TRUNCATE</span>(num, mantissas_n); </span><br><span class="line"><span class="comment">-- Truncate the given number with the decimal setting.</span></span><br><span class="line"><span class="comment">--Simiarly, we have:</span></span><br><span class="line"><span class="built_in">CEILING</span>()</span><br><span class="line"><span class="built_in">FLOOR</span>()</span><br><span class="line"><span class="built_in">ABS</span>()</span><br><span class="line">RAND() </span><br></pre></td></tr></table></figure>
+Other available functions can be found in the MySQL documentation.</li>
+</ol>
+<br>
+
+<ol start="12">
+<li><strong>String Function</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">LENGTH(<span class="string">&#x27;sky&#x27;</span>); </span><br><span class="line"><span class="comment">-- Return the length of the input string.</span></span><br><span class="line"><span class="built_in">UPPER</span>(<span class="string">&#x27;sky&#x27;</span>);</span><br><span class="line"><span class="comment">--transform to upper case</span></span><br><span class="line"><span class="built_in">LOWER</span>(<span class="string">&#x27;sky&#x27;</span>);</span><br><span class="line"><span class="comment">--transform to lower case</span></span><br><span class="line">LTRIM() <span class="operator">/</span> RTRIM() <span class="operator">/</span> <span class="built_in">TRIM</span>();</span><br><span class="line"><span class="comment">-- Remove the left / right / both side of spaces.</span></span><br><span class="line"><span class="keyword">LEFT</span>(string, n);</span><br><span class="line"><span class="comment">-- Return the left n chars;</span></span><br><span class="line"><span class="keyword">RIGHT</span>(string, n);</span><br><span class="line"><span class="comment">-- Return the right n chars;</span></span><br><span class="line"><span class="built_in">SUBSTRING</span>(string, <span class="keyword">start</span>, n);</span><br><span class="line"><span class="comment">-- Return n chars starts from start.</span></span><br><span class="line">LOCATE(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;kinter&#x27;</span>);</span><br><span class="line"><span class="comment">-- Find the smallest index where the pattern (&#x27;n&#x27;) occurs in the searched string (&#x27;kinter&#x27;). Index starts from 1.</span></span><br><span class="line">REPLACE(string, source, target);</span><br><span class="line"><span class="comment">-- Replace all the pattern of source to target, in string.</span></span><br><span class="line">CONCAT(a, b);</span><br><span class="line"><span class="comment">-- Concat strings into 1.</span></span><br></pre></td></tr></table></figure>
+Refer the documentation for more string functions.</li>
+</ol>
+<br>
+
+<ol start="13">
+<li><strong>Time Function</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">NOW();</span><br><span class="line"><span class="comment">-- Return the current time and date.</span></span><br><span class="line">CURDATE();</span><br><span class="line"><span class="comment">-- Return the current date.</span></span><br><span class="line">CURTIME():</span><br><span class="line"><span class="comment">-- Return the current time.</span></span><br><span class="line"><span class="keyword">YEAR</span>(<span class="type">time</span>) <span class="operator">/</span> <span class="keyword">MONTH</span>() <span class="operator">/</span> <span class="keyword">DAY</span>() <span class="operator">/</span> <span class="keyword">HOUR</span>() <span class="operator">/</span> <span class="keyword">MINUTE</span>() <span class="operator">/</span> <span class="keyword">SECOND</span>() ...</span><br><span class="line"><span class="comment">-- Extract the year... of a time / date. </span></span><br><span class="line">DAYNAME(<span class="type">time</span>);</span><br><span class="line"><span class="comment">-- Return the name of day, like Friday</span></span><br><span class="line">MONTHNAME(<span class="type">time</span>);</span><br><span class="line"><span class="comment">-- Return sth like DECEMBER...</span></span><br><span class="line"><span class="built_in">EXTRACT</span>( <span class="keyword">YEAR</span> <span class="keyword">FROM</span> NOW() )</span><br><span class="line"><span class="comment">-- Personalize a date / time.. Year can be substitute with other keywords</span></span><br></pre></td></tr></table></figure>
+<strong>E.g.</strong>, extract order of this year: YEAR(date) &#x3D; YEAR(NOW());</li>
+</ol>
+<br>
+
+<ol start="14">
+<li><strong>Fomat Time &#x2F; Date</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DATE_FORMAT(NOW(), <span class="string">&#x27;%y&#x27;</span>);</span><br><span class="line"><span class="comment">-- %y for 2-digit year, and %Y for 4-digit year;</span></span><br><span class="line"><span class="comment">-- Similar for D/d/M/m, ...</span></span><br><span class="line"><span class="comment">-- Can be use to format time as well.</span></span><br><span class="line"><span class="keyword">SELECT</span> DATE_ADD( NOW(), <span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">DAY</span> );</span><br><span class="line"><span class="comment">-- Return the date of 1 day later. Accept negative value like -1.</span></span><br><span class="line"><span class="comment">-- Can Use DATE_SUB instead and the behavior is very similar.</span></span><br><span class="line">DATEDIFF(d_1, d_2);</span><br><span class="line"><span class="comment">-- Find the diff of two dates. (by days, the input accepts DATE only)</span></span><br><span class="line"><span class="comment">-- Result can be negative, calculated by d_1 - d_2.</span></span><br><span class="line">TIME_TO_SEC(<span class="type">time</span>);</span><br><span class="line"><span class="comment">-- Transform time to second, starts from 12 am.</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<br>
+
+<ol start="15">
+<li><strong>IFNULL &amp; COALESCE</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id IFNULL(shipper_id, <span class="string">&#x27;Not Assigned&#x27;</span>) <span class="keyword">AS</span> s;</span><br><span class="line"><span class="comment">-- If a shipper_id is NULL, return &#x27;Not Assigned&#x27; instead.</span></span><br><span class="line"><span class="built_in">COALESCE</span>(shipper_id, comments, ..., <span class="string">&#x27;Not assigned&#x27;</span>);</span><br></pre></td></tr></table></figure>
+The COALESCE is the generalization of IFNULL. The principle is, by offering a bunch of column_name &#x2F; values, return the first one which IS NOT NULL.</li>
+</ol>
+<br>
+
+<ol start="16">
+<li><strong>IF &#x2F; CASE (Conditional Statement)</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IF (expression, <span class="keyword">first</span>, <span class="keyword">second</span>);</span><br><span class="line"><span class="comment">-- If the expression is TRUE, then return first; else, return second.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> order_id </span><br><span class="line"><span class="keyword">CASE</span> </span><br><span class="line">	<span class="keyword">WHEN</span> <span class="keyword">YEAR</span>(order_date) <span class="operator">=</span> <span class="keyword">YEAR</span>(NOW()) <span class="keyword">THEN</span> ‘Active’</span><br><span class="line">	<span class="keyword">WHEN</span> <span class="keyword">YEAR</span>(order_date) <span class="operator">=</span> <span class="keyword">YEAR</span>(NOW()) <span class="operator">-</span> <span class="number">1</span> <span class="keyword">THEN</span> ‘<span class="keyword">Last</span> <span class="keyword">Year</span>’</span><br><span class="line">	<span class="keyword">ELSE</span> ‘Other cases’</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">AS</span> category</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="comment">-- The case statement is quite similar with IF statement.</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2022/04/16/SQL-Study-Note-3/" data-id="cl22mc5dj00027otj7553f5mh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "SQL Study Note - 3 - Function and the Aggregate Function",
+        "image": "http://example.com/2022/04/16/SQL-Study-Note-3/sql.jpg",
+        "keywords": "SQL DataScience",
+        "genre": "Data Science SQL Job Search SQL",
+        "datePublished": "2022-04-16",
+        "dateCreated": "2022-04-16",
+        "dateModified": "2022-04-16",
+        "url": "http://example.com/2022/04/16/SQL-Study-Note-3/",
+        "description": "
+
+Function and the Aggregate Function
+Aggregate Function: 1COUNT(), MAX(), MIN(), AVG(), SUM()
+ It should be noted that COUNT(row_name) only returns the number of the non-empty records. If you need to",
+        "wordCount": 1531
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/04/16/SQL-Study-Note-2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">SQL Study Note - 2 - The Update / Delete / Insert Syntax</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/04/16/SQL-Study-Note-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/04/16/SQL-Study-Note-3/sql.jpg)" alt="SQL Study Note - 3 - Function and the Aggregate Function" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2022/04/16/SQL-Study-Note-3/" class="title">SQL Study Note - 3 - Function and the Aggregate Function</a></p>
+                            <p class="item-date"><time datetime="2022-04-17T01:34:31.000Z" itemprop="datePublished">2022-04-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/04/16/SQL-Study-Note-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/04/16/SQL-Study-Note-2/sql.jpg)" alt="SQL Study Note - 2 - The Update / Delete / Insert Syntax" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2022/04/16/SQL-Study-Note-2/" class="title">SQL Study Note - 2 - The Update / Delete / Insert Syntax</a></p>
+                            <p class="item-date"><time datetime="2022-04-17T01:29:50.000Z" itemprop="datePublished">2022-04-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/04/16/SQL-Study-Note-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/04/16/SQL-Study-Note-1/sql.jpg)" alt="SQL Study Note - 1 - Syntax Basics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2022/04/16/SQL-Study-Note-1/" class="title">SQL Study Note - 1 - Syntax Basics</a></p>
+                            <p class="item-date"><time datetime="2022-04-16T21:05:53.000Z" itemprop="datePublished">2022-04-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/04/15/blog-test/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2022/04/15/blog-test/" class="title">blog_test</a></p>
+                            <p class="item-date"><time datetime="2022-04-16T06:21:37.000Z" itemprop="datePublished">2022-04-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/04/15/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2022/04/15/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2022-04-16T06:19:15.574Z" itemprop="datePublished">2022-04-15</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Hexo/">Hexo</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/PHP/">PHP</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Games/" rel="tag">Games</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS3/" rel="tag">PS3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/Games/" style="font-size: 10px;">Games</a> <a href="/tags/PS3/" style="font-size: 10px;">PS3</a> <a href="/tags/SQL/" style="font-size: 20px;">SQL</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://example.com/2022/04/16/SQL-Study-Note-3/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
