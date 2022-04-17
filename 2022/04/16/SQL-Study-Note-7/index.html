@@ -6,19 +6,27 @@
     
 
     
-    <title>Archive | The blog of Blur</title>
+    <title>SQL-Study-Note-7 - Transactions | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Personal blog of blur.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The blog of Blur">
-<meta property="og:url" content="http://example.com/archives/index.html">
+    <meta name="keywords" content="SQL,DataScience" />
+    
+    <meta name="description" content="Transactions Principles of Transaction (ACID)  Atomicity Consistency Isolation Durability">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL-Study-Note-7 - Transactions">
+<meta property="og:url" content="http://example.com/2022/04/16/SQL-Study-Note-7/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Personal blog of blur.">
+<meta property="og:description" content="Transactions Principles of Transaction (ACID)  Atomicity Consistency Isolation Durability">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/04/16/SQL-Study-Note-7/sql.jpg">
+<meta property="article:published_time" content="2022-04-17T05:07:50.000Z">
+<meta property="article:modified_time" content="2022-04-17T05:43:36.417Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="DataScience">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/04/16/SQL-Study-Note-7/sql.jpg">
     
 
     
@@ -145,64 +153,178 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-archive"></i>Archive
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/SQL/">SQL</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-SQL-Study-Note-7" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2022" class="archive-year"><i class="icon fa fa-calendar-o"></i>2022</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-7/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-7/sql.jpg)" alt="SQL-Study-Note-7 - Transactions" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-7/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T05:07:50.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-7/">SQL-Study-Note-7 - Transactions</a>
+        SQL-Study-Note-7 - Transactions
         </h1>
     
 
-        <p class="article-excerpt">
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/04/16/SQL-Study-Note-7/" class="article-date">
+       <time datetime="2022-04-17T05:07:50.000Z" itemprop="datePublished">2022-04-16</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/04/16/SQL-Study-Note-7/" class="article-date">
+     <time datetime="2022-04-17T05:43:36.417Z" itemprop="dateModified">2022-04-16</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
             
+
+            
+
+            
+
+            <img src="/2022/04/16/SQL-Study-Note-7/sql.jpg" class="" title="SQL Note of blur!">
+
+<h1 id="Transactions"><a href="#Transactions" class="headerlink" title="Transactions"></a>Transactions</h1><ol>
+<li><p><strong>Principles of Transaction (ACID)</strong></p>
+<ul>
+<li>Atomicity</li>
+<li>Consistency</li>
+<li>Isolation</li>
+<li>Durability<span id="more"></span>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> Instruction block <span class="keyword">to</span> be executed</span><br><span class="line"></span><br><span class="line"><span class="comment">-- If only part of the transaction is done and the connection to server is lost, the finished part would be rolled back</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+A transaction would <strong>lock</strong> the lines and tables to be updated so that they are <strong>untouchable</strong> to other transactions.<br>If one transaction comes into locked resources, it would <strong>wait</strong> the owner of the lock to finish, or until it expires the time limit itself.<br>At the same time, <strong>ROLLBACK</strong> is also a SQL instruction and keyword.</li>
+</ul>
+</li>
+<li><p><strong>Different level of transaction isolation</strong>:</p>
+ <img src="/2022/04/16/SQL-Study-Note-7/iso.jpg" class="" title="Levels of Isolation">
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br><span class="line"><span class="comment">-- Note that this setting is session-leveled.</span></span><br></pre></td></tr></table></figure>
+
+<p> It comes with the tradeoff that the higher the isolation level is, the lower performance it reaches. (In extreme situation, serializable level would not benefit from distributed architecture.) </p>
+<ul>
+<li><strong>Read Uncommitted</strong>: May read uncommited data (dirty read). Rarely used in actual application as the performance improvement is very limited.</li>
+<li><strong>Read Committed</strong>: Default level for most DBMS (Oracle, SQL server). However, it may counter <strong>Nonrepeatable Read</strong>: same select may have different result within one transaction.<br> This is due to the <strong>UPDATE</strong> operation made by other transactions and can be solved by <strong>Line Level Lock</strong>.</li>
+<li><strong>Repeatable Read</strong>: Applied with <strong>Line Level Lock</strong>. However, it can still encounter <strong>Phantom Reads</strong> (caused by the delete &#x2F; insert operations made by other transactions). Require <strong>Table Level Lock</strong> to solve.</li>
+<li><strong>Serializable</strong>: Ban the parallel processing and sort all the transactions.</li>
+</ul>
+</li>
+</ol>
+<hr>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2022/04/16/SQL-Study-Note-7/" data-id="cl22v4pz2000b0ctj490c28nj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "SQL-Study-Note-7 - Transactions",
+        "image": "http://example.com/2022/04/16/SQL-Study-Note-7/sql.jpg",
+        "keywords": "SQL DataScience",
+        "genre": "Data Science SQL Job Search SQL",
+        "datePublished": "2022-04-16",
+        "dateCreated": "2022-04-16",
+        "dateModified": "2022-04-16",
+        "url": "http://example.com/2022/04/16/SQL-Study-Note-7/",
+        "description": "
 
 Transactions
 Principles of Transaction (ACID)
@@ -210,317 +332,23 @@ Principles of Transaction (ACID)
 Atomicity
 Consistency
 Isolation
-Durability
-        </p>
-    </div>
+Durability",
+        "wordCount": 276
+    }
+</script>
+
 </article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-6/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-6/sql.jpg)" alt="SQL-Study-Note-6 - Trigger and Events" class="thumbnail-image"></span>
-    
+    <section id="comments">
     
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-6/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T04:46:07.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-6/">SQL-Study-Note-6 - Trigger and Events</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-5/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-5/sql.jpg)" alt="SQL-Study-Note-5 - Stored Procedure and User Defined Functions" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-5/">0</span>
-    
-</span>
 
 
     
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T02:01:32.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-5/">SQL-Study-Note-5 - Stored Procedure and User Defined Functions</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Stored ProcedureMotivationGenerally, developers prefer not to interpret string as SQL codes &#x2F; instructions due to security concerns.
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-4/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-4/sql.jpg)" alt="SQL-Study-Note-4 - View" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-4/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T01:39:43.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-4/">SQL-Study-Note-4 - View</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-ViewIntroduction to ViewWith the introduction of View, middle &#x2F; query results can be stored for further query and use, just like a real table.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-3/sql.jpg)" alt="SQL Study Note - 3 - Function and the Aggregate Function" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-3/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T01:34:31.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-3/">SQL Study Note - 3 - Function and the Aggregate Function</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Function and the Aggregate Function
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-2/sql.jpg)" alt="SQL Study Note - 2 - The Update / Delete / Insert Syntax" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-2/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T01:29:50.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-2/">SQL Study Note - 2 - The Update / Delete / Insert Syntax</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-The update &#x2F; delete &#x2F; insert syntax
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-1/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-1/sql.jpg)" alt="SQL Study Note - 1 - Syntax Basics" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-1/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-16T21:05:53.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-1/">SQL Study Note - 1 - Syntax Basics</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Overview
-The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
+    </section>
 
 
 
@@ -582,6 +410,19 @@ The core of database system is to interact with DB (DataBase) with DBMS (Databas
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/04/16/SQL-Study-Note-6/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">SQL-Study-Note-6 - Trigger and Events</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -793,11 +634,13 @@ The core of database system is to interact with DB (DataBase) with DBMS (Databas
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://example.com/2022/04/16/SQL-Study-Note-7/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
