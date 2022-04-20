@@ -6,23 +6,27 @@
     
 
     
-    <title>About Me | The blog of Blur</title>
+    <title>Missing Value Imputation in Traffic Data | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Who am i                This is Shenghui Xu and welcome to my blog. I am currently a year-one MS student with the Electrical Computer Engineering department of University of California, Los Angeles. I">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About Me">
-<meta property="og:url" content="http://example.com/about/index.html">
+    <meta name="keywords" content="UCLA,DataScience" />
+    
+    <meta name="description" content="Lost of sensor-generated data can be very common. The methods of imputation can be coarsely categorized into: 1. Prediction methods; 2. Interpolation methods; 3. Statistical Learning methods.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Missing Value Imputation in Traffic Data">
+<meta property="og:url" content="http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Who am i                This is Shenghui Xu and welcome to my blog. I am currently a year-one MS student with the Electrical Computer Engineering department of University of California, Los Angeles. I">
+<meta property="og:description" content="Lost of sensor-generated data can be very common. The methods of imputation can be coarsely categorized into: 1. Prediction methods; 2. Interpolation methods; 3. Statistical Learning methods.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/about/selfie.jpg">
-<meta property="article:published_time" content="2022-04-16T17:45:16.000Z">
-<meta property="article:modified_time" content="2022-04-16T21:04:08.505Z">
+<meta property="og:image" content="http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png">
+<meta property="article:published_time" content="2022-04-19T21:52:23.000Z">
+<meta property="article:modified_time" content="2022-04-20T18:51:02.297Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="UCLA">
+<meta property="article:tag" content="DataScience">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/about/selfie.jpg">
+<meta name="twitter:image" content="http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png">
     
 
     
@@ -149,24 +153,56 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <em class="page-title-link" data-url="/about/index.html">About Me</em>
+    <a class="page-title-link" href="/categories/UCLA/">UCLA</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/UCLA/Course-Study/">Course Study</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="page-" class="article article-single article-type-page" itemscope itemprop="blogPost">
+                            <article id="post-Missing-Value-Imputation-in-Traffic-Data" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        About Me
+        Missing Value Imputation in Traffic Data
         </h1>
     
 
             </header>
         
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" class="article-date">
+       <time datetime="2022-04-19T21:52:23.000Z" itemprop="datePublished">2022-04-19</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" class="article-date">
+     <time datetime="2022-04-20T18:51:02.297Z" itemprop="dateModified">2022-04-20</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/UCLA/" rel="tag">UCLA</a>
+    </div>
+
+                
+
+                
+
+            </div>
         
         
         <div class="article-entry" itemprop="articleBody">
@@ -176,83 +212,39 @@
 
             
 
-            <h2 id="Who-am-i"><a href="#Who-am-i" class="headerlink" title="Who am i"></a>Who am i</h2><div  align="center">    
-    <img src="/about/selfie.jpg" width = "150" height = "80" alt="" align=left />
-</div>
-  
-
-<blockquote>
-<p>This is <strong>Shenghui Xu</strong> and welcome to my blog. I am currently a year-one MS student with the Electrical Computer Engineering department of <strong>University of California, Los Angeles</strong>. I am now focusing on the track of Signals &amp; Systems and have a GPA of 4.0. I am also an incoming applied researcher intern at <strong>ebay</strong>.</p>
+            <blockquote>
+<p>Lost of sensor-generated data can be very common. The methods of imputation can be coarsely categorized into: 1. Prediction methods; 2. Interpolation methods; 3. Statistical Learning methods.</p>
 </blockquote>
-<!-- ![](/about/ucla.jpg) -->
+<span id="more"></span>
 
-<div  align="center">    
-    <img src="/about/ucla.jpg" width = "150" height = "80" alt="" align=left />
-    <img src="/about/ece.jpg" width = "300" height = "400" alt="" align=right />
-</div>
-<br>
-<br>
-<br>
+<h1 id="Imputation-problem-amp-Model-Formulation"><a href="#Imputation-problem-amp-Model-Formulation" class="headerlink" title="Imputation problem &amp; Model Formulation"></a>Imputation problem &amp; Model Formulation</h1><p>Let $Y_c$ be the traffic dataset persists for $N$ consecutive days,<br>$$ Y_c &#x3D; [Y(1), …, Y(N)] $$<br>in which the ith $Y(i)$ be noted as 1-D vector<br>$$ Y(i) &#x3D; [y_i(1), …, y_i(D)]^T, i \in [1, N] $$.<br>Concatenate all the vectors we have together, we would have:<br>$$ Y_{series} &#x3D; [y(1), …, y(D \times N)]^T $$.</p>
+<h1 id="ARIMA-based-method"><a href="#ARIMA-based-method" class="headerlink" title="ARIMA-based method"></a>ARIMA-based method</h1><p><strong>ARIMA</strong> stands for <strong>Autoregressive Integrated Moving Average</strong>.</p>
+<p>In ARIMA(p, d, q), p denotes the order of the autoregressive part, d is the degree of differencing and q is the order of moving average part:</p>
+<p>$$ (1 - \sum_{i&#x3D;1}^p \alpha_i L^i) (1 - L)^d y(t) &#x3D; (1 + \sum_{i&#x3D;1}^q \beta_i L^i) y(t) \xi(t)  $$</p>
+<p>and <strong>L</strong> is the backshift operator, $L_y(t) &#x3D; y(t- 1)$. $\xi(t)$  is white Gaussian noise.</p>
+<p>First train  this model with the known series and impute missing data one by one. The imputed data would be used as known data for next prediction. We use Akaike information criterion to determine $p$ and $q$. $d$ is suggested to be set to $1$.</p>
+<h1 id="BNs-based-imputation-method"><a href="#BNs-based-imputation-method" class="headerlink" title="BNs-based imputation method"></a>BNs-based imputation method</h1><p><strong>BN</strong> stands for <strong>Bayesian Netowrk</strong>.</p>
+<p>Based on the known dataset, learn the distribution model of multivariable variants $Y_{mv}(t) &#x3D; [y(t-m), …, y(t)]^T$.<br>Assume this learning target as <strong>Gaussian mixture model (GMM)</strong>.<br>Use split and merge expectation maximisation algorithm to determine the model parameters.</p>
+<p>With a learnt GMM, missing data of $y(t)$ can be estimated as the expectation foregoing value from the latest $m$ items, as:</p>
+<p>$$ \hat y(t) &#x3D; E[y(t) | y(t-m), …, y(t-1)] $$</p>
+<h1 id="k-NN-based-imputation-method"><a href="#k-NN-based-imputation-method" class="headerlink" title="k-NN based imputation method"></a>k-NN based imputation method</h1><p>Weighted k-NN is a non-parametric estimation method.</p>
+<h2 id="Selection-S-step-Selection-Step"><a href="#Selection-S-step-Selection-Step" class="headerlink" title="Selection S-step (Selection Step):"></a>Selection S-step (Selection Step):</h2><p>Use a metric to find $k$ nearest traffic daily flow vectors to the corrupted vector $Y(i)$ in pattern-similar from the dataset $Y_c$.<br>Metrics can be <strong>Euclidean distance</strong> and <strong>Pearson correlation</strong>, for examples.</p>
+<p>Then, the lost entry &#x2F; dimension of $Y(i)$ can be imputed with the mean value of the (entries of the) $k$ vectors. </p>
+<h2 id="Imputation-I-step-Imputation-Step"><a href="#Imputation-I-step-Imputation-Step" class="headerlink" title="Imputation I-step: (Imputation Step)"></a>Imputation I-step: (Imputation Step)</h2><p>Because our k-NN algorithm is weighted, then we need to find the weighted average of the k entries (averaged by the correlation coefficent given by the selected metric).  </p>
+<p>Grid search and other optimization methods may be applied to determine best $k$.</p>
+<h1 id="LLS-based-imputation-method"><a href="#LLS-based-imputation-method" class="headerlink" title="LLS-based imputation method"></a>LLS-based imputation method</h1><h2 id="Selection-S-step-Selection-Step-1"><a href="#Selection-S-step-Selection-Step-1" class="headerlink" title="Selection S-step (Selection Step):"></a>Selection S-step (Selection Step):</h2><p>Exactly the same as the above k-NN method.</p>
+<h2 id="Imputation-I-step-Imputation-Step-1"><a href="#Imputation-I-step-Imputation-Step-1" class="headerlink" title="Imputation I-step: (Imputation Step)"></a>Imputation I-step: (Imputation Step)</h2><p>Decompose k selected vectors dataset into matrix $A$ and $B$. The dimension should be corresponding to the missing part of $Y_{mis}(i)$ and observed part $Y_{obs}(i)$ of $Y(i)$.</p>
+<p>We would have $$ \hat Y_{mis}(i) &#x3D; B((A^TA)^{-1}A^T Y_{obs}(i)) $$.</p>
+<p>This is just a pseudo-inverse, $A$ should be full-ranked&#x2F;</p>
+<img src="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png" class="" title="Note">
 
-<hr>
-<blockquote>
-<p>Before I went to UCLA, I was an undergraduate student majored in Computer Science with <strong>Soochow University</strong>. I graduated with honor in Sep. 2016 (with a GPA of 3.83).</p>
-</blockquote>
-<div  align="center">
-    <img src="/about/suzhou.jpg" width = "100" height = "100" alt="" align=right />
-</div>
-
-<br>
-<br>
-<br>
-
-<hr>
-<h2 id="Skills-and-Tools"><a href="#Skills-and-Tools" class="headerlink" title="Skills and Tools"></a>Skills and Tools</h2><ul>
-<li><p>Languages</p>
-<ul>
-<li>Python &#x2F; Matlab &#x2F; R &#x2F; Java &#x2F; JavaScript &#x2F; C++</li>
-<li>Bash &#x2F; CMD &#x2F; Code Climate</li>
-</ul>
-</li>
-<li><p>Frameworks</p>
-<ul>
-<li>TensorFlow &#x2F; Torch &#x2F; Keras &#x2F; Theano &#x2F; CUDA &#x2F; CUDNN</li>
-<li>Scikit-learn &#x2F; nltk &#x2F; Numpy &#x2F; Spark (PySpark)</li>
-<li>Qt</li>
-</ul>
-</li>
-<li><p>Web</p>
-<ul>
-<li>HTML&#x2F;HTML5 &#x2F; CSS &#x2F; Node.js</li>
-<li>jQuery &#x2F; Vue.js &#x2F; quasar</li>
-<li>Tornado &#x2F; Chrome Dev Tools</li>
-</ul>
-</li>
-<li><p>Editor &amp; IDE</p>
-<ul>
-<li>VIM &#x2F; Sublime Text &#x2F; Notepad++ &#x2F; Lime Text </li>
-<li>Visual Studio &#x2F; Qtcreator &#x2F; Pycharm &#x2F; Eclipse</li>
-</ul>
-</li>
-<li><p>Version Control &amp; Deployment</p>
-<ul>
-<li>Git &#x2F; SVN &#x2F; Github &#x2F; GitLab &#x2F; Gitee &#x2F; Anaconda &#x2F; npm</li>
-</ul>
-</li>
-<li><p>Testing</p>
-<ul>
-<li>Jenkins &#x2F; Lint &#x2F; Pytest &#x2F; Docker &#x2F; Unit Testing</li>
-</ul>
-</li>
-<li><p>Data Management</p>
-<ul>
-<li>MySQL &#x2F; MongoDB &#x2F; Redis &#x2F; Memcached</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="Projects"><a href="#Projects" class="headerlink" title="Projects"></a>Projects</h2><hr>
-<h2 id="Experiences"><a href="#Experiences" class="headerlink" title="Experiences"></a>Experiences</h2><hr>
+<h1 id="MCMC-based-imputation-method"><a href="#MCMC-based-imputation-method" class="headerlink" title="MCMC-based imputation method"></a>MCMC-based imputation method</h1><p>First assume the entire data sequence $Y$ follows a certain distribution, <strong>e.g.</strong>, Gaussian distribution.<br>The conditional expectation $E[Y_{mis}|Y_{obs}, \Phi]$ would be approximated by MCMC(Markov chain Monte Carlo) with DA(Data Augmentation), since the expectation is hard to be solved precisely due to its high dimension. Here $\Phi$ stands for the parameter of the selected distribution.</p>
+<p>The MCMC with DA is a special case of Gibbs sampler described as follows:</p>
+<h2 id="Imputation-I-step-Imputation-Step-2"><a href="#Imputation-I-step-Imputation-Step-2" class="headerlink" title="Imputation I-step: (Imputation Step)"></a>Imputation I-step: (Imputation Step)</h2><p>Given a current estimated model parameter $\Phi ^k$, this step uses the conditional probability $Y_{mis}^{k+1}&#x3D;p(Y_{mis}|Y_{obs}, \Phi)$ to simulate missing values for each observation independently.</p>
+<h2 id="Posterior-P-step"><a href="#Posterior-P-step" class="headerlink" title="Posterior P-step:"></a>Posterior P-step:</h2><p>Use $p(\Phi |   Y_{obs}, Y_{mis}^{k+1})$ to update model parameter $\Phi$. In this manner, a Markov chain of $(Y_{mis}^{1},\Phi ^{1} )$, …, $(Y_{mis}^{N},\Phi ^{N} )$ should be constructed.</p>
+<p>The missing data is estimated as<br>$$ \hat Y_{mis} &#x3D; \frac{1}{N_{sample} - N_{burn-in}} \sum_{t &#x3D; N_{burn-in + 1}}^{N_{sample}} Y_{mis}^t   $$.</p>
+<p>The first $N_{burn-in}$ samples would be discarded. One feasible parameter setting is $N_{sample}&#x3D;1500$ and $N_{burn-in}&#x3D;500$. I believe the introduction of burn-in is to allow the model sometime to converge.</p>
+<h1 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h1><p>Prediction and interpolation methods mentioned cannot capture stochastic variations in daily traffic flow. On the contrary, statistical learning methods could achieve traffic flow information by emphasising the statistical characteristics of traffic flow.</p>
 
         </div>
         <footer class="article-footer">
@@ -260,7 +252,7 @@
 
 
 
-    <a data-url="http://example.com/about/index.html" data-id="cl27xl53q0000wktjds4rcndf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" data-id="cl27xl53t0001wktjhg7ee7kb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -330,22 +322,18 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "About Me",
-        "image": "http://example.com/about/selfie.jpg",
-        
-        
-        "datePublished": "2022-04-16",
-        "dateCreated": "2022-04-16",
-        "dateModified": "2022-04-16",
-        "url": "http://example.com/about/index.html",
-        "description": "Who am i    
-    
-
-  
-
-
-This is Shenghui Xu and welcome to my blog. I am currently a year-one MS student with the Electrical Computer Engineering department of University of California, Los Angeles. I",
-        "wordCount": 274
+        "headline": "Missing Value Imputation in Traffic Data",
+        "image": "http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png",
+        "keywords": "UCLA DataScience",
+        "genre": "UCLA Course Study ECE209 in 2022 spring",
+        "datePublished": "2022-04-19",
+        "dateCreated": "2022-04-19",
+        "dateModified": "2022-04-20",
+        "url": "http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/",
+        "description": "
+Lost of sensor-generated data can be very common. The methods of imputation can be coarsely categorized into: 1. Prediction methods; 2. Interpolation methods; 3. Statistical Learning methods.
+",
+        "wordCount": 719
     }
 </script>
 
@@ -422,6 +410,19 @@ This is Shenghui Xu and welcome to my blog. I am currently a year-one MS student
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/04/16/SQL-Study-Note-8/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">SQL-Study-Note-8 - Data Type of MySQL</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -633,7 +634,7 @@ This is Shenghui Xu and welcome to my blog. I am currently a year-one MS student
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://example.com/about/index.html';
+    var disqus_url = 'http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/';
     
     (function() {
     var dsq = document.createElement('script');
