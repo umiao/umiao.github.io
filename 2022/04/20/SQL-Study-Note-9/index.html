@@ -6,19 +6,27 @@
     
 
     
-    <title>Tag: DataScience | The blog of Blur</title>
+    <title>SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Personal blog of blur.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The blog of Blur">
-<meta property="og:url" content="http://example.com/tags/DataScience/index.html">
+    <meta name="keywords" content="DataScience,SQL" />
+    
+    <meta name="description" content="Data Modelling Pipeline Understand the requirements;  Build a conceptual Model;  Build a logical model;  Build a physical model.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form">
+<meta property="og:url" content="http://example.com/2022/04/20/SQL-Study-Note-9/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Personal blog of blur.">
+<meta property="og:description" content="Data Modelling Pipeline Understand the requirements;  Build a conceptual Model;  Build a logical model;  Build a physical model.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/04/20/SQL-Study-Note-9/sql.jpg">
+<meta property="article:published_time" content="2022-04-20T22:22:22.000Z">
+<meta property="article:modified_time" content="2022-04-21T17:50:52.065Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/04/20/SQL-Study-Note-9/sql.jpg">
     
 
     
@@ -145,535 +153,211 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>Tag: <em>DataScience</em>
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/SQL/">SQL</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-SQL-Study-Note-9" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2022" class="archive-year"><i class="icon fa fa-calendar-o"></i>2022</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/20/SQL-Study-Note-9/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/20/SQL-Study-Note-9/sql.jpg)" alt="SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/20/SQL-Study-Note-9/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-20T22:22:22.000Z" itemprop="datePublished">2022-04-20</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/20/SQL-Study-Note-9/">SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form</a>
+        SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form
         </h1>
     
 
-        <p class="article-excerpt">
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/04/20/SQL-Study-Note-9/" class="article-date">
+       <time datetime="2022-04-20T22:22:22.000Z" itemprop="datePublished">2022-04-20</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/04/20/SQL-Study-Note-9/" class="article-date">
+     <time datetime="2022-04-21T17:50:52.065Z" itemprop="dateModified">2022-04-21</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
             
+
+            
+
+            
+
+            <img src="/2022/04/20/SQL-Study-Note-9/sql.jpg" class="" title="SQL Note of blur!">
+
+<h1 id="Data-Modelling-Pipeline"><a href="#Data-Modelling-Pipeline" class="headerlink" title="Data Modelling Pipeline"></a>Data Modelling Pipeline</h1><ol>
+<li>Understand the requirements; </li>
+<li>Build a conceptual Model; </li>
+<li>Build a logical model; </li>
+<li>Build a physical model.<span id="more"></span></li>
+</ol>
+<h1 id="Foreign-Key-Constraint"><a href="#Foreign-Key-Constraint" class="headerlink" title="Foreign Key Constraint"></a>Foreign Key Constraint</h1><p>Although modify the primary key IS NOT recommended, we would consider the update to the foreign key caused by the primary key anyway.</p>
+<p><strong>Option (strategy of updating):</strong></p>
+<ol>
+<li><strong>restrict</strong>: restrict modification</li>
+<li><strong>cascade</strong>: update the foreign keys according to the primary key</li>
+<li><strong>set null</strong>: set the corresponding foreign key in the foreign table into NULL</li>
+<li><strong>no action</strong>: reject the update</li>
+</ol>
+<p>It is highly not recommended to use <em><strong>set null</strong></em>, as it would result in organ record in the corresponding tables (no idea which id it belongs to).</p>
+<h1 id="Dataset-Normalization"><a href="#Dataset-Normalization" class="headerlink" title="Dataset Normalization"></a>Dataset Normalization</h1><h2 id="NF-1-First-Normal-Form"><a href="#NF-1-First-Normal-Form" class="headerlink" title="NF-1 (First Normal Form):"></a>NF-1 (First Normal Form):</h2><p>Each record unit (element specified by row and column index) should contain a <strong>single value</strong> only and contain <strong>NO</strong> duplicate column.<br><em>E.g.</em>, if you want to add tags to the Course table, you should extract tags into an independent table (and use id mapping to retrieve the tags) for it to be extendable.</p>
+<h2 id="NF-2-Second-Normal-Form"><a href="#NF-2-Second-Normal-Form" class="headerlink" title="NF-2 (Second Normal Form):"></a>NF-2 (Second Normal Form):</h2><p>Frist is to satisfy <strong>NF-1</strong>. Also, every non candidate-key attribute depends on the whole candidate keys (that is to say, they must not depend on a true subset of the candidate keys).</p>
+<p>That is to say, each table should contain exactly one entity category only. <em>E.g.</em>, a table stores course information should <strong>NOT</strong> contain information like the enroll time of each student. If there is an attribute which does not belong to the entity represented by this table, <strong>create a new table</strong> to store it.</p>
+<h2 id="NF-3-Third-Normal-Form"><a href="#NF-3-Third-Normal-Form" class="headerlink" title="NF-3 (Third Normal Form):"></a>NF-3 (Third Normal Form):</h2><p>Frist is to satisfy <strong>NF-2</strong>.<br>Also, all the attributes of the table should be determined by <strong>candidate key</strong> (for example, id) and should <strong>NOT</strong> be determined by the other non-primary attributes.<br>That is to say, all the columns of the table should <strong>NOT</strong> be generated &#x2F; derived by the other columns, to avoid errors caused by duplicate storage and erroneous update.</p>
+<h1 id="Data-Model-leftrightarrow-Table"><a href="#Data-Model-leftrightarrow-Table" class="headerlink" title="Data Model $ \leftrightarrow$ Table"></a>Data Model $ \leftrightarrow$ Table</h1><p>In MySQL, you can use <strong>forward engineer</strong> to convert data model into actual tables. Its essence is to generate <strong>sql script</strong> for database &#x2F; table generation, with the specified data model &#x2F; structual graph.<br>The script would be like:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> schema IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> … </span><br><span class="line">USE schema … </span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> …</span><br></pre></td></tr></table></figure>
+<p>It is also supported to regenerate and fix the table via modifying the data model. In this case, you should select <strong>synchronize model</strong> instead of forward engineer.</p>
+<p>For those table with <strong>foreign keys</strong>, if you want to update the table, foreign keys would prevent you from doing so (as a constraint). You should first <strong>drop</strong> all the foreign keys and then reconstruct it to link to correlated tables.</p>
+<h2 id="Reverse-Engineer"><a href="#Reverse-Engineer" class="headerlink" title="Reverse Engineer"></a>Reverse Engineer</h2><p>It is also supported to generate data model (graphs) from existing tables. That is reverse engineering.<br>It is highly recommended that you only put <strong>ONE</strong> database into a single data model, unless these databases are really <strong>highly correlated</strong>.</p>
+<h2 id="Data-Management-Opertion-Via-SQL-Script"><a href="#Data-Management-Opertion-Via-SQL-Script" class="headerlink" title="Data Management Opertion (Via SQL Script)"></a>Data Management Opertion (Via SQL Script)</h2><p>Create of Database:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> name;</span><br><span class="line"><span class="comment">-- Make well use of EXISTS clause to avoid error.</span></span><br></pre></td></tr></table></figure>
+<h3 id="Create-Table"><a href="#Create-Table" class="headerlink" title="Create Table:"></a>Create Table:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> cus (</span><br><span class="line">	c_id, </span><br><span class="line">	<span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,  </span><br><span class="line">	first_name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>, </span><br><span class="line">	points <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>, </span><br><span class="line">	email <span class="type">VARCHAR</span>(<span class="number">250</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">UNIQUE</span></span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
+<h3 id="Use-Alter-Table-to-update-Table"><a href="#Use-Alter-Table-to-update-Table" class="headerlink" title="Use Alter Table to update Table:"></a>Use Alter Table to update Table:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> customers </span><br><span class="line"><span class="keyword">ADD</span> </span><br><span class="line">last_name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> </span><br><span class="line">AFTER </span><br><span class="line">first_name</span><br><span class="line"></span><br><span class="line"><span class="comment">-- You can also use MODIFY / DROP instead of ADD to edit and delete the existing and known columns. </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Add-Constraints-e-g-Foreign-Key"><a href="#Add-Constraints-e-g-Foreign-Key" class="headerlink" title="Add Constraints (e.g., Foreign Key):"></a>Add Constraints (e.g., Foreign Key):</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FOREIGN</span> KEY fk_col_name (c_id 表中列名) </span><br><span class="line"><span class="keyword">REFERENCES</span> customers(c_id) </span><br><span class="line"><span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">NO</span> ACTION </span><br><span class="line"><span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">NO</span> ACTION </span><br><span class="line"><span class="comment">-- You cannot drop a table without droping its foreign key constraints in advance.</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Charset"><a href="#Charset" class="headerlink" title="Charset"></a>Charset</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> CHARSET; </span><br><span class="line"><span class="comment">-- You can use this command to show the charset.</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="operator">/</span> <span class="keyword">ALTER</span> DATABASE db_name <span class="type">CHARACTER</span> <span class="keyword">SET</span> lain1;</span><br><span class="line"><span class="comment">-- About modifying / altering the charset (for a dataset).</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="operator">/</span> <span class="keyword">ALTER</span> <span class="keyword">TABLE</span> () <span class="type">CHARACTER</span> <span class="keyword">SET</span> latin1;</span><br><span class="line"><span class="comment">-- You can set the charset in the table level, too.</span></span><br><span class="line"><span class="comment">-- Also, charset can be set in column level, just like adding constriants like &#x27;NOT NULL&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Database-Engine-x2F-Storage-Engine"><a href="#Database-Engine-x2F-Storage-Engine" class="headerlink" title="Database Engine &#x2F; Storage Engine"></a>Database Engine &#x2F; Storage Engine</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> ENGINES; </span><br><span class="line"><span class="comment">-- Show all the engines.</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> customers ENGINE <span class="operator">=</span> InnoDB;</span><br><span class="line"><span class="comment">-- Specify the engine for a table.</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2022/04/20/SQL-Study-Note-9/" data-id="cl29avdwf000kywtjgv2kh1qc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form",
+        "image": "http://example.com/2022/04/20/SQL-Study-Note-9/sql.jpg",
+        "keywords": "DataScience SQL",
+        "genre": "Data Science SQL Job Search SQL",
+        "datePublished": "2022-04-20",
+        "dateCreated": "2022-04-20",
+        "dateModified": "2022-04-21",
+        "url": "http://example.com/2022/04/20/SQL-Study-Note-9/",
+        "description": "
 
 Data Modelling Pipeline
 Understand the requirements; 
 Build a conceptual Model; 
 Build a logical model; 
-Build a physical model.
-        </p>
-    </div>
+Build a physical model.",
+        "wordCount": 910
+    }
+</script>
+
 </article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png)" alt="Missing Value Imputation in Traffic Data" class="thumbnail-image"></span>
-    
+    <section id="comments">
     
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/UCLA/">UCLA</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/UCLA/Course-Study/">Course Study</a>
-            </div>
-            <div class="date"><time datetime="2022-04-19T21:52:23.000Z" itemprop="datePublished">2022-04-19</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/">Missing Value Imputation in Traffic Data</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Lost of sensor-generated data can be very common. The methods of imputation can be coarsely categorized into: 1. Prediction methods; 2. Interpolation methods; 3. Statistical Learning methods.
-
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-8/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-8/sql.jpg)" alt="SQL-Study-Note-8 - Data Type of MySQL" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-8/">0</span>
-    
-</span>
 
 
     
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T05:47:13.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-8/">SQL-Study-Note-8 - Data Type of MySQL</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Data Type of MySQL
-Suggestion for Data Type Selection
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-7/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-7/sql.jpg)" alt="SQL-Study-Note-7 - Transactions" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-7/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T05:07:50.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-7/">SQL-Study-Note-7 - Transactions</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Transactions
-Principles of Transaction (ACID)
-
-Atomicity
-Consistency
-Isolation
-Durability
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-6/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-6/sql.jpg)" alt="SQL-Study-Note-6 - Trigger and Events" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-6/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T04:46:07.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-6/">SQL-Study-Note-6 - Trigger and Events</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-5/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-5/sql.jpg)" alt="SQL-Study-Note-5 - Stored Procedure and User Defined Functions" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-5/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T02:01:32.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-5/">SQL-Study-Note-5 - Stored Procedure and User Defined Functions</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Stored ProcedureMotivationGenerally, developers prefer not to interpret string as SQL codes &#x2F; instructions due to security concerns.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-4/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-4/sql.jpg)" alt="SQL-Study-Note-4 - View" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-4/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T01:39:43.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-4/">SQL-Study-Note-4 - View</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-ViewIntroduction to ViewWith the introduction of View, middle &#x2F; query results can be stored for further query and use, just like a real table.
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-3/sql.jpg)" alt="SQL Study Note - 3 - Function and the Aggregate Function" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-3/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T01:34:31.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-3/">SQL Study Note - 3 - Function and the Aggregate Function</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Function and the Aggregate Function
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-2/sql.jpg)" alt="SQL Study Note - 2 - The Update / Delete / Insert Syntax" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-2/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T01:29:50.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-2/">SQL Study Note - 2 - The Update / Delete / Insert Syntax</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-The update &#x2F; delete &#x2F; insert syntax
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-1/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-1/sql.jpg)" alt="SQL Study Note - 1 - Syntax Basics" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/16/SQL-Study-Note-1/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-16T21:05:53.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-1/">SQL Study Note - 1 - Syntax Basics</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Overview
-The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
+    </section>
 
 
 
@@ -735,6 +419,19 @@ The core of database system is to interact with DB (DataBase) with DBMS (Databas
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Missing Value Imputation in Traffic Data</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -946,11 +643,13 @@ The core of database system is to interact with DB (DataBase) with DBMS (Databas
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://example.com/2022/04/20/SQL-Study-Note-9/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
