@@ -6,19 +6,27 @@
     
 
     
-    <title>Tag: UCLA | The blog of Blur</title>
+    <title>SQL-Study-Note-10 Index | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Personal blog of blur.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The blog of Blur">
-<meta property="og:url" content="http://example.com/tags/UCLA/index.html">
+    <meta name="keywords" content="DataScience,SQL" />
+    
+    <meta name="description" content="Index can be used to find the row (line) numbers corresponding to the value being queried. Index is added to certain columns and is stored in memory (RAM) for most times.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL-Study-Note-10 Index">
+<meta property="og:url" content="http://example.com/2022/04/21/SQL-Study-Note-10/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Personal blog of blur.">
+<meta property="og:description" content="Index can be used to find the row (line) numbers corresponding to the value being queried. Index is added to certain columns and is stored in memory (RAM) for most times.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/04/21/SQL-Study-Note-10/sql.jpg">
+<meta property="article:published_time" content="2022-04-21T17:53:59.000Z">
+<meta property="article:modified_time" content="2022-04-21T19:55:39.737Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/04/21/SQL-Study-Note-10/sql.jpg">
     
 
     
@@ -145,75 +153,212 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>Tag: <em>UCLA</em>
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/SQL/">SQL</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-SQL-Study-Note-10" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2022" class="archive-year"><i class="icon fa fa-calendar-o"></i>2022</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png)" alt="Missing Value Imputation in Traffic Data" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://example.com/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/UCLA/">UCLA</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/UCLA/Course-Study/">Course Study</a>
-            </div>
-            <div class="date"><time datetime="2022-04-19T21:52:23.000Z" itemprop="datePublished">2022-04-19</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/">Missing Value Imputation in Traffic Data</a>
+        SQL-Study-Note-10 Index
         </h1>
     
 
-        <p class="article-excerpt">
-            
-Lost of sensor-generated data can be very common. The methods of imputation can be coarsely categorized into: 1. Prediction methods; 2. Interpolation methods; 3. Statistical Learning methods.
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/04/21/SQL-Study-Note-10/" class="article-date">
+       <time datetime="2022-04-21T17:53:59.000Z" itemprop="datePublished">2022-04-21</time>
+    </a>
+  </div>
 
-        </p>
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/04/21/SQL-Study-Note-10/" class="article-date">
+     <time datetime="2022-04-21T19:55:39.737Z" itemprop="dateModified">2022-04-21</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
     </div>
-</article>
-    
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <img src="/2022/04/21/SQL-Study-Note-10/sql.jpg" class="" title="SQL Note of blur!">
+
+<p><strong>Index</strong> can be used to find the row (line) numbers corresponding to the value being queried. Index is added to certain columns and is stored in memory (RAM) for most times.</p>
+<span id="more"></span>
+
+<h1 id="Create-Index"><a href="#Create-Index" class="headerlink" title="Create Index"></a>Create Index</h1><p>Index can <strong>speed up</strong> the query, however, it would also increase the <strong>size (memory comsuption)</strong> of database as well as the <strong>cost of maintenance</strong>. It is usually implemented by <strong>binary tree</strong> in database systems.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state <span class="keyword">ON</span> customers (state);</span><br><span class="line"><span class="comment">-- Specify a column of a table to create an index.</span></span><br></pre></td></tr></table></figure>
+<h1 id="Explain-and-ANALYZE"><a href="#Explain-and-ANALYZE" class="headerlink" title="Explain and ANALYZE"></a>Explain and ANALYZE</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> ...</span><br></pre></td></tr></table></figure>
+<p>Add <em>EXPLAIN</em> before a sql query would get <strong>explanatory information</strong> instead of the query result. E.g., which information is used and how many records are went through, for performance evaluation.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> INDEXES <span class="keyword">IN</span> customers;</span><br><span class="line"><span class="comment">-- Reveal all the indexes in the customers table.</span></span><br><span class="line"><span class="comment">-- You can find out the indexes added, the cardinality and name.</span></span><br><span class="line">ANALYZE <span class="keyword">TABLE</span> customers;</span><br><span class="line"><span class="comment">-- Indexes includes primary index, secondary index, etc.</span></span><br><span class="line"><span class="comment">-- You can use the ANALYZE command to view the statistics and values of a table</span></span><br></pre></td></tr></table></figure>
+<h1 id="Different-Index-Types"><a href="#Different-Index-Types" class="headerlink" title="Different Index Types"></a>Different Index Types</h1><ol>
+<li><strong>prefix index</strong><br>You should create prefix index, instead of index on the entire column, for acceleration.<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_n <span class="keyword">ON</span> customers (last_name(<span class="number">20</span>));</span><br><span class="line"><span class="comment">-- In this case, the last_name column would be grouped and indexed according to the first 20 characters only.</span></span><br><span class="line"><span class="built_in">COUNT</span> (<span class="keyword">DISTINCT</span> <span class="keyword">LEFT</span>(last_name, <span class="number">10</span>));</span><br><span class="line"><span class="comment">-- You can use this way to analyze the performance of creating prefix index on the first 10 characters. </span></span><br><span class="line"><span class="comment">-- If the number of distinct values is large enough, then this prefix is able to differentiate the possible values.</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>Full-Text Index</strong><br>The idea of such index is similar to the implementation principles of <strong>Search Engines</strong>. For all the non-stop words, record the corresponding passages (rows) and the position where they appear.<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idex_t_body <span class="keyword">ON</span> posts (title, body);</span><br><span class="line"><span class="comment">-- FULLTEXT INDEX can monitor multiple columns.</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> posts <span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST (<span class="string">&#x27;react redux&#x27;</span>);</span><br><span class="line"><span class="comment">-- Search &#x27;react redux&#x27; in the two columns: title and body. They are viewed as TWO words.</span></span><br><span class="line"><span class="keyword">MATCH</span>(title, body) AGAINST (<span class="string">&#x27;react -redux +form&#x27;</span> <span class="keyword">IN</span> <span class="type">BOOLEAN</span> MODE);</span><br><span class="line"><span class="comment">-- It is possible to exclude some words by adding a &#x27;-&#x27;.</span></span><br><span class="line"><span class="comment">-- So the above query matches contents including react/form and without redux.</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>Composite indexes</strong><br>Enable indexing on <strong>multiple</strong> columns in order to solve the issue that too many results are returned after filtering with the primary index. You can use the appearing order of the columns to decide the filtering priority of the Composite indexes.<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_n <span class="keyword">ON</span> customers (last_name, state, points);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>MySQL supports Composite index to include at most <strong>16</strong> columns. However, including 4-6 columns is fairly enough in practice.</li>
+<li>At the same time, Composite index supports <em><strong>sorting</strong></em> on the columns so that the more frequently used columns appear ahead.</li>
+<li>In fact, you can decide the <strong>priority</strong> of the indexes being used, by changing the appearing order of the conditions of the <strong>WHERE</strong> clause.</li>
+<li>You can use the command of: <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USE INDEX idx_name;</span><br></pre></td></tr></table></figure>
+ to force MySQL to use certain index, even it is not optimal.</li>
+<li>You can <strong>NOT</strong> make full use of the index, if column is included in the sql expression (<strong>e.g.</strong> in WHERE condtion). So extract the required column first before conducting transformation.</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<h1 id="Sorting-and-Performance"><a href="#Sorting-and-Performance" class="headerlink" title="Sorting and Performance"></a>Sorting and Performance</h1><h2 id="Sorting-should-be-avoided-as-possible"><a href="#Sorting-should-be-avoided-as-possible" class="headerlink" title="Sorting should be avoided as possible"></a>Sorting should be avoided as possible</h2><p>It is because it is <strong>costy</strong>. You should utilize <strong>Indexes</strong> for the purpose of sorting, as possible.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> STATUS;</span><br><span class="line"><span class="comment">-- Show the variables being used in MySQL server.</span></span><br><span class="line">last_query_cost;</span><br><span class="line"><span class="comment">-- You can measure the cost of last query by this mean.</span></span><br></pre></td></tr></table></figure>
+<p>It should be noted that, for column <strong>a</strong> and <strong>b</strong>, <strong>ORDER BY</strong> clause can use the Index for sorting if the order is among one of these:</p>
+<blockquote>
+<ol>
+<li>ORDER BY a</li>
+<li>ORDER BY b</li>
+<li>ORDER BY a, b</li>
+<li>ORDER BY a DESC, b DESC<br>Any other order would introduce <strong>external sorting</strong> operation (which means <strong>Scaning the Entire Table!</strong>).<br>There is an exception that if WHERE clause can locate to a <strong>Single Column</strong>, then external sorting would not happen.</li>
+</ol>
+</blockquote>
+<p>If you can achieve the result of query <strong>solely rely on</strong> the index, then it is a <strong>Overlay Index</strong>.</p>
+<h2 id="Duplicate-index-and-Redundant-Index"><a href="#Duplicate-index-and-Redundant-Index" class="headerlink" title="Duplicate index and Redundant Index"></a>Duplicate index and Redundant Index</h2><ol>
+<li><strong>Duplicate Indexes</strong>: Repeatly create <strong>the same</strong> index, <em>e.g.</em> on columns (a, b, c).</li>
+<li><strong>Redundant Indexes</strong>: One index’s functionality is <strong>completely covered</strong> by the other. <em>E.g.</em>, creating index for column (a) and (a, b) at the same time. (The latter can cover the prior)</li>
+</ol>
+<hr>
+
         </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2022/04/21/SQL-Study-Note-10/" data-id="cl29i66de00068stj8x983evz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "SQL-Study-Note-10 Index",
+        "image": "http://example.com/2022/04/21/SQL-Study-Note-10/sql.jpg",
+        "keywords": "DataScience SQL",
+        "genre": "Data Science SQL Job Search SQL",
+        "datePublished": "2022-04-21",
+        "dateCreated": "2022-04-21",
+        "dateModified": "2022-04-21",
+        "url": "http://example.com/2022/04/21/SQL-Study-Note-10/",
+        "description": "
+
+Index can be used to find the row (line) numbers corresponding to the value being queried. Index is added to certain columns and is stored in memory (RAM) for most times.",
+        "wordCount": 849
+    }
+</script>
+
+</article>
+
+    <section id="comments">
     
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
 
 
-    </div></section>
+    
+    </section>
 
 
 
@@ -275,6 +420,29 @@ Lost of sensor-generated data can be very common. The methods of imputation can 
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/04/21/SQL-Study-Note-11/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            SQL-Study-Note-11 User and Privilege Management
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/04/20/SQL-Study-Note-9/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -486,11 +654,13 @@ Lost of sensor-generated data can be very common. The methods of imputation can 
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://example.com/2022/04/21/SQL-Study-Note-10/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
