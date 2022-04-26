@@ -6,19 +6,27 @@
     
 
     
-    <title>The blog of Blur</title>
+    <title>DS-Study-Note-2 Bias VS Variance | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Personal blog of blur.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The blog of Blur">
-<meta property="og:url" content="https://umiao.github.io/index.html">
+    <meta name="keywords" content="DataScience,Machine Learning" />
+    
+    <meta name="description" content="The target of Machine Learning is to fit an (unknown) distribution. There lies three possible error: bias, variance and irreducible error.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DS-Study-Note-2 Bias VS Variance">
+<meta property="og:url" content="https://umiao.github.io/2022/04/23/DS-Study-Note-2/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Personal blog of blur.">
+<meta property="og:description" content="The target of Machine Learning is to fit an (unknown) distribution. There lies three possible error: bias, variance and irreducible error.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2022/04/23/DS-Study-Note-2/var.jpg">
+<meta property="article:published_time" content="2022-04-23T07:41:01.000Z">
+<meta property="article:modified_time" content="2022-04-26T22:18:22.843Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2022/04/23/DS-Study-Note-2/var.jpg">
     
 
     
@@ -146,547 +154,195 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <em class="page-title-link" data-url="home">Home</em>
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-DS-Study-Note-2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2022" class="archive-year"><i class="icon fa fa-calendar-o"></i>2022</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/26/DS-Study-Note-3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/26/DS-Study-Note-3/over.png)" alt="DS-Study-Note-3 Dimension Curse" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/26/DS-Study-Note-3/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-04-26T22:19:27.000Z" itemprop="datePublished">2022-04-26</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/26/DS-Study-Note-3/">DS-Study-Note-3 Dimension Curse</a>
+        DS-Study-Note-2 Bias VS Variance
         </h1>
     
 
-        <p class="article-excerpt">
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/04/23/DS-Study-Note-2/" class="article-date">
+       <time datetime="2022-04-23T07:41:01.000Z" itemprop="datePublished">2022-04-23</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/04/23/DS-Study-Note-2/" class="article-date">
+     <time datetime="2022-04-26T22:18:22.843Z" itemprop="dateModified">2022-04-26</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
             
-DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data.
 
-
-
-
-
-
-
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/23/DS-Study-Note-2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/23/DS-Study-Note-2/var.jpg)" alt="DS-Study-Note-2 Bias VS Variance" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/23/DS-Study-Note-2/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-04-23T07:41:01.000Z" itemprop="datePublished">2022-04-23</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/23/DS-Study-Note-2/">DS-Study-Note-2 Bias VS Variance</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            The target of Machine Learning is to fit an (unknown) distribution. There lies three possible error: bias, variance and irreducible error. 
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/22/DS-Study-Note-1/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/22/DS-Study-Note-1/over.jpg)" alt="DS-Study-Note-1 Overfitting and Brief Introduction on Decomposition and Regularization" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/22/DS-Study-Note-1/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-04-22T16:23:14.000Z" itemprop="datePublished">2022-04-22</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/22/DS-Study-Note-1/">DS-Study-Note-1 Overfitting and Brief Introduction on Decomposition and Regularization</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
             
-Overfitting is a modeling error in statistics that occurs when a function is too closely aligned to a limited set of data points. —- Definition ranked 1st in Google 
 
+            
 
-        </p>
-    </div>
-</article>
-    
+            <p>The target of Machine Learning is to fit an (unknown) distribution. There lies three possible error: bias, variance and irreducible error. </p>
+<span id="more"></span>
+<img src="/2022/04/23/DS-Study-Note-2/var.jpg" class="" title="ML_note">
+<blockquote>
+<p>The irreducible error <strong>CANNOT be avoided</strong> with any algorithm as it can be viewed as the result of unknown factor, noise, accidents, etc. Thus, we would focus on the bias and variance error.</p>
+</blockquote>
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><ol>
+<li><strong>Bias</strong> can be understood as the <strong>accuracy</strong> of the model, <em>i.e.</em>, the ability to estimate the output value <strong>accurately</strong>. </li>
+<li><strong>Variance</strong> can be understood as the <strong>stability</strong> of the model, <em>i.e.</em>, the ability of resisting the noise and disturbance contained by the input. I also understood this ability as being able to recognize similar inputs and generate <strong>similar</strong> results for them.</li>
+</ol>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><ul>
+<li>Applying <strong>K-fold cross validation</strong> can reduce the influence casted by the <em>outliers</em> and enhance the generalization ability, which reduces <strong>the variance error</strong>.</li>
+<li>At the same time, part of the data is not used for training, which impairs the model’s fitting ability and increase the <strong>bias error</strong>. </li>
+<li>An intuition is that, a more <strong>complex</strong> model is more <strong>sensitive</strong> to the noise contained by the input, which makes the output less stable (higher variance error). At the same time, a simpler model more easily <em>ignores</em> the random noise and difference of distribution between the training set and the testing set.</li>
+</ul>
+<h1 id="Tradeoff-and-Analysis"><a href="#Tradeoff-and-Analysis" class="headerlink" title="Tradeoff and Analysis"></a>Tradeoff and Analysis</h1><p>The variance of the parameters you are estimating can be reduced, at the cost of increasing bias. If you would like to <strong>generalize</strong> a model trained on a certain training set, then you <strong>CANNOT</strong> minimize the <em>bias and variance error</em> at the same time. </p>
+<h2 id="Bias"><a href="#Bias" class="headerlink" title="Bias:"></a>Bias:</h2><ul>
+<li>Bias error comes from the <strong>erroneous assumptions</strong> of the learning algorithm.</li>
+<li>High bias error corresponds to <strong>underfitting</strong>.</li>
+<li>Bias error measures the <strong>closeness</strong> between the distribution you modeled and the <strong>expectation</strong> of the real distribution.</li>
+<li>Introduction of bias term in linear models aims at <strong>simplying</strong> the learning process without introducing way more complicated distribution which makes the model hard to generalize. At the same time, such models would fail to solve the more complicated models which do not meet the <strong>assumption</strong> (that this problem can be approximated by linear model).</li>
+</ul>
+<h2 id="Variance"><a href="#Variance" class="headerlink" title="Variance:"></a>Variance:</h2><ul>
+<li>Variance error comes from the <strong>noise &#x2F; fluctuation &#x2F; disturbance</strong> of the training set.</li>
+<li>High variance error probably means that you are modeling on the random noise of the training set, which cannot be generalized, and this means <strong>overfitting</strong>.</li>
+<li>Variance error reveals the level of <strong>concentration</strong> of your model.</li>
+</ul>
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/21/SQL-Study-Note-11/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/21/SQL-Study-Note-11/sql.jpg)" alt="SQL-Study-Note-11 User and Privilege Management" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/21/SQL-Study-Note-11/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-21T19:39:39.000Z" itemprop="datePublished">2022-04-21</time></div>
         </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/21/SQL-Study-Note-11/">SQL-Study-Note-11 User and Privilege Management</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
+        <footer class="article-footer">
             
 
 
-Most data science practitioners would not be granted the privilege of managing the database system (not even the privilege to update &#x2F; delete), so…
 
-        </p>
+    <a data-url="https://umiao.github.io/2022/04/23/DS-Study-Note-2/" data-id="cl2gpvalk0002t4tj8ix45k54" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "DS-Study-Note-2 Bias VS Variance",
+        "image": "https://umiao.github.io/2022/04/23/DS-Study-Note-2/var.jpg",
+        "keywords": "DataScience Machine Learning",
+        "genre": "Data Science General Knowledge",
+        "datePublished": "2022-04-23",
+        "dateCreated": "2022-04-23",
+        "dateModified": "2022-04-26",
+        "url": "https://umiao.github.io/2022/04/23/DS-Study-Note-2/",
+        "description": "The target of Machine Learning is to fit an (unknown) distribution. There lies three possible error: bias, variance and irreducible error. ",
+        "wordCount": 412
+    }
+</script>
+
 </article>
-    
-        </div>
-    
 
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/21/SQL-Study-Note-10/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/21/SQL-Study-Note-10/sql.jpg)" alt="SQL-Study-Note-10 Index" class="thumbnail-image"></span>
-    
+    <section id="comments">
     
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/21/SQL-Study-Note-10/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-21T17:53:59.000Z" itemprop="datePublished">2022-04-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/21/SQL-Study-Note-10/">SQL-Study-Note-10 Index</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Index can be used to find the row (line) numbers corresponding to the value being queried. Index is added to certain columns and is stored in memory (RAM) for most times.
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/20/SQL-Study-Note-9/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/20/SQL-Study-Note-9/sql.jpg)" alt="SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/20/SQL-Study-Note-9/">0</span>
-    
-</span>
 
 
     
-</a>
+    </section>
 
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-20T22:22:22.000Z" itemprop="datePublished">2022-04-20</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/20/SQL-Study-Note-9/">SQL-Study-Note-9 Data Modeling, Constraint and Normalization Form</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Data Modelling Pipeline
-Understand the requirements; 
-Build a conceptual Model; 
-Build a logical model; 
-Build a physical model.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png)" alt="Missing Value Imputation in Traffic Data" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/UCLA/">UCLA</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/UCLA/Course-Study/">Course Study</a>
-            </div>
-            <div class="date"><time datetime="2022-04-19T21:52:23.000Z" itemprop="datePublished">2022-04-19</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/">Missing Value Imputation in Traffic Data</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Lost of sensor-generated data can be very common. The methods of imputation can be coarsely categorized into: 1. Prediction methods; 2. Interpolation methods; 3. Statistical Learning methods.
-
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-8/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-8/sql.jpg)" alt="SQL-Study-Note-8 - Data Type of MySQL" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/16/SQL-Study-Note-8/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T05:47:13.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-8/">SQL-Study-Note-8 - Data Type of MySQL</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Data Type of MySQL
-Suggestion for Data Type Selection
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-7/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-7/sql.jpg)" alt="SQL-Study-Note-7 - Transactions" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/16/SQL-Study-Note-7/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T05:07:50.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-7/">SQL-Study-Note-7 - Transactions</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-Transactions
-Principles of Transaction (ACID)
-
-Atomicity
-Consistency
-Isolation
-Durability
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/16/SQL-Study-Note-6/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/16/SQL-Study-Note-6/sql.jpg)" alt="SQL-Study-Note-6 - Trigger and Events" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/16/SQL-Study-Note-6/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-04-17T04:46:07.000Z" itemprop="datePublished">2022-04-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/16/SQL-Study-Note-6/">SQL-Study-Note-6 - Trigger and Events</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-
-TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
-
-
-    <nav id="page-nav">
-        <span class="pages">Page 1 of 2</span>
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
-    </nav>
 
 
                         </div>
@@ -747,6 +403,29 @@ TriggerTriggers are the code blocks executed automatically before insertion &#x2
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/04/26/DS-Study-Note-3/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            DS-Study-Note-3 Dimension Curse
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/04/22/DS-Study-Note-1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">DS-Study-Note-1 Overfitting and Brief Introduction on Decomposition and Regularization</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -958,11 +637,13 @@ TriggerTriggers are the code blocks executed automatically before insertion &#x2
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'https://umiao.github.io/2022/04/23/DS-Study-Note-2/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
