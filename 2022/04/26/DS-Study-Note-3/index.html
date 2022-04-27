@@ -12,16 +12,16 @@
     
     <meta name="keywords" content="DataScience,Machine Learning" />
     
-    <meta name="description" content="DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data.">
+    <meta name="description" content="DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data. E.g., computation of similarity, distance, neighbour or any metric based processing.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DS-Study-Note-3 Dimension Curse">
 <meta property="og:url" content="https://umiao.github.io/2022/04/26/DS-Study-Note-3/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data.">
+<meta property="og:description" content="DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data. E.g., computation of similarity, distance, neighbour or any metric based processing.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://umiao.github.io/2022/04/26/DS-Study-Note-3/over.png">
 <meta property="article:published_time" content="2022-04-26T22:19:27.000Z">
-<meta property="article:modified_time" content="2022-04-26T22:24:49.700Z">
+<meta property="article:modified_time" content="2022-04-27T05:26:41.457Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
 <meta property="article:tag" content="Machine Learning">
@@ -186,7 +186,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/04/26/DS-Study-Note-3/" class="article-date">
-     <time datetime="2022-04-26T22:24:49.700Z" itemprop="dateModified">2022-04-26</time>
+     <time datetime="2022-04-27T05:26:41.457Z" itemprop="dateModified">2022-04-26</time>
   </a>
 </div>
 
@@ -213,14 +213,59 @@
 
             
 
-            <span id="more"></span>
-<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><p><strong>Dimension curse</strong> stands for the troubles you would meet when processing <strong>high-dimensional</strong> data.</p>
-<img src="/2022/04/26/DS-Study-Note-3/over.png" class="" title="ML_note">
-
-
-
-
-
+            <img src="/2022/04/26/DS-Study-Note-3/over.png" class="" title="ML_note">
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><p><strong>Dimension curse</strong> stands for the troubles you would meet when processing <strong>high-dimensional</strong> data. <em>E.g.</em>, computation of <strong>similarity, distance, neighbour or any metric based processing.</strong></p>
+<span id="more"></span>
+<p>The reason is that for <strong>high-dimensional</strong> space, the concept of distance will gradually <strong>fail</strong>, and even make any two points <strong>infinitely inseparable</strong>, even if they look different &#x2F; correspond to very different categories.</p>
+<p>As the dimension (of vector representation) grows, the data becomes more and more <strong>sparse</strong> and may correspond to higher variance and bias error. These phenomena are essentially caused by the same theory. However, the theoretical derivation is omitted here.</p>
+<blockquote>
+<p>Specifically, <strong>dimension curse</strong> can be categorized into the following more concrete problems: </p>
+<ol>
+<li>Distance concentration</li>
+<li>Combinational explosion</li>
+<li>Hubness</li>
+</ol>
+</blockquote>
+<h1 id="Distance-concentration"><a href="#Distance-concentration" class="headerlink" title="Distance concentration"></a>Distance concentration</h1><ul>
+<li>As the number of dimension raises, for the queried point, the distance to its <strong>closest neighbour</strong> would converge to the distance to the <strong>furthest point</strong>. This also means that the <em><strong>difference of distance</strong></em> between <strong>arbitrary</strong> two points would be <strong>negligible</strong>.</li>
+<li>The difference of distance may be small enough, for a dimension of <strong>20</strong>.</li>
+<li>The distance may remain <strong>effective</strong>, if there lies <strong>inherent clusters</strong> in the data and these clusters are <strong>distant</strong> from each other. Or, if many of the data’s dimensions are <strong>redundant</strong> (the data can be embedded into a space with much smaller dimension).</li>
+<li>In high-dimensional space, small change of the <strong>neighbourhood radius</strong> determines the difference of selecting only <strong>ONE</strong> point or selecting <strong>ALL</strong> the datapoints. </li>
+<li>This is because the <strong>volume ratio</strong> of a <strong>fixed radius</strong> hypersphere to a unit radius hypersphere will be close to <strong>1</strong>.</li>
+<li>Increase of <strong>relevant features</strong> would be <strong>beneficial</strong> to the model. </li>
+<li>Increase of <strong>irrelevant features</strong> would <strong>impair</strong> the model’s performance.</li>
+<li>Distance under <em>different dimension and space</em> <strong>CANNOT</strong> be compared with each other.</li>
+</ul>
+<h1 id="Combinational-explosion"><a href="#Combinational-explosion" class="headerlink" title="Combinational explosion"></a>Combinational explosion</h1><img src="/2022/04/26/DS-Study-Note-3/dif.jpg" class="" title="ML_note">
+<ul>
+<li>As the dimensionality increases, a larger percentage of the training data resides in the <strong>corners</strong> of the feature space. </li>
+<li>It is also much more difficult to traverse the increasing search space as the size of the search space <strong>grows exponentially</strong>, as shown in the above image.</li>
+<li>A complex search space may correspond to the same configuration (object &#x2F; training &#x2F; testing sample) in the low-dimensional case, resulting in <strong>overfitting</strong>.</li>
+<li>Training samples with <strong>larger scale</strong> are required to suppress <strong>overfitting</strong> (on data with <strong>high dimensions</strong>). </li>
+<li>Algorithms like <strong>Random Forest</strong> can restrict the number of features used (in one tree).</li>
+</ul>
+<h1 id="Hubness"><a href="#Hubness" class="headerlink" title="Hubness"></a>Hubness</h1><ul>
+<li>With the increase of dimension, a handful of points are <strong>significantly more frequent</strong> to become the <strong>nearest neighbour</strong> of other points. This is also called <strong>Hubness</strong>.</li>
+<li>If we record the frequency of each point becoming the <strong>nearest neighbour</strong> of another point, we can find that is frequency follows Zipf’s Law and is <strong>right-skewed</strong> heavily.</li>
+<li>Generally, points close to the <strong>mean value</strong> of the entire dataset become hubs more easily.</li>
+<li>When <strong>cluster</strong> exists, data points close to the <strong>mean value</strong> of the cluster are more likely to become hubs as well.</li>
+</ul>
+<h1 id="Outlier-x2F-Anti-hubs"><a href="#Outlier-x2F-Anti-hubs" class="headerlink" title="Outlier &#x2F; Anti-hubs"></a>Outlier &#x2F; Anti-hubs</h1><ul>
+<li>These points are most <strong>distant</strong> from the majority of other points.</li>
+<li>Anti-intuitive things may happen, i.e., hubs exist in the <strong>low-density region</strong> of the high-dimensional space, but the hubs are <strong>close</strong> to the other points. </li>
+<li>At the same time, anti-hubs may exist in the <strong>high-density region</strong> of the high-dimensional space, but the anti-hubs are <strong>distant</strong> to the other points (which makes them outliers).</li>
+<li>This can be viewed as a mismatch between the <strong>probabilistic density</strong> and <strong>distance distribution</strong>.</li>
+</ul>
+<h1 id="Solution-to-dimension-curse"><a href="#Solution-to-dimension-curse" class="headerlink" title="Solution (to dimension curse)"></a>Solution (to dimension curse)</h1><ol>
+<li>For the cases of <strong>Multicollinearity</strong> and <strong>Duplication of Components</strong>(redundancy) happen, we can simply <strong>remove</strong> the redundant variables after evaluation.</li>
+<li>In the case when each dimension (feature) contributes <strong>equally</strong> to the model’s result, methods like <strong>Dimensional Reduction</strong> (including <strong>CNN</strong>, <strong>Convolutional Neural Network</strong>) can be applied.</li>
+<li>Dimensional Reduction’s <strong>Disadvantages</strong>: <ul>
+<li>Converted data points <strong>DO NOT</strong> represent <strong>original features</strong>.</li>
+<li><strong>Less interpretable, hard to visualize, weaker theoretical support</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr>
 
         </div>
         <footer class="article-footer">
@@ -228,7 +273,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2022/04/26/DS-Study-Note-3/" data-id="cl2gpvaln0004t4tj9l36cwaq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2022/04/26/DS-Study-Note-3/" data-id="cl2h7t4io00040wtjfxukgrsg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -307,15 +352,8 @@
         "dateModified": "2022-04-26",
         "url": "https://umiao.github.io/2022/04/26/DS-Study-Note-3/",
         "description": "
-DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data.
-
-
-
-
-
-
-",
-        "wordCount": 21
+DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data. E.g., computation of similarity, distance, neighbour or any metric based processing.",
+        "wordCount": 630
     }
 </script>
 
@@ -396,6 +434,16 @@ DefinitionDimension curse stands for the troubles you would meet when processing
         
 <nav id="article-nav">
     
+        <a href="/2022/04/26/DS-Study-Note-4/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            DS-Study-Note-4 Metrics
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
     
         <a href="/2022/04/23/DS-Study-Note-2/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
@@ -417,6 +465,26 @@ DefinitionDimension curse stands for the troubles you would meet when processing
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/04/26/DS-Study-Note-4/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/04/26/DS-Study-Note-4/metric.png)" alt="DS-Study-Note-4 Metrics" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></p>
+                            <p class="item-title"><a href="/2022/04/26/DS-Study-Note-4/" class="title">DS-Study-Note-4 Metrics</a></p>
+                            <p class="item-date"><time datetime="2022-04-27T05:28:19.000Z" itemprop="datePublished">2022-04-26</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -498,26 +566,6 @@ DefinitionDimension curse stands for the troubles you would meet when processing
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2022/04/21/SQL-Study-Note-10/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/21/SQL-Study-Note-10/sql.jpg)" alt="SQL-Study-Note-10 Index" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
-                            <p class="item-title"><a href="/2022/04/21/SQL-Study-Note-10/" class="title">SQL-Study-Note-10 Index</a></p>
-                            <p class="item-date"><time datetime="2022-04-21T17:53:59.000Z" itemprop="datePublished">2022-04-21</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -527,7 +575,7 @@ DefinitionDimension curse stands for the troubles you would meet when processing
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
         </div>
     </div>
 
@@ -537,7 +585,7 @@ DefinitionDimension curse stands for the troubles you would meet when processing
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">15</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">16</span></li></ul>
         </div>
     </div>
 
@@ -547,7 +595,7 @@ DefinitionDimension curse stands for the troubles you would meet when processing
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 

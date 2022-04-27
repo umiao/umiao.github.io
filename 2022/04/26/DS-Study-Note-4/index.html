@@ -6,27 +6,27 @@
     
 
     
-    <title>SQL Study Note - 1 - Syntax Basics | The blog of Blur</title>
+    <title>DS-Study-Note-4 Metrics | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="DataScience,SQL" />
+    <meta name="keywords" content="DataScience,Machine Learning" />
     
-    <meta name="description" content="Overview The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).">
+    <meta name="description" content="Metrics are used for model training and evaluation. It reveals a model’s performance on a given dataset.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL Study Note - 1 - Syntax Basics">
-<meta property="og:url" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/index.html">
+<meta property="og:title" content="DS-Study-Note-4 Metrics">
+<meta property="og:url" content="https://umiao.github.io/2022/04/26/DS-Study-Note-4/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Overview The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).">
+<meta property="og:description" content="Metrics are used for model training and evaluation. It reveals a model’s performance on a given dataset.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/sql.jpg">
-<meta property="article:published_time" content="2022-04-16T21:05:53.000Z">
-<meta property="article:modified_time" content="2022-04-17T01:31:33.088Z">
+<meta property="og:image" content="https://umiao.github.io/2022/04/26/DS-Study-Note-4/metric.png">
+<meta property="article:published_time" content="2022-04-27T05:28:19.000Z">
+<meta property="article:modified_time" content="2022-04-27T06:47:18.035Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
-<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/sql.jpg">
+<meta name="twitter:image" content="https://umiao.github.io/2022/04/26/DS-Study-Note-4/metric.png">
     
 
     
@@ -154,19 +154,19 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/SQL/">SQL</a>
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-SQL-Study-Note-1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-DS-Study-Note-4" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        SQL Study Note - 1 - Syntax Basics
+        DS-Study-Note-4 Metrics
         </h1>
     
 
@@ -177,16 +177,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2022/04/16/SQL-Study-Note-1/" class="article-date">
-       <time datetime="2022-04-16T21:05:53.000Z" itemprop="datePublished">2022-04-16</time>
+    <a href="/2022/04/26/DS-Study-Note-4/" class="article-date">
+       <time datetime="2022-04-27T05:28:19.000Z" itemprop="datePublished">2022-04-26</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2022/04/16/SQL-Study-Note-1/" class="article-date">
-     <time datetime="2022-04-17T01:31:33.088Z" itemprop="dateModified">2022-04-16</time>
+  <a href="/2022/04/26/DS-Study-Note-4/" class="article-date">
+     <time datetime="2022-04-27T06:47:18.035Z" itemprop="dateModified">2022-04-26</time>
   </a>
 </div>
 
@@ -196,7 +196,7 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a>
     </div>
 
                 
@@ -213,168 +213,67 @@
 
             
 
-            <img src="/2022/04/16/SQL-Study-Note-1/sql.jpg" class="" title="SQL Note of blur!">
+            <img src="/2022/04/26/DS-Study-Note-4/metric.png" class="" title="ML_note">
 
-<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ol>
-<li>The core of database system is to interact with <strong>DB (DataBase)</strong> with <strong>DBMS (Database Management System)</strong>.<span id="more"></span></li>
-</ol>
-<br>
-
-<ol start="2">
-<li>The DB can be generally divided into:<ul>
-<li><strong>Relational DB</strong> </li>
-<li><strong>NoSQL DB</strong> (<em>e.g.</em>, KV (key-value) based DB)</li>
+<p>Metrics are used for model training and evaluation. It reveals a model’s performance on a given dataset.</p>
+<span id="more"></span>
+<h1 id="Preliminary"><a href="#Preliminary" class="headerlink" title="Preliminary"></a>Preliminary</h1><p>We use:</p>
+<ul>
+<li>$f$ to denote our model (function) </li>
+<li>$D$ to denote the dataset used, $m$ as the sample it contains.</li>
 </ul>
-</li>
-</ol>
-<br>
-
-<ol start="3">
-<li>Recommended code style of SQL (Structed Query Language):<ul>
-<li><strong>Capitalize</strong> all <strong>keywords</strong> and <strong>reserved words</strong>, and lowercase all other contents.</li>
-<li>Each statement should end with <strong>;</strong>.</li>
+<h1 id="Error-rate"><a href="#Error-rate" class="headerlink" title="Error rate"></a>Error rate</h1><p>Defined as the number of <strong>incorrectly</strong> classified samples divide the number of total samples.<br>$$ E(f;D) &#x3D; \frac{1}{m}\sum_{i&#x3D;1}^m \mathbb{I}(f(x_i) \ne y_i)        $$<br>Similarly, the continuous form:<br>$$E(f;D) &#x3D;\int_{x \sim D} \mathbb{I}(f(x_i) \ne y_i)p(x)dx   $$</p>
+<h1 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h1><p>Defined as the number of <strong>correctly</strong> classified samples divide the number of total samples.<br>$$ acc(f;D) &#x3D; 1 - E(f;D) &#x3D; \frac{1}{m}\sum_{i&#x3D;1}^m \mathbb{I}(f(x_i) &#x3D; y_i)        $$<br>Similarly, the continuous form:<br>$$acc(f;D) &#x3D; \int_{x \sim D} \mathbb{I}(f(x_i) &#x3D; y_i)p(x)dx   $$</p>
+<h1 id="Recall-and-Precision-Rate"><a href="#Recall-and-Precision-Rate" class="headerlink" title="Recall and Precision Rate"></a>Recall and Precision Rate</h1><p>When the distribution of different classes are <strong>NOT balanced</strong>, we may be interested in how many samples of interest (positive samples) is found (<strong>Recall Rate</strong>) and  how many of the filter samples of interest are correct (<strong>Precision Rate</strong>). </p>
+<p>We use <strong>TP &#x2F; FP &#x2F; TN &#x2F; FN</strong> to denote the frequency of <strong>True Positive &#x2F; False Positive &#x2F; True Negative &#x2F; False Negative</strong>.</p>
+<h2 id="Precision-Rate"><a href="#Precision-Rate" class="headerlink" title="Precision Rate"></a>Precision Rate</h2><p>$$ P &#x3D; \frac{TP}{TP + FP}  $$ (TP + FP stands for all the samples classified as <strong>positive</strong>)</p>
+<h2 id="Recall-Rate"><a href="#Recall-Rate" class="headerlink" title="Recall Rate"></a>Recall Rate</h2><p>$$ R &#x3D; \frac{TP}{TP + FN} $$ (TP + FN stands for all the samples whose labels are <strong>positive</strong>)</p>
+<h2 id="Tradeoff"><a href="#Tradeoff" class="headerlink" title="Tradeoff"></a>Tradeoff</h2><ul>
+<li>Pursuing Recall Rate and Precision Rate at the same time is often <strong>contradictory</strong>. </li>
+<li>This is because a high Precision means that the model would be <strong>cautious</strong> as possible so that many positive samples with <strong>lower confidence</strong> would be classified as negative.</li>
 </ul>
-</li>
+<h1 id="PR-Curve"><a href="#PR-Curve" class="headerlink" title="PR Curve"></a>PR Curve</h1><p>In order to <strong>unify</strong> the Precision and Recall rate and compare the performance of different model, <strong>PR Curve</strong> is proposed.</p>
+<ol>
+<li>The model is required to sort all the samples by the <strong>confidence</strong> (of <strong>being positive</strong> sample). </li>
+<li>Normally, for the first sample, the <strong>Precision</strong> would be 1 while the <strong>Recall</strong> would be the <strong>minima</strong> (close to 0).</li>
+<li>Predict the current sample to be <strong>positive</strong>, <strong>one-by-one</strong>, in the sorted order and keep calculating the corresponding Precison and Recall Rate.</li>
+<li>When all the samples are predicted to be positive, we have a <strong>Recall</strong> of 1 and the <strong>Precision</strong> reaches the <strong>minima</strong>.</li>
 </ol>
-<br>
+<h2 id="Break-Event-Point-of-PR-Curve"><a href="#Break-Event-Point-of-PR-Curve" class="headerlink" title="Break-Event Point of PR Curve"></a>Break-Event Point of PR Curve</h2><p>In order to compare the performance of two models, we can use the <strong>area</strong> under the PR curve as the metric. However, this value can be hard to calculate. </p>
+<p>Thus, we use the <strong>Break-Event Point</strong> to reach a balance between the Recall and Precision.<br>It is calculated by the <strong>x-coordinate of the intersection point</strong> of the <strong>PR Curve</strong> and function $y&#x3D;x$.<br>Ideally, we want both the Precision and Recall to be <strong>as high as possible</strong>.</p>
+<img src="/2022/04/26/DS-Study-Note-4/pr.jpg" class="" title="ML_note">
 
-<h1 id="Keywords-and-Syntax-Rules"><a href="#Keywords-and-Syntax-Rules" class="headerlink" title="Keywords and Syntax Rules"></a>Keywords and Syntax Rules</h1><h2 id="The-query-syntax"><a href="#The-query-syntax" class="headerlink" title="The query syntax"></a>The query syntax</h2><ol>
-<li><strong>SHOW DATABASES</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br></pre></td></tr></table></figure>
-  List all the names of exisitng databases (under the current schema).</li>
-</ol>
-<br>
 
-<ol start="2">
-<li><strong>USE</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">USE database_name;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">table</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">from</span> database_name.table; </span><br><span class="line"><span class="comment">-- Must specify the database_name for the DBs which are not in use</span></span><br></pre></td></tr></table></figure>
-  Select one DB as the default one.</li>
+<h1 id="F1-Score"><a href="#F1-Score" class="headerlink" title="F1-Score"></a>F1-Score</h1><p><strong>F1-Score</strong> is a more commonly used metric to reach a balance between Precision and Recall, it is defined as the <strong>Harmonic Mean</strong> of these two:<br>$$ \frac{1}{F1} &#x3D; \frac{1}{2} \times (\frac{1}{P} + \frac{1}{R}) $$</p>
+<h2 id="Macro-scope-Macro-F1"><a href="#Macro-scope-Macro-F1" class="headerlink" title="Macro scope (Macro-F1)"></a>Macro scope (Macro-F1)</h2><ol>
+<li>For <strong>N-class</strong> classification problem, first calculates $N$ F1-Scores on $N$ <strong>Confusion Matrix</strong>.</li>
+<li>Find the <strong>arithmetic mean</strong> of the $N$ F1-Scores.</li>
 </ol>
-<br>
-
-<ol start="3">
-<li><strong>SELECT</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> (column_name) <span class="keyword">FROM</span> (table_name) <span class="keyword">WHERE</span> (<span class="keyword">condition</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> (col_name).</span><br></pre></td></tr></table></figure>
-  Select the desired data from a table.<br>  It should be noted that you should use <strong>&#x3D;</strong> in SQL to determine equivalence. (It <strong>DOES NOT</strong> mean assignment.)<br>  You can conduct calculation on the selected result.</li>
+<h2 id="Micro-scope-Micro-F1"><a href="#Micro-scope-Micro-F1" class="headerlink" title="Micro scope (Micro-F1)"></a>Micro scope (Micro-F1)</h2><ol>
+<li>Find $N$ groups of $TP$, $FP$, $TN$, $FN$ and find the <strong>arithmetic mean</strong> for each of the four.</li>
+<li>Calculate <strong>F1-Score</strong> with the <strong>mean</strong> $TP$, $FP$, $TN$, $FN$.</li>
 </ol>
-<br>
-
-<ol start="4">
-<li><strong>AS</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> (column_name) <span class="keyword">FROM</span> (table_name) <span class="keyword">WHERE</span> (<span class="keyword">condition</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> (col_name).</span><br></pre></td></tr></table></figure>
-  For each col_name, table_name to be queried and the queried results, you can always to set alias (surname) for them with <strong>AS</strong>.</li>
+<h2 id="Generalization"><a href="#Generalization" class="headerlink" title="Generalization"></a>Generalization</h2><p>With the method describe above, you can similarly define <strong>micro-P</strong>, <strong>macro-P</strong>, <strong>micro-R</strong>, <strong>macro-R</strong>.</p>
+<h1 id="Receiver-Operating-Characteristic-ROC-Curve"><a href="#Receiver-Operating-Characteristic-ROC-Curve" class="headerlink" title="Receiver Operating Characteristic (ROC) Curve"></a>Receiver Operating Characteristic (ROC) Curve</h1><ol>
+<li>Similar to PR Curve, <strong>sort</strong> all the samples by the <strong>confidence of predicting as positive</strong>.</li>
+<li>Find $$ TPR &#x3D; \frac{TP}{TP + FN} $$, $$ FPR &#x3D; \frac{FP}{TN + FP} $$.<br>These two values stand for the ratio of <strong>correctly classified positive samples</strong> and <strong>incorrectly classified negative samples</strong>.</li>
+<li>For a <strong>0-1 Classification</strong> task, a model based on <strong>random guess</strong>‘s ROC Curve should correspond to $y&#x3D;x$ and an accuracy of $0.5$.</li>
 </ol>
-<br>
-
-<ol start="5">
-<li><strong>– &#x2F; comment</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- This a comment.</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> This <span class="keyword">is</span> also acceptable.</span><br></pre></td></tr></table></figure></li>
+<h2 id="Area-Under-ROC-Curve-AUC"><a href="#Area-Under-ROC-Curve-AUC" class="headerlink" title="Area Under ROC Curve (AUC)"></a>Area Under ROC Curve (AUC)</h2><ul>
+<li>With <strong>finite samples</strong>, you can draw the coordinate $(TPR, FPR)$ for each point and find the <strong>area</strong> under the ROC Curve. </li>
+<li>This is a common metric in <strong>evaluating</strong> models.</li>
+</ul>
+<h2 id="Find-a-confidence-threshold-for-ROC-Curve"><a href="#Find-a-confidence-threshold-for-ROC-Curve" class="headerlink" title="Find a confidence threshold for ROC Curve"></a>Find a confidence threshold for ROC Curve</h2><ol>
+<li>Set the threshold to $\inf$ which exceeds the confidence (score) of all the positive samples and they are all predicted as negative.</li>
+<li>In this case, both the <strong>TPR</strong> and <strong>FPR</strong> equal $0$.</li>
+<li>With the threshold goes down, these two would gradually raise to $1$.</li>
 </ol>
-<br>
-
-<ol start="6">
-<li><strong>DISTINCT</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> column_name <span class="keyword">FROM</span> t</span><br></pre></td></tr></table></figure>
-  Add DISTINCT ahead of the queried target (column) to receive all the unique values.</li>
-</ol>
-<br>
-
-<ol start="7">
-<li><strong>AND &#x2F; OR &#x2F; NOT</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> col_a <span class="operator">&gt;</span> <span class="number">10</span> <span class="keyword">and</span> col_b <span class="operator">=</span> <span class="string">&#x27;CA&#x27;</span></span><br></pre></td></tr></table></figure>
-  Logical operator to be used with the WHERE clause.</li>
-</ol>
-<br>
-
-<ol start="8">
-<li><strong>IN</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> col_a <span class="keyword">IN</span> (<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>)</span><br></pre></td></tr></table></figure>
-  Determine if the queried value belongs to a set.</li>
-</ol>
-<br>
-
-<ol start="9">
-<li><strong>BETWEEN</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> point <span class="keyword">BETWEEN</span> <span class="number">100</span> <span class="keyword">AND</span> <span class="number">300</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> point <span class="operator">&gt;=</span> <span class="number">100</span> <span class="keyword">AND</span> point <span class="operator">&lt;=</span> <span class="number">300</span>;</span><br><span class="line"><span class="comment">-- These two are equivalent</span></span><br></pre></td></tr></table></figure>
-  Determine if the queried value within a given interval.<br>  Both ends of the interval are closed ([beg, end]).</li>
-</ol>
-<br>
-
-<ol start="10">
-<li><strong>LIKE</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">like</span> <span class="string">&#x27;b%&#x27;</span></span><br><span class="line"><span class="comment">-- Able to match &#x27;Bob&#x27; and &#x27;bike&#x27;</span></span><br></pre></td></tr></table></figure>
- Provide functionality similar to Regular Expression. <strong>%</strong> can match arbitrary string, <strong>_</strong> can match arbitrary char. Not sensitive to the case.</li>
-</ol>
-<br>
-
-<ol start="11">
-<li><strong>REGEXP</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name REGEX <span class="string">&#x27;^f[a-z]+d&#x27;</span></span><br></pre></td></tr></table></figure>
- Match a given Regular Expression pattern.</li>
-</ol>
-<br>
-
-<ol start="12">
-<li><strong>IS NULL</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
- Query all the records which are (not) null in a given column.</li>
-</ol>
-<br>
-
-<ol start="13">
-<li><strong>ORDER BY</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">ORDER</span> <span class="keyword">BY</span> col_name <span class="keyword">DESC</span> <span class="operator">/</span> AESC</span><br></pre></td></tr></table></figure>
- Decide the sorting order of the returned records.</li>
-</ol>
-<br>
-
-<ol start="14">
-<li><strong>LIMIT</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t LIMIT <span class="keyword">offset</span>, tot_num</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t LIMIT tot_num</span><br></pre></td></tr></table></figure>
- Restrict the number of the returned records.<br> Skip the first $n&#x3D;$offset records and then return tot_num lines of records.<br> Return all the records if number of matched records fewer than tot_num.</li>
-</ol>
-<br>
-
-<ol start="15">
-<li><strong>INNER JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> t_a.col_1 <span class="operator">=</span> t_b.col_2;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> t_a.col_1 <span class="operator">=</span> DB_2.t_b.col_2;</span><br><span class="line"><span class="comment">-- You can conduct crossed-DB join by specifying the name of the DB not in use.</span></span><br></pre></td></tr></table></figure>
- Can be simply writtene as <strong>JOIN</strong>. Concat two tables based on the given condition. Conduct Cartesian product implicitly.</li>
-</ol>
-<br>
-
-<ol start="16">
-<li><strong>SELF JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">AS</span> a <span class="keyword">JOIN</span> t_a <span class="keyword">AS</span> b <span class="keyword">on</span> a.col_1 <span class="operator">=</span> b.col_2;</span><br></pre></td></tr></table></figure>
- A table can join with itself, but different alias are required.</li>
-</ol>
-<br>
-
-<ol start="17">
-<li><strong>Multi-table JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> a.col_1 <span class="operator">=</span> b.col_2 <span class="keyword">JOIN</span> t_c <span class="keyword">on</span> b.col_2 <span class="operator">=</span> c.col_3;</span><br></pre></td></tr></table></figure>
- Multiple (n) tables can be joined but this is not recommended when $ n &gt; 3 $ due to performance concern.</li>
-</ol>
-<br>
-
-<ol start="18">
-<li><strong>Composite JOIN &#x2F; Implicit JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> a.col_1 <span class="operator">=</span> b.col_2 <span class="keyword">JOIN</span> t_c <span class="keyword">on</span> b.col_2 <span class="operator">=</span> c.col_3;</span><br></pre></td></tr></table></figure>
- Sometimes only a tuple of multiple attributes can uniquely identify a row of the table. In this case, these attributes become Composite Primary Key. <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a, t_b;</span><br></pre></td></tr></table></figure>
- Implicit JOIN is conducted in the above example but this is not recommended, too.</li>
-</ol>
-<br>
-
-<ol start="19">
-<li><strong>OUTER JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">AS</span> a <span class="keyword">JOIN</span> t_b <span class="keyword">AS</span> b <span class="keyword">on</span> a.col_1 <span class="operator">=</span> b.col_2 <span class="keyword">JOIN</span> t_c <span class="keyword">AS</span> c <span class="keyword">on</span> b.col_2 <span class="operator">=</span> c.col_3;</span><br></pre></td></tr></table></figure>
- When using INNER JOIN, some records of the left table cannot match with the right table because the condition of the ON clause is not satisfied. However, if we want to return all the records of the left (right) table regardless of the boolean value of the ON clause, we can use LEFT (RIGHT) OUTER JOIN.<br> You should use RIGHT JOIN instead of LEFT JOIN as possible.<br> <strong>SELF OUTER JOIN</strong> is similar, and alias is still required.</li>
-</ol>
-<br>
-
-<ol start="20">
-<li><strong>USING</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> t_a.col_1 <span class="operator">=</span> t_b.col_1;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">USING</span> (col_1);</span><br><span class="line"><span class="comment">-- These two are equivalent.</span></span><br></pre></td></tr></table></figure>
- Can be used to simplify the code, if the column names of the to-be-joined tables are exactly the same. You can Join on a tuple like ‘USING (id1, id2, id3)’ and these column names should be exactly the same as well (in the two tables).</li>
-</ol>
-<br>
-
-<ol start="21">
-<li><strong>NATURAL JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> t_b;</span><br></pre></td></tr></table></figure>
- Let the compiler (DBMS) to decide the way of join. Not recommended to use!</li>
-</ol>
-<br>
-
-<ol start="22">
-<li><strong>CROSS JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> t_b;</span><br></pre></td></tr></table></figure>
- Conduct Cartesian Product.</li>
-</ol>
-<br>
-
-<ol start="23">
-<li><strong>UNION</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> a <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> b;</span><br></pre></td></tr></table></figure>
- Concatenate multiple queried results together (on the direction of row). The column names should be exactly the same.<br> <strong>IT SHOULD BE NOTED</strong> that ORDER BY can be set only once, so union all the results before setting the ORDER clause.</li>
-</ol>
-<hr>
+<h2 id="Define-Sorting-Loss-based-on-AUC"><a href="#Define-Sorting-Loss-based-on-AUC" class="headerlink" title="Define Sorting Loss based on AUC"></a>Define Sorting Loss based on AUC</h2><ul>
+<li>For each pair of positive-negative samples, if the positive sample achieves a score <strong>lower than</strong> the negative sample, add $1$ to the Loss. If equals, add $0.5$. </li>
+<li>This corresponds to the area <strong>above the ROC Curve</strong> and thus should be <strong>minimized</strong>.</li>
+<li>$AUC &#x3D; 1- L_{rank}$</li>
+<li>Similarly, we can assign <strong>different weights</strong> to different types of mistakes a classifer made and draw the <strong>cost curve</strong>. We can find the weighted sum and for each point, draw the curve of <strong>expected cost</strong> (line determined by $(0, FPR)$ and $(1, FNR)$. Then we find the lower bound of all such lines, the area under this curve stands for the cost.<img src="/2022/04/26/DS-Study-Note-4/cost.png" class="" title="ML_note"></li>
+</ul>
 
         </div>
         <footer class="article-footer">
@@ -382,7 +281,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/" data-id="cl2h7t4it000a0wtj3d8hhdf5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2022/04/26/DS-Study-Note-4/" data-id="cl2h7t4iq00060wtj9fr85sbt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -452,19 +351,18 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "SQL Study Note - 1 - Syntax Basics",
-        "image": "https://umiao.github.io/2022/04/16/SQL-Study-Note-1/sql.jpg",
-        "keywords": "DataScience SQL",
-        "genre": "Data Science SQL Job Search SQL",
-        "datePublished": "2022-04-16",
-        "dateCreated": "2022-04-16",
-        "dateModified": "2022-04-16",
-        "url": "https://umiao.github.io/2022/04/16/SQL-Study-Note-1/",
+        "headline": "DS-Study-Note-4 Metrics",
+        "image": "https://umiao.github.io/2022/04/26/DS-Study-Note-4/metric.png",
+        "keywords": "DataScience Machine Learning",
+        "genre": "Data Science General Knowledge",
+        "datePublished": "2022-04-26",
+        "dateCreated": "2022-04-26",
+        "dateModified": "2022-04-26",
+        "url": "https://umiao.github.io/2022/04/26/DS-Study-Note-4/",
         "description": "
 
-Overview
-The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).",
-        "wordCount": 1255
+Metrics are used for model training and evaluation. It reveals a model’s performance on a given dataset.",
+        "wordCount": 894
     }
 </script>
 
@@ -545,16 +443,12 @@ The core of database system is to interact with DB (DataBase) with DBMS (Databas
         
 <nav id="article-nav">
     
-        <a href="/2022/04/16/SQL-Study-Note-2/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            SQL Study Note - 2 - The Update / Delete / Insert Syntax
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
+        <a href="/2022/04/26/DS-Study-Note-3/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">DS-Study-Note-3 Dimension Curse</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
     
 </nav>
 
@@ -769,7 +663,7 @@ The core of database system is to interact with DB (DataBase) with DBMS (Databas
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'https://umiao.github.io/2022/04/16/SQL-Study-Note-1/';
+    var disqus_url = 'https://umiao.github.io/2022/04/26/DS-Study-Note-4/';
     
     (function() {
     var dsq = document.createElement('script');
