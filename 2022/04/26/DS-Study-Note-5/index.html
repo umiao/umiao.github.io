@@ -6,27 +6,28 @@
     
 
     
-    <title>SQL Study Note - 1 - Syntax Basics | The blog of Blur</title>
+    <title>DS-Study-Note-5 Support Vector Machine (SVM) | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="DataScience,SQL" />
+    <meta name="keywords" content="DataScience,Machine Learning,SVM" />
     
-    <meta name="description" content="Overview The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).">
+    <meta name="description" content="SVM is a machine learning model which aims at finding a Decision Boundary with a subset of the training set. The SVM is a non-probabilistic binary classifier.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL Study Note - 1 - Syntax Basics">
-<meta property="og:url" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/index.html">
+<meta property="og:title" content="DS-Study-Note-5 Support Vector Machine (SVM)">
+<meta property="og:url" content="https://umiao.github.io/2022/04/26/DS-Study-Note-5/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Overview The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).">
+<meta property="og:description" content="SVM is a machine learning model which aims at finding a Decision Boundary with a subset of the training set. The SVM is a non-probabilistic binary classifier.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/sql.jpg">
-<meta property="article:published_time" content="2022-04-16T21:05:53.000Z">
-<meta property="article:modified_time" content="2022-04-17T01:31:33.088Z">
+<meta property="og:image" content="https://umiao.github.io/2022/04/26/DS-Study-Note-5/svm.png">
+<meta property="article:published_time" content="2022-04-27T06:51:47.000Z">
+<meta property="article:modified_time" content="2022-05-01T08:11:21.602Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
-<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="SVM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/sql.jpg">
+<meta name="twitter:image" content="https://umiao.github.io/2022/04/26/DS-Study-Note-5/svm.png">
     
 
     
@@ -154,19 +155,19 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/SQL/">SQL</a>
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-SQL-Study-Note-1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-DS-Study-Note-5" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        SQL Study Note - 1 - Syntax Basics
+        DS-Study-Note-5 Support Vector Machine (SVM)
         </h1>
     
 
@@ -177,16 +178,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2022/04/16/SQL-Study-Note-1/" class="article-date">
-       <time datetime="2022-04-16T21:05:53.000Z" itemprop="datePublished">2022-04-16</time>
+    <a href="/2022/04/26/DS-Study-Note-5/" class="article-date">
+       <time datetime="2022-04-27T06:51:47.000Z" itemprop="datePublished">2022-04-26</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2022/04/16/SQL-Study-Note-1/" class="article-date">
-     <time datetime="2022-04-17T01:31:33.088Z" itemprop="dateModified">2022-04-16</time>
+  <a href="/2022/04/26/DS-Study-Note-5/" class="article-date">
+     <time datetime="2022-05-01T08:11:21.602Z" itemprop="dateModified">2022-05-01</time>
   </a>
 </div>
 
@@ -196,7 +197,7 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a>, <a class="tag-link-link" href="/tags/SVM/" rel="tag">SVM</a>
     </div>
 
                 
@@ -213,168 +214,67 @@
 
             
 
-            <img src="/2022/04/16/SQL-Study-Note-1/sql.jpg" class="" title="SQL Note of blur!">
+            <p>SVM is a machine learning model which aims at finding a Decision Boundary with a subset of the training set. The SVM is a non-probabilistic binary classifier.</p>
+<img src="/2022/04/26/DS-Study-Note-5/svm.png" class="" title="ML_note">
+<span id="more"></span>
 
-<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ol>
-<li>The core of database system is to interact with <strong>DB (DataBase)</strong> with <strong>DBMS (Database Management System)</strong>.<span id="more"></span></li>
+<h1 id="Linear-Separable"><a href="#Linear-Separable" class="headerlink" title="Linear Separable"></a>Linear Separable</h1><p><strong>Linear Separable</strong> stands for an attribute that two class of points can be <strong>completely divided</strong> by a <strong>hyperplane</strong> (more specifically, a line in the 2-D space).<br>A <strong>hyperplance</strong> can be determined with normal vector $W$ and intercept $b$, <em>i.e.</em>, $$ X^TW + b&#x3D;0 $$. For the two separable groups, they would satisfies $X^TW + b&gt;0$ and $X^TW + b&lt;0$, respectively. </p>
+<ul>
+<li>In order to enhance the <strong>robustness</strong>, we additionally require the best-fit hyperplane to separate these two classes with maximum margin  &#x2F; interval, which is called <strong>Maximum Margin Hyperplane</strong>.</li>
+</ul>
+<h1 id="SVM-Support-Vector-Machine"><a href="#SVM-Support-Vector-Machine" class="headerlink" title="SVM (Support Vector Machine)"></a>SVM (Support Vector Machine)</h1><p>In the training set, the points which are nearest to the hyperplane are named Support Vector. After generalized to $n$ dimensional space, a point $x &#x3D; (x_1, …, x_n)$’s <em>distance</em> to the hyperplane $w^Tx+b&#x3D;0$ is $\frac{|w^Tx+b|}{||w||}$ (the denominator corresponds to 2-norm). We are interested with these support vectors and optimize the hyperplane in order to maximize the margin between the support vectors which belong to different classes.</p>
+<p>If the maximized distance equals $d$, for all the support vectors, we further unfold the absolute value expression to have:<br>$$ \frac{w^Tx+b}{||w||} \ge d, y&#x3D; 1; \quad \frac{w^Tx+b}{||w||} \le -d, y&#x3D; -1$$<br>while $y$ marks different classes.<br>Ignore the constant factor, we can have $$ w^Tx+b \ge 1 (y&#x3D;1); \quad w^Tx+b \le -1 (y&#x3D;-1)$$<br>which equals $$ y(w^Tx+b) \ge 1 $$, so that we use hyperplanes $w^Tx+b&#x3D; \pm 1$ to seperate the two classes. Replace the numerator of the distance expression with the two hyperplanes to have our optimization target:<br>$$ \max_{w, b} margin \Leftrightarrow \max(\frac{2}{||w||}) \Leftrightarrow \max(\frac{2}{||w||})^2 \Leftrightarrow \min({||w||}^2), \quad y(w^Tx+b) \ge 1 $$	<br>We can add a constant factor of $\frac{1}{2}$ to absorb the constant factor after get derivative of $w^2$.</p>
+<h2 id="Support-Vectors"><a href="#Support-Vectors" class="headerlink" title="Support Vectors"></a>Support Vectors</h2><p>Now we can tell that support vectors are all the vectors on the lines of $wx^T +b &#x3D; \pm 1$. Only the support vectors would contribute to the classification.</p>
+<h1 id="Primal-Dual-Transformation"><a href="#Primal-Dual-Transformation" class="headerlink" title="Primal-Dual Transformation"></a>Primal-Dual Transformation</h1><p>In order to solve the primal problem of $\frac{1}{2} {||w||}^2$, we can use <strong>Method of Lagrange Multiplier</strong> to <strong>solve its Dual Problem</strong>. Solving the corresponding dual problem has the advantages of:</p>
+<ul>
+<li>Easier to solve with simpler constraints and only need to optimize one variable $\alpha$</li>
+<li>Able to introduce kernel function to generalize to non-linear cases</li>
+</ul>
+<h2 id="Method-of-Lagrange-Multiplier"><a href="#Method-of-Lagrange-Multiplier" class="headerlink" title="Method of Lagrange Multiplier"></a>Method of Lagrange Multiplier</h2><ol>
+<li>Problem formulation<br>$$ \min f(x_1, …, x_n) s.t. h_k(x_1, …, x_n)&#x3D; 0, k&#x3D;1,2,…,l $$<br>That is to say, we decide to optimize function $f(x_1, …, x_n) $ with $l$ extra constraints. We can let $$ L(x, \lambda &#x3D; f(x) + \sum_{k&#x3D;1}^l \lambda_k h_k(x) $$, where $L(x, \lambda)$ is named <strong>Lagrange Function</strong>, and $\lambda$ is <strong>NOT</strong> required to be non-negative.</li>
 </ol>
-<br>
-
-<ol start="2">
-<li>The DB can be generally divided into:<ul>
-<li><strong>Relational DB</strong> </li>
-<li><strong>NoSQL DB</strong> (<em>e.g.</em>, KV (key-value) based DB)</li>
+<p>When solving the problem, we need to find $\frac{\partial L(x, \lambda)}{\partial x_i}$ for each $i \in {1, …, n}$ and let them be $0$. This is called <strong>necessary condition of equality constraints</strong> (in order to get extremum).</p>
+<h2 id="Strong-Duality"><a href="#Strong-Duality" class="headerlink" title="Strong Duality"></a>Strong Duality</h2><p>We want to transform $$ \min_w \max_\lambda L(w, \lambda)  \Rightarrow \max_\lambda \min_w  L(w, \lambda), \quad (\lambda_i \ge 0)$$<br>For function $f$, if we have $\min \max f \ge \max \min f$, that is, the minimum of the possible maximums is still greate than the maximal possible minimums, we say there exists <strong>weak duality</strong>. If $f$ is <strong>convex optimization problem</strong>, we have <strong>strong duality</strong>.<br>In order to handle the SVM problem, we require the <strong>Karush-Kuhn-Tucker (KTT)</strong> condition as the <strong>necessary and sufficient condition</strong> of strong duality.</p>
+<h2 id="Karush-Kuhn-Tucker-KTT-condition"><a href="#Karush-Kuhn-Tucker-KTT-condition" class="headerlink" title="Karush-Kuhn-Tucker (KTT) condition"></a>Karush-Kuhn-Tucker (KTT) condition</h2><p>We need to transform the optimization of inequality into optimization of equality:<br>$$ \min f(w)&#x3D;\min \frac{1}{2} {||w||}^2, g_i(w) &#x3D; 1 - y_i(w^Tx_i+b)\le 0 $$<br>into<br>$$ L(w, \lambda, a) &#x3D; f(w) + \sum_{i&#x3D;1}^n \lambda_i h_i(w) &#x3D; f(w) + \sum_{i&#x3D;1}^n \lambda_i [g_i(w) + \alpha_i^2], \lambda_i \ge 0$$<br>$g_i(w)$ is guaranteed to be $\le 0$ for $\forall i$, we can solve a series of non-zero values (a_i^2) to make every term of constraints $0$. Then we require $L$’s’ partial derivative to $w$, $\lambda$ and $a$ equals $0$ to derive the KKT condtion:<br>$$\min L(w, \lambda, a) \Rightarrow \min L(w, \lambda) &#x3D; f(w) + \sum_{i&#x3D;1}^n \lambda_i g_i (w)$$<br>The achieved minima must be greater than $0$, we have $\sum_{i&#x3D;1}^n\lambda_i g_i(w)\le 0 $, $L(w, \lambda) \le p$ as a natural upper bound. So that our objective can be changed to $\max_\lambda L(w, \lambda)$.<br>The dual optimization problem after transformation: $$\min_w  \max_\lambda L(w, \lambda) , \lambda_i \ge 0$$ </p>
+<h1 id="Procedure-of-solving-SVM-problem"><a href="#Procedure-of-solving-SVM-problem" class="headerlink" title="Procedure of solving SVM problem"></a>Procedure of solving SVM problem</h1><ol>
+<li>Construct Lagrange Function $\min_{w,b}\max_{\lambda}L(w,b,\lambda)&#x3D; \frac{1}{2} {||w||}^2 + \sum_{i&#x3D;1}^n \lambda_i [1 - y_i(w^Tx_i+b)] $</li>
+<li>Transform to dual problem $\max_\lambda \min_{w,b}L(w,b,\lambda)$<br>Find derivatives: $\frac{\partial L}{\partial w}&#x3D;w - \sum_{i&#x3D;1}^n \lambda_i x_iy_i&#x3D;0$,<br>$\frac{\partial L}{\partial b}&#x3D;\sum_{i&#x3D;1}^n \lambda_i y_i&#x3D;0$ to get $\sum_{i&#x3D;1}^n \lambda_i x_iy_i&#x3D;w$, $\sum_{i&#x3D;1}^n \lambda_i y_i&#x3D;0$.<br>Substitue into function:<img src="/2022/04/26/DS-Study-Note-5/f1.png" class="" title="ML_note">, that is, 
+$$ \min_{w,b}L(w,b,\lambda)&#x3D;\sum_{j&#x3D;1}^n\lambda_i - \frac{1}{2} \sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^n \lambda_i\lambda_jy_iy_j(x_i \cdot x_j) $$</li>
+<li>We can tell that the above question is a quadratic programming problem and its scale is proportional to the number of training samples. It can be solved with <strong>Sequential Minial Optimization (SMO)</strong> algorithm. It optimizes one parameter a time and fixed the others.<ul>
+<li>We just mentioned that SMO algorithm optimize <strong>only one</strong> parameter a time. However, we have a constraint $\sum_{i&#x3D;1}^n \lambda_i y_i&#x3D;0$ which must be satisfied. Thus, we update <strong>two</strong> parameters a time to solve this issue. With two selected parameters $\lambda_i$ and $\lambda_j$, we fix the other parameters and we have $$\lambda_i y_i + \lambda_j y_j &#x3D; c, \lambda_i \ge 0, \lambda_j \ge 0, c&#x3D; -\sum_{k \ne i,j}\lambda_ky_k $$ Then we can have $\lambda_j &#x3D; \frac{c-\lambda_iy_i}{y_j}$ so that we can replace $\lambda_j$ with expression of $\lambda_i$, find the partial derivative for $\lambda_i$ and update the two paramteres, keep iterating until converge.</li>
 </ul>
 </li>
+<li>By find partial derivative, we can have $w&#x3D;\sum_{i&#x3D;1}^m \lambda_i y_i x_i$. All the points corresponding to a $\lambda_i &gt; 0$ are <strong>support vectors</strong> (non-support vectors correspond to $\lambda_i&#x3D;0$), and we can find an arbitary support vector $x_s$ and substitute x to have $y_s(wx_s+b)&#x3D;1 \Rightarrow y_s^2(wx_s+b)&#x3D;y_s$ to find $b$. $y_s^2&#x3D;1$, thus $b&#x3D;y_s - wx_s$. We can also find b via the mean value of the support vectors: $$b&#x3D;\frac{1}{|S|}\sum_{s\in S}(y_s - wx_s) $$</li>
+<li>With $w$ and $b$ found, we can construct the hyperplane $w^Tx+b&#x3D;0$ and use $f(x)&#x3D;sign(w^Tx+b)$ to decide the classification result.</li>
 </ol>
-<br>
-
-<ol start="3">
-<li>Recommended code style of SQL (Structed Query Language):<ul>
-<li><strong>Capitalize</strong> all <strong>keywords</strong> and <strong>reserved words</strong>, and lowercase all other contents.</li>
-<li>Each statement should end with <strong>;</strong>.</li>
+<h1 id="Parameters-to-be-searched-tuned-in-SVM"><a href="#Parameters-to-be-searched-tuned-in-SVM" class="headerlink" title="Parameters to be searched (tuned) in SVM"></a>Parameters to be searched (tuned) in SVM</h1><ul>
+<li><strong>C</strong>: decide the level of regularization. In fact, $C&#x3D;\frac{1}{\lambda}$ and $\lambda$ is the regularization coefficient. (Is a squared l2-penalty)</li>
+<li><strong>kernel</strong>: The kernel function adopted by SVM model.</li>
+<li><strong>degree</strong>: The highest degree, when adapting Polynomial kernel function.</li>
+<li><strong>gamma</strong>: Coefficent of the kernel function.<br>Beside, you can decide whether to use <strong>heuristic shrinking</strong>, <strong>tolerance</strong> (the desired accuracy at convergence), size allocated to <strong>kernel cache</strong>, <strong>iteration times</strong>. You can also appoint <strong>random state</strong> for reproducing results.</li>
 </ul>
-</li>
-</ol>
-<br>
+<h1 id="Soft-Margin"><a href="#Soft-Margin" class="headerlink" title="Soft Margin"></a>Soft Margin</h1><p>The original SVM require the problem to be solved is <strong>linear separable</strong>. When this prerequisite is not satisfied, we can use <strong>soft margin</strong> to solve this problem. Originally, we require the two classes correspond to different signs, in a hyperplane expression. Now, we can allow SVM to misclassify on a handful of vectors.<br>$$ y_i(w^Tx_i+b) - \xi_i  \ge 1$$ which means that for such $i$, they do not meet the constraint and need the help of <strong>relax coefficient</strong> $\xi_i$.</p>
+<p>In order to minimize the number of misclassified vectors, we would fix our objective (loss) (by appending a regularization term for the relax coefficients):<br>$$ \min_w \frac{1}{2}{||w||}^2 + C \sum_{i&#x3D;1}^m \xi_i, \quad g_i(w,b)&#x3D;1-y_i(w^Tx_i+b)-\xi_i \le 0, \xi_i \ge 0 $$<br>Here, $C &gt; 0$ and can be understood as the penalty to the misclassified samples. If $C \rightarrow \infty$, then $\xi_i \rightarrow 0$ and the SVM (with soft margin) becomes linear separable SVM.</p>
+<h1 id="Kernel-Function"><a href="#Kernel-Function" class="headerlink" title="Kernel Function"></a>Kernel Function</h1><p>The essence of kernel function $K$ is to map vectors from low-dim Hilbert Space to high-dim. By this mean, we expect the samples which are not linear separable become separable, in the high-dim space.<br>$$K(x,z)&#x3D;\phi(x) \cdot \phi(z)$$<br>Prerequisite: The Gram matrix formed by the set of all the points of the function is <strong>semi-positive definite</strong>. (a.k.a. complete inner product space)</p>
+<img src="/2022/04/26/DS-Study-Note-5/ker.jpg" class="" title="ML_note">
 
-<h1 id="Keywords-and-Syntax-Rules"><a href="#Keywords-and-Syntax-Rules" class="headerlink" title="Keywords and Syntax Rules"></a>Keywords and Syntax Rules</h1><h2 id="The-query-syntax"><a href="#The-query-syntax" class="headerlink" title="The query syntax"></a>The query syntax</h2><ol>
-<li><strong>SHOW DATABASES</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br></pre></td></tr></table></figure>
-  List all the names of exisitng databases (under the current schema).</li>
+<p>The introduction of kernel function is to solve the case of linear unseparable. It is costly to map samples to high-dimensional space before calculating dot product, thus kernel function can realize effectively calculating the dot product result of high-dimensional space, in low-dimensional space.</p>
+<h2 id="Types-of-kernel-functions"><a href="#Types-of-kernel-functions" class="headerlink" title="Types of kernel functions"></a>Types of kernel functions</h2><ul>
+<li>Linear kernel: $x_i^Tx_j$</li>
+<li>Polynomial Kernel: $(x_i^Tx_j+c)^d$</li>
+<li>Radial basis function kernel: $exp(-\frac{||x_i-x_j||_2^2}{2\sigma ^2})$</li>
+<li>Hyperbolic tangent kernel: $tanh(Kx_i^Tx_j+c), \quad K&gt;0, c&lt;0$<br>It is clear that only the latter three needs parameter tuning.</li>
+</ul>
+<h1 id="Pros-and-Cons"><a href="#Pros-and-Cons" class="headerlink" title="Pros and Cons"></a>Pros and Cons</h1><h2 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages:"></a>Advantages:</h2><ol>
+<li>Supported by math theory, highly <strong>interpretable</strong></li>
+<li>Do not rely on statistical method, simplify the regular classification and regression problem (solely rely on the support vectors, which are deterministic and crucial samples)</li>
+<li>Applying of kernel function can handle the <strong>unlinear tasks</strong></li>
+<li>Computational complexity relies on the number of support vectors(rather than the dimensional of the sample space), avoid the curse of dimension<h2 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages:"></a>Disadvantages:</h2></li>
+<li>Long training time (every time select a pair of parameters for optimization to maintain the sum unchanged). The complexity would be $\mathcal{O}(n^2)$ where $N$ equals the number of training samples.</li>
+<li>If applied kernel function and need to store the matrix, extra space of  $\mathcal{O}(n^2)$ is required.</li>
+<li>The prediction rate is <strong>inversely proportional</strong> to the number of support vectors, leading to high complexity. </li>
+<li>Not suitable for scenarios which have millions, or even hundreds of millison of samples.</li>
 </ol>
-<br>
-
-<ol start="2">
-<li><strong>USE</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">USE database_name;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">table</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">from</span> database_name.table; </span><br><span class="line"><span class="comment">-- Must specify the database_name for the DBs which are not in use</span></span><br></pre></td></tr></table></figure>
-  Select one DB as the default one.</li>
-</ol>
-<br>
-
-<ol start="3">
-<li><strong>SELECT</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> (column_name) <span class="keyword">FROM</span> (table_name) <span class="keyword">WHERE</span> (<span class="keyword">condition</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> (col_name).</span><br></pre></td></tr></table></figure>
-  Select the desired data from a table.<br>  It should be noted that you should use <strong>&#x3D;</strong> in SQL to determine equivalence. (It <strong>DOES NOT</strong> mean assignment.)<br>  You can conduct calculation on the selected result.</li>
-</ol>
-<br>
-
-<ol start="4">
-<li><strong>AS</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> (column_name) <span class="keyword">FROM</span> (table_name) <span class="keyword">WHERE</span> (<span class="keyword">condition</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> (col_name).</span><br></pre></td></tr></table></figure>
-  For each col_name, table_name to be queried and the queried results, you can always to set alias (surname) for them with <strong>AS</strong>.</li>
-</ol>
-<br>
-
-<ol start="5">
-<li><strong>– &#x2F; comment</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- This a comment.</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> This <span class="keyword">is</span> also acceptable.</span><br></pre></td></tr></table></figure></li>
-</ol>
-<br>
-
-<ol start="6">
-<li><strong>DISTINCT</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> column_name <span class="keyword">FROM</span> t</span><br></pre></td></tr></table></figure>
-  Add DISTINCT ahead of the queried target (column) to receive all the unique values.</li>
-</ol>
-<br>
-
-<ol start="7">
-<li><strong>AND &#x2F; OR &#x2F; NOT</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> col_a <span class="operator">&gt;</span> <span class="number">10</span> <span class="keyword">and</span> col_b <span class="operator">=</span> <span class="string">&#x27;CA&#x27;</span></span><br></pre></td></tr></table></figure>
-  Logical operator to be used with the WHERE clause.</li>
-</ol>
-<br>
-
-<ol start="8">
-<li><strong>IN</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> col_a <span class="keyword">IN</span> (<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>)</span><br></pre></td></tr></table></figure>
-  Determine if the queried value belongs to a set.</li>
-</ol>
-<br>
-
-<ol start="9">
-<li><strong>BETWEEN</strong> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> point <span class="keyword">BETWEEN</span> <span class="number">100</span> <span class="keyword">AND</span> <span class="number">300</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> point <span class="operator">&gt;=</span> <span class="number">100</span> <span class="keyword">AND</span> point <span class="operator">&lt;=</span> <span class="number">300</span>;</span><br><span class="line"><span class="comment">-- These two are equivalent</span></span><br></pre></td></tr></table></figure>
-  Determine if the queried value within a given interval.<br>  Both ends of the interval are closed ([beg, end]).</li>
-</ol>
-<br>
-
-<ol start="10">
-<li><strong>LIKE</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">like</span> <span class="string">&#x27;b%&#x27;</span></span><br><span class="line"><span class="comment">-- Able to match &#x27;Bob&#x27; and &#x27;bike&#x27;</span></span><br></pre></td></tr></table></figure>
- Provide functionality similar to Regular Expression. <strong>%</strong> can match arbitrary string, <strong>_</strong> can match arbitrary char. Not sensitive to the case.</li>
-</ol>
-<br>
-
-<ol start="11">
-<li><strong>REGEXP</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name REGEX <span class="string">&#x27;^f[a-z]+d&#x27;</span></span><br></pre></td></tr></table></figure>
- Match a given Regular Expression pattern.</li>
-</ol>
-<br>
-
-<ol start="12">
-<li><strong>IS NULL</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
- Query all the records which are (not) null in a given column.</li>
-</ol>
-<br>
-
-<ol start="13">
-<li><strong>ORDER BY</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">ORDER</span> <span class="keyword">BY</span> col_name <span class="keyword">DESC</span> <span class="operator">/</span> AESC</span><br></pre></td></tr></table></figure>
- Decide the sorting order of the returned records.</li>
-</ol>
-<br>
-
-<ol start="14">
-<li><strong>LIMIT</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t LIMIT <span class="keyword">offset</span>, tot_num</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t LIMIT tot_num</span><br></pre></td></tr></table></figure>
- Restrict the number of the returned records.<br> Skip the first $n&#x3D;$offset records and then return tot_num lines of records.<br> Return all the records if number of matched records fewer than tot_num.</li>
-</ol>
-<br>
-
-<ol start="15">
-<li><strong>INNER JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> t_a.col_1 <span class="operator">=</span> t_b.col_2;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> t_a.col_1 <span class="operator">=</span> DB_2.t_b.col_2;</span><br><span class="line"><span class="comment">-- You can conduct crossed-DB join by specifying the name of the DB not in use.</span></span><br></pre></td></tr></table></figure>
- Can be simply writtene as <strong>JOIN</strong>. Concat two tables based on the given condition. Conduct Cartesian product implicitly.</li>
-</ol>
-<br>
-
-<ol start="16">
-<li><strong>SELF JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">AS</span> a <span class="keyword">JOIN</span> t_a <span class="keyword">AS</span> b <span class="keyword">on</span> a.col_1 <span class="operator">=</span> b.col_2;</span><br></pre></td></tr></table></figure>
- A table can join with itself, but different alias are required.</li>
-</ol>
-<br>
-
-<ol start="17">
-<li><strong>Multi-table JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> a.col_1 <span class="operator">=</span> b.col_2 <span class="keyword">JOIN</span> t_c <span class="keyword">on</span> b.col_2 <span class="operator">=</span> c.col_3;</span><br></pre></td></tr></table></figure>
- Multiple (n) tables can be joined but this is not recommended when $ n &gt; 3 $ due to performance concern.</li>
-</ol>
-<br>
-
-<ol start="18">
-<li><strong>Composite JOIN &#x2F; Implicit JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> a.col_1 <span class="operator">=</span> b.col_2 <span class="keyword">JOIN</span> t_c <span class="keyword">on</span> b.col_2 <span class="operator">=</span> c.col_3;</span><br></pre></td></tr></table></figure>
- Sometimes only a tuple of multiple attributes can uniquely identify a row of the table. In this case, these attributes become Composite Primary Key. <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a, t_b;</span><br></pre></td></tr></table></figure>
- Implicit JOIN is conducted in the above example but this is not recommended, too.</li>
-</ol>
-<br>
-
-<ol start="19">
-<li><strong>OUTER JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">AS</span> a <span class="keyword">JOIN</span> t_b <span class="keyword">AS</span> b <span class="keyword">on</span> a.col_1 <span class="operator">=</span> b.col_2 <span class="keyword">JOIN</span> t_c <span class="keyword">AS</span> c <span class="keyword">on</span> b.col_2 <span class="operator">=</span> c.col_3;</span><br></pre></td></tr></table></figure>
- When using INNER JOIN, some records of the left table cannot match with the right table because the condition of the ON clause is not satisfied. However, if we want to return all the records of the left (right) table regardless of the boolean value of the ON clause, we can use LEFT (RIGHT) OUTER JOIN.<br> You should use RIGHT JOIN instead of LEFT JOIN as possible.<br> <strong>SELF OUTER JOIN</strong> is similar, and alias is still required.</li>
-</ol>
-<br>
-
-<ol start="20">
-<li><strong>USING</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">on</span> t_a.col_1 <span class="operator">=</span> t_b.col_1;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">JOIN</span> t_b <span class="keyword">USING</span> (col_1);</span><br><span class="line"><span class="comment">-- These two are equivalent.</span></span><br></pre></td></tr></table></figure>
- Can be used to simplify the code, if the column names of the to-be-joined tables are exactly the same. You can Join on a tuple like ‘USING (id1, id2, id3)’ and these column names should be exactly the same as well (in the two tables).</li>
-</ol>
-<br>
-
-<ol start="21">
-<li><strong>NATURAL JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> t_b;</span><br></pre></td></tr></table></figure>
- Let the compiler (DBMS) to decide the way of join. Not recommended to use!</li>
-</ol>
-<br>
-
-<ol start="22">
-<li><strong>CROSS JOIN</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_a <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> t_b;</span><br></pre></td></tr></table></figure>
- Conduct Cartesian Product.</li>
-</ol>
-<br>
-
-<ol start="23">
-<li><strong>UNION</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> a <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> b;</span><br></pre></td></tr></table></figure>
- Concatenate multiple queried results together (on the direction of row). The column names should be exactly the same.<br> <strong>IT SHOULD BE NOTED</strong> that ORDER BY can be set only once, so union all the results before setting the ORDER clause.</li>
-</ol>
-<hr>
 
         </div>
         <footer class="article-footer">
@@ -382,7 +282,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/" data-id="cl2n0klis000bc4tj3xjf3qfi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2022/04/26/DS-Study-Note-5/" data-id="cl2n0klim0006c4tjfqk1h1ir" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -452,19 +352,17 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "SQL Study Note - 1 - Syntax Basics",
-        "image": "https://umiao.github.io/2022/04/16/SQL-Study-Note-1/sql.jpg",
-        "keywords": "DataScience SQL",
-        "genre": "Data Science SQL Job Search SQL",
-        "datePublished": "2022-04-16",
-        "dateCreated": "2022-04-16",
-        "dateModified": "2022-04-16",
-        "url": "https://umiao.github.io/2022/04/16/SQL-Study-Note-1/",
-        "description": "
-
-Overview
-The core of database system is to interact with DB (DataBase) with DBMS (Database Management System).",
-        "wordCount": 1255
+        "headline": "DS-Study-Note-5 Support Vector Machine (SVM)",
+        "image": "https://umiao.github.io/2022/04/26/DS-Study-Note-5/svm.png",
+        "keywords": "DataScience Machine Learning SVM",
+        "genre": "Data Science General Knowledge",
+        "datePublished": "2022-04-26",
+        "dateCreated": "2022-04-26",
+        "dateModified": "2022-05-01",
+        "url": "https://umiao.github.io/2022/04/26/DS-Study-Note-5/",
+        "description": "SVM is a machine learning model which aims at finding a Decision Boundary with a subset of the training set. The SVM is a non-probabilistic binary classifier.
+",
+        "wordCount": 1576
     }
 </script>
 
@@ -545,16 +443,12 @@ The core of database system is to interact with DB (DataBase) with DBMS (Databas
         
 <nav id="article-nav">
     
-        <a href="/2022/04/16/SQL-Study-Note-2/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            SQL Study Note - 2 - The Update / Delete / Insert Syntax
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
+        <a href="/2022/04/26/DS-Study-Note-4/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">DS-Study-Note-4 Metrics</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
     
 </nav>
 
@@ -769,7 +663,7 @@ The core of database system is to interact with DB (DataBase) with DBMS (Databas
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'https://umiao.github.io/2022/04/16/SQL-Study-Note-1/';
+    var disqus_url = 'https://umiao.github.io/2022/04/26/DS-Study-Note-5/';
     
     (function() {
     var dsq = document.createElement('script');
