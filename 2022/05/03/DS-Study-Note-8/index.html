@@ -6,27 +6,28 @@
     
 
     
-    <title>DS-Study-Note-3 Dimension Curse | The blog of Blur</title>
+    <title>DS-Study-Note-8 Random Forest | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="DataScience,Machine Learning" />
+    <meta name="keywords" content="DataScience,Machine Learning,Random Forest" />
     
-    <meta name="description" content="DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data. E.g., computation of similarity, distance, neighbour or any metric based processing.">
+    <meta name="description" content="Random Forest inherits the idea of bagging, which is part of Ensemble Learning paradigm.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DS-Study-Note-3 Dimension Curse">
-<meta property="og:url" content="https://umiao.github.io/2022/04/26/DS-Study-Note-3/index.html">
+<meta property="og:title" content="DS-Study-Note-8 Random Forest">
+<meta property="og:url" content="https://umiao.github.io/2022/05/03/DS-Study-Note-8/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data. E.g., computation of similarity, distance, neighbour or any metric based processing.">
+<meta property="og:description" content="Random Forest inherits the idea of bagging, which is part of Ensemble Learning paradigm.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://umiao.github.io/2022/04/26/DS-Study-Note-3/over.png">
-<meta property="article:published_time" content="2022-04-26T22:19:27.000Z">
-<meta property="article:modified_time" content="2022-04-27T05:26:41.457Z">
+<meta property="og:image" content="https://umiao.github.io/2022/05/03/DS-Study-Note-8/rf.png">
+<meta property="article:published_time" content="2022-05-04T05:48:16.000Z">
+<meta property="article:modified_time" content="2022-05-04T17:42:41.778Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
 <meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="Random Forest">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://umiao.github.io/2022/04/26/DS-Study-Note-3/over.png">
+<meta name="twitter:image" content="https://umiao.github.io/2022/05/03/DS-Study-Note-8/rf.png">
     
 
     
@@ -159,14 +160,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-DS-Study-Note-3" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-DS-Study-Note-8" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        DS-Study-Note-3 Dimension Curse
+        DS-Study-Note-8 Random Forest
         </h1>
     
 
@@ -177,16 +178,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2022/04/26/DS-Study-Note-3/" class="article-date">
-       <time datetime="2022-04-26T22:19:27.000Z" itemprop="datePublished">2022-04-26</time>
+    <a href="/2022/05/03/DS-Study-Note-8/" class="article-date">
+       <time datetime="2022-05-04T05:48:16.000Z" itemprop="datePublished">2022-05-03</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2022/04/26/DS-Study-Note-3/" class="article-date">
-     <time datetime="2022-04-27T05:26:41.457Z" itemprop="dateModified">2022-04-26</time>
+  <a href="/2022/05/03/DS-Study-Note-8/" class="article-date">
+     <time datetime="2022-05-04T17:42:41.778Z" itemprop="dateModified">2022-05-04</time>
   </a>
 </div>
 
@@ -196,7 +197,7 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a>, <a class="tag-link-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a>
     </div>
 
                 
@@ -213,59 +214,82 @@
 
             
 
-            <img src="/2022/04/26/DS-Study-Note-3/over.png" class="" title="ML_note">
-<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><p><strong>Dimension curse</strong> stands for the troubles you would meet when processing <strong>high-dimensional</strong> data. <em>E.g.</em>, computation of <strong>similarity, distance, neighbour or any metric based processing.</strong></p>
+            <p>Random Forest inherits the idea of <strong>bagging</strong>, which is part of <strong>Ensemble Learning</strong> paradigm.</p>
 <span id="more"></span>
-<p>The reason is that for <strong>high-dimensional</strong> space, the concept of distance will gradually <strong>fail</strong>, and even make any two points <strong>infinitely inseparable</strong>, even if they look different &#x2F; correspond to very different categories.</p>
-<p>As the dimension (of vector representation) grows, the data becomes more and more <strong>sparse</strong> and may correspond to higher variance and bias error. These phenomena are essentially caused by the same theory. However, the theoretical derivation is omitted here.</p>
-<blockquote>
-<p>Specifically, <strong>dimension curse</strong> can be categorized into the following more concrete problems: </p>
-<ol>
-<li>Distance concentration</li>
-<li>Combinational explosion</li>
-<li>Hubness</li>
+
+<img src="/2022/05/03/DS-Study-Note-8/rf.png" class="" title="ML_note">
+<h1 id="Introduction-to-Ensemble-Learning"><a href="#Introduction-to-Ensemble-Learning" class="headerlink" title="Introduction to Ensemble Learning"></a>Introduction to Ensemble Learning</h1><ol>
+<li>It can be simply categorized into <strong>Boosting</strong>, <strong>Bagging</strong> and <strong>Stacking</strong>.</li>
+<li><strong>Stacking</strong>: use <strong>Logistics Regression</strong> to integrate multiple prediction results and output one single prediction. It can be viewed as a more complicated form of <strong>voting</strong> (most commonly appeared in classification tasks, take the result with most votes).</li>
+<li><strong>Bagging</strong> and <strong>Boosting</strong> both somehow combine existing classification &#x2F; regression methods to form a stronger classifier (utilize some sort of <strong>group intelligence</strong>). The difference lies in the combining method.</li>
 </ol>
-</blockquote>
-<h1 id="Distance-concentration"><a href="#Distance-concentration" class="headerlink" title="Distance concentration"></a>Distance concentration</h1><ul>
-<li>As the number of dimension raises, for the queried point, the distance to its <strong>closest neighbour</strong> would converge to the distance to the <strong>furthest point</strong>. This also means that the <em><strong>difference of distance</strong></em> between <strong>arbitrary</strong> two points would be <strong>negligible</strong>.</li>
-<li>The difference of distance may be small enough, for a dimension of <strong>20</strong>.</li>
-<li>The distance may remain <strong>effective</strong>, if there lies <strong>inherent clusters</strong> in the data and these clusters are <strong>distant</strong> from each other. Or, if many of the data’s dimensions are <strong>redundant</strong> (the data can be embedded into a space with much smaller dimension).</li>
-<li>In high-dimensional space, small change of the <strong>neighbourhood radius</strong> determines the difference of selecting only <strong>ONE</strong> point or selecting <strong>ALL</strong> the datapoints. </li>
-<li>This is because the <strong>volume ratio</strong> of a <strong>fixed radius</strong> hypersphere to a unit radius hypersphere will be close to <strong>1</strong>.</li>
-<li>Increase of <strong>relevant features</strong> would be <strong>beneficial</strong> to the model. </li>
-<li>Increase of <strong>irrelevant features</strong> would <strong>impair</strong> the model’s performance.</li>
-<li>Distance under <em>different dimension and space</em> <strong>CANNOT</strong> be compared with each other.</li>
-</ul>
-<h1 id="Combinational-explosion"><a href="#Combinational-explosion" class="headerlink" title="Combinational explosion"></a>Combinational explosion</h1><img src="/2022/04/26/DS-Study-Note-3/dif.jpg" class="" title="ML_note">
+<h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>Also known as <strong>Bootstrap aggregating</strong>. </p>
+<h3 id="Procedure"><a href="#Procedure" class="headerlink" title="Procedure"></a>Procedure</h3><p>The idea is to :<br>    1. sample $n$ data samples with bootstraping method (<strong>sample with replacement</strong>) from the dataset, to form $k$ training sample sets by repeating $k$ times. That is to say, some samples can be contained in multiple training sample sets, while some samples may not be contained by any training sample sets.<br>    2. We can tell that the $k$ training sets are <strong>independent</strong> with each other.<br>    3. Execute learning algorithm on the $k$ training sets to achieve $k$ models.<br>    4. Receive the classification  &#x2F; regression results by integrating the $k$ outputs of these models (with voting &#x2F; averaging).</p>
 <ul>
-<li>As the dimensionality increases, a larger percentage of the training data resides in the <strong>corners</strong> of the feature space. </li>
-<li>It is also much more difficult to traverse the increasing search space as the size of the search space <strong>grows exponentially</strong>, as shown in the above image.</li>
-<li>A complex search space may correspond to the same configuration (object &#x2F; training &#x2F; testing sample) in the low-dimensional case, resulting in <strong>overfitting</strong>.</li>
-<li>Training samples with <strong>larger scale</strong> are required to suppress <strong>overfitting</strong> (on data with <strong>high dimensions</strong>). </li>
-<li>Algorithms like <strong>Random Forest</strong> can restrict the number of features used (in one tree).</li>
+<li><strong>Characteristics</strong>: <ol>
+<li>Highly Parallelizable.</li>
+<li>The generated models are highly independent with each other.</li>
+<li>All the models have the same significance (equally important).</li>
+</ol>
+</li>
+<li><strong>Representative Work</strong>: <em>Random Forest</em></li>
 </ul>
-<h1 id="Hubness"><a href="#Hubness" class="headerlink" title="Hubness"></a>Hubness</h1><ul>
-<li>With the increase of dimension, a handful of points are <strong>significantly more frequent</strong> to become the <strong>nearest neighbour</strong> of other points. This is also called <strong>Hubness</strong>.</li>
-<li>If we record the frequency of each point becoming the <strong>nearest neighbour</strong> of another point, we can find that is frequency follows Zipf’s Law and is <strong>right-skewed</strong> heavily.</li>
-<li>Generally, points close to the <strong>mean value</strong> of the entire dataset become hubs more easily.</li>
-<li>When <strong>cluster</strong> exists, data points close to the <strong>mean value</strong> of the cluster are more likely to become hubs as well.</li>
+<h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>The idea is to combine multiple ‘weak’ classifiers to form only <strong>ONE</strong> ‘strong’ classifier to generate <strong>ONE</strong> prediction, rather generating and processing $k$ individual predictions. </p>
+<ul>
+<li>This method runs under the <strong>Approximately Correct (PAC)</strong> framework. This theory supports that you are bound to leverage multiple weak classifiers into a stronger one.<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3></li>
 </ul>
-<h1 id="Outlier-x2F-Anti-hubs"><a href="#Outlier-x2F-Anti-hubs" class="headerlink" title="Outlier &#x2F; Anti-hubs"></a>Outlier &#x2F; Anti-hubs</h1><ul>
-<li>These points are most <strong>distant</strong> from the majority of other points.</li>
-<li>Anti-intuitive things may happen, i.e., hubs exist in the <strong>low-density region</strong> of the high-dimensional space, but the hubs are <strong>close</strong> to the other points. </li>
-<li>At the same time, anti-hubs may exist in the <strong>high-density region</strong> of the high-dimensional space, but the anti-hubs are <strong>distant</strong> to the other points (which makes them outliers).</li>
-<li>This can be viewed as a mismatch between the <strong>probabilistic density</strong> and <strong>distance distribution</strong>.</li>
-</ul>
-<h1 id="Solution-to-dimension-curse"><a href="#Solution-to-dimension-curse" class="headerlink" title="Solution (to dimension curse)"></a>Solution (to dimension curse)</h1><ol>
-<li>For the cases of <strong>Multicollinearity</strong> and <strong>Duplication of Components</strong>(redundancy) happen, we can simply <strong>remove</strong> the redundant variables after evaluation.</li>
-<li>In the case when each dimension (feature) contributes <strong>equally</strong> to the model’s result, methods like <strong>Dimensional Reduction</strong> (including <strong>CNN</strong>, <strong>Convolutional Neural Network</strong>) can be applied.</li>
-<li>Dimensional Reduction’s <strong>Disadvantages</strong>: <ul>
-<li>Converted data points <strong>DO NOT</strong> represent <strong>original features</strong>.</li>
-<li><strong>Less interpretable, hard to visualize, weaker theoretical support</strong>.</li>
+<ol>
+<li>In each round, the <strong>weight distribution</strong> of the  training data would be altered. The weight of samples which are <strong>falsely</strong> classified would <strong>increase</strong> while the weight of the <strong>correctly</strong> classified samples would be <strong>reduced</strong> to accelerate the iteration &#x2F; convergence. </li>
+<li><strong>Different ways of combining the weak classifiers</strong>: <ul>
+<li>Use <strong>additive model</strong> to generate a <strong>linear combination</strong>.</li>
+<li><strong>AdaBoost</strong>: Through the <strong>weighted majority voting</strong> method, the weight of classifiers with less error rate would be increased. Weight of classifiers with high error rate would decrease.</li>
+<li><strong>Boosting Tree</strong>: The classifers establish series connection and each classifier fits the <strong>residual</strong> of the prior one. Use the <strong>additive sum</strong> of <strong>all</strong> the classifiers as the predicted value.</li>
 </ul>
 </li>
 </ol>
-<hr>
+<ul>
+<li><strong>Representative Work</strong>: <em>GBDT &#x2F; XGBoost</em></li>
+</ul>
+<h2 id="Summary-on-Bagging-and-Boosting"><a href="#Summary-on-Bagging-and-Boosting" class="headerlink" title="Summary on Bagging and Boosting"></a>Summary on Bagging and Boosting</h2><ul>
+<li><strong>Bagging</strong>: <ol>
+<li>would generate multiple training sets with <strong>replacement</strong>. </li>
+<li>Each sample &#x2F; classifier has <strong>the same</strong> weight. </li>
+<li>Can be easily <strong>Parallelization</strong>.</li>
+</ol>
+</li>
+<li><strong>Boosting</strong>: <ol>
+<li>would not modify the training set but the samples’ weight. </li>
+<li>The weight of each sample &#x2F; classifier would be <strong>changed</strong> according to error rate. </li>
+<li>The training of classifiers should be in <strong>sequential</strong> order.</li>
+</ol>
+</li>
+</ul>
+<h3 id="Model-setup-x2F-combination"><a href="#Model-setup-x2F-combination" class="headerlink" title="Model setup &#x2F; combination"></a>Model setup &#x2F; combination</h3><ol>
+<li>Bagging + Decision Tree &#x3D; <strong>Random Forest</strong></li>
+<li>AdaBoost + Decision Tree &#x3D; <strong>Boosting Tree</strong></li>
+<li>Gradient Boosting + Decision Tree &#x3D; <strong>Gradient Boosted Decision Trees (GBDT)</strong></li>
+</ol>
+<h1 id="Decision-Tree"><a href="#Decision-Tree" class="headerlink" title="Decision Tree"></a>Decision Tree</h1><h2 id="How-it-is-built"><a href="#How-it-is-built" class="headerlink" title="How it is built"></a>How it is built</h2><ul>
+<li>General description: <ol>
+<li>Randomly sample from the dataset to train decision tree.<br>  (First select $N$ samples to train a decision tree which is to be placed at the <strong>root</strong> node)</li>
+<li>Randomly select attribute (feature) used for training.<br>  (If the data has $M$ attributes, then randomly select a subset with size of $m$)</li>
+<li>Decide the attribute used for node splitting.<br>  (Use some metirc (<strong>information gain</strong>, <strong>gini impurity</strong>) to select one attribute as the splitting attribute of this node)</li>
+<li>Repeat such process untill reach the preset boundary<br>  (Unable to split &#x2F; reach required depth).<br>  (If the selected splitting attribute is already used by the father node, it also indicates that we have reached the <strong>leaf node</strong> and no further splitting is required)</li>
+<li>Build massive Decision Trees to form a forest.</li>
+</ol>
+</li>
+</ul>
+<h1 id="Pros-and-Cons"><a href="#Pros-and-Cons" class="headerlink" title="Pros and Cons"></a>Pros and Cons</h1><h2 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h2><ol>
+<li>Able to process data with high dimensions without <strong>dimensional reduction</strong> and <strong>feature selection</strong>.</li>
+<li>Indicates the <strong>importance</strong> and <strong>correlation</strong> between features.</li>
+<li>Resist <strong>overfitting</strong>.</li>
+<li>High training speed, easy to <strong>parallelize</strong>.</li>
+<li>Easy to implement.</li>
+<li>Able to alleviate the <strong>imbalance</strong> in dataset distribution.</li>
+<li>Able to resist <strong>missing data</strong> partially.<h2 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h2></li>
+<li>Overfitting on some regression and classification tasks with high noise volumn.</li>
+<li>In favor of attributes with more possible ways of splitting (in discrete cases).<br>With more <strong>choices of splitting</strong> &#x2F; more <strong>unique values</strong>, an attribute can cast greater impact on the Random Forest classifier, making the result unreliable.</li>
+</ol>
 
         </div>
         <footer class="article-footer">
@@ -273,7 +297,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2022/04/26/DS-Study-Note-3/" data-id="cl2rvawgj0002nctjflx5d68k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2022/05/03/DS-Study-Note-8/" data-id="cl2rvawgs000enctj2l0p30if" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -343,17 +367,16 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "DS-Study-Note-3 Dimension Curse",
-        "image": "https://umiao.github.io/2022/04/26/DS-Study-Note-3/over.png",
-        "keywords": "DataScience Machine Learning",
+        "headline": "DS-Study-Note-8 Random Forest",
+        "image": "https://umiao.github.io/2022/05/03/DS-Study-Note-8/rf.png",
+        "keywords": "DataScience Machine Learning Random Forest",
         "genre": "Data Science General Knowledge",
-        "datePublished": "2022-04-26",
-        "dateCreated": "2022-04-26",
-        "dateModified": "2022-04-26",
-        "url": "https://umiao.github.io/2022/04/26/DS-Study-Note-3/",
-        "description": "
-DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data. E.g., computation of similarity, distance, neighbour or any metric based processing.",
-        "wordCount": 630
+        "datePublished": "2022-05-03",
+        "dateCreated": "2022-05-03",
+        "dateModified": "2022-05-04",
+        "url": "https://umiao.github.io/2022/05/03/DS-Study-Note-8/",
+        "description": "Random Forest inherits the idea of bagging, which is part of Ensemble Learning paradigm.",
+        "wordCount": 756
     }
 </script>
 
@@ -434,20 +457,10 @@ DefinitionDimension curse stands for the troubles you would meet when processing
         
 <nav id="article-nav">
     
-        <a href="/2022/04/26/DS-Study-Note-4/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            DS-Study-Note-4 Metrics
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2022/04/23/DS-Study-Note-2/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2022/05/02/DS-Study-Note-7/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">DS-Study-Note-2 Bias VS Variance</p>
+        <p class="article-nav-title">DS-Study-Note-7 L1 &amp; L2 Regularization</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -664,7 +677,7 @@ DefinitionDimension curse stands for the troubles you would meet when processing
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'https://umiao.github.io/2022/04/26/DS-Study-Note-3/';
+    var disqus_url = 'https://umiao.github.io/2022/05/03/DS-Study-Note-8/';
     
     (function() {
     var dsq = document.createElement('script');
