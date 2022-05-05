@@ -6,19 +6,27 @@
     
 
     
-    <title>Archive | The blog of Blur</title>
+    <title>SQL-Study-Note-12 Common Table Expression and Discussion on UNION | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Personal blog of blur.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The blog of Blur">
-<meta property="og:url" content="https://umiao.github.io/archives/index.html">
+    <meta name="keywords" content="DataScience,SQL" />
+    
+    <meta name="description" content="Common Table Expression (CTE) is viewed as a better way to realize the functionality of subquery.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL-Study-Note-12 Common Table Expression and Discussion on UNION">
+<meta property="og:url" content="https://umiao.github.io/2022/05/04/SQL-Study-Note-12/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Personal blog of blur.">
+<meta property="og:description" content="Common Table Expression (CTE) is viewed as a better way to realize the functionality of subquery.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2022/05/04/SQL-Study-Note-12/sql.jpg">
+<meta property="article:published_time" content="2022-05-04T19:17:03.000Z">
+<meta property="article:modified_time" content="2022-05-05T23:11:11.470Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2022/05/04/SQL-Study-Note-12/sql.jpg">
     
 
     
@@ -146,514 +154,200 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-archive"></i>Archive
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/SQL/">SQL</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-SQL-Study-Note-12" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2022" class="archive-year"><i class="icon fa fa-calendar-o"></i>2022</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/05/05/SQL-Study-Note-13/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/05/05/SQL-Study-Note-13/sql.jpg)" alt="SQL-Study-Note-13 Window Function" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/05/05/SQL-Study-Note-13/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
-            </div>
-            <div class="date"><time datetime="2022-05-05T21:26:39.000Z" itemprop="datePublished">2022-05-05</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2022/05/05/SQL-Study-Note-13/">SQL-Study-Note-13 Window Function</a>
+        SQL-Study-Note-12 Common Table Expression and Discussion on UNION
         </h1>
     
 
-        <p class="article-excerpt">
-            
-        </p>
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/05/04/SQL-Study-Note-12/" class="article-date">
+       <time datetime="2022-05-04T19:17:03.000Z" itemprop="datePublished">2022-05-04</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/05/04/SQL-Study-Note-12/" class="article-date">
+     <time datetime="2022-05-05T23:11:11.470Z" itemprop="dateModified">2022-05-05</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
     </div>
-</article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/05/04/SQL-Study-Note-12/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/05/04/SQL-Study-Note-12/sql.jpg)" alt="SQL-Study-Note-12 Common Table Expression and Discussion on UNION" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/05/04/SQL-Study-Note-12/">0</span>
-    
-</span>
+                
 
+                
 
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a>
             </div>
-            <div class="date"><time datetime="2022-05-04T19:17:03.000Z" itemprop="datePublished">2022-05-04</time></div>
-        </div>
         
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/05/04/SQL-Study-Note-12/">SQL-Study-Note-12 Common Table Expression and Discussion on UNION</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            Common Table Expression (CTE) is viewed as a better way to realize the functionality of subquery.
-
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
         
-        <a href="/2022/05/03/DS-Study-Note-8/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/05/03/DS-Study-Note-8/rf.png)" alt="DS-Study-Note-8 Random Forest" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/05/03/DS-Study-Note-8/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-05-04T05:48:16.000Z" itemprop="datePublished">2022-05-03</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/05/03/DS-Study-Note-8/">DS-Study-Note-8 Random Forest</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            Random Forest inherits the idea of bagging, which is part of Ensemble Learning paradigm.
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/05/02/DS-Study-Note-7/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/05/02/DS-Study-Note-7/reg.jpg)" alt="DS-Study-Note-7 L1 &amp; L2 Regularization" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/05/02/DS-Study-Note-7/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-05-02T23:37:57.000Z" itemprop="datePublished">2022-05-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/05/02/DS-Study-Note-7/">DS-Study-Note-7 L1 &amp; L2 Regularization</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            The essence of L1 and L2 regularization (with corresponding L1 &#x2F; L2 Norm): the projection of a vector to the domain of positive real number. They can both be viewed as metrics of distance. 
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/05/02/DS-Study-Note-6/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/05/02/DS-Study-Note-6/1.jpg)" alt="DS-Study-Note-6 Naive Bayesian modeling" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/05/02/DS-Study-Note-6/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-05-02T16:39:44.000Z" itemprop="datePublished">2022-05-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/05/02/DS-Study-Note-6/">DS-Study-Note-6 Naive Bayesian modeling</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            Naïve Bayesian Classifier: is a typical learning based method which make hypothesis on the distribution of prediction target.
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/05/01/Missing-Values-Patterns-in-Time-Series-Data/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/05/01/Missing-Values-Patterns-in-Time-Series-Data/img.jpg)" alt="Missing Values Patterns in Time Series Data" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/05/01/Missing-Values-Patterns-in-Time-Series-Data/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/UCLA/">UCLA</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/UCLA/Course-Study/">Course Study</a>
-            </div>
-            <div class="date"><time datetime="2022-05-02T03:36:26.000Z" itemprop="datePublished">2022-05-01</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/05/01/Missing-Values-Patterns-in-Time-Series-Data/">Missing Values Patterns in Time Series Data</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            It is meaningful and believed to be possible to discover the pattern of the missing parts of the time series data. Such patterns may vary in different scenarios and sources and may be related with physical devices and configurations.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/26/DS-Study-Note-5/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/26/DS-Study-Note-5/svm.png)" alt="DS-Study-Note-5 Support Vector Machine (SVM)" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/26/DS-Study-Note-5/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-04-27T06:51:47.000Z" itemprop="datePublished">2022-04-26</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/26/DS-Study-Note-5/">DS-Study-Note-5 Support Vector Machine (SVM)</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            SVM is a machine learning model which aims at finding a Decision Boundary with a subset of the training set. The SVM is a non-probabilistic binary classifier.
-
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/26/DS-Study-Note-4/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/26/DS-Study-Note-4/metric.png)" alt="DS-Study-Note-4 Metrics" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/26/DS-Study-Note-4/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-04-27T05:28:19.000Z" itemprop="datePublished">2022-04-26</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/26/DS-Study-Note-4/">DS-Study-Note-4 Metrics</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
+        <div class="article-entry" itemprop="articleBody">
             
 
-Metrics are used for model training and evaluation. It reveals a model’s performance on a given dataset.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/26/DS-Study-Note-3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/26/DS-Study-Note-3/over.png)" alt="DS-Study-Note-3 Dimension Curse" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/26/DS-Study-Note-3/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-04-26T22:19:27.000Z" itemprop="datePublished">2022-04-26</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/26/DS-Study-Note-3/">DS-Study-Note-3 Dimension Curse</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
             
-DefinitionDimension curse stands for the troubles you would meet when processing high-dimensional data. E.g., computation of similarity, distance, neighbour or any metric based processing.
-        </p>
-    </div>
-</article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2022/04/23/DS-Study-Note-2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/23/DS-Study-Note-2/var.jpg)" alt="DS-Study-Note-2 Bias VS Variance" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://umiao.github.io/2022/04/23/DS-Study-Note-2/">0</span>
-    
-</span>
+            
+
+            <p><strong>Common Table Expression (CTE)</strong> is viewed as a better way to realize the functionality of subquery.</p>
+<img src="/2022/05/04/SQL-Study-Note-12/sql.jpg" class="" title="SQL Note of blur!">
+
+<span id="more"></span>
+<ul>
+<li>Supported by MySQL &gt;&#x3D; 8.0</li>
+<li>Generate a named temporary table, only survives during the query</li>
+<li>Comparing with <strong>subquery</strong>: CTE can be referred multiple times within one query, and is able to refer itself (in recursive manner)</li>
+</ul>
+<h1 id="Syntax-of-Common-Table-Expression"><a href="#Syntax-of-Common-Table-Expression" class="headerlink" title="Syntax (of Common Table Expression)"></a>Syntax (of Common Table Expression)</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cte(col1, col2) <span class="keyword">AS</span> <span class="comment">-- Name the temporary table here, col_name is brackets</span></span><br><span class="line">(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="number">1</span>, <span class="number">2</span> <span class="keyword">UNION</span> <span class="keyword">ALL</span> <span class="keyword">SELECT</span> <span class="number">3</span>, <span class="number">4</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> col1, col2 <span class="keyword">FROM</span> cte</span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> cte <span class="comment">-- Can be referred for multipletimes, subquery can be used only once</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> col1 </span><br></pre></td></tr></table></figure>
+<h2 id="Recursively-generate-sequence"><a href="#Recursively-generate-sequence" class="headerlink" title="Recursively generate sequence"></a>Recursively generate sequence</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> <span class="keyword">RECURSIVE</span> test <span class="keyword">as</span> <span class="comment">-- USE recursive keyword to call itself</span></span><br><span class="line">(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">AS</span> <span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="number">1</span> <span class="operator">+</span> n <span class="keyword">FROM</span> test <span class="comment">-- call itself</span></span><br><span class="line"><span class="keyword">WHERE</span> n <span class="operator">&lt;</span> <span class="number">10</span>           <span class="comment">-- break when n &gt; 10</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test</span><br></pre></td></tr></table></figure>
+<p>The script above would generate results like:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Another example about querying the quest &#x2F; reply pairs recursively</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> <span class="keyword">RECURSIVE</span> replay ( quest_id, quest_title, user_id, replyid, path ) <span class="keyword">AS</span> (</span><br><span class="line">	<span class="keyword">SELECT</span>   <span class="comment">-- Select all the answers without reply</span></span><br><span class="line">	quest_id,</span><br><span class="line">	quest_title,</span><br><span class="line">	user_id,</span><br><span class="line">	replyid,</span><br><span class="line">	<span class="built_in">cast</span>( quest_id <span class="keyword">AS</span> <span class="type">CHAR</span> ( <span class="number">200</span> ) ) <span class="keyword">AS</span> path </span><br><span class="line">	<span class="keyword">FROM</span></span><br><span class="line">		imc_question </span><br><span class="line">	<span class="keyword">WHERE</span></span><br><span class="line">		course_id <span class="operator">=</span> <span class="number">59</span> </span><br><span class="line">		<span class="keyword">AND</span> replyid <span class="operator">=</span> <span class="number">0</span>    <span class="comment">-- 0 means that there does not exist reply</span></span><br><span class="line">  <span class="keyword">UNION</span> <span class="keyword">ALL</span><span class="comment">-- search the reply / comments recursively</span></span><br><span class="line">	<span class="keyword">SELECT</span></span><br><span class="line">		a.quest_id,</span><br><span class="line">		a.quest_title,</span><br><span class="line">		a.user_id,</span><br><span class="line">		a.replyid,</span><br><span class="line">		CONCAT( b.path, <span class="string">&#x27; &gt;&gt; &#x27;</span>, a.quest_id ) <span class="keyword">AS</span> path  </span><br><span class="line">	<span class="keyword">FROM</span></span><br><span class="line">		imc_question a <span class="comment">-- table a stores the reply of table b</span></span><br><span class="line">		<span class="keyword">JOIN</span> replay b <span class="keyword">ON</span> a.replyid <span class="operator">=</span> b.quest_id  </span><br><span class="line">		<span class="comment">-- recursively join on table &#x27;reply&#x27;, that is this very CTE</span></span><br><span class="line">	) </span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> replay</span><br></pre></td></tr></table></figure>
+
+<h1 id="UNION-V-S-UNION-ALL"><a href="#UNION-V-S-UNION-ALL" class="headerlink" title="UNION V.S. UNION ALL"></a>UNION V.S. UNION ALL</h1><p>As discussed previously, <em>MYSQL UNION</em> is able to combine the results of multiple queries:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">column</span>, ... <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">UNION</span> \ [<span class="keyword">ALL</span>\]</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">column</span>, ... <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>In these SELECT clauses, the corresponding columns should have the same <strong>attributes (column names)</strong>, and the attribute name in the <strong>FIRST</strong> appearing clause would be used as the result’s attribute name.</p>
+<h2 id="The-main-difference-of-UNION-x2F-UNION-ALL"><a href="#The-main-difference-of-UNION-x2F-UNION-ALL" class="headerlink" title="The main difference of UNION &#x2F; UNION ALL"></a>The main difference of UNION &#x2F; UNION ALL</h2><p>When using UNION, MySQL would remove the <strong>duplicates</strong> in the query result. When using UNION ALL, MySQL would return <strong>all the results</strong>, with a <strong>higher efficiency</strong> comparing with UNION.</p>
+<h2 id="Using-ORDER-BY-in-UNION-sub-clause"><a href="#Using-ORDER-BY-in-UNION-sub-clause" class="headerlink" title="Using ORDER BY in UNION sub clause"></a>Using ORDER BY in UNION sub clause</h2><p>If <strong>ORDER BY</strong> is used in the sub clause (of SELECT), the result of the sub clauses would first be sorted, before combined.<br>Besides, the entire sub clause should be wrapped with <strong>brackets</strong>, including <strong>LIMIT</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">SELECT</span> aid,title <span class="keyword">FROM</span> article <span class="keyword">ORDER</span> <span class="keyword">BY</span> aid <span class="keyword">DESC</span> LIMIT <span class="number">10</span>) </span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line">(<span class="keyword">SELECT</span> bid,title <span class="keyword">FROM</span> blog <span class="keyword">ORDER</span> <span class="keyword">BY</span> bid <span class="keyword">DESC</span> LIMIT <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="Using-ORDER-BY-in-entire-query-with-UNION"><a href="#Using-ORDER-BY-in-entire-query-with-UNION" class="headerlink" title="Using ORDER BY in entire query with UNION"></a>Using ORDER BY in entire query with UNION</h2><p>If you want to use <strong>ORDER BY &#x2F; LIMIT</strong> to restrict or classify the <strong>combined result</strong> of <strong>UNION</strong>, you should add brackets to <strong>each</strong> single SELECT clause:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">SELECT</span> aid,title <span class="keyword">FROM</span> article) </span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line">(<span class="keyword">SELECT</span> bid,title <span class="keyword">FROM</span> blog)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> aid <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
+<h2 id="When-alia-is-used"><a href="#When-alia-is-used" class="headerlink" title="When alia is used"></a>When alia is used</h2><p>If <strong>alia</strong> is used, then <strong>ORDER BY</strong> clause <strong>MUST</strong> refer the alia:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">SELECT</span> a <span class="keyword">AS</span> b <span class="keyword">FROM</span> <span class="keyword">table</span>) <span class="keyword">UNION</span> (<span class="keyword">SELECT</span> ...) <span class="keyword">ORDER</span> <span class="keyword">BY</span> b</span><br></pre></td></tr></table></figure>
 
 
-    
-</a>
 
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
-            </div>
-            <div class="date"><time datetime="2022-04-23T07:41:01.000Z" itemprop="datePublished">2022-04-23</time></div>
+
         </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2022/04/23/DS-Study-Note-2/">DS-Study-Note-2 Bias VS Variance</a>
-        </h1>
-    
+        <footer class="article-footer">
+            
 
-        <p class="article-excerpt">
-            The target of Machine Learning is to fit an (unknown) distribution. There lies three possible error: bias, variance and irreducible error. 
-        </p>
+
+
+    <a data-url="https://umiao.github.io/2022/05/04/SQL-Study-Note-12/" data-id="cl2tn75p8000uyktjhargb4u3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "SQL-Study-Note-12 Common Table Expression and Discussion on UNION",
+        "image": "https://umiao.github.io/2022/05/04/SQL-Study-Note-12/sql.jpg",
+        "keywords": "DataScience SQL",
+        "genre": "Data Science SQL Job Search SQL",
+        "datePublished": "2022-05-04",
+        "dateCreated": "2022-05-04",
+        "dateModified": "2022-05-05",
+        "url": "https://umiao.github.io/2022/05/04/SQL-Study-Note-12/",
+        "description": "Common Table Expression (CTE) is viewed as a better way to realize the functionality of subquery.
+",
+        "wordCount": 812
+    }
+</script>
+
 </article>
+
+    <section id="comments">
     
-        </div>
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
     
+    </section>
 
-
-    </div></section>
-
-
-    <nav id="page-nav">
-        <span class="pages">Page 1 of 3</span>
-        <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">&raquo;</a>
-    </nav>
 
 
                         </div>
@@ -714,6 +408,29 @@ DefinitionDimension curse stands for the troubles you would meet when processing
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/05/05/SQL-Study-Note-13/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            SQL-Study-Note-13 Window Function
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/05/03/DS-Study-Note-8/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">DS-Study-Note-8 Random Forest</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -925,11 +642,13 @@ DefinitionDimension curse stands for the troubles you would meet when processing
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'https://umiao.github.io/2022/05/04/SQL-Study-Note-12/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>

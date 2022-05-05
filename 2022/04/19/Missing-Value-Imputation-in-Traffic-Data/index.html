@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://umiao.github.io/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png">
 <meta property="article:published_time" content="2022-04-19T21:52:23.000Z">
-<meta property="article:modified_time" content="2022-04-20T21:22:37.055Z">
+<meta property="article:modified_time" content="2022-05-05T23:30:44.310Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
 <meta property="article:tag" content="UCLA">
@@ -186,7 +186,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" class="article-date">
-     <time datetime="2022-04-20T21:22:37.055Z" itemprop="dateModified">2022-04-20</time>
+     <time datetime="2022-05-05T23:30:44.310Z" itemprop="dateModified">2022-05-05</time>
   </a>
 </div>
 
@@ -218,35 +218,35 @@
 </blockquote>
 <span id="more"></span>
 
-<h1 id="Imputation-problem-amp-Model-Formulation"><a href="#Imputation-problem-amp-Model-Formulation" class="headerlink" title="Imputation problem &amp; Model Formulation"></a>Imputation problem &amp; Model Formulation</h1><p>Let $Y_c$ be the traffic dataset persists for $N$ consecutive days,<br>$$ Y_c &#x3D; [Y(1), …, Y(N)] $$<br>in which the ith $Y(i)$ be noted as 1-D vector<br>$$ Y(i) &#x3D; [y_i(1), …, y_i(D)]^T, i \in [1, N] $$.<br>Concatenate all the vectors we have together, we would have:<br>$$ Y_{series} &#x3D; [y(1), …, y(D \times N)]^T $$.</p>
+<h1 id="Imputation-problem-amp-Model-Formulation1"><a href="#Imputation-problem-amp-Model-Formulation1" class="headerlink" title="Imputation problem &amp; Model Formulation1"></a>Imputation problem &amp; Model Formulation<a href="#1"><sup>1</sup></a></h1><p>Let $Y_c$ be the traffic dataset persists for $N$ consecutive days,<br>$$ Y_c &#x3D; [Y(1), …, Y(N)] $$<br>in which the ith $Y(i)$ be noted as 1-D vector<br>$$ Y(i) &#x3D; [y_i(1), …, y_i(D)]^T, i \in [1, N] $$.<br>Concatenate all the vectors we have together, we would have:<br>$$ Y_{series} &#x3D; [y(1), …, y(D \times N)]^T $$.</p>
 <p>Typical traffic data includes the speed and number of vehicles on a certain lane at a time.  These data can form a numerical time sequence. Such data can be collected by sensor installed on the roads or along the roadsides.</p>
-<h1 id="ARIMA-based-method"><a href="#ARIMA-based-method" class="headerlink" title="ARIMA-based method"></a>ARIMA-based method</h1><p><strong>ARIMA</strong> stands for <strong>Autoregressive Integrated Moving Average</strong>.</p>
+<h1 id="ARIMA-based-method2"><a href="#ARIMA-based-method2" class="headerlink" title="ARIMA-based method2"></a>ARIMA-based method<a href="#2"><sup>2</sup></a></h1><p><strong>ARIMA</strong> stands for <strong>Autoregressive Integrated Moving Average</strong>.</p>
 <p>In ARIMA(p, d, q), p denotes the order of the autoregressive part, d is the degree of differencing and q is the order of moving average part:</p>
 <p>$$ (1 - \sum_{i&#x3D;1}^p \alpha_i L^i) (1 - L)^d y(t) &#x3D; (1 + \sum_{i&#x3D;1}^q \beta_i L^i) y(t) \xi(t)  $$</p>
 <p>and <strong>L</strong> is the backshift operator, $L_y(t) &#x3D; y(t- 1)$. $\xi(t)$  is white Gaussian noise.</p>
 <p>First train  this model with the known series and impute missing data one by one. The imputed data would be used as known data for next prediction. We use Akaike information criterion to determine $p$ and $q$. $d$ is suggested to be set to $1$.</p>
-<h1 id="BNs-based-imputation-method"><a href="#BNs-based-imputation-method" class="headerlink" title="BNs-based imputation method"></a>BNs-based imputation method</h1><p><strong>BN</strong> stands for <strong>Bayesian Netowrk</strong>.</p>
+<h1 id="BNs-based-imputation-method3"><a href="#BNs-based-imputation-method3" class="headerlink" title="BNs-based imputation method3"></a>BNs-based imputation method<a href="#3"><sup>3</sup></a></h1><p><strong>BN</strong> stands for <strong>Bayesian Netowrk</strong>.</p>
 <p>Based on the known dataset, learn the distribution model of multivariable variants $Y_{mv}(t) &#x3D; [y(t-m), …, y(t)]^T$.<br>Assume this learning target as <strong>Gaussian mixture model (GMM)</strong>.<br>Use split and merge expectation maximisation algorithm to determine the model parameters.</p>
 <p>With a learnt GMM, missing data of $y(t)$ can be estimated as the expectation foregoing value from the latest $m$ items, as:</p>
 <p>$$ \hat y(t) &#x3D; E[y(t) | y(t-m), …, y(t-1)] $$</p>
-<h1 id="k-NN-based-imputation-method"><a href="#k-NN-based-imputation-method" class="headerlink" title="k-NN based imputation method"></a>k-NN based imputation method</h1><p>Weighted k-NN is a non-parametric estimation method.</p>
+<h1 id="k-NN-based-imputation-method4"><a href="#k-NN-based-imputation-method4" class="headerlink" title="k-NN based imputation method4"></a>k-NN based imputation method<a href="#4"><sup>4</sup></a></h1><p>Weighted k-NN is a non-parametric estimation method.</p>
 <h2 id="Selection-S-step-Selection-Step"><a href="#Selection-S-step-Selection-Step" class="headerlink" title="Selection S-step (Selection Step):"></a>Selection S-step (Selection Step):</h2><p>Use a metric to find $k$ nearest traffic daily flow vectors to the corrupted vector $Y(i)$ in pattern-similar from the dataset $Y_c$.<br>Metrics can be <strong>Euclidean distance</strong> and <strong>Pearson correlation</strong>, for examples.</p>
 <p>Then, the lost entry &#x2F; dimension of $Y(i)$ can be imputed with the mean value of the (entries of the) $k$ vectors. </p>
 <h2 id="Imputation-I-step-Imputation-Step"><a href="#Imputation-I-step-Imputation-Step" class="headerlink" title="Imputation I-step: (Imputation Step)"></a>Imputation I-step: (Imputation Step)</h2><p>Because our k-NN algorithm is weighted, then we need to find the weighted average of the k entries (averaged by the correlation coefficent given by the selected metric).  </p>
 <p>Grid search and other optimization methods may be applied to determine best $k$.</p>
-<h1 id="LLS-based-imputation-method"><a href="#LLS-based-imputation-method" class="headerlink" title="LLS-based imputation method"></a>LLS-based imputation method</h1><h2 id="Selection-S-step-Selection-Step-1"><a href="#Selection-S-step-Selection-Step-1" class="headerlink" title="Selection S-step (Selection Step):"></a>Selection S-step (Selection Step):</h2><p>Exactly the same as the above k-NN method.</p>
+<h1 id="LLS-based-imputation-method5"><a href="#LLS-based-imputation-method5" class="headerlink" title="LLS-based imputation method5"></a>LLS-based imputation method<a href="#5"><sup>5</sup></a></h1><h2 id="Selection-S-step-Selection-Step-1"><a href="#Selection-S-step-Selection-Step-1" class="headerlink" title="Selection S-step (Selection Step):"></a>Selection S-step (Selection Step):</h2><p>Exactly the same as the above k-NN method.</p>
 <h2 id="Imputation-I-step-Imputation-Step-1"><a href="#Imputation-I-step-Imputation-Step-1" class="headerlink" title="Imputation I-step: (Imputation Step)"></a>Imputation I-step: (Imputation Step)</h2><p>Decompose k selected vectors dataset into matrix $A$ and $B$. The dimension should be corresponding to the missing part of $Y_{mis}(i)$ and observed part $Y_{obs}(i)$ of $Y(i)$.</p>
 <p>We would have $$ \hat Y_{mis}(i) &#x3D; B((A^TA)^{-1}A^T Y_{obs}(i)) $$.</p>
 <p>This is just a pseudo-inverse, $A$ should be full-ranked&#x2F;</p>
 <img src="/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/matrix.png" class="" title="Note">
 
-<h1 id="MCMC-based-imputation-method"><a href="#MCMC-based-imputation-method" class="headerlink" title="MCMC-based imputation method"></a>MCMC-based imputation method</h1><p>First assume the entire data sequence $Y$ follows a certain distribution, <strong>e.g.</strong>, Gaussian distribution.<br>The conditional expectation $E[Y_{mis}|Y_{obs}, \Phi]$ would be approximated by <strong>MCMC(Markov chain Monte Carlo)</strong> with <strong>DA(Data Augmentation)</strong>, since the expectation is hard to be solved precisely due to its high dimension. Here $\Phi$ stands for the parameter of the selected distribution.</p>
+<h1 id="MCMC-based-imputation-method-6-7"><a href="#MCMC-based-imputation-method-6-7" class="headerlink" title="MCMC-based imputation method 6, 7"></a>MCMC-based imputation method <a href="#6"><sup>6, 7</sup></a></h1><p>First assume the entire data sequence $Y$ follows a certain distribution, <strong>e.g.</strong>, Gaussian distribution.<br>The conditional expectation $E[Y_{mis}|Y_{obs}, \Phi]$ would be approximated by <strong>MCMC(Markov chain Monte Carlo)</strong> with <strong>DA(Data Augmentation)</strong>, since the expectation is hard to be solved precisely due to its high dimension. Here $\Phi$ stands for the parameter of the selected distribution.</p>
 <p>The MCMC with DA is a special case of Gibbs sampler described as follows:</p>
 <h2 id="Imputation-I-step-Imputation-Step-2"><a href="#Imputation-I-step-Imputation-Step-2" class="headerlink" title="Imputation I-step: (Imputation Step)"></a>Imputation I-step: (Imputation Step)</h2><p>Given a current estimated model parameter $\Phi ^k$, this step uses the conditional probability $Y_{mis}^{k+1}&#x3D;p(Y_{mis}|Y_{obs}, \Phi)$ to simulate missing values for each observation independently.</p>
 <h2 id="Posterior-P-step"><a href="#Posterior-P-step" class="headerlink" title="Posterior P-step:"></a>Posterior P-step:</h2><p>Use $p(\Phi |   Y_{obs}, Y_{mis}^{k+1})$ to update model parameter $\Phi$. In this manner, a Markov chain of $(Y_{mis}^{1},\Phi ^{1} )$, …, $(Y_{mis}^{N},\Phi ^{N} )$ should be constructed.</p>
 <p>The missing data is estimated as<br>$$ \hat Y_{mis} &#x3D; \frac{1}{N_{sample} - N_{burn-in}} \sum_{t &#x3D; N_{burn-in + 1}}^{N_{sample}} Y_{mis}^t   $$.</p>
 <p>The first $N_{burn-in}$ samples would be discarded. One feasible parameter setting is $N_{sample}&#x3D;1500$ and $N_{burn-in}&#x3D;500$. I believe the introduction of burn-in is to allow the model sometime to converge.</p>
-<h1 id="PPCA-based-imputation-method"><a href="#PPCA-based-imputation-method" class="headerlink" title="PPCA-based imputation method"></a>PPCA-based imputation method</h1><p>PPCA stands for <strong>Probabilistic Principal Component Analysis</strong>. It assumes that the observed data depends on latent varaiables $$ Y &#x3D; Wx + \mu + \epsilon $$ where $Y$ is a D-dimensional vector of observed data, $x$ is a q-dimensional latent varaible defined Gaussian distribution and $\epsilon$ is isotropic noise. $x \sim N(0,1)$, $\epsilon \sim N(0, \sigma ^2 I)$ and $\mu$ stands for a base mean value. </p>
+<h1 id="PPCA-based-imputation-method8"><a href="#PPCA-based-imputation-method8" class="headerlink" title="PPCA-based imputation method8"></a>PPCA-based imputation method<a href="#6"><sup>8</sup></a></h1><p>PPCA stands for <strong>Probabilistic Principal Component Analysis</strong>. It assumes that the observed data depends on latent varaiables $$ Y &#x3D; Wx + \mu + \epsilon $$ where $Y$ is a D-dimensional vector of observed data, $x$ is a q-dimensional latent varaible defined Gaussian distribution and $\epsilon$ is isotropic noise. $x \sim N(0,1)$, $\epsilon \sim N(0, \sigma ^2 I)$ and $\mu$ stands for a base mean value. </p>
 <p>Use Expectation Maximisation (EM) method to find a set of imputed data which best fit the above distribution. Concrete steps of EM method:</p>
 <h2 id="Expectation-E-step"><a href="#Expectation-E-step" class="headerlink" title="Expectation E-step:"></a>Expectation E-step:</h2><p>Find out the expectation of completed log-likelihood function with previous estimated parameters $\Phi ^k$ and observed data part $Y_{obs}$:<br>$$ Q(\Phi | \Phi ^k) &#x3D; E_{X, Y_{mis} | Y_{obs}, \Phi ^k}[log p_c (Y_c, X|\Phi ^k)]  $$<br>We can use this to update our guess of the missing data part $Y_{mis}^k$ and latent data $X^k$.</p>
 <h2 id="Maximisation-M-step"><a href="#Maximisation-M-step" class="headerlink" title="Maximisation M-step:"></a>Maximisation M-step:</h2><p>Computiong parameter space $\Phi$ by maximising the expectation of log-likelihood in E-step:<br>$$ \Phi ^{k+1} &#x3D; \arg \max_{\Phi} Q(\Phi | \Phi ^k)  $$</p>
@@ -255,6 +255,46 @@
 
 <h1 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h1><p>Prediction and interpolation methods mentioned cannot capture stochastic variations in daily traffic flow. On the contrary, statistical learning methods could achieve traffic flow information by emphasising the statistical characteristics of traffic flow.</p>
 <p><strong>Shorting coming of such methods</strong>: Cannot handle the situations in which neighbour (data points) DO NOT even exist.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><div id='1'></div>
+
+<ul>
+<li>[1] [Li, Yuebiao, Zhiheng Li, and Li Li]”Missing traffic data: comparison of imputation methods.” IET Intelligent Transport Systems 8.1 (2014): 51-57.</li>
+</ul>
+<div id='2'></div>
+
+<ul>
+<li>[2] [Ahmed, Mohammed S., and Allen R. Cook]Analysis of freeway traffic time-series data by using Box-Jenkins techniques. No. 722. 1979.</li>
+</ul>
+<div id='3'></div>
+
+<ul>
+<li>[3] [Ueda, Naonori, et al.] “Split and merge EM algorithm for improving Gaussian mixture density estimates.” Journal of VLSI signal processing systems for signal, image and video technology 26.1 (2000): 133-140.</li>
+</ul>
+<div id='4'></div>
+
+<ul>
+<li>[4] [Troyanskaya, Olga, et al.] “Missing value estimation methods for DNA microarrays.” Bioinformatics 17.6 (2001): 520-525.</li>
+</ul>
+<div id='5'></div>
+
+<ul>
+<li>[5] [Kim, Hyunsoo, Gene H. Golub, and Haesun Park.] “Missing value estimation for DNA microarray gene expression data: local least squares imputation.” Bioinformatics 21.2 (2005): 187-198.</li>
+</ul>
+<div id='6'></div>
+
+<ul>
+<li>[6] [Ni, D., Leonard II, J.D.] “Markov chain Monte Carlo multiple imputation using Bayesian networks for incomplete intelligent transportation systems data”, Transp. Res. Rec., 2005, 1935, (1), pp. 57–67</li>
+</ul>
+<div id='7'></div>
+
+<ul>
+<li>[7] [Gilks, W.R., Richardson, S., Spiegelhalter, D.J.]”Markov chain Monte Carlo in practice” (Chapman &amp; Hall, London, 1996)</li>
+</ul>
+<div id='8'></div>
+
+<ul>
+<li>[8] [Tipping, M.E., Bishop, C.M.]”Mixtures of probabilistic principal<br>component analyzers”, Neural Comput., 1999, 11, (2), pp. 443–482</li>
+</ul>
 
         </div>
         <footer class="article-footer">
@@ -262,7 +302,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" data-id="cl2rvawgu000gnctj1xg98794" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/" data-id="cl2tn75p2000gyktjeftrdeis" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -338,12 +378,12 @@
         "genre": "UCLA Course Study ECE209 in 2022 spring",
         "datePublished": "2022-04-19",
         "dateCreated": "2022-04-19",
-        "dateModified": "2022-04-20",
+        "dateModified": "2022-05-05",
         "url": "https://umiao.github.io/2022/04/19/Missing-Value-Imputation-in-Traffic-Data/",
         "description": "
 Lost of sensor-generated data can be very common. The methods of imputation can be coarsely categorized into: 1. Prediction methods; 2. Interpolation methods; 3. Statistical Learning methods.
 ",
-        "wordCount": 988
+        "wordCount": 1179
     }
 </script>
 
@@ -459,6 +499,46 @@ Lost of sensor-generated data can be very common. The methods of imputation can 
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2022/05/05/SQL-Study-Note-13/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/05/05/SQL-Study-Note-13/sql.jpg)" alt="SQL-Study-Note-13 Window Function" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2022/05/05/SQL-Study-Note-13/" class="title">SQL-Study-Note-13 Window Function</a></p>
+                            <p class="item-date"><time datetime="2022-05-05T21:26:39.000Z" itemprop="datePublished">2022-05-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/04/SQL-Study-Note-12/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/05/04/SQL-Study-Note-12/sql.jpg)" alt="SQL-Study-Note-12 Common Table Expression and Discussion on UNION" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2022/05/04/SQL-Study-Note-12/" class="title">SQL-Study-Note-12 Common Table Expression and Discussion on UNION</a></p>
+                            <p class="item-date"><time datetime="2022-05-04T19:17:03.000Z" itemprop="datePublished">2022-05-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2022/05/03/DS-Study-Note-8/" class="thumbnail">
     
     
@@ -516,46 +596,6 @@ Lost of sensor-generated data can be very common. The methods of imputation can 
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2022/05/01/Missing-Values-Patterns-in-Time-Series-Data/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/05/01/Missing-Values-Patterns-in-Time-Series-Data/img.jpg)" alt="Missing Values Patterns in Time Series Data" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/UCLA/">UCLA</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/UCLA/Course-Study/">Course Study</a></p>
-                            <p class="item-title"><a href="/2022/05/01/Missing-Values-Patterns-in-Time-Series-Data/" class="title">Missing Values Patterns in Time Series Data</a></p>
-                            <p class="item-date"><time datetime="2022-05-02T03:36:26.000Z" itemprop="datePublished">2022-05-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2022/04/26/DS-Study-Note-5/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2022/04/26/DS-Study-Note-5/svm.png)" alt="DS-Study-Note-5 Support Vector Machine (SVM)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></p>
-                            <p class="item-title"><a href="/2022/04/26/DS-Study-Note-5/" class="title">DS-Study-Note-5 Support Vector Machine (SVM)</a></p>
-                            <p class="item-date"><time datetime="2022-04-27T06:51:47.000Z" itemprop="datePublished">2022-04-26</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -565,7 +605,7 @@ Lost of sensor-generated data can be very common. The methods of imputation can 
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">13</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">13</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
         </div>
     </div>
 
@@ -575,7 +615,7 @@ Lost of sensor-generated data can be very common. The methods of imputation can 
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
         </div>
     </div>
 
@@ -585,7 +625,7 @@ Lost of sensor-generated data can be very common. The methods of imputation can 
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
