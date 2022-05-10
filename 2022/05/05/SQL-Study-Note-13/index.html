@@ -12,14 +12,16 @@
     
     <meta name="keywords" content="DataScience,SQL" />
     
-    <meta property="og:type" content="article">
+    <meta name="description" content="Window function is also known as Online Analytical Processing function (LAP), which is able to conduct realtime processing and analyzing on the database data.">
+<meta property="og:type" content="article">
 <meta property="og:title" content="SQL-Study-Note-13 Window Function">
 <meta property="og:url" content="https://umiao.github.io/2022/05/05/SQL-Study-Note-13/index.html">
 <meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Window function is also known as Online Analytical Processing function (LAP), which is able to conduct realtime processing and analyzing on the database data.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://umiao.github.io/2022/05/05/SQL-Study-Note-13/sql.jpg">
 <meta property="article:published_time" content="2022-05-05T21:26:39.000Z">
-<meta property="article:modified_time" content="2022-05-05T21:29:01.936Z">
+<meta property="article:modified_time" content="2022-05-10T08:14:53.317Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
 <meta property="article:tag" content="SQL">
@@ -184,7 +186,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/05/05/SQL-Study-Note-13/" class="article-date">
-     <time datetime="2022-05-05T21:29:01.936Z" itemprop="dateModified">2022-05-05</time>
+     <time datetime="2022-05-10T08:14:53.317Z" itemprop="dateModified">2022-05-10</time>
   </a>
 </div>
 
@@ -211,16 +213,83 @@
 
             
 
-            <img src="/2022/05/05/SQL-Study-Note-13/sql.jpg" class="" title="SQL Note of blur!">
+            <p>Window function is also known as <strong>Online Analytical Processing function (LAP)</strong>, which is able to conduct realtime processing and analyzing on the database data. </p>
+<img src="/2022/05/05/SQL-Study-Note-13/sql.jpg" class="" title="SQL Note of blur!">
 
 <span id="more"></span>
+
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>In order to solve the following problems:</p>
+<ol>
+<li><strong>Ranking</strong>: rank each department with its own performance </li>
+<li><strong>TOP N</strong>: find out the top $N$ department interms of performance</li>
+</ol>
+<h1 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="operator">&lt;</span><span class="keyword">window</span> <span class="keyword">function</span><span class="operator">&gt;</span> <span class="keyword">OVER</span></span><br><span class="line">(</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="operator">&lt;</span>col_name used <span class="keyword">for</span> <span class="keyword">grouping</span><span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span>col_name used <span class="keyword">for</span> sorting<span class="operator">&gt;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">AS</span> ranking</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line"><span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+<h1 id="Types-of-window-functions"><a href="#Types-of-window-functions" class="headerlink" title="Types of window functions"></a>Types of window functions</h1><p>The <window function> above can be replaced by two types of functions:</p>
+<ul>
+<li><strong>Specialized Window Functions</strong>: RANK, DENSE_RANK, ROW_NUMBER</li>
+<li><strong>Aggregate Window Function</strong>: SUM, AVG, COUNT, MAX, MIN</li>
+</ul>
+<h2 id="Specialized-Window-Functions"><a href="#Specialized-Window-Functions" class="headerlink" title="Specialized Window Functions"></a>Specialized Window Functions</h2><p>Considering that we have a column A with value of $\{3,3,3,7\}$ and we would get the ranking in the form of <em><strong>RANK() OVER A</strong></em>.</p>
+<ol>
+<li><strong>RANK</strong>: Multiple rows with the same value would occupy their following ranking place.</li>
+</ol>
+<p><strong>Result</strong>: $\{1,1,1,4\}$<br>2. <strong>DENSE_RANK</strong>: Multiple rows with the same value woud <strong>NOT</strong> occupy their following ranking place.<br><strong>Result</strong>: $\{1,1,1,2\}$<br>3. <strong>ROW_NUMBER</strong>: Multiple rows with the same value woud <strong>NOT</strong> share the same ranking. The tie would be broken via a lexicographical order or something.<br><strong>Result</strong>: $\{1,2,3,4\}$</p>
+<p>Example of these three functions shown below:</p>
+<img src="/2022/05/05/SQL-Study-Note-13/1.jpg" class="" title="SQL Note of blur!">
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ol>
+<li>It should be noted that, the window function operates on the intermediate result after <strong>WHERE &#x2F; GROUP BY</strong>. Thus, it should be written in the <strong>SELECT</strong> clause.</li>
+<li>The <strong>PARTITION</strong> can be ignored (means sorting without grouping).  </li>
+<li><strong>Difference</strong> between <strong>PARTITION BY</strong> and <strong>GROUP BY</strong>: <strong>GROUP BY</strong> has the summary functionality, which would summarize multiple records in a group into <strong>one</strong> (<strong>reducing</strong> the number of rows), while <strong>PARTITION</strong> would keep all these records (leave the number of rows <strong>unchanged</strong>).</li>
+<li>Specialized Window Functions realize the functionality of <strong>sorting</strong> and <strong>grouping</strong> at the same time, and <strong>would NOT reduce</strong> the number of rows.</li>
+</ol>
+<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h1><ol>
+<li><p>Get each student’s <strong>ranking by class</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, </span><br><span class="line"><span class="built_in">DENSE_RANK</span>() <span class="keyword">over</span> (<span class="keyword">order</span> <span class="keyword">by</span> 成绩 <span class="keyword">desc</span>) <span class="keyword">as</span> dese_rank </span><br><span class="line"><span class="keyword">from</span> 班级表;</span><br></pre></td></tr></table></figure></li>
+<li><p>Solve <strong>TOP N</strong> question:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span></span><br><span class="line">(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> </span><br><span class="line">(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> col_name_to_be_part</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> col_name_to_be_sort <span class="keyword">DESC</span></span><br><span class="line">) <span class="keyword">AS</span> ranking</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">table</span> </span><br><span class="line">) <span class="keyword">AS</span> A</span><br><span class="line"><span class="keyword">WHERE</span> ranking <span class="operator">&lt;=</span> N;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Find the grades which are <strong>above average</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span></span><br><span class="line">(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="built_in">AVG</span>(grade) <span class="keyword">OVER</span> </span><br><span class="line">(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> course_id) <span class="keyword">AS</span> avg_grade</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">table</span> </span><br><span class="line">) <span class="keyword">AS</span> A</span><br><span class="line"><span class="keyword">WHERE</span>  grade <span class="operator">&gt;</span> avg_grade;</span><br></pre></td></tr></table></figure>
+<p>This is solved with a <strong>2-step</strong> manner. <strong>For each row</strong>, the corresponding average value is found. Then, <strong>filter</strong> those courses whose  grades are above average.</p>
+</li>
+</ol>
+<h1 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a><strong>Sliding</strong> Window</h1><p>The range of <strong>Sliding Window</strong> can be specified either by <strong>ROWS</strong> or by <strong>RANGE</strong>.</p>
+<h2 id="By-ROWS"><a href="#By-ROWS" class="headerlink" title="By ROWS"></a>By ROWS</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>,</span><br><span class="line"><span class="built_in">AVG</span>(grade) <span class="keyword">OVER</span> </span><br><span class="line">(<span class="keyword">ORDER</span> <span class="keyword">BY</span> id <span class="keyword">ROWS</span> <span class="number">2</span> PRECEDING ) </span><br><span class="line"><span class="comment">-- Ways to decide the range of window by specifying rows</span></span><br><span class="line">(<span class="keyword">ORDER</span> <span class="keyword">BY</span> id <span class="keyword">ROWS</span> <span class="number">2</span> FOLLOWING ) </span><br><span class="line"><span class="comment">-- Two end interval:</span></span><br><span class="line">(<span class="keyword">ORDER</span> <span class="keyword">BY</span> id <span class="keyword">ROWS</span> <span class="keyword">BETWEEN</span> <span class="number">1</span> PRECEDING <span class="keyword">AND</span> <span class="number">1</span> FOLLOWING) </span><br><span class="line"><span class="keyword">AS</span> current_avg</span><br><span class="line"><span class="keyword">FROM</span> class</span><br></pre></td></tr></table></figure>
+<p>The <strong>PRECEDING &#x2F; FOLLOWING</strong> clause is also known as <strong>Frame</strong> clause.</p>
+<h2 id="By-RANGE"><a href="#By-RANGE" class="headerlink" title="By RANGE"></a>By RANGE</h2><p>Sometimes, the range cannot be represented by neighbor rows. <em>E.g.</em>, when you want to select the orders within a <strong>time frame</strong> of a given date (rathe than a row frame).</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>,</span><br><span class="line"><span class="built_in">AVG</span>(price) <span class="keyword">OVER</span> </span><br><span class="line">(<span class="keyword">ORDER</span> <span class="keyword">BY</span> id </span><br><span class="line"><span class="type">INTERVAL</span> <span class="keyword">BETWEEN</span> <span class="number">7</span> <span class="keyword">DAY</span> PRECEDING <span class="keyword">AND</span> <span class="number">7</span> <span class="keyword">DAY</span> FOLLOWING) </span><br><span class="line"><span class="keyword">AS</span> current_avg</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br></pre></td></tr></table></figure>
+<h2 id="Window-Functions-with-constant-frame"><a href="#Window-Functions-with-constant-frame" class="headerlink" title="Window Functions with constant frame"></a>Window Functions with constant frame</h2><blockquote>
+<p>cume_dist() &#x2F; dense_rank() &#x2F; lag() &#x2F; lead() &#x2F; ntile() &#x2F; percent_rank() &#x2F; rank() &#x2F; row_number()</p>
+</blockquote>
+<blockquote>
+<p>In these cases, built-in rules would specify the frame.</p>
+</blockquote>
+<h1 id="MySQL-8-0-source-code-analysis-on-execution-process"><a href="#MySQL-8-0-source-code-analysis-on-execution-process" class="headerlink" title="MySQL 8.0 source code analysis (on execution process)"></a>MySQL 8.0 source code analysis (on execution process)</h1><h2 id="stage-of-optimization"><a href="#stage-of-optimization" class="headerlink" title="stage of optimization"></a>stage of optimization</h2><ol>
+<li><strong>setup windows</strong>: during the optimization process, if <code>select_lex-&gt;m_windows</code> is not NULL, then first call <code>Window::setup_windows</code>; The crucial interface would be <code>Window::check_window_functions(THD *thd, SELECT_LEX *select)</code>.</li>
+</ol>
+<p>a. First judge the current window is <em>dynamic</em> or <em>static</em>. Static window (<code>m_static_aggregates=True</code>) would judge if the lower and upper bound of the window are defined.</p>
+<p>b. If the conditon is not satisfied, i.e., <code>m_static_aggregates=False</code>. Then further decide if it is based on range (<code>m_range_optimizable</code>) or rows (<code>m_row_optimizable</code>). Then decide if a <strong>row_buffer</strong> is required to calculate the result (if we need <strong>neighbor rows</strong>, no matter whether the window is static &#x2F; dynamic).</p>
+<p>Use <code>Optimize-&gt; make_tmp_tables_info</code> to decide if a temporary table is required as a windodw frame buffer.</p>
+<p>c. Stack calling:  <code>unit-&gt;first_select()-&gt;join-&gt;exec()-&gt;evaluate_join_record()-&gt;sub_select_op()  -&gt;QEP_tmp_table::put_record()-&gt;end_write_wf()</code></p>
+<img src="/2022/05/05/SQL-Study-Note-13/buf1.jpg" class="" title="SQL Note of blur!">
+<img src="/2022/05/05/SQL-Study-Note-13/buf2.jpg" class="" title="SQL Note of blur!">
+
+<h2 id="Code-example"><a href="#Code-example" class="headerlink" title="Code example:"></a>Code example:</h2><p><code>SUM(A+FLOOR(B)) OVER (ROWS 2 FOLLOWING)</code></p>
+<ol>
+<li>First finish the function calculation (FLOOR) not related with the window frame formulation. </li>
+<li>Then the result is put into the frame buffer, and frame buffer decides if the set of rows within the frame is already calculated (done in <code>process_buffered_windowing_record</code>).</li>
+<li>If the result does not satisfy the definition of window frame, then the calculation continues. Otherwise, the result is put into frame buffer and continue on processing the non-window function operators.</li>
+<li><code>process_buffered_windowing_record</code> has two strategies of moving the sliding window, <code>native strategy</code>  and <code>optimizable strategy</code>.<br>The prior would go through all the rows within the row buffer. However, the latter would find the <strong>inverse</strong> function to eliminate the out-of-frame rows’ contribution made to the aggregation. Then, a <strong>normal</strong> aggregation function would add the contribution made by the row which just entered the frame.</li>
+</ol>
+
         </div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://umiao.github.io/2022/05/05/SQL-Study-Note-13/" data-id="cl2tn75p8000wyktjbxrogprg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2022/05/05/SQL-Study-Note-13/" data-id="cl30i9p35000wzstjc1cd8wqf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -296,10 +365,11 @@
         "genre": "Data Science SQL Job Search SQL",
         "datePublished": "2022-05-05",
         "dateCreated": "2022-05-05",
-        "dateModified": "2022-05-05",
+        "dateModified": "2022-05-10",
         "url": "https://umiao.github.io/2022/05/05/SQL-Study-Note-13/",
-        "description": "",
-        "wordCount": 8
+        "description": "Window function is also known as Online Analytical Processing function (LAP), which is able to conduct realtime processing and analyzing on the database data. 
+",
+        "wordCount": 1067
     }
 </script>
 
