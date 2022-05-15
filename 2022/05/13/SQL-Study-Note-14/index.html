@@ -6,27 +6,27 @@
     
 
     
-    <title>SQL-Study-Note-6 - Trigger and Events | The blog of Blur</title>
+    <title>SQL-Study-Note-14 Optimization Discussion 1 - Always use index | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="keywords" content="DataScience,SQL" />
     
-    <meta name="description" content="TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.">
+    <meta name="description" content="The optimization of SQL script can be extremely important, just as the importance of algorithm theory &amp; analysis to programming.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL-Study-Note-6 - Trigger and Events">
-<meta property="og:url" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-6/index.html">
+<meta property="og:title" content="SQL-Study-Note-14 Optimization Discussion 1 - Always use index">
+<meta property="og:url" content="https://umiao.github.io/2022/05/13/SQL-Study-Note-14/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.">
+<meta property="og:description" content="The optimization of SQL script can be extremely important, just as the importance of algorithm theory &amp; analysis to programming.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-6/sql.jpg">
-<meta property="article:published_time" content="2022-04-17T04:46:07.000Z">
-<meta property="article:modified_time" content="2022-04-17T05:05:21.886Z">
+<meta property="og:image" content="https://umiao.github.io/2022/05/13/SQL-Study-Note-14/sql.jpg">
+<meta property="article:published_time" content="2022-05-14T06:31:36.000Z">
+<meta property="article:modified_time" content="2022-05-14T18:14:23.730Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-6/sql.jpg">
+<meta name="twitter:image" content="https://umiao.github.io/2022/05/13/SQL-Study-Note-14/sql.jpg">
     
 
     
@@ -159,14 +159,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-SQL-Study-Note-6" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-SQL-Study-Note-14" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        SQL-Study-Note-6 - Trigger and Events
+        SQL-Study-Note-14 Optimization Discussion 1 - Always use index
         </h1>
     
 
@@ -177,16 +177,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2022/04/16/SQL-Study-Note-6/" class="article-date">
-       <time datetime="2022-04-17T04:46:07.000Z" itemprop="datePublished">2022-04-16</time>
+    <a href="/2022/05/13/SQL-Study-Note-14/" class="article-date">
+       <time datetime="2022-05-14T06:31:36.000Z" itemprop="datePublished">2022-05-13</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2022/04/16/SQL-Study-Note-6/" class="article-date">
-     <time datetime="2022-04-17T05:05:21.886Z" itemprop="dateModified">2022-04-16</time>
+  <a href="/2022/05/13/SQL-Study-Note-14/" class="article-date">
+     <time datetime="2022-05-14T18:14:23.730Z" itemprop="dateModified">2022-05-14</time>
   </a>
 </div>
 
@@ -213,27 +213,80 @@
 
             
 
-            <img src="/2022/04/16/SQL-Study-Note-6/sql.jpg" class="" title="SQL Note of blur!">
+            <p>The optimization of SQL script can be extremely important, just as the importance of algorithm theory &amp; analysis to programming.</p>
+<img src="/2022/05/13/SQL-Study-Note-14/sql.jpg" class="" title="SQL Note of blur!">
 
-<h1 id="Trigger"><a href="#Trigger" class="headerlink" title="Trigger"></a>Trigger</h1><p>Triggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.</p>
 <span id="more"></span>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> payments_after_insert </span><br><span class="line">AFTER<span class="operator">/</span>BEFORE </span><br><span class="line"><span class="keyword">INSERT</span><span class="operator">/</span><span class="keyword">UPDATE</span><span class="operator">/</span><span class="keyword">DELETE</span> </span><br><span class="line"><span class="keyword">ON</span> payments <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span>   <span class="comment">-- You can either write SQL codes here or call the existing procedure</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The optimization of SQL is the most significant way of leveraging the system’s performance (with the lowest cost and the best effect).</p>
+<ol>
+<li><strong>The cost of optimization</strong>: hardware &gt; system configuration &gt; table structure of database &gt; SQL &amp; index</li>
+<li><strong>Effect of optimization</strong>: hardware &lt; system configuration &lt; table structure of database</li>
+</ol>
+<h1 id="Principles-of-MySQL-Optimization"><a href="#Principles-of-MySQL-Optimization" class="headerlink" title="Principles of MySQL Optimization"></a>Principles of MySQL Optimization</h1><ol>
+<li><strong>Reduce the visiting of data</strong>: Setting reasonable type for each attribute; Apply <strong>compression and index</strong> to reduce the drive’s IO</li>
+<li><strong>Return less data</strong>: Only return the needed attributes (avoid using the wildcard *); use <strong>paging</strong> of data to reduce the IO of drive and network</li>
+<li><strong>Reduce the number of interaction</strong>: <strong>Batch</strong> DML operation; Reduce the number of connection to database via function &#x2F; stored procedure</li>
+<li><strong>Reduce the CPU overhead</strong>: Reduce the <strong>sorting</strong> and <strong>scan of full table</strong>; to reduce the occupancy of CPU</li>
+<li><strong>Fully use the resources</strong>: Introduce <strong>parallel processing</strong> and <strong>table partitioning</strong></li>
+</ol>
+<h1 id="Order-of-syntax-and-execution"><a href="#Order-of-syntax-and-execution" class="headerlink" title="Order of syntax and execution"></a>Order of syntax and execution</h1><h2 id="Order-of-syntax"><a href="#Order-of-syntax" class="headerlink" title="Order of syntax"></a>Order of syntax</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">SELECT</span> </span><br><span class="line"><span class="number">2.</span> <span class="keyword">DISTINCT</span> <span class="operator">&lt;</span>select_list<span class="operator">&gt;</span></span><br><span class="line"><span class="number">3.</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>left_table<span class="operator">&gt;</span></span><br><span class="line"><span class="number">4.</span> <span class="operator">&lt;</span>join_type<span class="operator">&gt;</span> <span class="keyword">JOIN</span> <span class="operator">&lt;</span>right_table<span class="operator">&gt;</span></span><br><span class="line"><span class="number">5.</span> <span class="keyword">ON</span> <span class="operator">&lt;</span>join_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="number">6.</span> <span class="keyword">WHERE</span> <span class="operator">&lt;</span>where_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="number">7.</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span>group_by_list<span class="operator">&gt;</span></span><br><span class="line"><span class="number">8.</span> <span class="keyword">HAVING</span> <span class="operator">&lt;</span>having_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="number">9.</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span>order_by_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="number">10.</span>LIMIT <span class="operator">&lt;</span>limit_number<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Order-of-execution"><a href="#Order-of-execution" class="headerlink" title="Order of execution"></a>Order of execution</h2><ol>
+<li><strong>FROM</strong>: Select table. Would use <em>Cartesian Product</em> to merge multiple tables into one.</li>
+<li><strong>ON</strong>: Filtering based on the virtual table generated by <em>Cartesian Product</em></li>
+<li><strong>JOIN</strong>: Specify the type of JOIN. <em>E.g.</em>, LEFT JOIN would add the remaining data of the left table into the virtual table.</li>
+<li><strong>WHERE</strong>: Filtering based on the above virtual table. </li>
+<li><strong>GROUP BY</strong>: Grouping the data.</li>
+<li><strong>HAVING</strong>: Filtering after the exection of GROUP BY. Logical judgement on the aggregate result can only be placed here.</li>
+<li><strong>SELECT</strong>: Select the desired attributes from the filtered result.</li>
+<li><strong>DISTINCT</strong>: Keep distinct result only. Modify the name of attribute (column).</li>
+<li><strong>ORDER BY</strong>: Sorting the result.</li>
+<li><strong>LIMIT</strong>: Limit the row number of the returned result.</li>
+</ol>
+<h1 id="Avoid-the-scenario-which-invalidaes-the-index"><a href="#Avoid-the-scenario-which-invalidaes-the-index" class="headerlink" title="Avoid the scenario which invalidaes the index"></a>Avoid the scenario which invalidaes the index</h1><h2 id="Do-not-use-fuzzy-matching-at-the-beginning-of-text"><a href="#Do-not-use-fuzzy-matching-at-the-beginning-of-text" class="headerlink" title="Do not use fuzzy matching at the beginning of text"></a>Do not use fuzzy matching at the beginning of text</h2><p>This would result in a <strong>full table scanning</strong>, rather than a query with index.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;%J&#x27;</span></span><br><span class="line"><span class="comment">-- This would result in full table scanning</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;J%&#x27;</span></span><br><span class="line"><span class="comment">-- In this case, the index would be used</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>If you MUST use the fuzzy matching at the very beginning, you should:</p>
+</blockquote>
+<ul>
+<li>Use function <code>INSTR(str, substr)</code> for matching, which is similar to <code>indexOf()</code> (return the position of queried string)</li>
+<li>Use <strong>FullText</strong> index, and query with <strong>MATCH AGAINST</strong>.</li>
+<li>Apply ElasticSearch &#x2F; solr, for big data scenario</li>
+<li>Simply use <code>LIKE &#39;%J&#39;</code> in small data scenario</li>
+</ul>
+<h2 id="Avoid-using-IN-x2F-NOT-IN"><a href="#Avoid-using-IN-x2F-NOT-IN" class="headerlink" title="Avoid using IN &#x2F; NOT IN"></a>Avoid using IN &#x2F; NOT IN</h2><p>This would also result in the DB engine conduct a full table scan.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="keyword">IN</span> (<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment">-- Original query</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="keyword">BETWEEN</span> <span class="number">2</span> <span class="keyword">AND</span> <span class="number">3</span></span><br><span class="line"><span class="comment">-- If the value is continuous</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> A <span class="keyword">where</span> A.id <span class="keyword">in</span> (<span class="keyword">select</span> id <span class="keyword">from</span> B);</span><br><span class="line"><span class="comment">-- Index deactivated</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> A <span class="keyword">where</span> <span class="keyword">exists</span> (<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> B <span class="keyword">where</span> B.id <span class="operator">=</span> A.id);</span><br><span class="line"><span class="comment">-- Index activated</span></span><br></pre></td></tr></table></figure>
+<h2 id="Avoid-using-OR"><a href="#Avoid-using-OR" class="headerlink" title="Avoid using OR"></a>Avoid using OR</h2><p>This would also result in the DB engine conduct a full table scan.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">OR</span> id <span class="operator">=</span> <span class="number">3</span></span><br><span class="line"><span class="comment">-- Original query</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">3</span></span><br><span class="line"><span class="comment">-- Optimized with UNION</span></span><br></pre></td></tr></table></figure>
+<h2 id="Avoid-comparing-with-NULL"><a href="#Avoid-comparing-with-NULL" class="headerlink" title="Avoid comparing with NULL"></a>Avoid comparing with NULL</h2><p>This would also result in the DB engine conduct a full table scan.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> score <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="comment">-- Original query</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> score <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="comment">-- Set a default value 0 for this attribute, and filter by value 0</span></span><br></pre></td></tr></table></figure>
+<h2 id="Avoid-calculating-expression-x2F-function-in-the-left-part-of-the-condition-of-WHERE"><a href="#Avoid-calculating-expression-x2F-function-in-the-left-part-of-the-condition-of-WHERE" class="headerlink" title="Avoid calculating expression &#x2F; function in the left part of the condition of WHERE"></a>Avoid calculating expression &#x2F; function in the left part of the condition of WHERE</h2><p>This would also result in the DB engine conduct a full table scan.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> T <span class="keyword">WHERE</span> score<span class="operator">/</span><span class="number">10</span> <span class="operator">=</span> <span class="number">9</span></span><br><span class="line"><span class="comment">-- Full table scan</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> T <span class="keyword">WHERE</span> score <span class="operator">=</span> <span class="number">10</span><span class="operator">*</span><span class="number">9</span></span><br><span class="line"><span class="comment">-- Use index</span></span><br></pre></td></tr></table></figure>
+<h2 id="Avoid-using-WHERE-1-x3D-1-with-big-data"><a href="#Avoid-using-WHERE-1-x3D-1-with-big-data" class="headerlink" title="Avoid using WHERE 1&#x3D;1 with big data"></a>Avoid using WHERE 1&#x3D;1 with big data</h2><p>For the convenience of adding condition to the query, we would use WHERE 1&#x3D;1 defaultly. In this case, the DB engine would scan the whole table.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username, age, sex <span class="keyword">FROM</span> T <span class="keyword">WHERE</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br><span class="line"><span class="comment">-- Original query</span></span><br></pre></td></tr></table></figure>
+<p>We can further optimize this query. If we do not need the WHERE condition, we can remove <code>WHERE 1=1</code> and if we need, we can add <code>AND</code> to the condition part.</p>
+<h2 id="Avoid-lt-gt-x2F-x3D-in-the-filter-condition"><a href="#Avoid-lt-gt-x2F-x3D-in-the-filter-condition" class="headerlink" title="Avoid &lt;&gt; &#x2F; !&#x3D; in the filter condition"></a>Avoid &lt;&gt; &#x2F; !&#x3D; in the filter condition</h2><p>When an index column is used in the condition expression, we should avoid using <code>&lt;&gt;</code> or <code>!=</code>. If this query (and Not Equal operator) is really required in business, we should evaluate the setup of index and <strong>avoiding building index</strong> on this attribute (and build index on <strong>other attributes</strong> used in the query instead).</p>
+<h2 id="Leftmost-Prefix-Matching-Principle"><a href="#Leftmost-Prefix-Matching-Principle" class="headerlink" title="Leftmost Prefix Matching Principle"></a>Leftmost Prefix Matching Principle</h2><p>For example, if a <strong>composite (union) index</strong> includes three columns, <code>key_part1, key_part2, key_part3</code> but the SQL query does not include the leftmost column <code>key_part1</code>, then the index would not be used. This is because the <strong>Leftmost Prefix Matching Principle</strong> of SQL.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> col1 <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> key_part2<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> key_part3<span class="operator">=</span><span class="number">2</span></span><br><span class="line"><span class="comment">-- key_part1 is missing</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Extensive-syntax"><a href="#Extensive-syntax" class="headerlink" title="Extensive syntax"></a>Extensive syntax</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">NEW</span> <span class="comment">-- Return the just inserted line.</span></span><br><span class="line"><span class="keyword">OLD</span> <span class="comment">-- Return the just deleted line.</span></span><br><span class="line">NEW.amount <span class="comment">-- Can use . to specify a column</span></span><br></pre></td></tr></table></figure>
-<p>These two (NEW &#x2F; OLD) are keywords of MySQL.<br>Triggers can be used to modify data of any table <strong>EXCEPT</strong> the table which is being listened by the trigger. This is because trigger can trigger itself and results in <strong>infinite loop</strong>.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> TRIGGERS <span class="comment">-- Show all the created triggers.</span></span><br><span class="line"><span class="keyword">ShOW</span> TRIGGERS <span class="keyword">LIKE</span> <span class="string">&#x27;c%&#x27;</span> <span class="comment">-- Filter the triggers.</span></span><br></pre></td></tr></table></figure>
-<p>Triggers can be also used for auditing purpose, <em>i.e.</em>, record the executor, attribute and timestamp when an operation is done.</p>
-<h1 id="EVENT"><a href="#EVENT" class="headerlink" title="EVENT"></a>EVENT</h1><p>Events are periodically triggered codes for multiple tasks.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="comment">-- Show all system variables.</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> event_scheduler<span class="operator">=</span><span class="keyword">ON</span> <span class="operator">/</span> OFF <span class="comment">-- Switch the event_scheduler</span></span><br></pre></td></tr></table></figure>
+<h2 id="Implicit-type-conversion"><a href="#Implicit-type-conversion" class="headerlink" title="Implicit type conversion"></a>Implicit type conversion</h2><p>In the following example, the type of this column is <code>varchar</code> while the given value <code>123</code> is a number. This would introduce <strong>Implicit type conversion</strong> and prevent the DB engine from using index. </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> col1 <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> col_varchar<span class="operator">=</span><span class="number">123</span>;</span><br></pre></td></tr></table></figure>
 
-<p><strong>Create Event</strong>:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> EVENT yearly_delete_state_audit_rows <span class="keyword">ON</span> SCHEDULE</span><br><span class="line"><span class="keyword">EVERY</span> <span class="number">1</span> <span class="keyword">YEAR</span> </span><br><span class="line">STARTS ‘<span class="number">2020</span><span class="number">-01</span><span class="number">-01</span>’ ENDS ’<span class="number">2029</span><span class="number">-01</span><span class="number">-01</span>’</span><br><span class="line">DO <span class="keyword">BEGIN</span>  <span class="comment">-- Note that DO is required here.</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Two ways to calculate the diff of time</strong>:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NOW() – <span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>;</span><br><span class="line">DATESUB(NOW(), <span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>Activate &#x2F; Deactivate Events</strong>:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> EVENT e_name DISABLE;</span><br></pre></td></tr></table></figure>
+<h2 id="The-condition-of-ORDER-BY-should-be-the-same-as-WHERE"><a href="#The-condition-of-ORDER-BY-should-be-the-same-as-WHERE" class="headerlink" title="The condition of ORDER BY should be the same as WHERE"></a>The condition of ORDER BY should be the same as WHERE</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">order</span> <span class="keyword">by</span> age;</span><br><span class="line"><span class="comment">-- age&#x27;s index is NOT used</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">where</span> age <span class="operator">&gt;</span> <span class="number">0</span> <span class="keyword">order</span> <span class="keyword">by</span> age;</span><br><span class="line"><span class="comment">-- age&#x27;s index is used</span></span><br></pre></td></tr></table></figure>
+<p>For the above SQL, the processing order of DB is:</p>
+<ol>
+<li>Fetch the data according to the execution plan described by WHERE condition.</li>
+<li>Sort the data. When processing ORDER BY clause, the DB would check if the attribute used for sorting <strong>uses index</strong> in the execution plan. If yes, the data is <strong>sorted by the index</strong>. Otherwise, <strong>external sorting</strong> is applied.</li>
+<li>Return the sorted data.</li>
+</ol>
+<p>Thus, we require the attribute specified by ORDER BY appears in the WHERE condition, to avoid external sorting. More specifically, this attribute should use the index during execution.</p>
+<p>Similar conclusion holds for other keywords requiring sorting: <strong>GROUP BY, UNION, DISTINCT</strong>, etc.</p>
+<h2 id="Proper-use-of-HINT"><a href="#Proper-use-of-HINT" class="headerlink" title="Proper use of HINT"></a>Proper use of HINT</h2><p>In MySQL, you can use HINT to require the optimizer to select &#x2F; omit certain index during execution. Generally,  we recommend using ANALYZE table to collect statistical information. However, sometimes specify the HINT can result in better execution plan.</p>
+<ol>
+<li>Appoint the index you would like to use with <strong>USE INDEX</strong> (to the end of the query).</li>
+<li>Omit certain index with <strong>IGNORE INDEX</strong>. </li>
+<li>Force MySQL to use certain index with <strong>FORCE INDEX</strong>.</li>
+</ol>
+<p>Generally, the DB system would auto select a proper index but it is not guaranteed to be optimal. If we know how to select the index, we can use <strong>FORCE INDEX</strong> to specify the index to use.</p>
 <hr>
 
         </div>
@@ -242,7 +295,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2022/04/16/SQL-Study-Note-6/" data-id="cl36zs6vg001pzktj4q8gc2zt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2022/05/13/SQL-Study-Note-14/" data-id="cl36zs6va0010zktj1y4333da" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -312,18 +365,17 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "SQL-Study-Note-6 - Trigger and Events",
-        "image": "https://umiao.github.io/2022/04/16/SQL-Study-Note-6/sql.jpg",
+        "headline": "SQL-Study-Note-14 Optimization Discussion 1 - Always use index",
+        "image": "https://umiao.github.io/2022/05/13/SQL-Study-Note-14/sql.jpg",
         "keywords": "DataScience SQL",
         "genre": "Data Science SQL Job Search SQL",
-        "datePublished": "2022-04-16",
-        "dateCreated": "2022-04-16",
-        "dateModified": "2022-04-16",
-        "url": "https://umiao.github.io/2022/04/16/SQL-Study-Note-6/",
-        "description": "
-
-TriggerTriggers are the code blocks executed automatically before insertion &#x2F; update &#x2F; delete take effect.",
-        "wordCount": 356
+        "datePublished": "2022-05-13",
+        "dateCreated": "2022-05-13",
+        "dateModified": "2022-05-14",
+        "url": "https://umiao.github.io/2022/05/13/SQL-Study-Note-14/",
+        "description": "The optimization of SQL script can be extremely important, just as the importance of algorithm theory &amp; analysis to programming.
+",
+        "wordCount": 1555
     }
 </script>
 
@@ -404,20 +456,20 @@ TriggerTriggers are the code blocks executed automatically before insertion &#x2
         
 <nav id="article-nav">
     
-        <a href="/2022/04/16/SQL-Study-Note-7/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2022/05/14/SQL-Study-Note-15/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            SQL-Study-Note-7 - Transactions
+            SQL-Study-Note-15 Optimization Discussion 2 - Optimize the SELECT and Data Manipulation
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2022/04/16/SQL-Study-Note-5/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2022/05/05/SQL-Study-Note-13/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">SQL-Study-Note-5 - Stored Procedure and User Defined Functions</p>
+        <p class="article-nav-title">SQL-Study-Note-13 Window Function</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -634,7 +686,7 @@ TriggerTriggers are the code blocks executed automatically before insertion &#x2
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'https://umiao.github.io/2022/04/16/SQL-Study-Note-6/';
+    var disqus_url = 'https://umiao.github.io/2022/05/13/SQL-Study-Note-14/';
     
     (function() {
     var dsq = document.createElement('script');
