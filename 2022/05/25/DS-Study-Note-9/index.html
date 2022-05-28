@@ -6,27 +6,29 @@
     
 
     
-    <title>SQL-Study-Note-14 Optimization Discussion 1 - Always use index | The blog of Blur</title>
+    <title>DS-Study-Note-9 Gradient Boosting Machine Tree Model(s) | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="DataScience,SQL" />
+    <meta name="keywords" content="DataScience,Machine Learning,GBM,XGBoost" />
     
-    <meta name="description" content="The optimization of SQL script can be extremely important, just as the importance of algorithm theory &amp; analysis to programming.">
+    <meta name="description" content="Gradient Boosting Machine TreeGBMTree stands for Gradient Boosting Machine Tree.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL-Study-Note-14 Optimization Discussion 1 - Always use index">
-<meta property="og:url" content="https://umiao.github.io/2022/05/13/SQL-Study-Note-14/index.html">
+<meta property="og:title" content="DS-Study-Note-9 Gradient Boosting Machine Tree Model(s)">
+<meta property="og:url" content="https://umiao.github.io/2022/05/25/DS-Study-Note-9/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="The optimization of SQL script can be extremely important, just as the importance of algorithm theory &amp; analysis to programming.">
+<meta property="og:description" content="Gradient Boosting Machine TreeGBMTree stands for Gradient Boosting Machine Tree.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://umiao.github.io/2022/05/13/SQL-Study-Note-14/sql.jpg">
-<meta property="article:published_time" content="2022-05-14T06:31:36.000Z">
-<meta property="article:modified_time" content="2022-05-14T18:14:23.730Z">
+<meta property="og:image" content="https://umiao.github.io/2022/05/25/DS-Study-Note-9/theory.jpg">
+<meta property="article:published_time" content="2022-05-26T02:54:23.000Z">
+<meta property="article:modified_time" content="2022-05-28T22:43:50.842Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
-<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="GBM">
+<meta property="article:tag" content="XGBoost">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://umiao.github.io/2022/05/13/SQL-Study-Note-14/sql.jpg">
+<meta name="twitter:image" content="https://umiao.github.io/2022/05/25/DS-Study-Note-9/theory.jpg">
     
 
     
@@ -154,19 +156,19 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/SQL/">SQL</a>
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-SQL-Study-Note-14" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-DS-Study-Note-9" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        SQL-Study-Note-14 Optimization Discussion 1 - Always use index
+        DS-Study-Note-9 Gradient Boosting Machine Tree Model(s)
         </h1>
     
 
@@ -177,16 +179,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2022/05/13/SQL-Study-Note-14/" class="article-date">
-       <time datetime="2022-05-14T06:31:36.000Z" itemprop="datePublished">2022-05-13</time>
+    <a href="/2022/05/25/DS-Study-Note-9/" class="article-date">
+       <time datetime="2022-05-26T02:54:23.000Z" itemprop="datePublished">2022-05-25</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2022/05/13/SQL-Study-Note-14/" class="article-date">
-     <time datetime="2022-05-14T18:14:23.730Z" itemprop="dateModified">2022-05-14</time>
+  <a href="/2022/05/25/DS-Study-Note-9/" class="article-date">
+     <time datetime="2022-05-28T22:43:50.842Z" itemprop="dateModified">2022-05-28</time>
   </a>
 </div>
 
@@ -196,7 +198,7 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
+        <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/GBM/" rel="tag">GBM</a>, <a class="tag-link-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a>, <a class="tag-link-link" href="/tags/XGBoost/" rel="tag">XGBoost</a>
     </div>
 
                 
@@ -213,81 +215,101 @@
 
             
 
-            <p>The optimization of SQL script can be extremely important, just as the importance of algorithm theory &amp; analysis to programming.</p>
-<img src="/2022/05/13/SQL-Study-Note-14/sql.jpg" class="" title="SQL Note of blur!">
-
+            <h1 id="Gradient-Boosting-Machine-Tree"><a href="#Gradient-Boosting-Machine-Tree" class="headerlink" title="Gradient Boosting Machine Tree"></a>Gradient Boosting Machine Tree</h1><p><strong>GBMTree</strong> stands for <strong>Gradient Boosting Machine Tree</strong>.</p>
 <span id="more"></span>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The optimization of SQL is the most significant way of leveraging the system’s performance (with the lowest cost and the best effect).</p>
-<ol>
-<li><strong>The cost of optimization</strong>: hardware &gt; system configuration &gt; table structure of database &gt; SQL &amp; index</li>
-<li><strong>Effect of optimization</strong>: hardware &lt; system configuration &lt; table structure of database</li>
-</ol>
-<h1 id="Principles-of-MySQL-Optimization"><a href="#Principles-of-MySQL-Optimization" class="headerlink" title="Principles of MySQL Optimization"></a>Principles of MySQL Optimization</h1><ol>
-<li><strong>Reduce the visiting of data</strong>: Setting reasonable type for each attribute; Apply <strong>compression and index</strong> to reduce the drive’s IO</li>
-<li><strong>Return less data</strong>: Only return the needed attributes (avoid using the wildcard *); use <strong>paging</strong> of data to reduce the IO of drive and network</li>
-<li><strong>Reduce the number of interaction</strong>: <strong>Batch</strong> DML operation; Reduce the number of connection to database via function &#x2F; stored procedure</li>
-<li><strong>Reduce the CPU overhead</strong>: Reduce the <strong>sorting</strong> and <strong>scan of full table</strong>; to reduce the occupancy of CPU</li>
-<li><strong>Fully use the resources</strong>: Introduce <strong>parallel processing</strong> and <strong>table partitioning</strong></li>
-</ol>
-<h1 id="Order-of-syntax-and-execution"><a href="#Order-of-syntax-and-execution" class="headerlink" title="Order of syntax and execution"></a>Order of syntax and execution</h1><h2 id="Order-of-syntax"><a href="#Order-of-syntax" class="headerlink" title="Order of syntax"></a>Order of syntax</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">SELECT</span> </span><br><span class="line"><span class="number">2.</span> <span class="keyword">DISTINCT</span> <span class="operator">&lt;</span>select_list<span class="operator">&gt;</span></span><br><span class="line"><span class="number">3.</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>left_table<span class="operator">&gt;</span></span><br><span class="line"><span class="number">4.</span> <span class="operator">&lt;</span>join_type<span class="operator">&gt;</span> <span class="keyword">JOIN</span> <span class="operator">&lt;</span>right_table<span class="operator">&gt;</span></span><br><span class="line"><span class="number">5.</span> <span class="keyword">ON</span> <span class="operator">&lt;</span>join_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="number">6.</span> <span class="keyword">WHERE</span> <span class="operator">&lt;</span>where_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="number">7.</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span>group_by_list<span class="operator">&gt;</span></span><br><span class="line"><span class="number">8.</span> <span class="keyword">HAVING</span> <span class="operator">&lt;</span>having_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="number">9.</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span>order_by_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="number">10.</span>LIMIT <span class="operator">&lt;</span>limit_number<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Order-of-execution"><a href="#Order-of-execution" class="headerlink" title="Order of execution"></a>Order of execution</h2><ol>
-<li><strong>FROM</strong>: Select table. Would use <em>Cartesian Product</em> to merge multiple tables into one.</li>
-<li><strong>ON</strong>: Filtering based on the virtual table generated by <em>Cartesian Product</em></li>
-<li><strong>JOIN</strong>: Specify the type of JOIN. <em>E.g.</em>, LEFT JOIN would add the remaining data of the left table into the virtual table.</li>
-<li><strong>WHERE</strong>: Filtering based on the above virtual table. </li>
-<li><strong>GROUP BY</strong>: Grouping the data.</li>
-<li><strong>HAVING</strong>: Filtering after the exection of GROUP BY. Logical judgement on the aggregate result can only be placed here.</li>
-<li><strong>SELECT</strong>: Select the desired attributes from the filtered result.</li>
-<li><strong>DISTINCT</strong>: Keep distinct result only. Modify the name of attribute (column).</li>
-<li><strong>ORDER BY</strong>: Sorting the result.</li>
-<li><strong>LIMIT</strong>: Limit the row number of the returned result.</li>
-</ol>
-<h1 id="Avoid-the-scenario-which-invalidaes-the-index"><a href="#Avoid-the-scenario-which-invalidaes-the-index" class="headerlink" title="Avoid the scenario which invalidaes the index"></a>Avoid the scenario which invalidaes the index</h1><h2 id="Do-not-use-fuzzy-matching-at-the-beginning-of-text"><a href="#Do-not-use-fuzzy-matching-at-the-beginning-of-text" class="headerlink" title="Do not use fuzzy matching at the beginning of text"></a>Do not use fuzzy matching at the beginning of text</h2><p>This would result in a <strong>full table scanning</strong>, rather than a query with index.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;%J&#x27;</span></span><br><span class="line"><span class="comment">-- This would result in full table scanning</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;J%&#x27;</span></span><br><span class="line"><span class="comment">-- In this case, the index would be used</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>If you MUST use the fuzzy matching at the very beginning, you should:</p>
-</blockquote>
+<p>The idea is to train multiple serial <strong>weak</strong> learner, while the objective of each learner is to fit the <strong>negative</strong> gradient of the loss function of the previous cumulative model.<br>Thus, after this weak learner is attached, the loss of the new cumulative model shall be maximally reduced. Also, each base (weak) learner can be linearly combined with different weights (so that those learners with higher performance would contribute more to the result). A common implementation of the base learner is Tree Model (<em>e.g.</em>, Decision Tree).</p>
+<img src="/2022/05/25/DS-Study-Note-9/theory.jpg" class="" title="ML_note">
+
+<h1 id="Primary-Feature"><a href="#Primary-Feature" class="headerlink" title="Primary Feature"></a>Primary Feature</h1><p>The primary feature of GBM (Gradient Bossting Machine) is that, it conduct <strong>Gradient Descent</strong> in the space of function, instead of the space of model parameters (e.g., Neural Network calculates the gradient of current loss to the model parameters for update).</p>
+<p>In Gradient Boosting, in each iteration, a weak learner is generated via <strong>fitting the negative gradient</strong> of loss function to the cumulative model formed by the learners generated before (this means that the previous model is left <strong>unchanged</strong>). Then, the current weak learner is added to the cumulative model to reduce the loss.</p>
+<p><strong>Differences</strong>:</p>
 <ul>
-<li>Use function <code>INSTR(str, substr)</code> for matching, which is similar to <code>indexOf()</code> (return the position of queried string)</li>
-<li>Use <strong>FullText</strong> index, and query with <strong>MATCH AGAINST</strong>.</li>
-<li>Apply ElasticSearch &#x2F; solr, for big data scenario</li>
-<li>Simply use <code>LIKE &#39;%J&#39;</code> in small data scenario</li>
+<li>Gradient descent of the <strong>parameter space</strong> would: use the gradient to update the parameters</li>
+<li>Gradient descent of the <strong>function space</strong> would: fit a new function with the gradient</li>
 </ul>
-<h2 id="Avoid-using-IN-x2F-NOT-IN"><a href="#Avoid-using-IN-x2F-NOT-IN" class="headerlink" title="Avoid using IN &#x2F; NOT IN"></a>Avoid using IN &#x2F; NOT IN</h2><p>This would also result in the DB engine conduct a full table scan.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="keyword">IN</span> (<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment">-- Original query</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="keyword">BETWEEN</span> <span class="number">2</span> <span class="keyword">AND</span> <span class="number">3</span></span><br><span class="line"><span class="comment">-- If the value is continuous</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> A <span class="keyword">where</span> A.id <span class="keyword">in</span> (<span class="keyword">select</span> id <span class="keyword">from</span> B);</span><br><span class="line"><span class="comment">-- Index deactivated</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> A <span class="keyword">where</span> <span class="keyword">exists</span> (<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> B <span class="keyword">where</span> B.id <span class="operator">=</span> A.id);</span><br><span class="line"><span class="comment">-- Index activated</span></span><br></pre></td></tr></table></figure>
-<h2 id="Avoid-using-OR"><a href="#Avoid-using-OR" class="headerlink" title="Avoid using OR"></a>Avoid using OR</h2><p>This would also result in the DB engine conduct a full table scan.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">OR</span> id <span class="operator">=</span> <span class="number">3</span></span><br><span class="line"><span class="comment">-- Original query</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">3</span></span><br><span class="line"><span class="comment">-- Optimized with UNION</span></span><br></pre></td></tr></table></figure>
-<h2 id="Avoid-comparing-with-NULL"><a href="#Avoid-comparing-with-NULL" class="headerlink" title="Avoid comparing with NULL"></a>Avoid comparing with NULL</h2><p>This would also result in the DB engine conduct a full table scan.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> score <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="comment">-- Original query</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> score <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="comment">-- Set a default value 0 for this attribute, and filter by value 0</span></span><br></pre></td></tr></table></figure>
-<h2 id="Avoid-calculating-expression-x2F-function-in-the-left-part-of-the-condition-of-WHERE"><a href="#Avoid-calculating-expression-x2F-function-in-the-left-part-of-the-condition-of-WHERE" class="headerlink" title="Avoid calculating expression &#x2F; function in the left part of the condition of WHERE"></a>Avoid calculating expression &#x2F; function in the left part of the condition of WHERE</h2><p>This would also result in the DB engine conduct a full table scan.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> T <span class="keyword">WHERE</span> score<span class="operator">/</span><span class="number">10</span> <span class="operator">=</span> <span class="number">9</span></span><br><span class="line"><span class="comment">-- Full table scan</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> T <span class="keyword">WHERE</span> score <span class="operator">=</span> <span class="number">10</span><span class="operator">*</span><span class="number">9</span></span><br><span class="line"><span class="comment">-- Use index</span></span><br></pre></td></tr></table></figure>
-<h2 id="Avoid-using-WHERE-1-x3D-1-with-big-data"><a href="#Avoid-using-WHERE-1-x3D-1-with-big-data" class="headerlink" title="Avoid using WHERE 1&#x3D;1 with big data"></a>Avoid using WHERE 1&#x3D;1 with big data</h2><p>For the convenience of adding condition to the query, we would use WHERE 1&#x3D;1 defaultly. In this case, the DB engine would scan the whole table.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username, age, sex <span class="keyword">FROM</span> T <span class="keyword">WHERE</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br><span class="line"><span class="comment">-- Original query</span></span><br></pre></td></tr></table></figure>
-<p>We can further optimize this query. If we do not need the WHERE condition, we can remove <code>WHERE 1=1</code> and if we need, we can add <code>AND</code> to the condition part.</p>
-<h2 id="Avoid-lt-gt-x2F-x3D-in-the-filter-condition"><a href="#Avoid-lt-gt-x2F-x3D-in-the-filter-condition" class="headerlink" title="Avoid &lt;&gt; &#x2F; !&#x3D; in the filter condition"></a>Avoid &lt;&gt; &#x2F; !&#x3D; in the filter condition</h2><p>When an index column is used in the condition expression, we should avoid using <code>&lt;&gt;</code> or <code>!=</code>. If this query (and Not Equal operator) is really required in business, we should evaluate the setup of index and <strong>avoiding building index</strong> on this attribute (and build index on <strong>other attributes</strong> used in the query instead).</p>
-<h2 id="Leftmost-Prefix-Matching-Principle"><a href="#Leftmost-Prefix-Matching-Principle" class="headerlink" title="Leftmost Prefix Matching Principle"></a>Leftmost Prefix Matching Principle</h2><p>For example, if a <strong>composite (union) index</strong> includes three columns, <code>key_part1, key_part2, key_part3</code> but the SQL query does not include the leftmost column <code>key_part1</code>, then the index would not be used. This is because the <strong>Leftmost Prefix Matching Principle</strong> of SQL.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> col1 <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> key_part2<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> key_part3<span class="operator">=</span><span class="number">2</span></span><br><span class="line"><span class="comment">-- key_part1 is missing</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Implicit-type-conversion"><a href="#Implicit-type-conversion" class="headerlink" title="Implicit type conversion"></a>Implicit type conversion</h2><p>In the following example, the type of this column is <code>varchar</code> while the given value <code>123</code> is a number. This would introduce <strong>Implicit type conversion</strong> and prevent the DB engine from using index. </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> col1 <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> col_varchar<span class="operator">=</span><span class="number">123</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="The-condition-of-ORDER-BY-should-be-the-same-as-WHERE"><a href="#The-condition-of-ORDER-BY-should-be-the-same-as-WHERE" class="headerlink" title="The condition of ORDER BY should be the same as WHERE"></a>The condition of ORDER BY should be the same as WHERE</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">order</span> <span class="keyword">by</span> age;</span><br><span class="line"><span class="comment">-- age&#x27;s index is NOT used</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t <span class="keyword">where</span> age <span class="operator">&gt;</span> <span class="number">0</span> <span class="keyword">order</span> <span class="keyword">by</span> age;</span><br><span class="line"><span class="comment">-- age&#x27;s index is used</span></span><br></pre></td></tr></table></figure>
-<p>For the above SQL, the processing order of DB is:</p>
+<h1 id="Math-Theory"><a href="#Math-Theory" class="headerlink" title="Math Theory"></a>Math Theory</h1><p>Considering we have $n$ training samples $\{x_i, y_i\}$, and the cumulative model in the $k$th round is $F_{k-1}(x)$. Then, the model in the kth round should be:<br>$$ F_k(x) &#x3D; F_{k-1}(x) + arg \min_{h \subset H} Loss(y_i, F_{k-1}(x_i) + h(x_i))   $$<br>where $h(x)$ is the desired weak learner.</p>
+<p>In fact, after the $k-1$th round, we can have $\hat y &#x3D; F_{k-1}(x)$ and the loss $Loss(y, \hat y)$. Thus, in order to minimize the model’s loss after introducing the $k$th weak learner, the gradient of this learner $h(x)$ should be negative to the gradient of $F_{k-1}(x)$, so that:<br>$$ Gradient \  h(x) &#x3D; - \frac{\partial Loss(y, \hat y)}{\partial F_{k-1}(x)} $$ </p>
+<p>In the actual implementation of this algorithm, a concrete <strong>loss function</strong> and a <strong>learning rate</strong> $\alpha$ should be appointed. The learning rate would be used when updating the model: $F_k(x) &#x3D; F_{k-1}(x) + \alpha h(x)$.<br>We also need to set a boundary condition (number of iteration, minimal improvement &#x2F; difference, etc) to decide when to terminate this algorithm.</p>
+<h1 id="GBDT-Gradient-Boosting-Decision-Tree-Algorithm"><a href="#GBDT-Gradient-Boosting-Decision-Tree-Algorithm" class="headerlink" title="GBDT (Gradient Boosting Decision Tree) Algorithm"></a>GBDT (Gradient Boosting Decision Tree) Algorithm</h1><p><strong>GBDT</strong> uses <strong>CART (Classifier And Regression Tree)</strong> as the weak learner.<br>The benefit of such design is that, the Decision Tree itself is unstable, as minor fluctuation of training data can greatly influence the (inference) result (single Decision Tree has <strong>high variance</strong>).</p>
+<p>In <strong>Ensemble Learning</strong>, we expect weak classifiers to have <strong>high variance</strong> to achieve <strong>better generalization performance</strong>. Thus, CART is preferred to the more stable weak learners (<em>e.g.</em>, linear regression).</p>
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><ul>
+<li><p>In <strong>regression task</strong>, the loss function would be ${(y - F_{k-1}(x))}^2$, then the negative gradient would be $2(y - F_{k-1}(x))$.<br>Thus, we can find the negative gradient simply via $y - F_{k-1}(x)$.</p>
+</li>
+<li><p>In <strong>classification task</strong>, we aims at fitting the logarithmic probability $\log \frac{p}{1-p}$ with linear model $Wx+b$. The loss function would be <strong>Cross Entropy Loss</strong>: $Loss &#x3D; -y \log p - (1-y)log(1-p)$. Then, we can have<br>$$ F_{k-1}(x) &#x3D; \log\frac{p_{k-1}}{1-p_{k-1}} \Rightarrow p_{k-1} &#x3D; \frac{1}{1 + e^{-F_{k-1}}}  $$<br>$$ Loss &#x3D; -y\log \frac{1}{1 + e^{-F_{k-1}}} - (1-y)\log \frac{e^{-F_{k-1}}}{1 + e^{-F_{k-1}}} $$</p>
+<p>  Simplify the expression, we have $Loss &#x3D; (1-y)F_{k-1} + \log(1 + e^{-F_{k-1}})$. $-\frac{\partial Loss}{\partial F_{k-1}} &#x3D; y - p_{k-1}$</p>
+</li>
+</ul>
+<h1 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h1><p><strong>XGBoost</strong> stands for <strong>eXtreme Gradient Boosting</strong>, which is an algorithm based on <strong>GBDT</strong>. It makes multiple improments, including:</p>
 <ol>
-<li>Fetch the data according to the execution plan described by WHERE condition.</li>
-<li>Sort the data. When processing ORDER BY clause, the DB would check if the attribute used for sorting <strong>uses index</strong> in the execution plan. If yes, the data is <strong>sorted by the index</strong>. Otherwise, <strong>external sorting</strong> is applied.</li>
-<li>Return the sorted data.</li>
+<li>Apply <strong>second-order Taylor Formula Expansion</strong> to better approximate various loss functions (and faster convergence).</li>
+<li>Introduce <strong>regularization term</strong> to prevent overfitting.</li>
+<li>Use <strong>Block</strong> to store the structure for parallel processing</li>
 </ol>
-<p>Thus, we require the attribute specified by ORDER BY appears in the WHERE condition, to avoid external sorting. More specifically, this attribute should use the index during execution.</p>
-<p>Similar conclusion holds for other keywords requiring sorting: <strong>GROUP BY, UNION, DISTINCT</strong>, etc.</p>
-<h2 id="Proper-use-of-HINT"><a href="#Proper-use-of-HINT" class="headerlink" title="Proper use of HINT"></a>Proper use of HINT</h2><p>In MySQL, you can use HINT to require the optimizer to select &#x2F; omit certain index during execution. Generally,  we recommend using ANALYZE table to collect statistical information. However, sometimes specify the HINT can result in better execution plan.</p>
+<h2 id="Math-Theory-1"><a href="#Math-Theory-1" class="headerlink" title="Math Theory"></a>Math Theory</h2><p>The objective function of XGBoost consists of <strong>loss function</strong> and <strong>regularization term</strong>.<br>The objective function can be written as:<br>$$ Loss &#x3D; \sum_{i&#x3D;1}^n l(y_i, \hat y_i) + \sum_{k&#x3D;1}^K \Omega(f_k) $$<br>We have $n$ pairs of training samples and a total of $K$ trees. $\Omega(f_k)$ is the regularization term which measures the model’s complexity.</p>
+<p>Since XGB is implemented by Boosting, we also have: $\hat y_i^t &#x3D; \hat y_i^{t-1} + f_t(x_i)$. Here $f_t(x_i)$ is the most recently appended weak learner.</p>
+<h3 id="Taylor-Expansion"><a href="#Taylor-Expansion" class="headerlink" title="Taylor Expansion"></a>Taylor Expansion</h3><p>We already know that $f(x) \approx f(x_0) + f’(x_0)(x - x_0) + \frac{f’’(x_0)}{2}(x - x_0)^2$.<br>Then, let $l(x) &#x3D; l(y_i, x)$, find the 2nd order Taylor Expansion at $x_0$, we can have $l(y_i, x) \approx l(y_i, x_0) + l’(y_i, x_0)(x - x_0) + \frac{l’’(y_i, x_0)}{2}(x - x_0)^2$.<br>Similarly, we have $l(y_i, x) \approx l(y_i, \hat y_i^{t-1}) + l’(y_i, \hat y_i^{t-1})(x - \hat y_i^{t-1}) + \frac{l’’(y_i, \hat y_i^{t-1})}{2}(x - \hat y_i^{t-1})^2$.</p>
+<p>Note that we have $x &#x3D; \hat y_i^{t-1} + f_t(x_i)$, denote $g_i &#x3D; l’(y_i, \hat y_i^{t-1})$, $h_i &#x3D; l’’(y_i, \hat y_i^{t-1})$, we have:<br>$$ l(y_i, \hat y_i^{t-1} + f_t(x_i)) \approx  l(y_i, \hat y_i^{t-1}) + g_if_t(x_i) + \frac{h_i}{2}f_t^2(x_i)$$<br>Here we finish the derivation.</p>
+<h3 id="Unfold-regularization-term"><a href="#Unfold-regularization-term" class="headerlink" title="Unfold regularization term"></a>Unfold regularization term</h3><p>Note that $l(y_i, \hat y_i^{t-1})$ is a constant, we can simply remove it. Also, we unfold the regularization term $\sum_{k&#x3D;1}^K \Omega(f_k) &#x3D; \Omega(f_t) + \sum_{k&#x3D;1}^{t-1}\Omega(f_k)$. The structure of the previous $t-1$ trees would not change, thus we can view their sum as a constant and remove, to have the polished loss function:<br>$$ {Loss}^t &#x3D; \sum_i^n[g_if_t(x_i) + \frac{h_i}{2}f_t^2(x_i)] + \Omega(f_t) $$</p>
+<h3 id="Organize-the-objective-function"><a href="#Organize-the-objective-function" class="headerlink" title="Organize the objective function"></a>Organize the objective function</h3><ol>
+<li><p>In order to define a Tree, we need the leave nodes’ <strong>weight vector</strong> $\omega \subset R^T$ and the <strong>mapping relationship</strong> $q: R^d \rightarrow 1,2,…,T$, T is the number of the leave nodes. Thus, we can express a tree as $f_t(x) &#x3D; \omega_{q(x)}$.</p>
+</li>
+<li><p>We then define the complexity, <em>i.e.</em>, $\Omega$. We define it by: the number of the leave nodes $T$, and the <strong>L2 Norm</strong> of the weight vectors of the leave nodes. Thus, we define $\Omega(f_t) &#x3D; \gamma T + \frac{1}{2}\lambda\sum_{j&#x3D;1}^T\omega_j^2$.</p>
+</li>
+<li><p>Merge the terms according to their order:<br> $$ {Loss}^{(t)} &#x3D; \sum_{j&#x3D;1}^T[(\sum_{i \in I_j}g_i)w_j + \frac{1}{2}(\sum_{i \in I_j}h_i + \lambda)w_j^2] + \gamma T$$<br> We can denote $G_j &#x3D; (\sum_{i \in I_j}g_i)$ and $H_j &#x3D; \sum_{i \in I_j}h_i$, these two stands for sum of the 1 &#x2F; 2 - order partial derivative of the samples contained by leave node $j$. Note that $G_j$, $H_j$ are constants.</p>
+</li>
+</ol>
+<h3 id="Optimal-Solution"><a href="#Optimal-Solution" class="headerlink" title="Optimal Solution"></a>Optimal Solution</h3><p>We can tell that the objective function $f(w_j) &#x3D; G_jw_j + \frac{1}{2}(H_j + \lambda) w_j^2$ is a 2nd-order function about $w_j$. Thus, we can tell that the minial ($f(w_j) &#x3D; -\frac{G_j^2}{2(H_j + \lambda)}$) is reached at $w_j &#x3D; - \frac{G_j}{H_j + \lambda}$.</p>
+<h1 id="LightGBM"><a href="#LightGBM" class="headerlink" title="LightGBM"></a>LightGBM</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ol>
+<li>Reduce the occupancy of memory. Utilize as much as possible data on single machine, without sacrificing the speed.</li>
+<li>Reduce the overhead of communication, realize linear acceleration in case of Multiprocessor parallel.</li>
+</ol>
+<h2 id="Difference-from-XGBoost"><a href="#Difference-from-XGBoost" class="headerlink" title="Difference from XGBoost"></a>Difference from XGBoost</h2><ol>
+<li>These two alogrithms both use the negative gradient of the loss function as the approximation of the residual of current decision tree, to fit the new decision tree.</li>
+<li>LightGBM would grow in the vertical direction, and other algorithms would grow in the horizontal direction.</li>
+<li>LightGBM would grow in the leave node with maximal error, to reduce loss as possible.</li>
+</ol>
+<h2 id="Histogram-Algorithm"><a href="#Histogram-Algorithm" class="headerlink" title="Histogram Algorithm"></a>Histogram Algorithm</h2><p><strong>Histogram Algorithm</strong> is proposed to substitute the <strong>pre-sorted algorithm</strong> of <strong>XGBoost</strong>. The pre-sorted algorithm would first sort the samples according to their feature values, then find the optimal split point from all the possible feature values. Thus, for each feature, the number of candidate split points is proportional to the <strong>number of samples</strong>.</p>
+<p>At the same time, <strong>Histogram Algorithm</strong> would discretize the continuous feature values into a constant number (<em>e.g.</em>, 255) of bins. Thus, the candidate split points would reduce to <strong>(num_bins - 1)</strong> from <strong>(num_unique_values - 1)</strong>.</p>
+<img src="/2022/05/25/DS-Study-Note-9/hist.png" class="" title="ML_note">
+
+<p>With this manner, instead of storing the feature values with <code>float_32</code>, we can now use <code>uint_8</code> to store the index of bucket (with hash algorithm). At the same time, there comes the tradeoff of <strong>losing accuracy</strong> to <strong>raise efficiency</strong> </p>
+<ul>
+<li>(However, single Decision Tree itself is a weak model, it is not that important for the split points to be accurate. Coarse split points may have the <strong>regularization</strong> effect and the result can <strong>stay robust</strong> under Gradient Boosting framework.).<h3 id="Acceleration-of-Histogram-via-finding-difference"><a href="#Acceleration-of-Histogram-via-finding-difference" class="headerlink" title="Acceleration of Histogram via finding difference"></a>Acceleration of Histogram via finding difference</h3>The histogram of a leaf can be found by solving the difference of its father node’s histogram and its brother’s histogram. <strong>LightGBM</strong> can solve the histogram of a leaf node (with small sample number) and quickly find the histogram of its brother.<img src="/2022/05/25/DS-Study-Note-9/hist2.jpg" class="" title="ML_note"></li>
+</ul>
+<p>It should be noted that <strong>XGB</strong> and <strong>LightGBM</strong> only consider non-zero values.</p>
+<h3 id="Leaf-wise-Algorithm-with-Depth-Limit"><a href="#Leaf-wise-Algorithm-with-Depth-Limit" class="headerlink" title="Leaf-wise Algorithm with Depth Limit"></a>Leaf-wise Algorithm with Depth Limit</h3><p>Most GBDT algorithms use the <strong>level-wise</strong> grow strategy, <em>i.e.</em>, all the leave nodes in the same level would be splitted, under a single traverse (then <strong>post-pruning</strong> would be executed). It is friendly for multi-thread optimization, controlling of model complexity and resist over-fitting. However, for many leaves, the <strong>split gain</strong> is very <strong>low</strong> and result in useless computational overhead. </p>
+<p>LightGBM uses the <strong>leaf-wise</strong> grow strategy. At a time, a leaf with <strong>max split gain</strong> is selected and splitted. Thus, with the same number of splition, we can come up with better accuracy and lower error. However, it also has the advantage of possibility of <strong>overfitting</strong>, as a deep decision tree may be generated. Thus, a <code>max_depth</code> is introduced to control the depth of a tree.</p>
+<h2 id="GOSS-Gradient-Based-One-Side-Sampling"><a href="#GOSS-Gradient-Based-One-Side-Sampling" class="headerlink" title="GOSS - Gradient Based One-Side Sampling"></a>GOSS - Gradient Based One-Side Sampling</h2><p><strong>GOSS</strong> aims at omitting most of the samples with <strong>small gradient</strong> and only use the remaining samples to compute the information gain. (We assume that the samples with smaller gradients are already <strong>well-trained</strong>.)</p>
+<p>However, simply dropping the data with small gradient would change the overall distribution of dataset. Thus, <strong>GOSS</strong> would sort all the possible values of the feature to be splitted order by the absolute value and select the $k$-largest ones. Then, $m-k$ samples and randomly selected from the remaining ones (and assigned with a constant $fact$ to scale the samples with small gradient).</p>
+<h2 id="EFB-Exclusive-Feature-Bundling"><a href="#EFB-Exclusive-Feature-Bundling" class="headerlink" title="EFB - Exclusive Feature Bundling"></a>EFB - Exclusive Feature Bundling</h2><p>High-dimensional data is usually <strong>sparse</strong>. Such sparsity inspires us to develop a <strong>lossless</strong> method to reduce the dimension of features. If two features are <strong>exclusive</strong>, it means that their feature would not be non-zero values at the same time. Then, we can simply find the sum of these two (<strong>Bundling</strong>), without losing information. If they are not completely exclusive, we can measure the <strong>conflict ratio</strong> (ratio of having non-zero values at the same time) of a pair of features. If <strong>conflict ratio</strong> is small, we can still bundle them without impair the final accuracy.</p>
+<p><strong>Exclusive Feature Bundling, EFB</strong> points out that if we conduct fusion and bundling on some features, we can reduce the number of features for better performance.</p>
+<h3 id="Decide-which-features-to-bundle"><a href="#Decide-which-features-to-bundle" class="headerlink" title="Decide which features to bundle"></a>Decide which features to bundle</h3><p>Bundling <strong>pair-wise independent</strong> features is a <strong>NP-Hard</strong> problem. The <strong>EFB</strong> algorithm of <strong>LightGBM</strong> reduces this problem into <strong>Graph Coloring Algorithm</strong>. Each feature would be viewed as a <strong>vertex</strong> of the graph, and we draw an <strong>edge</strong> between two features which are <strong>NOT completely independent</strong> and the <strong>weight</strong> of the edge is the <strong>conflict ratio</strong> of these two features. Then our task is to color the vertices to be bundled in the same color.</p>
+<ul>
+<li>The <strong>heuristic</strong> alogrithm is like: <strong>Construct</strong> such a graph, <strong>sort</strong> the vertices by the degree (larger degree means higher degree of conflict). <strong>Traverse</strong> each vertex (feature), allocate it to one of the existing feature bundles or create a new one, to minimize the total conflict.</li>
+<li>When the scale of data is very large, the efficency of graph operation would get too low. <strong>LightGBM</strong> proposes a <strong>non-graph algorithm</strong>, which sort the features by the number of <strong>non-zero values</strong>.</li>
+</ul>
+<h3 id="Implement-the-bundling"><a href="#Implement-the-bundling" class="headerlink" title="Implement the bundling"></a>Implement the bundling</h3><p>We can distribute values of different features into <strong>different bins</strong> of a bundle (in order to make sure the values of raw features are <strong>recognizable before bundling</strong>, by adding a <strong>shifting constant</strong> to the feature value).</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>It is not recommended to use LightGBM on small dataset as it is <strong>sensitive to overfitting</strong>. (Recommend to use LightGBM on dataset with a size larger than 10K)</p>
+<h3 id="Categorical-Feature"><a href="#Categorical-Feature" class="headerlink" title="Categorical Feature"></a>Categorical Feature</h3><p>It should be noted that, <strong>one-hot encoding</strong> is not recommended for <strong>Decision Tree</strong> (especially when the number of classes is large).</p>
 <ol>
-<li>Appoint the index you would like to use with <strong>USE INDEX</strong> (to the end of the query).</li>
-<li>Omit certain index with <strong>IGNORE INDEX</strong>. </li>
-<li>Force MySQL to use certain index with <strong>FORCE INDEX</strong>.</li>
+<li>The split would be <strong>imbalanced</strong>, which results in <strong>very small splitting gain</strong>. Using one-hot encoding means that on each decision node, we can only use <strong>one vs rest</strong> splitting (<em>e.g.</em>, decide a sample is dog or not). It is almost equivalent to not splitting at all.</li>
+<li>One-hot encoding would cut samples of the same class into many <strong>small subspaces &#x2F; groups</strong> (statistics on small space may be <strong>inaccurate</strong>). <strong>LightGBM</strong> use <strong>many-to-many</strong> to solve this issue (<em>e.g.</em>, a single node is $X &#x3D; A || X &#x3D; C$).</li>
 </ol>
-<p>Generally, the DB system would auto select a proper index but it is not guaranteed to be optimal. If we know how to select the index, we can use <strong>FORCE INDEX</strong> to specify the index to use.</p>
-<hr>
+<p><strong>Acceleration method</strong>: Before traverse all the candidate splitting points, first sort the histogram by the mean value of the corresponding labels, then search the optimal splitting point according to the order. This method can easily <strong>overfitting</strong>, so it needs further <strong>constraints</strong> and <strong>regularization</strong>.</p>
+<h3 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h3><p>When running in parallel, <strong>LightGBM</strong> would store all the training data in each node (server) to save the communication cost (instead of dividing the data vertically and distributing to each node). LightGBM would also use <strong>Reduce Scatter</strong> to distribute the task of merging the histogram. Finally, it applies parallizing based on <strong>voting</strong> (only the <strong>Top K</strong> features of <strong>each node</strong> would be considered and merged). Also, the histogram algorithm <strong>LightGBM</strong> applied is naturally more friendly to <strong>Cache</strong>, because it reduce the <strong>random access</strong> and do not need a data structure to store the mapping of <strong>row indexes to leave indexes</strong>.</p>
+<p>Recommended web for source code studying: <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/XxFHmxV4_iDq8ksFuZM02w">https://mp.weixin.qq.com/s/XxFHmxV4_iDq8ksFuZM02w</a></p>
+<h1 id="Summary-on-Bagging-and-Boosting"><a href="#Summary-on-Bagging-and-Boosting" class="headerlink" title="Summary on Bagging and Boosting"></a>Summary on Bagging and Boosting</h1><ol>
+<li><p><strong>Sample Selection</strong>:<br> <strong>Bagging</strong>: sampling with replacement, different training sets are independent from each other<br> <strong>Boosting</strong>: The training set remains unchanged, only the weight of each sample alters (decided by the performance of last round).</p>
+</li>
+<li><p><strong>Weight of sample</strong>:<br> <strong>Bagging</strong>: Each sample has the same weight.<br> <strong>Boosting</strong>: Weight decided by the error rate (higher error rate corresponds to higher weight).</p>
+</li>
+<li><p><strong>Weight of learner</strong>:<br> <strong>Bagging</strong>: Each learner has the same weight.<br> <strong>Boosting</strong>: Each weak learner has different weight (more accurate one has higher weight).</p>
+</li>
+<li><p><strong>Parallel computing</strong>:<br> <strong>Bagging</strong>: Able to parallel.<br> <strong>Boosting</strong>: Each learner should be generated in sequential order.</p>
+</li>
+<li><p><strong>Essence</strong>:<br> <strong>Bagging</strong>: Reduce variance (via voting).<br> <strong>Boosting</strong>: Reduce bias.</p>
+</li>
+</ol>
 
         </div>
         <footer class="article-footer">
@@ -295,7 +317,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2022/05/13/SQL-Study-Note-14/" data-id="cl3qgxidt0013zstj1jk8gosj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2022/05/25/DS-Study-Note-9/" data-id="cl3qgxidl000gzstjfic4guxo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -365,17 +387,16 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "SQL-Study-Note-14 Optimization Discussion 1 - Always use index",
-        "image": "https://umiao.github.io/2022/05/13/SQL-Study-Note-14/sql.jpg",
-        "keywords": "DataScience SQL",
-        "genre": "Data Science SQL Job Search SQL",
-        "datePublished": "2022-05-13",
-        "dateCreated": "2022-05-13",
-        "dateModified": "2022-05-14",
-        "url": "https://umiao.github.io/2022/05/13/SQL-Study-Note-14/",
-        "description": "The optimization of SQL script can be extremely important, just as the importance of algorithm theory &amp; analysis to programming.
-",
-        "wordCount": 1555
+        "headline": "DS-Study-Note-9 Gradient Boosting Machine Tree Model(s)",
+        "image": "https://umiao.github.io/2022/05/25/DS-Study-Note-9/theory.jpg",
+        "keywords": "DataScience Machine Learning GBM XGBoost",
+        "genre": "Data Science General Knowledge",
+        "datePublished": "2022-05-25",
+        "dateCreated": "2022-05-25",
+        "dateModified": "2022-05-28",
+        "url": "https://umiao.github.io/2022/05/25/DS-Study-Note-9/",
+        "description": "Gradient Boosting Machine TreeGBMTree stands for Gradient Boosting Machine Tree.",
+        "wordCount": 2421
     }
 </script>
 
@@ -456,20 +477,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2022/05/14/SQL-Study-Note-15/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            SQL-Study-Note-15 Optimization Discussion 2 - Optimize the SELECT and Data Manipulation
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2022/05/05/SQL-Study-Note-13/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2022/05/14/SQL-Study-Note-16/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">SQL-Study-Note-13 Window Function</p>
+        <p class="article-nav-title">SQL-Study-Note-16 Optimization Discussion 3 - Optimize the condition setting and table creating</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -686,7 +697,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'https://umiao.github.io/2022/05/13/SQL-Study-Note-14/';
+    var disqus_url = 'https://umiao.github.io/2022/05/25/DS-Study-Note-9/';
     
     (function() {
     var dsq = document.createElement('script');
