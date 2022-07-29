@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>NLP-2 Reading Note: A Survey on Text Classification | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="NLP" />
+    
+    <meta name="description" content="Review the major NLP tasks as well as methods (in terms of text classification).">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP-2 Reading Note: A Survey on Text Classification">
+<meta property="og:url" content="https://umiao.github.io/2022/06/20/NLP-2/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Review the major NLP tasks as well as methods (in terms of text classification).">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2022/06/20/NLP-2/cover.png">
+<meta property="article:published_time" content="2022-06-20T18:38:01.000Z">
+<meta property="article:modified_time" content="2022-07-29T07:09:48.412Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="NLP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2022/06/20/NLP-2/cover.png">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/NLP/">NLP</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-NLP-2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        NLP-2 Reading Note: A Survey on Text Classification
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/06/20/NLP-2/" class="article-date">
+       <time datetime="2022-06-20T18:38:01.000Z" itemprop="datePublished">2022-06-20</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/06/20/NLP-2/" class="article-date">
+     <time datetime="2022-07-29T07:09:48.412Z" itemprop="dateModified">2022-07-29</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/NLP/" rel="tag">NLP</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Review the major NLP tasks as well as methods (in terms of text classification).</p>
+<img src="/2022/06/20/NLP-2/cover.png" class="" title="SQL Note of blur!">
+<span id="more"></span>
+
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>The methods discussed in this survey are proposed between 1961-2021.</p>
+<ol>
+<li><strong>Traditional model</strong>: Preprocess and mannually extract features from the documents.</li>
+<li><strong>Deep learning model</strong>: Learns and implements the feature extraction (as non-linear transformation). Better preserve the sequential structure and contextual info.</li>
+</ol>
+<img src="/2022/06/20/NLP-2/flowchart.png" class="" title="SQL Note of blur!">
+
+<h1 id="Traditional-models"><a href="#Traditional-models" class="headerlink" title="Traditional models"></a>Traditional models</h1><h2 id="1-Preprocessing"><a href="#1-Preprocessing" class="headerlink" title="1 - Preprocessing:"></a>1 - <strong>Preprocessing</strong>:</h2><pre class="mermaid">graph LR;
+A[word segmentation] --> B[data cleaning];
+B --> C[statistics];</pre>
+<h2 id="2-Word-Representation"><a href="#2-Word-Representation" class="headerlink" title="2 - Word Representation:"></a>2 - <strong>Word Representation</strong>:</h2><pre class="mermaid">graph LR;
+A[Representation Methods] --> 1["Bag-Of-Words (BOW)"];
+A --> 2[N-gram];
+A --> 3["Term Frequency-Inverse Document Frequency (TF-IDF)"];
+A --> 4[word2vec];
+A --> 5["Global Vectors for word representation (GloVe)"];</pre>
+<ul>
+<li><strong>Bag-Of-Words (BOW)</strong>: Representing each text with a dictionary-sized vector. The i-th element in the vector represents the frequency of the i-th word in the<br>mapping array of the sentence.</li>
+<li><strong>N-gram</strong>: Considers the information of adjacent words to predict a word’s probability. Adopts the <em><strong>Markov hypothesis</strong></em>: word appears only concerning the words that preceded it. Counting and recording the occurrence frequency of all fragments (in a sliding window with size N), and predict the sentence (next word) based on the above frequency vector.</li>
+<li><strong>TF-IDF</strong>: <strong>TF (Term Frequency)</strong> is the word frequency of a word in a specific article, and <strong>IDF (Inverse Document Frequency)</strong> is the reciprocal of the proportion of the articles containing this word to the total number of articles in the corpus. Use the <strong>multiplication</strong> of the two to represent a word. The importance of a word increases proportionally with the number of times it appears in a document. However, it decreases inversely with its frequency in the corpus as a whole.</li>
+<li><strong>word2vec</strong>:<br>  Use local context information to obtain (fixed-length, real value) word vectors. Two essential models: <strong>CBOW</strong> and <strong>Skip-gram</strong>. The former is to predict the current word on the premise that the context of the current word is known. The latter is to predict the context when the current word is known.<br>  The two manners:  <img src="/2022/06/20/NLP-2/w2v.png" class="" title="SQL Note of blur!"></li>
+<li><strong>GloVe: Global Vectors for Word Representation</strong>: Construct the co-occurrence matrix of words based on the corpus. Learn the word vector based on the co-occurrence matrix and <strong>GloVe</strong> model (fit the co-occurrence frequency by dot-product of vectors to measure the relevance).</li>
+</ul>
+<h2 id="3-Classifiers"><a href="#3-Classifiers" class="headerlink" title="3 - Classifiers"></a>3 - Classifiers</h2><p>Finally, the represented text (vector) is fed into the classifier according to selected features.</p>
+<h3 id="Probabilistic-Graphical-Models-PGMs-based"><a href="#Probabilistic-Graphical-Models-PGMs-based" class="headerlink" title="Probabilistic Graphical Models (PGMs) based"></a>Probabilistic Graphical Models (PGMs) based</h3><p>Express the conditional dependencies among features in graphs, such as the Bayesian network. It is a combination of probability theory and graph theory.</p>
+<ul>
+<li><p><strong>Naïve Bayes (NB)</strong> : Assumption: when the target value has been given, the conditions between text $T &#x3D; [T_1,T_2, . . . ,T_n]$ are independent. It uses the prior probability to calculate the posterior probability: $P(y|T_1, …, T_n)&#x3D;\frac{p(y)\prod_{j&#x3D;1}^np(T_j|y)}{\prod_{j&#x3D;1}^n p(T_j)}$. The sturcture would be quite simple (though the assumption is not actual) and would be shown below:</p>
+<img src="/2022/06/20/NLP-2/nb.png" class="" title="SQL Note of blur!">
+</li>
+<li><p><strong>Naive Bayes Transfer Classification (NBTC)</strong>: Use <strong>EM Algorithm</strong> to settle the different distribution between the training set and the target set (by obtaining a locally optimal posterior hypothesis on the target set). </p>
+</li>
+<li><p>By assuming the distribution of variables, <strong>Bernoulli NB, Gaussian NB and Multinomial NB</strong> can be implemented.</p>
+</li>
+</ul>
+<h3 id="K-Nearest-Neighbors-KNN-based"><a href="#K-Nearest-Neighbors-KNN-based" class="headerlink" title="K-Nearest Neighbors (KNN) based"></a>K-Nearest Neighbors (KNN) based</h3><p>Finding the category with the most samples on the k nearest samples.</p>
+<p><strong>Possible improvements</strong>: (metric of) feature similarity, <em>K</em> value, index optimization (accelerate the search of k nearest negihbours). </p>
+<p>However, this algorithm can be very <strong>SLOW</strong> on large datasets. The <strong>Neighbor-Weighted K-Nearest Neighbor (NWKNN)</strong> is proposed to improve classification on <strong>Unbalanced</strong> corpora (casting big weight for neighbors in a small category, a small weight for neighbors in a broad class).</p>
+<h3 id="Support-Vector-Machine-SVM-based"><a href="#Support-Vector-Machine-SVM-based" class="headerlink" title="Support Vector Machine (SVM) based"></a>Support Vector Machine (SVM) based</h3><p>Change the classification task into multiple binary classification tasks in essence (construct a optimal hyperplane to divide two classes with max distance of category boundary). </p>
+<h3 id="Decision-Trees-DT-based"><a href="#Decision-Trees-DT-based" class="headerlink" title="Decision Trees (DT) based"></a>Decision Trees (DT) based</h3><p>Supervised tree structure learning including: <strong>Tree constrction</strong> and <strong>tree pruning</strong>. The key is to divide the dataset into diverse subsets, and every leaf node stands for a category. </p>
+<p>The <strong>Iterative Dichotomiser 3 (ID3)</strong> algorithm uses information gain as the attribute selection criterion to select node &#x2F; discriminant attribute.</p>
+<p>DT based models usually need to be train on each dataset (lack of generalization ability).</p>
+<h3 id="Integration-based-Methods"><a href="#Integration-based-Methods" class="headerlink" title="Integration-based Methods."></a>Integration-based Methods.</h3><p>Aims at aggregating the results of multiple algorithms for better performance.</p>
+<p><strong>Bootstrap aggregation</strong>: <strong>Random forest</strong>, <strong>Adaptive Boosting (AdaBoost)</strong>, <strong>XGBoost</strong>. These classifiers are expected to be independent (combine <strong>different</strong> learners would be ideal).</p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary:"></a>Summary:</h3><p><strong>NB</strong> assume the features are independent. It is less sensitive to missing data and simple. The performance would drop with large number of features and high correlation between features.</p>
+<p><strong>SVM</strong> can solve high-dimensional &#x2F; non-linear problems. It has a high generalization but sensitive to missing data.</p>
+<p><strong>KNN</strong> depends on the finite, surrounding samples thus vulnearable in cases of crossover &#x2F; overlap of the class domain.</p>
+<p><strong>DT</strong> is easy to explain, however, the feature engineering can be difficult. However, it works well on small datasets.</p>
+<h2 id="Deep-learning-methods"><a href="#Deep-learning-methods" class="headerlink" title="Deep learning methods"></a>Deep learning methods</h2><p>Mainstream methods include <strong>Multi-Layer Perceptron (MLP), Recursive Nerual Network (RNN), Convolutional Neural Network (CNN)</strong>.</p>
+<p><strong>Bert</strong> is able generate the contextualized word vectors and is a significant turning point.</p>
+<ul>
+<li><p><strong>RNN</strong>: Usually used to learn a (latent) semantic vector representative automatically (each input word would be viewed as a leaf node of the entire tree like model structure. Finally, all nodes are combined into a parent node to represent the entire input text for prediction). It can also deal with input with variable length.</p>
+</li>
+<li><p>It should be noted that it is a biased model as the <strong>following inputs profit over the former</strong> and decreasing the semantic efficiency (<strong>LSTM</strong> is proposed to partially alleivated this issue). It can also be realized in a bi-directional manner.</p>
+<img src="/2022/06/20/NLP-2/rnn.png" class="" title="SQL Note of blur!">
+</li>
+<li><p><strong>CNN</strong>: It can be implemented both in <strong>character level</strong> and <strong>word level</strong>. It can also combined with pyramid structure, residual network, etc.</p>
+</li>
+<li><p><strong>Self-attention &#x2F; Transformer &#x2F; Bert</strong>: There are alread a lot of materials on this topic.</p>
+<img src="/2022/06/20/NLP-2/attention.png" class="" title="SQL Note of blur!">
+</li>
+<li><p><strong>Pre-trained Model</strong>: Including models like <strong>Embedding from Language Model (ELMo), OpenAI GPT, BERT</strong>, etc.<br>We can clearly tell that ELMo is <strong>LSTM</strong> based while GPT and BERT are <strong>Transformer</strong> based.</p>
+</li>
+</ul>
+<p>These methods comeup with larget training time, training data and resources. A typical setting is like over 200K training sets and 1.5B training data, batch size over 8K.</p>
+<img src="/2022/06/20/NLP-2/bert.png" class="" title="SQL Note of blur!">
+
+<p>We also have other models like <strong>BART</strong> (Seq2Seq based denoising autoencoder, introducing noise to the document and use Seq2Seq model to reconstruct) and <strong>SpanBERT</strong> (improved implementation of BERT, like mask a continuous paragraph, rather than word leveled. Span Boundary Objective (SBO) is added to predict span by the token next to the span boundary, and the NSP pre-training task is removed).</p>
+<h2 id="GNN-Graph-Neural-Networks-based-method"><a href="#GNN-Graph-Neural-Networks-based-method" class="headerlink" title="GNN (Graph Neural Networks) based method"></a>GNN (Graph Neural Networks) based method</h2><p>Just put a image here:</p>
+<img src="/2022/06/20/NLP-2/gnn.png" class="" title="SQL Note of blur!">
+
+
+
+
+
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2022/06/20/NLP-2/" data-id="cl4n336760000oktj9ozs8j13" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "NLP-2 Reading Note: A Survey on Text Classification",
+        "image": "https://umiao.github.io/2022/06/20/NLP-2/cover.png",
+        "keywords": "NLP",
+        "genre": "AI NLP",
+        "datePublished": "2022-06-20",
+        "dateCreated": "2022-06-20",
+        "dateModified": "2022-07-29",
+        "url": "https://umiao.github.io/2022/06/20/NLP-2/",
+        "description": "Review the major NLP tasks as well as methods (in terms of text classification).
+",
+        "wordCount": 1171
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/06/20/NLP-1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">NLP-1 Roadmap</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/06/20/NLP-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/06/20/NLP-2/cover.png)" alt="NLP-2 Reading Note: A Survey on Text Classification" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/NLP/">NLP</a></p>
+                            <p class="item-title"><a href="/2022/06/20/NLP-2/" class="title">NLP-2 Reading Note: A Survey on Text Classification</a></p>
+                            <p class="item-date"><time datetime="2022-06-20T18:38:01.000Z" itemprop="datePublished">2022-06-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/06/20/NLP-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/06/20/NLP-1/rm.png)" alt="NLP-1 Roadmap" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/NLP/">NLP</a></p>
+                            <p class="item-title"><a href="/2022/06/20/NLP-1/" class="title">NLP-1 Roadmap</a></p>
+                            <p class="item-date"><time datetime="2022-06-20T17:23:43.000Z" itemprop="datePublished">2022-06-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/25/DS-Study-Note-9/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/05/25/DS-Study-Note-9/theory.jpg)" alt="DS-Study-Note-9 Gradient Boosting Machine Tree Model(s)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></p>
+                            <p class="item-title"><a href="/2022/05/25/DS-Study-Note-9/" class="title">DS-Study-Note-9 Gradient Boosting Machine Tree Model(s)</a></p>
+                            <p class="item-date"><time datetime="2022-05-26T02:54:23.000Z" itemprop="datePublished">2022-05-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/14/SQL-Study-Note-16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/05/14/SQL-Study-Note-16/sql.jpg)" alt="SQL-Study-Note-16 Optimization Discussion 3 - Optimize the condition setting and table creating" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2022/05/14/SQL-Study-Note-16/" class="title">SQL-Study-Note-16 Optimization Discussion 3 - Optimize the condition setting and table creating</a></p>
+                            <p class="item-date"><time datetime="2022-05-14T21:02:18.000Z" itemprop="datePublished">2022-05-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/14/SQL-Study-Note-15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/05/14/SQL-Study-Note-15/sql.jpg)" alt="SQL-Study-Note-15 Optimization Discussion 2 - Optimize the SELECT and Data Manipulation" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2022/05/14/SQL-Study-Note-15/" class="title">SQL-Study-Note-15 Optimization Discussion 2 - Optimize the SELECT and Data Manipulation</a></p>
+                            <p class="item-date"><time datetime="2022-05-14T18:14:50.000Z" itemprop="datePublished">2022-05-14</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">25</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/Machine-Learning/" style="font-size: 15px;">Machine Learning</a> <a href="/tags/NLP/" style="font-size: 12.5px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/SQL/" style="font-size: 17.5px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/UCLA/" style="font-size: 12.5px;">UCLA</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2022/06/20/NLP-2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
