@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Collection and Solution of Brainteasers - 1 | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="IQ,Brainteasers,Math" />
+    
+    <meta name="description" content="Strange questions you would expected to meet only in interviews of financial &#x2F; trading firms LOL!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Collection and Solution of Brainteasers - 1">
+<meta property="og:url" content="https://umiao.github.io/2022/07/29/brainteaser_1/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Strange questions you would expected to meet only in interviews of financial &#x2F; trading firms LOL!">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2022/07/29/brainteaser_1/cover.png">
+<meta property="article:published_time" content="2022-07-29T07:35:43.000Z">
+<meta property="article:modified_time" content="2022-07-29T23:33:41.462Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="IQ">
+<meta property="article:tag" content="Brainteasers">
+<meta property="article:tag" content="Math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2022/07/29/brainteaser_1/cover.png">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-brainteaser_1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Collection and Solution of Brainteasers - 1
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/07/29/brainteaser_1/" class="article-date">
+       <time datetime="2022-07-29T07:35:43.000Z" itemprop="datePublished">2022-07-29</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/07/29/brainteaser_1/" class="article-date">
+     <time datetime="2022-07-29T23:33:41.462Z" itemprop="dateModified">2022-07-29</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a>, <a class="tag-link-link" href="/tags/IQ/" rel="tag">IQ</a>, <a class="tag-link-link" href="/tags/Math/" rel="tag">Math</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Strange questions you would expected to meet only in interviews of financial &#x2F; trading firms LOL!</p>
+<img src="/2022/07/29/brainteaser_1/cover.png" class="" title="SQL Note of blur!">
+<span id="more"></span>
+
+<h2 id="1-Screwy-pirates"><a href="#1-Screwy-pirates" class="headerlink" title="1 - Screwy pirates"></a>1 - Screwy pirates</h2><p><em><strong>Question</strong></em>: Five pirates looted a chest full of 100 gold coins. Being a bunch of democratic pirates, they agree on the following method to divide the loot:<br>The most senior pirate will propose a distribution of the coins. All pirates, including the<br>most senior pirate, will then vote. If at least 50% of the pirates (3 pirates in this case)<br>accept the proposal, the gold is divided as proposed. If not, the most senior pirate will be<br>fed to shark and the process starts over with the next most senior pirate … The process is<br>repeated until a plan is approved. You can assume that all pirates are <strong>perfectly rational</strong>:<br>they want to stay alive first and to get as much gold as possible second. Finally, being<br>blood-thirsty pirates, they want to have <strong>fewer pirates on the boat (kill as many as possible)</strong> if given a choice between otherwise equal outcomes.<br>How will the gold coins be divided in the end?</p>
+<p><em><strong>Solution</strong></em>: Infer from the most trivial case. </p>
+<ol>
+<li><strong>One pirate</strong>: get all $100$ gold. (1 v 0)</li>
+<li><strong>Two pirate</strong>: The 2nd pirate would deny the 1st’s plan anyway to get all $100$ golds. Thus, 1st pirate’s expectation is $0$. (1 v 1)</li>
+<li><strong>Three pirate</strong>: Now, the pirate who’s the first to move only need to give $1$ gold to the one who is second to move. (2 v 1)</li>
+<li><strong>Four pirate</strong>: In the three pirate case, the last pirate’s equity is <strong>denied</strong>, so the first to move give him $1$ gold. (2 v 2)</li>
+</ol>
+<p>Thus, for any $2n+1$ pirate case ($n &lt; 99$), the first-to-move pirate ($2n+1$) offer the pirate $1$, $3$, …, $2n-1$ one coin and keep the rest.</p>
+<h2 id="2-Tiger-and-sheep"><a href="#2-Tiger-and-sheep" class="headerlink" title="2 - Tiger and sheep"></a>2 - Tiger and sheep</h2><p><em><strong>Question</strong></em>: One hundred tigers and one sheep are put on a magic island that only has grass. Tigers can eat grass, but they would rather eat sheep. Assume: <strong>A.</strong> Each time only one tiger can eat one sheep, and that tiger itself will become a sheep after it eats the sheep. <strong>B.</strong> All<br>tigers are smart and <strong>perfectly rational</strong> and they want to survive. So will the sheep be<br>eaten?</p>
+<p><em><strong>Solution</strong></em>: Trace back from the trivial case, like $1$ tiger ($n&#x3D;1$) and $1$ sheep. The the tiger would eat the sheep. When $n&#x3D;2$, no tiger would eat the sheep, otherwise, the case would be transformed to $n&#x3D;1$ and the tiger who eat the sheep would be eaten. Similarly, we can have that when $n&#x3D;3$, or $n&#x3D;2k-1, \forall k \ge 1$, a tiger can eat the sheep.</p>
+<h2 id="3-River-crossing"><a href="#3-River-crossing" class="headerlink" title="3 - River crossing"></a>3 - River crossing</h2><p><em><strong>Question</strong></em>: Four people, A, B, C and D need to get across a river. The only way to cross the river is by an old bridge, which holds at most 2 people at a time. Being dark, they can’t cross the bridge without a torch, of which they only have one. So each pair can only walk at the speed of the slower person. They need to get all of them across to the other side as<br>quickly as possible. A is the slowest and takes $10$ minutes to cross; B takes $5$ minutes; C<br>takes $2$ minutes; and D takes $1$ minute.<br>What is the minimum time to get all of them across to the other side?<br><em><strong>Solution</strong></em>:<br>The key is to <strong>hide the latency</strong> lol. That is to say, A and B should cross in the same round and never get back. Thus, the plan would be like: ($\rightarrow$, CD), ($\leftarrow$, D), ($\rightarrow$, AB), ($\leftarrow$, C), ($\rightarrow$, CD). The total time consumption would be $17$ mins.</p>
+<h2 id="4-Birthday-problem"><a href="#4-Birthday-problem" class="headerlink" title="4 - Birthday problem"></a>4 - Birthday problem</h2><p><em><strong>Question</strong></em>: You and your colleagues know that your boss A’s birthday is one of the following $10$ dates:<br><strong>Mar 4, Mar 5, Mar 8<br>Jun 4, Jun 7<br>Sep 1, Sep 5<br>Dec 1, Dec 2, Dec 8</strong><br>A told you only the month of his birthday, and told your colleague Conly the day. After<br>that, you first said: “I don’t know A’s birthday; C doesn’t know it either.” After hearing what you said, C replied: “I didn’t know A’s birthday, but now I know it.” You smiled and said: “Now I know it, too.” After looking at the 10 dates and hearing your comments,<br>your administrative assistant wrote down A’s birthday without asking any questions. So what did the assistant write?</p>
+<p><em><strong>Solution</strong></em>: The key is like looking for a <strong>unique identifier</strong>. Since the days $2$ and $7$ are unique, then $C$ would be able to know the whole date if the day is $2$ or $7$. However, I believe $C$ does not have a chance to know it, thus, the month cannot be Jun or Dec. Then, $C$ learns the month is within Mar and Sep and know the whole date. Then, we can know that $C$’s day is within $\{1, 4, 8\}$ because if the day is $5$, $C$ still cannot tell. However, if the day is $4$ or $8$, I cannot figure out the date. Then, the month must be a <strong>unique identifier</strong> and can only be 1st Sep.</p>
+<h2 id="5-Card-game"><a href="#5-Card-game" class="headerlink" title="5 - Card game"></a>5 - Card game</h2><p><em><strong>Question</strong></em>: A casino offers a card game using a normal deck of $52$ cards. The rule is that you turn over two cards each time. For each pair, if both are black, they go to the dealer’s pile; if both are red, they go to your pile; if one black and one red, they are discarded. The process is repeated until you two go through all $52$ cards. If you have more cards in your pile, you win $100$ $; otherwise (including ties) you get nothing. The casino allows you to negotiate the price you want to pay for the game. How much would you be willing to pay to play this game? </p>
+<p><em><strong>Solution</strong></em>: $0$ because you will never win. Whenever you take away two red cards, there are two black cards for the dealer. In case of a tie (one black and one red), the difference of black and red cards number would not change (both in the deck and in your piles). Consider the idea of <strong>symmetry</strong>.</p>
+<h2 id="6-Burning-ropes"><a href="#6-Burning-ropes" class="headerlink" title="6 - Burning ropes"></a>6 - Burning ropes</h2><p><em><strong>Question</strong></em>: You have two ropes, each of which takes $1$ hour to burn. But either rope has different densities at different points, so there’s no guarantee of consistency in the time it takes different sections within the rope to bum. How do you use these two ropes to measure $45$ minutes? </p>
+<p><em><strong>Solution</strong></em>: For a rope that takes $x$ minutes to burn, if you light both ends of the rope simultaneously, it takes $\frac{x}{2}$ minutes to burn. So we should light both ends of the first rope and light one end of the second rope. $30$ minutes later, the first rope will get completely burned, while that second rope now becomes a $30$-min rope. At that moment, we can light the second rope at the other end (with the first end still burning), and when it is burned out, the total time is exactly $45$ minutes.</p>
+<h2 id="7-Defective-ball"><a href="#7-Defective-ball" class="headerlink" title="7 - Defective ball"></a>7 - Defective ball</h2><p><em><strong>Question</strong></em>: You have $12$ identical balls. One of the balls is heavier <strong>OR</strong> lighter than the rest (you don’t know which). Using just a balance that can only show you which side of the tray is heavier, how can you determine which ball is the defective one with $3$ measurements? </p>
+<p><em><strong>Solution</strong></em>: Split the $12$ balls into groups of $4$, and measure the first $2$ groups. If it balances, the defective ball is in the rest group. If not, that ball is within the prior $2$ groups…<br>The detailed strategy is shown in the following image:</p>
+<img src="/2022/07/29/brainteaser_1/ball.png" class="" title="SQL Note of blur!">
+
+<h2 id="8-Trailing-zeros"><a href="#8-Trailing-zeros" class="headerlink" title="8 - Trailing zeros"></a>8 - Trailing zeros</h2><p><em><strong>Question</strong></em>: How many trailing zeros are there in $100!$ (factorial of $100$)? </p>
+<p><em><strong>Solution</strong></em>: This is an easy problem. We know that each pair of $2$ and $5$ will give a trailing<br>zero. If we perform prime number decomposition on all the numbers in $100!$, it is obvious that the frequency of $2$ will far outnumber of the frequency of $5$. So the frequency of $5$ determines the number of trailing zeros. Among numbers $1, 2, …, 99$, and<br>$100$, $20$ numbers are divisible by $5$ ( $5, 10, …, 100$ ). Among these $20$ numbers, $4$ are<br>divisible by $5^2$ ( $25, 50, 75, 100$ ). So the total frequency of $5$ is $24$ and there are $24$<br>trailing zeros.</p>
+<h2 id="9-Horse-race"><a href="#9-Horse-race" class="headerlink" title="9 - Horse race"></a>9 - Horse race</h2><p><em><strong>Question</strong></em>: There are $25$ horses, each of which runs at a constant speed that is different from the other horses’. Since the track only has $5$ lanes, each race can have at most $5$ horses. If you need to find the $3$ fastest horses, what is the minimum number of races needed to identify them? </p>
+<p><em><strong>Solution</strong></em>: It is natural for us to index the horses from $1$ to $25$ and split them into $5$ groups of $5$ to take the first race. Then, with the first round $5$ races, you can eliminate the last $2$ of each group. We can assume $1, 6, 11, 16, 21$ are the fastest within each group (and already sorted by their speed, though we do not know the speed now).</p>
+<p>We can find that for $16, 21$ cannot be in top $3$; $11$ may be within top $3$ but may not (because other members of top $3$ may be beat by $1$ and $6$). Then, we can race the $6$th time among $1, 6, 11, 16, 21$ to find out the local top $3$. Then, the pool of top $3$ can only be: $1, (2, 3), 6, (7), 11$ and $1$ is the absolute champion. Then we only need to give $7$th ride to $2, 3, 6, 7, 11$.</p>
+<h2 id="10-Infinite-sequence"><a href="#10-Infinite-sequence" class="headerlink" title="10 - Infinite sequence"></a>10 - Infinite sequence</h2><p><em><strong>Question</strong></em>: If x ^ x ^ x … ^ x&#x3D;2 and $x^y&#x3D;x^y$, find $x$.<br><em><strong>Solution</strong></em>: Since we can have $x &gt; 1$ and $\lim_{n \rightarrow \inf}$ x ^ x ^ x … ^ x (a total of n) &#x3D;2 converges to a constant $2$, then another ^ x would not change the result.  Then we can have x ^ (x ^ x ^ x … ^ x) &#x3D; $x^2 &#x3D; 2$, $x&#x3D;\sqrt 2$.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2022/07/29/brainteaser_1/" data-id="cl673ql1m007hwctj5su32t4v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "Collection and Solution of Brainteasers - 1",
+        "image": "https://umiao.github.io/2022/07/29/brainteaser_1/cover.png",
+        "keywords": "IQ Brainteasers Math",
+        "genre": "Job Search Financial Firm",
+        "datePublished": "2022-07-29",
+        "dateCreated": "2022-07-29",
+        "dateModified": "2022-07-29",
+        "url": "https://umiao.github.io/2022/07/29/brainteaser_1/",
+        "description": "Strange questions you would expected to meet only in interviews of financial &#x2F; trading firms LOL!
+",
+        "wordCount": 1729
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/06/20/NLP-2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">NLP-2 Reading Note: A Survey on Text Classification</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/07/29/brainteaser_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/07/29/brainteaser_1/cover.png)" alt="Collection and Solution of Brainteasers - 1" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></p>
+                            <p class="item-title"><a href="/2022/07/29/brainteaser_1/" class="title">Collection and Solution of Brainteasers - 1</a></p>
+                            <p class="item-date"><time datetime="2022-07-29T07:35:43.000Z" itemprop="datePublished">2022-07-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/06/20/NLP-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/06/20/NLP-2/cover.png)" alt="NLP-2 Reading Note: A Survey on Text Classification" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/NLP/">NLP</a></p>
+                            <p class="item-title"><a href="/2022/06/20/NLP-2/" class="title">NLP-2 Reading Note: A Survey on Text Classification</a></p>
+                            <p class="item-date"><time datetime="2022-06-20T18:38:01.000Z" itemprop="datePublished">2022-06-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/06/20/NLP-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/06/20/NLP-1/rm.png)" alt="NLP-1 Roadmap" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/NLP/">NLP</a></p>
+                            <p class="item-title"><a href="/2022/06/20/NLP-1/" class="title">NLP-1 Roadmap</a></p>
+                            <p class="item-date"><time datetime="2022-06-20T17:23:43.000Z" itemprop="datePublished">2022-06-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/25/DS-Study-Note-9/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/05/25/DS-Study-Note-9/theory.jpg)" alt="DS-Study-Note-9 Gradient Boosting Machine Tree Model(s)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></p>
+                            <p class="item-title"><a href="/2022/05/25/DS-Study-Note-9/" class="title">DS-Study-Note-9 Gradient Boosting Machine Tree Model(s)</a></p>
+                            <p class="item-date"><time datetime="2022-05-26T02:54:23.000Z" itemprop="datePublished">2022-05-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/14/SQL-Study-Note-16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2022/05/14/SQL-Study-Note-16/sql.jpg)" alt="SQL-Study-Note-16 Optimization Discussion 3 - Optimize the condition setting and table creating" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/SQL/">SQL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/SQL/">SQL</a></p>
+                            <p class="item-title"><a href="/2022/05/14/SQL-Study-Note-16/" class="title">SQL-Study-Note-16 Optimization Discussion 3 - Optimize the condition setting and table creating</a></p>
+                            <p class="item-date"><time datetime="2022-05-14T21:02:18.000Z" itemprop="datePublished">2022-05-14</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">25</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IQ/" rel="tag">IQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Brainteasers/" style="font-size: 10px;">Brainteasers</a> <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/IQ/" style="font-size: 10px;">IQ</a> <a href="/tags/Machine-Learning/" style="font-size: 15px;">Machine Learning</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/NLP/" style="font-size: 12.5px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/SQL/" style="font-size: 17.5px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/UCLA/" style="font-size: 12.5px;">UCLA</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2022/07/29/brainteaser_1/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
