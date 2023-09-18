@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Basics About Linux &amp; Vim Usage | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Linux,Vim,CLI" />
+    
+    <meta name="description" content="For a Software Engineer &#x2F; Researcher, Linux and Vim should be the basic of basics (as important parts of CLI, Command Line Interface). In this post, we have discussed some basic knowledge as well">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Basics About Linux &amp; Vim Usage">
+<meta property="og:url" content="https://umiao.github.io/2023/09/17/Basics-About-Linux-Vim-Usage/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="For a Software Engineer &#x2F; Researcher, Linux and Vim should be the basic of basics (as important parts of CLI, Command Line Interface). In this post, we have discussed some basic knowledge as well">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2023/09/17/Basics-About-Linux-Vim-Usage/cover.jpg">
+<meta property="article:published_time" content="2023-09-18T05:16:13.000Z">
+<meta property="article:modified_time" content="2023-09-18T05:51:30.177Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Vim">
+<meta property="article:tag" content="CLI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2023/09/17/Basics-About-Linux-Vim-Usage/cover.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Investment/">Investment</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Productivity/">Productivity</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Basics-About-Linux-Vim-Usage" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Basics About Linux &amp; Vim Usage
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/09/17/Basics-About-Linux-Vim-Usage/" class="article-date">
+       <time datetime="2023-09-18T05:16:13.000Z" itemprop="datePublished">2023-09-17</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/09/17/Basics-About-Linux-Vim-Usage/" class="article-date">
+     <time datetime="2023-09-18T05:51:30.177Z" itemprop="dateModified">2023-09-17</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CLI/" rel="tag">CLI</a>, <a class="tag-link-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="tag-link-link" href="/tags/Vim/" rel="tag">Vim</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>For a Software Engineer &#x2F; Researcher, Linux and Vim should be the basic of basics (as important parts of CLI, Command Line Interface). In this post, we have discussed some basic knowledge as well as useful tips.</p>
+<img src="/2023/09/17/Basics-About-Linux-Vim-Usage/cover.jpg" class="" title="apple">
+<span id="more"></span>
+
+
+<h1 id="Notes-about-Linux-Usage"><a href="#Notes-about-Linux-Usage" class="headerlink" title="Notes about Linux Usage:"></a>Notes about Linux Usage:</h1><h2 id="File-System-Structure-of-Linux"><a href="#File-System-Structure-of-Linux" class="headerlink" title="File System Structure of Linux"></a>File System Structure of Linux</h2><p>A tree like directory, the root would be <strong>“&#x2F;”</strong>.<br>Some of the root folders: </p>
+<ul>
+<li><em><strong>“bin”</strong></em> storing binary executives</li>
+<li><em><strong>“etc”</strong></em> for system configurations</li>
+<li><em><strong>“home”</strong></em> for user files</li>
+<li><em><strong>“lib”</strong></em> for libraries and modules</li>
+<li><em><strong>“opt”</strong></em> for optionalpackages</li>
+<li><em><strong>“root”</strong></em> for super user folder</li>
+<li><em><strong>“tmp”</strong></em> for temporary files, etc.</li>
+</ul>
+<h2 id="Format-of-commands"><a href="#Format-of-commands" class="headerlink" title="Format of commands:"></a>Format of commands:</h2><p><code>cmd [options] [arguments]</code><br>The options and arguments all serve as part of input, use whitespace to separate.<br>For single character option, use <code>-option</code>. For a word, use <code>–-option</code> (two -s).</p>
+<h2 id="Wildcard-Matching-Operator"><a href="#Wildcard-Matching-Operator" class="headerlink" title="Wildcard Matching Operator"></a>Wildcard Matching Operator</h2><ul>
+<li><strong><em>“</em>”</strong>* for any character of any length</li>
+<li><em><strong>“?”</strong></em> for single character</li>
+<li><em><strong>[ab..]</strong></em> for any character among a, b, …, </li>
+<li><em><strong>[!ab]</strong></em> for any single character except a, b.</li>
+</ul>
+<h2 id="File-Type"><a href="#File-Type" class="headerlink" title="File Type"></a>File Type</h2><ul>
+<li>Normal file <em><strong>“-”</strong></em></li>
+<li>Directory <em><strong>“d”</strong></em></li>
+<li>Symbolic link <em><strong>“l”</strong></em> (hard link: point to a drive’s block of the file, just like a file; soft link: save an absolute path of a file)</li>
+<li>Character device file <em><strong>“c”</strong></em></li>
+<li>Block device file <em><strong>“b”</strong></em></li>
+<li>Socket <em><strong>“s”</strong></em></li>
+<li>Named pipe file <em><strong>“p”</strong></em></li>
+</ul>
+<h2 id="Frequently-Used-Commands"><a href="#Frequently-Used-Commands" class="headerlink" title="Frequently Used Commands:"></a>Frequently Used Commands:</h2><ul>
+<li><em><strong>“pwd”</strong></em>: show the current directory of current user</li>
+<li><em><strong>“cd”</strong></em>: change dir</li>
+<li><em><strong>“.”</strong></em>: current directory</li>
+<li><em><strong>“..”</strong></em>: parent directory</li>
+<li><em><strong>“-”</strong></em>: the directory before “cd” command got executed</li>
+<li><em><strong>“~”</strong></em>: Absolute path name of the user’s main directory</li>
+<li><strong>Absolute directory</strong>: start with “&#x2F;”, describe the complete path to the location of file.</li>
+<li><strong>Relative directory</strong>: not start with “&#x2F;”, appoint a location in relative to your current<br>working dir.</li>
+<li><strong>Auto-Complete</strong>: can press “Tab” to auto fill the command name &#x2F; file name &#x2F; etc. If<br>there are too many possibilities, need multiple press.</li>
+<li><em><strong>“ls”</strong></em>: show the information of file &#x2F; dir</li>
+<li><em><strong>“mkdir”</strong></em>: create an empty dir in current dir</li>
+<li><em><strong>“rmdir”</strong></em>: remove empty dir only</li>
+<li><em><strong>“touch”</strong></em>: generate an empty file, or update the time of a file (-a, -m, -d)</li>
+<li><em><strong>“cp”</strong></em>: copy file or directory</li>
+<li><em><strong>“mv”</strong></em>: move &#x2F; rename file or dir</li>
+<li><em><strong>“rm”</strong></em>: remove file or dir</li>
+<li><em><strong>“ln”</strong></em>: create a symbolic link</li>
+<li><em><strong>“find”</strong></em>: look up for a file</li>
+<li><em><strong>“stat”</strong></em>: look for file’s type &#x2F; property</li>
+<li><em><strong>“cat”</strong></em>: create file &#x2F; check the content of text file</li>
+<li><em><strong>“more”</strong></em>: used to view the text files, displaying one screen at a time.</li>
+<li><em><strong>“less”</strong></em>: similar to more, support search &#x2F; roll back</li>
+<li><em><strong>“tail”</strong></em>: check the last n lines of file, with tail -n filename</li>
+<li><em><strong>“head”</strong></em>: check the first n lines instead</li>
+<li><em><strong>“echo”</strong></em>: redirect content into given files</li>
+<li><em><strong>“|”</strong></em>: pipe command. Pass the result of prior command to latter command, like: <code>ls -la | wc</code>. This is for listing info and word count.</li>
+<li><em><strong>“&gt;, &gt;&gt;”</strong></em>: &gt; would override content, &gt;&gt; would append content.</li>
+<li><em><strong>“zip &#x2F; unzip &#x2F; gzip &#x2F; gunzip &#x2F;rar &#x2F; tar”</strong></em>: used to zip &#x2F; unzip &#x2F; pack.</li>
+</ul>
+<h3 id="Regular-Expression-related"><a href="#Regular-Expression-related" class="headerlink" title="Regular Expression related:"></a>Regular Expression related:</h3><ul>
+<li><em><strong>“grep”</strong></em>: stands for “global search regular expression”.</li>
+</ul>
+<p><strong>Format</strong>: <code>grep [options] PATTERN [FILE…]</code><br><strong>Examples</strong>: </p>
+<ol>
+<li>grep &#39;^[a-zA-Z]&#39; myfile</li>
+<li>grep -v &#39;^#&#39; myfile (reverse, only keep not matched result)</li>
+<li>grep -lr root &#x2F;etc&#x2F;* (recursively list all filenames under &#x2F;etc&#x2F; with<br>“root”)</li>
+</ol>
+<h2 id="Shell-Variables"><a href="#Shell-Variables" class="headerlink" title="Shell Variables:"></a>Shell Variables:</h2><p>It can be classified as:</p>
+<ol>
+<li><strong>Internal Variable</strong>: provided by the system, use only to the user (cannot be modified)</li>
+<li><strong>Environment Variable</strong>: define the work env, can be used in shell; user can modify some of them</li>
+<li><strong>User Variable</strong>: defined by user (often used in script). (Definition: varName&#x3D;Value, Reference: $varName).</li>
+<li><strong>“export”</strong> can switch variables between “Global” and “Local”</li>
+<li>Some common shell env variables: <strong>HOME, LOGNAME, USER, PWD, MAIL, HOSTNAME,<br>INPUTRC, SHELL, LANG, HISTSIZE, PATH, PS1, PS2</strong>.</li>
+</ol>
+<h1 id="VI-x2F-VIM-Visual-Interface-iMproved"><a href="#VI-x2F-VIM-Visual-Interface-iMproved" class="headerlink" title="VI &#x2F; VIM (Visual Interface iMproved)"></a>VI &#x2F; VIM (Visual Interface iMproved)</h1><p><strong>Entering</strong>: </p>
+<ul>
+<li><code>vim +n filename</code> (open file, place cursor to the beginning of nth line)</li>
+<li><code>vim + filename</code> (open file, place cursor to the beginning of last line)</li>
+<li><code>vim +/pattern</code> filename (open file, place cursor to first matched position)</li>
+</ul>
+<p><strong>Modes</strong>: </p>
+<ul>
+<li><strong>Normal</strong>: default mode when run vim</li>
+<li><strong>Insert</strong>: press i, o, a to enter insert mode</li>
+<li><strong>Cmdline</strong>: type commands starting with :, &#x2F;, ?, !</li>
+</ul>
+<h2 id="Under-Normal-Mode"><a href="#Under-Normal-Mode" class="headerlink" title="Under Normal Mode:"></a>Under Normal Mode:</h2><ul>
+<li><p><em><strong>G</strong></em> : jump to the end of file</p>
+</li>
+<li><p><em><strong>ZZ</strong></em> : save and exit</p>
+</li>
+<li><p><em><strong>ZQ</strong></em> : exit without save</p>
+</li>
+<li><p><em><strong>&#x2F;</strong></em> or <em><strong>?</strong></em> : for string look up. (can be used with “n” for next match)</p>
+</li>
+<li><p><em><strong>n</strong></em> : Next. Search for next match.</p>
+</li>
+<li><p><em><strong>yy</strong></em> : copy one line</p>
+</li>
+<li><p><em><strong>p</strong></em> : paste to next line; P: paste to previous line</p>
+</li>
+<li><p><em><strong>dd</strong></em> : delete one line</p>
+</li>
+<li><p><em><strong>dw</strong></em> : delete a word; can use “dnw” to delete n words.</p>
+</li>
+<li><p><em><strong>d$</strong></em> : delete to the end of current line. “dG” will delete to end of document.</p>
+</li>
+<li><p><em><strong>y</strong></em> : similarly, we can use “y” just as d to duplicate words.</p>
+</li>
+<li><p><em><strong>p</strong></em> : use p for pasting. Can use “10p” to paste for 10 times.</p>
+</li>
+<li><p><em><strong>x</strong></em> : delete the character at the cursor.</p>
+</li>
+<li><p><em><strong>u</strong></em> : Undo. Undo the last operation.</p>
+</li>
+<li><p><em><strong>“Ctrl + r”</strong></em> : to revoke the undo.</p>
+</li>
+<li><p><em><strong>“h,j,k,l”</strong></em> : move the cursor to left&#x2F;down&#x2F;up&#x2F;right</p>
+</li>
+<li><p><em><strong>“0”</strong></em> : move to head of line</p>
+</li>
+<li><p><em><strong>“^”</strong></em> : move to the first non-blank character</p>
+</li>
+<li><p><em><strong>“$”</strong></em> : move to end of line</p>
+</li>
+<li><p><em><strong>“g_”</strong></em> : move to the last non-blank character of current line</p>
+</li>
+<li><p><em><strong>“w”</strong></em> : move to the beginning of next word</p>
+</li>
+<li><p><em><strong>“e”</strong></em> : move to the end of next word</p>
+</li>
+<li><p><em><strong>“fa”</strong></em> : move to the position of next “a”. If use “Fa”, would move to previous a. </p>
+</li>
+<li><p><em><strong>“nfa”</strong></em> : would move to the nth “a”’s position in current line.<br>  Can use “;” to jump to next appointed character, “,” can jump to previous appointed character.</p>
+</li>
+<li><p><em><strong>“nG”</strong></em> : move cursor to the beginning of line n.</p>
+</li>
+<li><p><em><strong>“gg”</strong></em> : move cursor to beginning of line 1.</p>
+</li>
+<li><p><em><strong>“G”</strong></em> : move to the beginning of last line.</p>
+</li>
+<li><p><em><strong>“H &#x2F; M &#x2F; L”</strong></em>: move cursor to the beginning &#x2F; middle &#x2F; end of current screen</p>
+</li>
+<li><p><em><strong>“% &#x2F; * &#x2F; #”</strong></em> : match parenthesis &#x2F; match next word where cursor locates &#x2F; match previous word where cursor locates</p>
+</li>
+</ul>
+<h2 id="Under-Insertion-Mode"><a href="#Under-Insertion-Mode" class="headerlink" title="Under Insertion Mode:"></a>Under Insertion Mode:</h2><p>After entering this mode, any typed character would be recognized as content of file and then added.</p>
+<p><em><strong>“Esc”</strong></em>: press to exit insertion mode (back to normal mode)</p>
+<h2 id="Under-Command-Mode"><a href="#Under-Command-Mode" class="headerlink" title="Under Command Mode:"></a>Under Command Mode:</h2><p>Under Normal Mode, press <em><strong>“:”</strong></em> to enter Command mode.<br>Vim would get into “Pending command” state.</p>
+<ul>
+<li><p><em><strong>“:w”</strong></em> : save file</p>
+</li>
+<li><p><em><strong>“:w newfile”</strong></em> : save as a new file named “newfile”</p>
+</li>
+<li><p><em><strong>“:wq”</strong></em> : save and exit</p>
+</li>
+<li><p><em><strong>“:q!”</strong></em> : exit without save</p>
+</li>
+<li><p><em><strong>“:q”</strong></em> : save without changes made</p>
+</li>
+<li><p><em><strong>“:!command”</strong></em> : execute linux command, e.g., “date”, “ls”, …</p>
+</li>
+<li><p><em><strong>“:r !command”</strong></em> : e.g., “:r !date”: add the result to the position of cursor</p>
+</li>
+</ul>
+<h3 id="Environment-Setup"><a href="#Environment-Setup" class="headerlink" title="Environment Setup:"></a>Environment Setup:</h3><ul>
+<li><p><em><strong>“:set autoindent &#x2F; noautoindent”</strong></em> </p>
+</li>
+<li><p><em><strong>“:set number &#x2F; nonumber”</strong></em> : row number setting</p>
+</li>
+<li><p><em><strong>“:set ic &#x2F; noic”</strong></em> : require being insensitive &#x2F; sensitive to capitalized characters</p>
+</li>
+<li><p><em><strong>“:set tabstop&#x3D;value”</strong></em> : map tab into “value” spaces</p>
+</li>
+<li><p><em><strong>“:set all”</strong></em> : show all the configurable options</p>
+</li>
+<li><p><em><strong>“:n”</strong></em> : locate at line n</p>
+</li>
+<li><p><em><strong>“2, 5d”</strong></em> : delete lines with row numbers of 2 – 5.</p>
+</li>
+<li><p><em><strong>“:s&#x2F;aa&#x2F;bb&#x2F;g”</strong></em> : replace all “aa” with “bb” at current line.<br>  Replace “s” with “%s” would do the replacement across the entire document.<br>  Replace “s” with “n1, n2” would do the replacements for lines (with line number n1~n2).<br>  If omit “&#x2F;g”, would only replace the first appearance.<br>  If replace “&#x2F;g” with “&#x2F;gc”, confirmation would be required.</p>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2023/09/17/Basics-About-Linux-Vim-Usage/" data-id="clmofp0q40000swtegr1v16gu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "Basics About Linux &amp; Vim Usage",
+        "image": "https://umiao.github.io/2023/09/17/Basics-About-Linux-Vim-Usage/cover.jpg",
+        "keywords": "Linux Vim CLI",
+        "genre": "Job Search Software Engineering",
+        "datePublished": "2023-09-17",
+        "dateCreated": "2023-09-17",
+        "dateModified": "2023-09-17",
+        "url": "https://umiao.github.io/2023/09/17/Basics-About-Linux-Vim-Usage/",
+        "description": "For a Software Engineer &#x2F; Researcher, Linux and Vim should be the basic of basics (as important parts of CLI, Command Line Interface). In this post, we have discussed some basic knowledge as well as useful tips.
+",
+        "wordCount": 1150
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/09/17/Name-of-Every-Keyboard-s-Key/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Name of Every Keyboard&#39;s Key
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2023/09/15/Learn-English-Vocabulary-by-Frequency/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Learn English Vocabulary by Frequency</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/09/17/Name-of-Every-Keyboard-s-Key/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2023/09/17/Name-of-Every-Keyboard-s-Key/cover.jpg)" alt="Name of Every Keyboard&#39;s Key" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></p>
+                            <p class="item-title"><a href="/2023/09/17/Name-of-Every-Keyboard-s-Key/" class="title">Name of Every Keyboard&#39;s Key</a></p>
+                            <p class="item-date"><time datetime="2023-09-18T05:52:17.000Z" itemprop="datePublished">2023-09-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/09/17/Basics-About-Linux-Vim-Usage/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2023/09/17/Basics-About-Linux-Vim-Usage/cover.jpg)" alt="Basics About Linux &amp; Vim Usage" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></p>
+                            <p class="item-title"><a href="/2023/09/17/Basics-About-Linux-Vim-Usage/" class="title">Basics About Linux &amp; Vim Usage</a></p>
+                            <p class="item-date"><time datetime="2023-09-18T05:16:13.000Z" itemprop="datePublished">2023-09-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/09/15/Learn-English-Vocabulary-by-Frequency/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2023/09/15/Learn-English-Vocabulary-by-Frequency/cover.jpg)" alt="Learn English Vocabulary by Frequency" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Productivity/">Productivity</a></p>
+                            <p class="item-title"><a href="/2023/09/15/Learn-English-Vocabulary-by-Frequency/" class="title">Learn English Vocabulary by Frequency</a></p>
+                            <p class="item-date"><time datetime="2023-09-16T06:01:32.000Z" itemprop="datePublished">2023-09-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/09/10/Options-Futures-and-Other-Derivatives-Note-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2023/09/10/Options-Futures-and-Other-Derivatives-Note-2/cover.jpg)" alt="Options Futures and Other Derivatives - Note - 2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Investment/">Investment</a></p>
+                            <p class="item-title"><a href="/2023/09/10/Options-Futures-and-Other-Derivatives-Note-2/" class="title">Options Futures and Other Derivatives - Note - 2</a></p>
+                            <p class="item-date"><time datetime="2023-09-11T06:59:30.000Z" itemprop="datePublished">2023-09-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/09/09/Options-Futures-and-Other-Derivatives-Note-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2023/09/09/Options-Futures-and-Other-Derivatives-Note-1/cover.jpg)" alt="Options Futures and Other Derivatives - Note - 1" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Investment/">Investment</a></p>
+                            <p class="item-title"><a href="/2023/09/09/Options-Futures-and-Other-Derivatives-Note-1/" class="title">Options Futures and Other Derivatives - Note - 1</a></p>
+                            <p class="item-date"><time datetime="2023-09-09T19:42:55.000Z" itemprop="datePublished">2023-09-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">25</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Investment/">Investment</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/" rel="tag">Apple Watch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLI/" rel="tag">CLI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate/" rel="tag">Certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/" rel="tag">English</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IQ/" rel="tag">IQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyboard/" rel="tag">Keyboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOD/" rel="tag">OOD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented-Design/" rel="tag">Object Oriented Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Productivity/" rel="tag">Productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Term/" rel="tag">Term</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tips/" rel="tag">Tips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vocabulary/" rel="tag">Vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Frequency/" rel="tag">Word Frequency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/" rel="tag">futures</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/investment/" rel="tag">investment</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/options/" rel="tag">options</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trading/" rel="tag">trading</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Apple-Watch/" style="font-size: 10px;">Apple Watch</a> <a href="/tags/Brainteasers/" style="font-size: 10px;">Brainteasers</a> <a href="/tags/CLI/" style="font-size: 10px;">CLI</a> <a href="/tags/Certificate/" style="font-size: 10px;">Certificate</a> <a href="/tags/Cyber-Security/" style="font-size: 10px;">Cyber Security</a> <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/IQ/" style="font-size: 10px;">IQ</a> <a href="/tags/Keyboard/" style="font-size: 10px;">Keyboard</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 15px;">Machine Learning</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/NLP/" style="font-size: 12.5px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/OOD/" style="font-size: 10px;">OOD</a> <a href="/tags/Object-Oriented-Design/" style="font-size: 10px;">Object Oriented Design</a> <a href="/tags/Productivity/" style="font-size: 10px;">Productivity</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/SQL/" style="font-size: 17.5px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Software-Engineering/" style="font-size: 12.5px;">Software Engineering</a> <a href="/tags/Term/" style="font-size: 10px;">Term</a> <a href="/tags/Tips/" style="font-size: 10px;">Tips</a> <a href="/tags/UCLA/" style="font-size: 12.5px;">UCLA</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 10px;">Vocabulary</a> <a href="/tags/Word-Frequency/" style="font-size: 10px;">Word Frequency</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a> <a href="/tags/futures/" style="font-size: 12.5px;">futures</a> <a href="/tags/investment/" style="font-size: 12.5px;">investment</a> <a href="/tags/options/" style="font-size: 12.5px;">options</a> <a href="/tags/trading/" style="font-size: 12.5px;">trading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2023/09/17/Basics-About-Linux-Vim-Usage/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
