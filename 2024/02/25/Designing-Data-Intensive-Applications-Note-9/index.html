@@ -6,27 +6,27 @@
     
 
     
-    <title>Designing Data-Intensive-Applications-Note-6 | The blog of Blur</title>
+    <title>Designing Data-Intensive-Applications-Note-9 | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="keywords" content="DataScience,Data System" />
     
-    <meta name="description" content="Discussion on Indexes and Multi-Column Index solution (R-Tree).">
+    <meta name="description" content="Discussion on Data Flow and Message Passing.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Designing Data-Intensive-Applications-Note-6">
-<meta property="og:url" content="https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/index.html">
+<meta property="og:title" content="Designing Data-Intensive-Applications-Note-9">
+<meta property="og:url" content="https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Discussion on Indexes and Multi-Column Index solution (R-Tree).">
+<meta property="og:description" content="Discussion on Data Flow and Message Passing.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/cover.png">
-<meta property="article:published_time" content="2024-02-24T17:34:35.000Z">
-<meta property="article:modified_time" content="2024-02-24T18:06:35.867Z">
+<meta property="og:image" content="https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/cover.png">
+<meta property="article:published_time" content="2024-02-25T20:49:40.000Z">
+<meta property="article:modified_time" content="2024-02-26T04:36:58.528Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
 <meta property="article:tag" content="Data System">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/cover.png">
+<meta name="twitter:image" content="https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/cover.png">
     
 
     
@@ -159,14 +159,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-Designing-Data-Intensive-Applications-Note-6" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Designing-Data-Intensive-Applications-Note-9" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Designing Data-Intensive-Applications-Note-6
+        Designing Data-Intensive-Applications-Note-9
         </h1>
     
 
@@ -177,16 +177,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/" class="article-date">
-       <time datetime="2024-02-24T17:34:35.000Z" itemprop="datePublished">2024-02-24</time>
+    <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-9/" class="article-date">
+       <time datetime="2024-02-25T20:49:40.000Z" itemprop="datePublished">2024-02-25</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/" class="article-date">
-     <time datetime="2024-02-24T18:06:35.867Z" itemprop="dateModified">2024-02-24</time>
+  <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-9/" class="article-date">
+     <time datetime="2024-02-26T04:36:58.528Z" itemprop="dateModified">2024-02-25</time>
   </a>
 </div>
 
@@ -213,61 +213,108 @@
 
             
 
-            <p>Discussion on Indexes and Multi-Column Index solution (R-Tree).</p>
-<img src="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/cover.png" class="" title="ML_note">
+            <p>Discussion on Data Flow and Message Passing.</p>
+<img src="/2024/02/25/Designing-Data-Intensive-Applications-Note-9/cover.png" class="" title="ML_note">
 <span id="more"></span>
 
-
-<h3 id="Secondary-Index"><a href="#Secondary-Index" class="headerlink" title="Secondary Index"></a>Secondary Index</h3><ul>
-<li>The mapping may not be unique, i.e., we may have multiple rows mapped to the same key in secondary index. This can be solved by either<br>[1] making each value in that key to be <strong>list</strong> of matching row identifiers, or by<br>[2] making each key <strong>unique</strong> (adding a row identifer to the key).</li>
-<li>May help with <strong>Join</strong>.</li>
+<h3 id="Data-Flow-in-Databases"><a href="#Data-Flow-in-Databases" class="headerlink" title="Data Flow in Databases:"></a>Data Flow in Databases:</h3><ul>
+<li>Data usually has longer life cycle, comparing with codes. </li>
+<li>You need to be aware that if a new version of application wrote the data, it then got read &amp; rewrite by an old ver application, we may face loss of fields &#x2F; <strong>inconsistency</strong>. </li>
+<li>The solution can be easy (like keeping the unknown fields, even when you want to transform it into an object then convert back), you just need to be aware of this.<br>* For archival storage (like creating database’s <strong>snapshot</strong>), it is better to keep them all stored in <strong>latest</strong> version, rather than following the original mixture of formats.</li>
 </ul>
-<h3 id="Storing-values-within-the-index"><a href="#Storing-values-within-the-index" class="headerlink" title="Storing values within the index"></a>Storing values within the index</h3><p>In index, the key can just be the search keyword, but the value can be:<br>[1] <strong>Actual row</strong> (or document &#x2F; vertex) in question<br>[2] <strong>Reference</strong> to the row stored elsewhere<br>(That file is called <strong>heap</strong> file, in no particular order).</p>
-<p>Heap file helps: </p>
-<ol>
-<li>Eliminating <strong>duplication</strong>, because if there lies multiple secondary index, only the reference of data is stored; </li>
-<li>Efficient at <strong>overwriting</strong> values, if new value is no larger than the old value.</li>
-</ol>
-<p>Otherwise, the new value needs to be moved to somewhere with enough space. In that case, we can either update all secondary indexes to be updated to point to the new location, or leave a <strong>forwarding pointer</strong> in place.</p>
-<ul>
-<li><strong>Clustered index</strong>: If extra hop from index to heap file is too much of performance penalty for reads, we can directly store <strong>indexed row</strong> within index.<br>E.g., In MySQL’s <strong>InnoDB</strong> engine, the <strong>primary key</strong> of a table is always a clustered index and secondary indexes refer to the primary key. In SQL server, you can specify <strong>one</strong> clustered index per table.</li>
-<li><strong>Compromise between clustered &#x2F; non-clustered index</strong>: covering index or index with included columns, only stores some of the columns within the index.     Both cluster and covering index can speed up the reads but require more storage &#x2F; write overhead.</li>
+<h3 id="Data-Flow-Through-Services-REST-and-RPC"><a href="#Data-Flow-Through-Services-REST-and-RPC" class="headerlink" title="Data Flow Through Services: REST and RPC:"></a>Data Flow Through Services: REST and RPC:</h3><ul>
+<li>When arranging communication, you usually need to assign roles like <strong>clients</strong> (access API though network) and <strong>servers</strong> (expose API over network).</li>
+<li>Clients use <strong>get</strong> to dowload <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong>, images, etc. </li>
+<li>Use <strong>POST</strong> requests to submit data to the server. API consissts of a standardized set of protocols and data formats (<strong>HTTP</strong>, <strong>URLs</strong>, <strong>SSL&#x2F;TLS</strong>, <strong>HTML</strong>, etc.)</li>
+<li>A client-side JavaScript application running inside a web browser can use <strong>XMLHttpRequest</strong> to become an HTTP client (this technique is known as <strong>Ajax</strong>), usually transferring JSON.</li>
+</ul>
+<h3 id="Service-Oriented-Architecture-SOA-x2F-microservices-architecture"><a href="#Service-Oriented-Architecture-SOA-x2F-microservices-architecture" class="headerlink" title="Service Oriented Architecture (SOA) &#x2F; microservices architecture"></a>Service Oriented Architecture (SOA) &#x2F; microservices architecture</h3><ul>
+<li>Decompose large application into smaller services by area of <strong>functionality</strong></li>
+<li>One server itself can be the client of other servers by requesting certain sub-services.  </li>
+<li>This helps application easier to change and maintain by making services <strong>independently</strong> deployable and evolvable. This also means that older version and later version servers and clients must be <strong>compatible</strong> across versions of the service API.</li>
+<li>Service can impose <strong>fine-grained</strong> restrictions on what user can do, but limiting the <strong>input</strong> and <strong>output</strong>.</li>
 </ul>
 <hr>
-<h3 id="Multi-column-indexes"><a href="#Multi-column-indexes" class="headerlink" title="Multi-column indexes:"></a>Multi-column indexes:</h3><ul>
-<li>Can help querying <strong>multiple</strong> columns of a table</li>
-<li>Trivial implementation can be <strong>concatenated index</strong>, which concat multiple columns. This is not very flexible as it is hard coded, you can hardly search by some column’s <strong>sub-pattern</strong>.</li>
-<li>Standard B-Tree &#x2F; LSM-tree index can hardly answer quries which <strong>restrict range</strong> on multiple columns.</li>
-<li><strong>Implementation</strong> 1: To translate a multi-dimensional location into a single number using a <strong>space-filling curve</strong>, and then to use a regular B-tree index</li>
-<li><strong>Implementation</strong> 2: A better choice is using spatial indexes like <strong>R-trees</strong>.</li>
+<h3 id="Web-Services"><a href="#Web-Services" class="headerlink" title="Web Services:"></a>Web Services:</h3><ul>
+<li>Definition: when HTTP is used as the underlying protocol for talking to the service.<br>The context of “web” can be:</li>
 </ul>
-<h3 id="R-Tree-R-for-Rectangle"><a href="#R-Tree-R-for-Rectangle" class="headerlink" title="R-Tree (R for Rectangle):"></a>R-Tree (R for Rectangle):</h3><ul>
-<li>An generalization of B-tree to <strong>high-dim</strong> space. Used <strong>Minimal Bounding Rectangle</strong> (MBR) for space dividing. That is to say, just like segment tree, we want a spatial “rectangle tree” so that given a node, we can get the sub-nodes &#x2F; leaves belonging to that region. This tree can be <strong>multi-way</strong>.</li>
-</ul>
-<img src="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/1.png" class="" title="ML_note">
-
-<ul>
-<li><strong>Structure of leaf nodes</strong>: leaf nodes are saved as tuples of <code>(l, tuple-identifier)</code>. Where <code>tuple-identifer</code> is a n-dim vector (can be realized as a single record &#x2F; data point) and <code>l</code> is a n-dim rectangle which can exactly include all the datapoints belonging to this leaf node.</li>
-<li><strong>Stucture of non-leaf nodes</strong>: <code>(l, child-pointer)</code>, where <code>l</code> is the n-dim rectangle, and <code>child-point points</code> to the child node(s).</li>
-</ul>
-<p><strong>Variants of R-tree</strong>: </p>
 <ol>
-<li><strong>R* tree</strong> (use <strong>re-insertion</strong> to reduce overlap and improve query performance, using a combination of a revised <strong>node split</strong> algorithm and the concept of forced reinsertion at node overflow).<br>R-tree is sensitive to the order of insertion, thus we can improve it by: when a node overflows, a portion of its entries are removed and reinserted, limited to <strong>one</strong> time to avoid indefinite <strong>cascade re-insertion</strong>.)</li>
-<li><strong>R+ Tree</strong>: a tradeoff betweem <strong>R-tree</strong> and <strong>kd-tree</strong>. If needed, insert an object into multiple leaves to avoid overlapping of internal nodes. Minimal coverage reduces the amount of “dead space” (empty area), and reduces the set of search path to the leaves.<br>The difference is that R+ Tree is not guaranteed to be at least <strong>half-filled</strong>, the entries of any internal node do not overlap, and an object ID maybe stored in more than one leaf node.</li>
+<li>Personal device usage through public internet.</li>
+<li>Same organization’s services talk to each other within the data center as part of a service-oriented structure (software supporting this kind of use case is named as <strong>middleware</strong>). </li>
+<li>Requests between organizations, usually via internet.</li>
 </ol>
+<h4 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h4><ol>
+<li>Design philosophy that builds upon the principles of <strong>HTTP</strong></li>
+<li>Emphasizes <strong>simple</strong> data formats</li>
+<li>Using <strong>URLs</strong> for identifying resources and using HTTP features for <strong>cache control</strong>, <strong>authentication</strong>, and <strong>content type negotiation</strong>.<br>[More famous than SOAP]</li>
+</ol>
+<p>*API designed according to REST principles is called <strong>RESTful</strong>. It prefers less code generation and automated tooling. </p>
+<p>A definition format such as OpenAPI, a.k.a <strong>Swagger</strong>, can be used to describe RESTful APIs and produce documentation.</p>
+<h3 id="SOAP"><a href="#SOAP" class="headerlink" title="SOAP:"></a>SOAP:</h3><ul>
+<li>XML based protocol for making netwrok API requests. </li>
+<li>Aims to be independent from HTTP and <strong>avoids</strong> using most HTTP features</li>
+<li>Instead with sprawling and complex multitude of related standards (the <strong>web service framework</strong>, known as <strong>WS-*</strong>)</li>
+</ul>
+<p>The XML based languaged SOAP API use is called <strong>Web Services Description Language</strong> (WSDL). It is <strong>NOT</strong> human readable and hard to construct mannually, heavily rely on tool support, code generation and IDEs.<br>Client access a remote service using <strong>local classes</strong> and <strong>method calls</strong> (encoded to XML messages and decode by the framework).<br>[Good for statically typed language]<br>Also, the implementation can be different across vendors.</p>
 <hr>
-<h3 id="Full-text-search-and-fuzzy-indexes"><a href="#Full-text-search-and-fuzzy-indexes" class="headerlink" title="Full-text search and fuzzy indexes:"></a>Full-text search and fuzzy indexes:</h3><ul>
-<li><strong>Motivation</strong>: Instead of search the exact value, we want to allow search for <strong>similar</strong> keys like mis-spelled words.</li>
-<li><strong>Full text search</strong>: Include <strong>synonyms</strong> of the word, to ignore <strong>grammatical variations</strong> of<br>words, and to search for occurrences of words <strong>near</strong> each other in the same document, and support various other features that depend on linguistic analysis of the text.</li>
-<li><strong>Lucene</strong> allows searching of words within a certain <strong>edit distance</strong>, using quasi-SSTable structure to get the <strong>offset</strong> in the sorted file where they need to look for the candidate keys.   </li>
-<li>In <strong>LevelDB</strong>, this in-memory index is a sparse collection of some of the keys, but in <strong>Lucene</strong>, the in-memory index is a <strong>finite state automaton</strong> over the characters in the keys, similar to a <strong>trie</strong>.</li>
+<h3 id="Remote-Procedure-Calls"><a href="#Remote-Procedure-Calls" class="headerlink" title="Remote Procedure Calls:"></a>Remote Procedure Calls:</h3><ul>
+<li>The <strong>Remote Procedure Calls</strong> (RPC) model tries to make a request to a remote network service look the same as calling a function or method in your programming language, within the same process<br>(this abstraction is called <strong>location transparency</strong>).<h4 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h4></li>
+<li>Local func call is <strong>predictable</strong> and either succeeds or fails depend on the paran; </li>
+<li>A network request is <strong>unpredictable</strong> due to network problem (for both request and response). </li>
+<li>Network can have completely no result due to a <strong>time-out</strong> (you have no clue what happened). </li>
+<li>If you retry, then the requests may be executed for multiple times, just the response got lost. </li>
+<li>This will interfere with the behavior, unless you build mechanism for deduplication (<strong>idempotence</strong>).</li>
+<li>The time for func call is also <strong>unstable</strong>.</li>
+<li>Larger objects are hard to be encoded and send via network.<br>We may also encounter type issues when the client and server are not implemented using the same language. Like Java has problem dealing number $&gt; 2^{53}$.</li>
 </ul>
-<h3 id="Keep-everything-in-memory-persistent-memory-storage"><a href="#Keep-everything-in-memory-persistent-memory-storage" class="headerlink" title="Keep everything in memory (persistent memory storage?):"></a>Keep everything in memory (persistent memory storage?):</h3><ul>
-<li>Disks are <strong>cheaper</strong> and <strong>durable</strong> (will <strong>NOT</strong> lose data when power off), but needs to be laid out carefully for good performance on reads and writes.</li>
-<li>Now memory is cheaper, and for use cases like <strong>Memcached</strong>, data loss is acceptable. For durability required by database, we can <strong>log</strong> changes to disk, <strong>replicating</strong> in-memory state to other machines, this also helps with back-up &#x2F; inspection and analysis.</li>
-<li>Memory databases are faster because they can avoid the overheads of <strong>encoding</strong> in-mem data to disk form. They can also provide <strong>priority queques</strong> and <strong>sets</strong> (by <strong>Redis</strong>, e.g.) which are hard to implement on disk.</li>
-<li>We can actually support memory database which requires more space than the memory (overlay?) When there is no space, <strong>evict</strong> content to disk, when needed, <strong>load</strong> it back. It is like OS memory management (swap) but in <strong>record granularity</strong>.</li>
+<p><strong>Enterprise JavaBeans</strong> (EJB) and Java’s <strong>Remote Method Invocation</strong> (RMI) are limited to <strong>Java</strong>.<br>The <strong>Distributed Component Object Model</strong> (DCOM) is limited to <strong>Microsoft</strong> platforms.<br>The <strong>Common Object Request Broker Architecture</strong> (CORBA) is excessively complex, and does not provide backward or forward compatibility</p>
+<p>Due to the shorcomings mentioned above, RPC is mainly used in request between services owned by the same organizaiton, typically in the same <strong>data center</strong>.</p>
+<ul>
+<li><strong>Rest</strong>: will not try to hide the fact this is a network protocol, but you can still build RPC libraries on top of that.</li>
 </ul>
+<p><strong>RESTful</strong> APIs are：</p>
+<ol>
+<li>good for experimentation and debugging (easily make request using browser &#x2F; tool curl)</li>
+<li>Supported by <strong>all</strong> mainstream programming languages and platforms</li>
+<li>Has a vast <strong>ecosystem</strong> of tools (servers, caches, load balancers, proxies, firewalls, monitoring, debugging tools, testing tools, etc.).</li>
+</ol>
+<h4 id="Evolvability"><a href="#Evolvability" class="headerlink" title="Evolvability:"></a>Evolvability:</h4><ul>
+<li>For RPC, we can do the simplifying assumption that <strong>all</strong> servers will be first updated, then come the clients.<br>Then, we only have <strong>backward compatibility</strong> on <strong>requests</strong>, and <strong>forward compatibility</strong> on <strong>responses</strong>.<br>If RPC is used for service providing, upgrading can be <strong>hard</strong> on clients.<br>Then compatibility may need to be maintained to long time, maybe forever. </li>
+<li>Service providers often end up maintaining <strong>multiple versions</strong> of the service API side by side.<br>This can be done via specifying the version in <strong>HTTP header</strong> &#x2F; <strong>URL</strong> &#x2F; or use <strong>API Keys</strong>.</li>
+</ul>
+<p>* New generation of RPC frameworks is more explicit about the fact that remote request is different from a local function call. E.g., use <strong>futures</strong> (<strong>promises</strong>) to encapsulate <strong>async</strong> actions that may fail.<br>**Some frameworks also provide <strong>service discovery</strong>, allowing a client to find out at which IP address and port number it can find a particular service.</p>
+<hr>
+<h3 id="Asynchronous-Message-passing-Systems"><a href="#Asynchronous-Message-passing-Systems" class="headerlink" title="Asynchronous Message-passing Systems:"></a>Asynchronous Message-passing Systems:</h3><ul>
+<li>It is between <strong>RPC</strong> and <strong>databases</strong>.<br>A request (message) is delivered to another process with low latency, but got converyed by an intermediate called <strong>message broker</strong> (<strong>message queue</strong> &#x2F; <strong>message-oriented middleware</strong>). </li>
+<li>Usually no data model is enforced, the message is just a <strong>sequence of bytes</strong> with some metadata. </li>
+<li>For consumer, if it wants to republish the message, it should keep all the <strong>unknown fields</strong>.</li>
+<li>Difference with RPC is that the message-passing is usually <strong>one-way</strong>.<br>Sender does not expect replies, just send and move forward.</li>
+<li><strong>Open source implementations</strong>: <strong>RabbitMQ</strong>, <strong>ActiveMQ</strong>, <strong>HornetQ</strong>, <strong>NATS</strong>, <strong>Apache KAFKA</strong></li>
+</ul>
+<h4 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages:"></a>Advantages:</h4><ul>
+<li>Act as a <strong>buffer</strong> to improve system reliability; </li>
+<li>Redeliver messages to a <strong>crashed</strong> process, avoid it from being lost; </li>
+<li>Avoids the sender needing to know the <strong>IP address</strong> and <strong>port number</strong> of the recipent (useful in a cloud deployment where virtual<br>machines often come and go); </li>
+<li>One message to be send to <strong>serveral</strong> recipents; </li>
+<li>Logically <strong>decoupes</strong> the sender from the recipent (sender does not care who is the message consumer).</li>
+</ul>
+<hr>
+<h3 id="Distributed-actor-frameworks"><a href="#Distributed-actor-frameworks" class="headerlink" title="Distributed actor frameworks:"></a>Distributed actor frameworks:</h3><ul>
+<li>The actor model is a programming model for <strong>concurrency</strong> in a single process. </li>
+<li>Rather than dealing directly with threads (and the associated problems of <strong>race conditions</strong>, <strong>locking</strong>, and <strong>deadlock</strong>), logic is encapsulated in <strong>actors</strong>. </li>
+<li>Each can represent one <strong>client</strong> &#x2F; <strong>entity</strong>, may have some not shared local states.<br>Process one message at a time, can be scheduled <strong>independently</strong> by framework. </li>
+<li>Communicating with each other by sending – receiving <strong>asynchronous</strong> messages. Delivery is not guranteed.</li>
+</ul>
+<p>In distributed actor framework, this programming model is used to scale an application across multiple <strong>nodes</strong>. Same message-passing mechanism is used regardless of sender &amp; recipents in the same node or not.<br>If not, message will be encoded into byte sequence, send over network and decode on the other side.</p>
+<p>It essentially <strong>integrate</strong> message broker and the actor programming model into single framework.<br>But still need to take care of <strong>forward</strong> &amp; <strong>backward</strong> compatibility.</p>
+<ul>
+<li><strong>Location Transparency</strong>: ability to access objects without the knowledge of their location. In actor model, location transparency works better than model in RPC.<br>The message is already assumed to be possibly <strong>lost</strong>, and we have less of a fundamental mismatch between local and remote communication.</li>
+</ul>
+<h4 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h4><ol>
+<li><strong>Akka</strong> uses Java’s built-in serialization by default, which does not provide forward<br>or backward compatibility. However, you can replace it with something like <strong>Protocol Buffers</strong>, and thus gain the ability to do rolling upgrades.</li>
+<li><strong>Orleans</strong> by default uses a custom data encoding format that does not support <strong>rolling upgrade</strong> deployments;<br>To deploy a new version of your application, you need to set up a new cluster, move traffic from the old cluster to the new one, and shut down the old one.<br>Like with Akka, custom <strong>serialization</strong> plug-ins can be used.</li>
+<li>In <strong>Erlang</strong> OTP it is surprisingly hard to make changes to record schemas (despite the system having many features designed for high availability);<br>Rolling upgrades are possible but need to be planned carefully.<br>An experimental new maps datatype (a JSON-like structure, introduced in Erlang R17 in 2014) may make this easier in the future.</li>
+</ol>
 
         </div>
         <footer class="article-footer">
@@ -275,7 +322,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/" data-id="clt0d6eav0000iwtec4t38qlq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/" data-id="clt1zk9jx000058tedpio0dk4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -345,17 +392,17 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "Designing Data-Intensive-Applications-Note-6",
-        "image": "https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/cover.png",
+        "headline": "Designing Data-Intensive-Applications-Note-9",
+        "image": "https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/cover.png",
         "keywords": "DataScience Data System",
         "genre": "Data Science Data System",
-        "datePublished": "2024-02-24",
-        "dateCreated": "2024-02-24",
-        "dateModified": "2024-02-24",
-        "url": "https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/",
-        "description": "Discussion on Indexes and Multi-Column Index solution (R-Tree).
+        "datePublished": "2024-02-25",
+        "dateCreated": "2024-02-25",
+        "dateModified": "2024-02-25",
+        "url": "https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/",
+        "description": "Discussion on Data Flow and Message Passing.
 ",
-        "wordCount": 931
+        "wordCount": 1470
     }
 </script>
 
@@ -436,20 +483,20 @@
         
 <nav id="article-nav">
     
-        <a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-7/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-10/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            Designing Data-Intensive-Applications-Note-7
+            Designing Data-Intensive-Applications-Note-10
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-5/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-8/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-5</p>
+        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-8</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -674,7 +721,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/';
+    var disqus_url = 'https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/';
     
     (function() {
     var dsq = document.createElement('script');

@@ -6,27 +6,27 @@
     
 
     
-    <title>Designing Data-Intensive-Applications-Note-6 | The blog of Blur</title>
+    <title>Designing Data-Intensive-Applications-Note-10 | The blog of Blur</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="keywords" content="DataScience,Data System" />
     
-    <meta name="description" content="Discussion on Indexes and Multi-Column Index solution (R-Tree).">
+    <meta name="description" content="Discussion on distributed system goal and Replication implementations.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Designing Data-Intensive-Applications-Note-6">
-<meta property="og:url" content="https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/index.html">
+<meta property="og:title" content="Designing Data-Intensive-Applications-Note-10">
+<meta property="og:url" content="https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-10/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Discussion on Indexes and Multi-Column Index solution (R-Tree).">
+<meta property="og:description" content="Discussion on distributed system goal and Replication implementations.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/cover.png">
-<meta property="article:published_time" content="2024-02-24T17:34:35.000Z">
-<meta property="article:modified_time" content="2024-02-24T18:06:35.867Z">
+<meta property="og:image" content="https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-10/cover.png">
+<meta property="article:published_time" content="2024-02-26T04:37:34.000Z">
+<meta property="article:modified_time" content="2024-02-26T19:58:13.340Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="DataScience">
 <meta property="article:tag" content="Data System">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/cover.png">
+<meta name="twitter:image" content="https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-10/cover.png">
     
 
     
@@ -159,14 +159,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-Designing-Data-Intensive-Applications-Note-6" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Designing-Data-Intensive-Applications-Note-10" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Designing Data-Intensive-Applications-Note-6
+        Designing Data-Intensive-Applications-Note-10
         </h1>
     
 
@@ -177,16 +177,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/" class="article-date">
-       <time datetime="2024-02-24T17:34:35.000Z" itemprop="datePublished">2024-02-24</time>
+    <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-10/" class="article-date">
+       <time datetime="2024-02-26T04:37:34.000Z" itemprop="datePublished">2024-02-25</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/" class="article-date">
-     <time datetime="2024-02-24T18:06:35.867Z" itemprop="dateModified">2024-02-24</time>
+  <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-10/" class="article-date">
+     <time datetime="2024-02-26T19:58:13.340Z" itemprop="dateModified">2024-02-26</time>
   </a>
 </div>
 
@@ -213,61 +213,148 @@
 
             
 
-            <p>Discussion on Indexes and Multi-Column Index solution (R-Tree).</p>
-<img src="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/cover.png" class="" title="ML_note">
+            <p>Discussion on distributed system goal and Replication implementations.</p>
+<img src="/2024/02/25/Designing-Data-Intensive-Applications-Note-10/cover.png" class="" title="ML_note">
 <span id="more"></span>
 
-
-<h3 id="Secondary-Index"><a href="#Secondary-Index" class="headerlink" title="Secondary Index"></a>Secondary Index</h3><ul>
-<li>The mapping may not be unique, i.e., we may have multiple rows mapped to the same key in secondary index. This can be solved by either<br>[1] making each value in that key to be <strong>list</strong> of matching row identifiers, or by<br>[2] making each key <strong>unique</strong> (adding a row identifer to the key).</li>
-<li>May help with <strong>Join</strong>.</li>
-</ul>
-<h3 id="Storing-values-within-the-index"><a href="#Storing-values-within-the-index" class="headerlink" title="Storing values within the index"></a>Storing values within the index</h3><p>In index, the key can just be the search keyword, but the value can be:<br>[1] <strong>Actual row</strong> (or document &#x2F; vertex) in question<br>[2] <strong>Reference</strong> to the row stored elsewhere<br>(That file is called <strong>heap</strong> file, in no particular order).</p>
-<p>Heap file helps: </p>
-<ol>
-<li>Eliminating <strong>duplication</strong>, because if there lies multiple secondary index, only the reference of data is stored; </li>
-<li>Efficient at <strong>overwriting</strong> values, if new value is no larger than the old value.</li>
-</ol>
-<p>Otherwise, the new value needs to be moved to somewhere with enough space. In that case, we can either update all secondary indexes to be updated to point to the new location, or leave a <strong>forwarding pointer</strong> in place.</p>
+<p>Distributed System:</p>
 <ul>
-<li><strong>Clustered index</strong>: If extra hop from index to heap file is too much of performance penalty for reads, we can directly store <strong>indexed row</strong> within index.<br>E.g., In MySQL’s <strong>InnoDB</strong> engine, the <strong>primary key</strong> of a table is always a clustered index and secondary indexes refer to the primary key. In SQL server, you can specify <strong>one</strong> clustered index per table.</li>
-<li><strong>Compromise between clustered &#x2F; non-clustered index</strong>: covering index or index with included columns, only stores some of the columns within the index.     Both cluster and covering index can speed up the reads but require more storage &#x2F; write overhead.</li>
+<li><strong>Motivations</strong>:</li>
+</ul>
+<ol>
+<li><strong>Scalability</strong></li>
+<li><strong>Fault tolerance</strong> &#x2F; <strong>High availability</strong></li>
+<li><strong>Latency</strong>.</li>
+</ol>
+<h3 id="Scale-to-Higher-Load"><a href="#Scale-to-Higher-Load" class="headerlink" title="Scale to Higher Load"></a>Scale to Higher Load</h3><ul>
+<li><strong>Scale up</strong>: under single OS, integrate more CPUs, RAM and disks, under Shared memory architecture. </li>
+<li>However, single machine solution’s cost grows faster than <strong>linearly</strong>, restricted to single <strong>geographic</strong> location, has <strong>limited</strong> fault tolerance and subject to <strong>bottlenecks</strong> (like IO and memory)</li>
+</ul>
+<h4 id="Shared-disk-architecture"><a href="#Shared-disk-architecture" class="headerlink" title="Shared-disk architecture"></a>Shared-disk architecture</h4><ul>
+<li>Serval machines with <strong>independent</strong> CPU and RMA, but stored data on array of <strong>disks</strong> is shared between the machines</li>
+<li>Connected via a fast network (used in some data warehouse). </li>
+<li>However, this method’s scalability is also limited by contention and overhead of <strong>locking</strong>.</li>
+</ul>
+<h4 id="Scale-Out"><a href="#Scale-Out" class="headerlink" title="Scale Out"></a>Scale Out</h4><ul>
+<li>A <strong>Shared-Nothing</strong> Architecture, also named <strong>horizontal scaling</strong> is more popular. </li>
+<li>Each (virtual) machine is called a <strong>node</strong>. </li>
+<li>Each node uses its CPUs, RAM and disks <strong>independently</strong>. </li>
+<li>Coordination between nodes is done at <strong>software level</strong> with conventional network. </li>
+<li>No special hardware is reuiqred, so you can use whatever machines for best <strong>price &#x2F; performance ratio</strong>. </li>
+<li>Data can be potentially distributed across multiple geographic regions to reduce <strong>latency</strong> and <strong>survive</strong> the loss of an entire data center, also increase <strong>throughput</strong>. </li>
+<li>With cloud deployment of virtual machines, small companies can still have a <strong>multi-region</strong> distributed architecture.<br>*Such solution requires developer to be most cautious about the constraints and tradeoffs. It also introduces additional <strong>complexity</strong> for applications and limits the <strong>expressiveness</strong> of data model you are using.</li>
 </ul>
 <hr>
-<h3 id="Multi-column-indexes"><a href="#Multi-column-indexes" class="headerlink" title="Multi-column indexes:"></a>Multi-column indexes:</h3><ul>
-<li>Can help querying <strong>multiple</strong> columns of a table</li>
-<li>Trivial implementation can be <strong>concatenated index</strong>, which concat multiple columns. This is not very flexible as it is hard coded, you can hardly search by some column’s <strong>sub-pattern</strong>.</li>
-<li>Standard B-Tree &#x2F; LSM-tree index can hardly answer quries which <strong>restrict range</strong> on multiple columns.</li>
-<li><strong>Implementation</strong> 1: To translate a multi-dimensional location into a single number using a <strong>space-filling curve</strong>, and then to use a regular B-tree index</li>
-<li><strong>Implementation</strong> 2: A better choice is using spatial indexes like <strong>R-trees</strong>.</li>
+<h3 id="Replication-v-s-Partitioning"><a href="#Replication-v-s-Partitioning" class="headerlink" title="Replication v.s. Partitioning:"></a>Replication v.s. Partitioning:</h3><ul>
+<li>Common ways of distributing data across multiple nodes are replication and partition.</li>
 </ul>
-<h3 id="R-Tree-R-for-Rectangle"><a href="#R-Tree-R-for-Rectangle" class="headerlink" title="R-Tree (R for Rectangle):"></a>R-Tree (R for Rectangle):</h3><ul>
-<li>An generalization of B-tree to <strong>high-dim</strong> space. Used <strong>Minimal Bounding Rectangle</strong> (MBR) for space dividing. That is to say, just like segment tree, we want a spatial “rectangle tree” so that given a node, we can get the sub-nodes &#x2F; leaves belonging to that region. This tree can be <strong>multi-way</strong>.</li>
-</ul>
-<img src="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/1.png" class="" title="ML_note">
-
-<ul>
-<li><strong>Structure of leaf nodes</strong>: leaf nodes are saved as tuples of <code>(l, tuple-identifier)</code>. Where <code>tuple-identifer</code> is a n-dim vector (can be realized as a single record &#x2F; data point) and <code>l</code> is a n-dim rectangle which can exactly include all the datapoints belonging to this leaf node.</li>
-<li><strong>Stucture of non-leaf nodes</strong>: <code>(l, child-pointer)</code>, where <code>l</code> is the n-dim rectangle, and <code>child-point points</code> to the child node(s).</li>
-</ul>
-<p><strong>Variants of R-tree</strong>: </p>
-<ol>
-<li><strong>R* tree</strong> (use <strong>re-insertion</strong> to reduce overlap and improve query performance, using a combination of a revised <strong>node split</strong> algorithm and the concept of forced reinsertion at node overflow).<br>R-tree is sensitive to the order of insertion, thus we can improve it by: when a node overflows, a portion of its entries are removed and reinserted, limited to <strong>one</strong> time to avoid indefinite <strong>cascade re-insertion</strong>.)</li>
-<li><strong>R+ Tree</strong>: a tradeoff betweem <strong>R-tree</strong> and <strong>kd-tree</strong>. If needed, insert an object into multiple leaves to avoid overlapping of internal nodes. Minimal coverage reduces the amount of “dead space” (empty area), and reduces the set of search path to the leaves.<br>The difference is that R+ Tree is not guaranteed to be at least <strong>half-filled</strong>, the entries of any internal node do not overlap, and an object ID maybe stored in more than one leaf node.</li>
-</ol>
+<p><strong>Replication</strong>:<br>Keeping a copy of <strong>the same</strong> data on several different nodes, potentially in different locations, provides <strong>redundancy</strong>.</p>
+<p><strong>Partition</strong>:<br>Splitting a big database into smaller <strong>subsets</strong> called partitions.  </p>
+<p>These two ways can go with each other.</p>
 <hr>
-<h3 id="Full-text-search-and-fuzzy-indexes"><a href="#Full-text-search-and-fuzzy-indexes" class="headerlink" title="Full-text search and fuzzy indexes:"></a>Full-text search and fuzzy indexes:</h3><ul>
-<li><strong>Motivation</strong>: Instead of search the exact value, we want to allow search for <strong>similar</strong> keys like mis-spelled words.</li>
-<li><strong>Full text search</strong>: Include <strong>synonyms</strong> of the word, to ignore <strong>grammatical variations</strong> of<br>words, and to search for occurrences of words <strong>near</strong> each other in the same document, and support various other features that depend on linguistic analysis of the text.</li>
-<li><strong>Lucene</strong> allows searching of words within a certain <strong>edit distance</strong>, using quasi-SSTable structure to get the <strong>offset</strong> in the sorted file where they need to look for the candidate keys.   </li>
-<li>In <strong>LevelDB</strong>, this in-memory index is a sparse collection of some of the keys, but in <strong>Lucene</strong>, the in-memory index is a <strong>finite state automaton</strong> over the characters in the keys, similar to a <strong>trie</strong>.</li>
+<h3 id="Models-of-Replication"><a href="#Models-of-Replication" class="headerlink" title="Models of Replication:"></a>Models of Replication:</h3><h4 id="Leaders-and-Follower"><a href="#Leaders-and-Follower" class="headerlink" title="Leaders and Follower:"></a>Leaders and Follower:</h4><ul>
+<li>Each node stores a copy of data is called a <strong>replica</strong>. </li>
+<li>We want to ensure that (if our data can fit into arbitrary node, a simplifying assumption) every write ends up on <strong>all</strong> the replicas. </li>
+<li>That is why we need <strong>leader-based</strong> replication (<strong>active-passive</strong> or <strong>master-slave</strong> replication).</li>
 </ul>
-<h3 id="Keep-everything-in-memory-persistent-memory-storage"><a href="#Keep-everything-in-memory-persistent-memory-storage" class="headerlink" title="Keep everything in memory (persistent memory storage?):"></a>Keep everything in memory (persistent memory storage?):</h3><ul>
-<li>Disks are <strong>cheaper</strong> and <strong>durable</strong> (will <strong>NOT</strong> lose data when power off), but needs to be laid out carefully for good performance on reads and writes.</li>
-<li>Now memory is cheaper, and for use cases like <strong>Memcached</strong>, data loss is acceptable. For durability required by database, we can <strong>log</strong> changes to disk, <strong>replicating</strong> in-memory state to other machines, this also helps with back-up &#x2F; inspection and analysis.</li>
-<li>Memory databases are faster because they can avoid the overheads of <strong>encoding</strong> in-mem data to disk form. They can also provide <strong>priority queques</strong> and <strong>sets</strong> (by <strong>Redis</strong>, e.g.) which are hard to implement on disk.</li>
-<li>We can actually support memory database which requires more space than the memory (overlay?) When there is no space, <strong>evict</strong> content to disk, when needed, <strong>load</strong> it back. It is like OS memory management (swap) but in <strong>record granularity</strong>.</li>
+<p><strong>Implementation of Leader-based Replication</strong>:</p>
+<ol>
+<li>One replica is designated the <strong>leader</strong> (<strong>master</strong> &#x2F; <strong>primary</strong>). When clients want to write to the database, they must send their requests to the leader, and leader first write the new data to its <strong>local storage</strong>.</li>
+<li>Other replica known as <strong>followers</strong> (<strong>slaves</strong> &#x2F; <strong>secondaries</strong> &#x2F; <strong>hot standbys</strong>), will receive leader’s change as part of <strong>replication log</strong> &#x2F; <strong>change stream</strong>, updating their local copies by applying all writes in <strong>the same order</strong>.</li>
+<li>When a clinet wants to read from the database, it can query either the leader or any of the followers. However, writes are only accepted on the leader<br>(followers are <strong>read-only</strong> from leader’s view).</li>
+</ol>
+<ul>
+<li><p><strong>Usage as built-in feature of relational DB</strong>: </p>
+</li>
+<li><p>PostgreSQL (since 9.0)</p>
+</li>
+<li><p>MySQL</p>
+</li>
+<li><p>Oracle Data Guard</p>
+</li>
+<li><p>SQL Sever’s AlwaysOn Availability Groups.  </p>
+</li>
+<li><p><strong>Usage as non-relational DB</strong>: </p>
+</li>
+<li><p>MongoDB</p>
+</li>
+<li><p>RethinkDB</p>
+</li>
+<li><p>Espresso.</p>
+</li>
 </ul>
+<p>Also used in distributed message brokers like <strong>Kafka</strong>, <strong>RabbitMQ</strong>’s <strong>highly available queues</strong>.<br>Also used by some network file systems and replicated block devices.</p>
+<h3 id="Synchronous-v-s-Asynchrounous-Replication"><a href="#Synchronous-v-s-Asynchrounous-Replication" class="headerlink" title="Synchronous v.s. Asynchrounous Replication:"></a>Synchronous v.s. Asynchrounous Replication:</h3><p>In relational DB, this is usually <strong>configurable</strong>. However, in other systems, it is usually hard-coded.</p>
+<h4 id="Example-of-Synchronous"><a href="#Example-of-Synchronous" class="headerlink" title="Example of Synchronous:"></a>Example of Synchronous:</h4><ul>
+<li>Leader get the request, send write request to one of the follower, waiting for its “OK” before return to the client. </li>
+<li>The leader will continue to wait for the next follower to finish updates.</li>
+</ul>
+<p><strong>Advantages</strong>: follower is guaranteed to have an <strong>up-to-date</strong> &amp; <strong>consistent</strong> copy, which is usable even leader fails.<br><strong>Disadvantages</strong>: the followers might <strong>fall behind</strong> the leader by a long time due to failure, capacity issue or network issues. All follower writes will be <strong>blocked</strong> in this case.<br>Due to the above reason, usually only 1 follower is <strong>synchronous</strong> and the rest are <strong>asynchronous</strong>.<br>If the synchronous follower becomes unavailable, another asynchronous follower will become synchronous.<br>[This guarantees 2 up-to-date copy on at least 2 nodes]<br>This is sometimes called <strong>semi-synchronous</strong>.</p>
+<p>Usually, leader-based replication is configured to be <strong>completely asynchronous</strong>.<br>If leader fails and not recoverable, any write not yet replicated will lost.<br>[<strong>Not</strong> durable write, even confirmed with client]<br>The good side is that leader can continue processing writes even all followers are falling behind (especially when we have a lot of them).</p>
+<hr>
+<h3 id="Chain-Replication"><a href="#Chain-Replication" class="headerlink" title="*Chain Replication"></a>*Chain Replication</h3><ul>
+<li><strong>Chain Replication</strong> is a variant of <strong>synchronous</strong> replication that has been successfully implemented in a few systems such as <strong>Microsoft Azure Storage</strong> (which avoid loss of data)</li>
+</ul>
+<p><strong>Basic components</strong> of CR are:<br>A sequence (chain) of nodes with 2 special nodes — <strong>HEAD</strong> (receives requests from clients) and <strong>TAIL</strong> (end of the chain, provides the guarantee for consistency). </p>
+<p>Such chain has at least following <strong>properties</strong>:</p>
+<ul>
+<li>Tolerates failure of up to $n-1$ nodes.</li>
+<li>Write performance is around write performance of <strong>P&#x2F;B</strong> (<strong>Primary &#x2F; Backup</strong>) approach.</li>
+<li>Cluster reconfiguration happens much faster, in case HEAD failure happens. </li>
+<li>For other nodes — around the same time as for <strong>P&#x2F;B</strong>.<br>It is very important to note that chain replication requires a strong and reliable <strong>FIFO link</strong> between nodes.</li>
+</ul>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation:"></a>Implementation:</h4><ul>
+<li>Clients send write requests to the head and read requests to the tail. </li>
+<li>When the head receives a request, it calculates the <strong>delta</strong> of the states, applies the change and <strong>propagates</strong> the delta down the chain (to successor). As soon as tail receives the delta, it sends <strong>ACK</strong> back through each node to the head. </li>
+<li>As you can see, if a read request returns some value X, that means it has been saved on <strong>all</strong> nodes.</li>
+</ul>
+<p>In each node, we will save:<br><strong>Pending(i)</strong> — list of received requests by not yet processed by the tail.<br><strong>Sent(i)</strong> — list of not yet processed by the tail requests, sent to the node’s i successor.<br><strong>History(i, key)</strong> — list of changes for the key. It could be either full history or just last value.</p>
+<p>Note that:<br>$History(j, key) \subseteq History(i, key), \forall j \gt i$ and $Sent(i) \subseteq Pending(i), History(i, key) &#x3D; History(i + 1, key) \cup Sent(i)$</p>
+<h4 id="Coping-with-failures"><a href="#Coping-with-failures" class="headerlink" title="Coping with failures:"></a>Coping with failures:</h4><p>We need a special <strong>master process</strong> will: </p>
+<ul>
+<li><strong>Detect</strong> a failed node; </li>
+<li>Notify <strong>predecessor</strong> and <strong>successor</strong> of the failed node; </li>
+<li>Notify clients if the failed node is either HEAD or TAIL.<br>We also assume that our nodes are <strong>fail-stop</strong>, means server stops working in case of its failure, never send an incorrect response. Failure is always <strong>detectable</strong> by the master process.</li>
+</ul>
+<p><strong>Basc Approach</strong>: </p>
+<ul>
+<li>Only write on HEAD and read from TAIL (the only tail, making it a hotspot which is bad; </li>
+<li>If tail is in another data center, it can slow down the entire chain). </li>
+<li>When we need a new node, insert it after tail will be easiest (just <strong>copy</strong> the tail state and ask the previous tail to continue transfer requests).<br>We can tell that, if head fails, we have $Pending(head) – Sent(head)$ lost; If TAIL fails, we can recover by Node TAIL-1. If other node fails, we can recover based on it predecessor and succesor.</li>
+</ul>
+<hr>
+<h3 id="Chain-Replication-with-Apportioned-Queries-（CRAQ）"><a href="#Chain-Replication-with-Apportioned-Queries-（CRAQ）" class="headerlink" title="Chain Replication with Apportioned Queries （CRAQ）:"></a>Chain Replication with Apportioned Queries （CRAQ）:</h3><p>Read only on TAIL can be a <strong>bottleneck</strong>. We want to improve this by allowing read requests to be processed by <strong>all</strong> nodes <strong>but</strong> the TAIL.<br>To preserve consistency, we maintain a <strong>version vector</strong> for write requests and will do requests to the TAIL to get latest committed version in case of ambiguity.</p>
+<p>For <strong>read</strong> request, HEAD will return the response to clients.<br>For <strong>write</strong> request, each node except TAIL can return the value back to the client.</p>
+<p>Each non-tail node can maintain multiple versions of the same key, and those versions are <strong>monotonically increasing</strong>.<br>Each version can be either <strong>“clean”</strong> or <strong>“dirty”</strong>, in the beginning, all versions are <strong>clean</strong>.</p>
+<ul>
+<li>When a node receives a <strong>write</strong> request, it adds the received version to its local list of versions of that key.</li>
+<li>If the node is the TAIL then it marks the version as <strong>clean</strong>, the version now is committed and the tail sends <strong>ACK</strong> back to the head.</li>
+<li>Otherwise — the node marks the version as <strong>dirty</strong> and passes to the next node (<strong>successor</strong>).</li>
+<li>When a node receives ACK from its successor it marks the version as <strong>clean</strong> and removes <strong>all older versions</strong>.</li>
+</ul>
+<hr>
+<ul>
+<li>When a node receives a <strong>read</strong> request:</li>
+<li>If the latest known to the node version is <strong>clean</strong> — return it.</li>
+<li>Otherwise — ask TAIL to get last committed version of the given key, which it sends back to the client. (Such version will always exist on the tail by design).</li>
+</ul>
+<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary:"></a>Summary:</h4><p>CRAQ’s performance grows linearly with the amount of nodes with <strong>mostly read</strong> requests;<br>In case of mostly write requests, the performance will be close to the basic approach.<br>It can be deployed in <strong>multiple</strong> data center to be physically closer to client. </p>
+<p>CRAQ provides <strong>strong consistency</strong>.<br>But the TAIL might commit the latest version, before a node sends the response to client.<br>We can use <strong>monotonic read</strong> (subsequent read requests don’t go in the past; that is to say, subsequent read should see all changes happened ahead) on the whole chain.</p>
+<p>Other consistency provided:<br><strong>Eventual consistency</strong>: the node doesn’t request the latest committed version from the TAIL.<br>This will still provide monotonic reads but only on <strong>one</strong> node. (subsequent read requests must hit <strong>the same</strong> node).<br>Besides, this allows CRAQ to tolerate <strong>network partitioning</strong> (into independent subnets)<br><strong>Bounded Eventual Consistency</strong>: Allow to return dirty version only under some conditions, like <strong>not older</strong> than N revisions or T minutes.</p>
+<hr>
+<h3 id="Fast-Array-of-Wimpy-Nodes-FAWN"><a href="#Fast-Array-of-Wimpy-Nodes-FAWN" class="headerlink" title="Fast Array of Wimpy Nodes (FAWN):"></a>Fast Array of Wimpy Nodes (FAWN):</h3><p>Similar to the idea of <strong>Amazon Dynamo</strong> and consistent hash, we map a physical server into serveral virtual nodes, each has its own unique VID, forming a <strong>ring</strong>.<br>We have multiple <strong>ranges</strong> formed by virtual nodes, and each VI takes care of the keys <strong>“behind”</strong> it and within the certain range.</p>
+<p>Then, to improve fault tolerance, data is replicated over $R$ next virtual nodes in the <strong>clockwise</strong> direction (for example, if $R&#x3D;2$ then keys from A1 are replicated to B1 and C1, if the chain only has A1-C1). Thus, we get a <strong>chain replication</strong> (basic approach).<br><strong>Read requests</strong> are routed to the TAIL, i.e. read from A1 will be routed to C1.<br><strong>Write requests</strong> are routed to the head and are propagated to the TAIL.</p>
+<hr>
+<h3 id="Setting-Up-Follower-without-downtime"><a href="#Setting-Up-Follower-without-downtime" class="headerlink" title="Setting Up Follower (without downtime):"></a>Setting Up Follower (without downtime):</h3><ul>
+<li>We may need to set up new followers due to <strong>failed nodes</strong> &#x2F; need to <strong>increase replica</strong>. We want the added followers to be accurate. Since the database is changing all the time, copy data from one node to naother is not sufficient.<br>Use lock to make file consistent will against our goal of <strong>availability</strong>.</li>
+</ul>
+<h4 id="Method"><a href="#Method" class="headerlink" title="Method:"></a>Method:</h4><ol>
+<li>Take a consistent <strong>snapshot</strong> of the leader’s database at some point (ideally <strong>without</strong> a lock in the entire databases).<br>This may be supported by database infra, or third party tool like <strong>innobackupex</strong> for <strong>MySQL</strong>.</li>
+<li>Copy the snapshot to the new follower node.</li>
+<li>New follower connects to the leader and requests all the data changes after the snapshot<br>(snapshot should be associated to an exact position in the leader’s <strong>replication log</strong>)<br>[such position named as <strong>log sequence number</strong> in <strong>PostgreSQL</strong>, <strong>binlog coordinates</strong> in <strong>MySQL</strong>].</li>
+<li>After follower processed the backlog of data changes, it is caught up.</li>
+</ol>
+<h4 id="Node-Outage"><a href="#Node-Outage" class="headerlink" title="Node Outage:"></a>Node Outage:</h4><p>Each node can possibly go done, should be able to reboot without downtime of sysTEM. It can be done by <strong>Catch-up</strong> recovery.<br>Each follower keeps a log of data changes received from the leader, and be able to identify the <strong>last</strong> successful transaction before the fault occurred. The follower can request the data changes after the outage and catch up. </p>
 
         </div>
         <footer class="article-footer">
@@ -275,7 +362,7 @@
 
 
 
-    <a data-url="https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/" data-id="clt0d6eav0000iwtec4t38qlq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-10/" data-id="clt2h23mk0000rstec2dx71gz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -345,17 +432,17 @@
             "@type": "Person",
             "name": "Blur - Shenghui Xu"
         },
-        "headline": "Designing Data-Intensive-Applications-Note-6",
-        "image": "https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/cover.png",
+        "headline": "Designing Data-Intensive-Applications-Note-10",
+        "image": "https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-10/cover.png",
         "keywords": "DataScience Data System",
         "genre": "Data Science Data System",
-        "datePublished": "2024-02-24",
-        "dateCreated": "2024-02-24",
-        "dateModified": "2024-02-24",
-        "url": "https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/",
-        "description": "Discussion on Indexes and Multi-Column Index solution (R-Tree).
+        "datePublished": "2024-02-25",
+        "dateCreated": "2024-02-25",
+        "dateModified": "2024-02-26",
+        "url": "https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-10/",
+        "description": "Discussion on distributed system goal and Replication implementations.
 ",
-        "wordCount": 931
+        "wordCount": 1882
     }
 </script>
 
@@ -436,20 +523,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-7/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            Designing Data-Intensive-Applications-Note-7
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-5/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-9/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-5</p>
+        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-9</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -674,7 +751,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/';
+    var disqus_url = 'https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-10/';
     
     (function() {
     var dsq = document.createElement('script');
