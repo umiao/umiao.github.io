@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Designing Data-Intensive-Applications-Note-11 | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="DataScience,Data System" />
+    
+    <meta name="description" content="Discussion on implementation and optimization of replication log.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Designing Data-Intensive-Applications-Note-11">
+<meta property="og:url" content="https://umiao.github.io/2024/02/26/Designing-Data-Intensive-Applications-Note-11/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Discussion on implementation and optimization of replication log.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2024/02/26/Designing-Data-Intensive-Applications-Note-11/cover.png">
+<meta property="article:published_time" content="2024-02-27T04:01:56.000Z">
+<meta property="article:modified_time" content="2024-03-21T23:28:33.576Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="Data System">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2024/02/26/Designing-Data-Intensive-Applications-Note-11/cover.png">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/Data-System/">Data System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Investment/">Investment</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Productivity/">Productivity</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/Data-System/">Data System</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Designing-Data-Intensive-Applications-Note-11" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Designing Data-Intensive-Applications-Note-11
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2024/02/26/Designing-Data-Intensive-Applications-Note-11/" class="article-date">
+       <time datetime="2024-02-27T04:01:56.000Z" itemprop="datePublished">2024-02-26</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2024/02/26/Designing-Data-Intensive-Applications-Note-11/" class="article-date">
+     <time datetime="2024-03-21T23:28:33.576Z" itemprop="dateModified">2024-03-21</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Data-System/" rel="tag">Data System</a>, <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Discussion on implementation and optimization of replication log.</p>
+<img src="/2024/02/26/Designing-Data-Intensive-Applications-Note-11/cover.png" class="" title="ML_note">
+<span id="more"></span>
+
+
+<h3 id="Statement-based-Replication"><a href="#Statement-based-Replication" class="headerlink" title="Statement-based Replication"></a>Statement-based Replication</h3><ul>
+<li>Simplest case, just forward all leader’s write request to its followers (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>).</li>
+<li>Statement calls a <strong>non-determinsitic</strong> function like <code>RAND()</code> can get a different value.</li>
+<li>For <strong>auto-incrementing</strong> column &#x2F; operators relying on the <strong>existing</strong> data in the database, they have to be executed in exactly <strong>the same order</strong> on each replica. This can be limiting in multiple concurrently executing transactions case.</li>
+<li>Stataments that have side effects (<strong>triggers</strong>, <strong>stored procedures</strong>, <strong>user-defined functions</strong>) may result in different side effect occuring on each replica, unless they are absolutely <strong>determinsitic</strong>.</li>
+</ul>
+<p>These issues can be resolved by replacing non-deterministic function calls with a fixed value. However, there are too many <strong>edge cases</strong> so other replication methods are preferred.</p>
+<p><strong>Statement-based</strong> replication was used in <strong>MySQL</strong> before version 5.1. It is still sometimes used today, as it is quite compact, but by default MySQL now switches to <strong>rowbased replication</strong> if there is any <strong>nondeterminism</strong> in a statement.<br><strong>VoltDB</strong> uses statement-based replication, and makes it safe by requiring transactions to be <strong>deterministic</strong></p>
+<h3 id="Write-ahead-log-WAL-shipping"><a href="#Write-ahead-log-WAL-shipping" class="headerlink" title="Write-ahead log (WAL) shipping"></a>Write-ahead log (WAL) shipping</h3><p>In storage engines, for data on disk, we usually every write is appended to a log:</p>
+<ul>
+<li>In the case of a <strong>log-structured</strong> storage engine,this log is the main place for storage. Log segments are <strong>compacted</strong> and <strong>garbage-collected</strong> in the background.</li>
+<li>In the case of a B-tree, which overwrites individual disk blocks, every modification is first written to a <strong>write-ahead log</strong> so that the index can be restored to a consistent state after a crash.</li>
+<li>In either case, the log is an <strong>append-only</strong> sequence of bytes containing all writes to the database. </li>
+<li>We can use the exact same log to build a <strong>replica</strong> on another node: besides writing the log to disk, the leader also sends it across the network to its followers to build a copy of the exact same data structures as on the leader (used in <strong>PostgreSQL</strong> and <strong>Oracle</strong>).</li>
+<li><strong>Disadvantage</strong>: log describes the data on a very low level, contains details of which bytes were changed in which disk blocks. This makes replication closely <strong>coupled</strong> to the storage engine.<br>If the database changes its storage format from one version to another, it is typically not possible to run different versions of the database software on the leader and the followers.</li>
+<li>If the replication protocol allows the follower to use a newer software version than the leader, you can perform a <strong>zero-downtime</strong> upgrade of the database software by first upgrading the followers and then performing a failover to make one of the upgraded nodes the new leader. If the replication protocol does not allow this version mismatch, as is often the case with <strong>WAL shipping</strong>, such upgrades require <strong>downtime</strong>.</li>
+</ul>
+<h3 id="Logical-row-based-log-replication"><a href="#Logical-row-based-log-replication" class="headerlink" title="Logical (row-based) log replication"></a>Logical (row-based) log replication</h3><p>An alternative is to use <strong>different</strong> log formats for replication and for the storage engine, which allows the replication log to be <strong>decoupled</strong> from the storage engine internals.<br>This kind of replication log is called a <strong>logical log</strong>, to distinguish it from the storage engine’s (<strong>physical</strong>) data representation.</p>
+<ul>
+<li>A logical log for a relational database is usually a <strong>sequence of records</strong> describing writes to database tables at the granularity of a <strong>row</strong>:</li>
+<li>For an <strong>inserted</strong> row, the log contains the new values of all columns.</li>
+<li>For a <strong>deleted</strong> row, the log contains enough information to uniquely identify the row that was deleted. Typically this would be the <em>primary key</em>, but if there is no primary key on the table, the old values of all columns need to be logged.</li>
+<li>For an <strong>updated</strong> row, the log contains enough information to uniquely <strong>identify</strong> the updated row, and the new values of all columns (or at least the new values of all columns that changed).</li>
+</ul>
+<p>A transaction that modifies several rows generates several such log records, followed by a record indicating that the transaction was committed.<br>MySQL’s <strong>binlog</strong> (when configured to use row-based replication) uses this approach.</p>
+<p>Since a logical log is <strong>decoupled</strong> from the storage engine internals, it can more easily be kept <strong>backward compatible</strong>, allowing the leader and the follower to run different versions of the database software, or even different storage engines.</p>
+<p>A logical log format is also easier for external applications to parse. This aspect is useful if you want to send the contents of a database to an external system, such as a <strong>data warehouse</strong> for offline analysis, or for building <strong>custom indexes</strong> and <strong>caches</strong>.<br>This technique is called <strong>change data capture</strong>.</p>
+<h3 id="Trigger-based-replication"><a href="#Trigger-based-replication" class="headerlink" title="Trigger-based replication"></a>Trigger-based replication</h3><p>Above replication approaches are implemented by the database system, without involving any <strong>application code</strong>. </p>
+<ul>
+<li>More flexibility may be needed. </li>
+<li>For example, if you want to only replicate a <strong>subset</strong> of the data, or want to replicate from one kind of database to another, or if you need <strong>conflict</strong> resolution logic, </li>
+<li>You may need to move replication up to the <strong>application layer</strong>.</li>
+</ul>
+<p><strong>Oracle GoldenGate</strong>, can make data changes available to an application by reading the database log. </p>
+<p>An alternative is to use features that are available in many relational databases: <strong>triggers</strong> and <strong>stored procedures</strong>.</p>
+<ol>
+<li>A trigger lets you register custom application code that is automatically executed when a data change (<strong>write transaction</strong>) occurs in a database system. </li>
+<li>Able to log this change into a <strong>separate</strong> table, from which it can be read by an external process. </li>
+<li>That external process can then apply <strong>any</strong> necessary application logic and replicate the data change to another system.</li>
+</ol>
+<p><strong>Databus</strong> for <strong>Oracle</strong> and <strong>Bucardo</strong> for <strong>Postgres</strong> work like this, for example.</p>
+<h4 id="Trigger-based-replication-v-s-built-in-replication"><a href="#Trigger-based-replication-v-s-built-in-replication" class="headerlink" title="Trigger-based replication v.s. built-in replication"></a>Trigger-based replication v.s. built-in replication</h4><ul>
+<li>Greater overheads</li>
+<li>More prone to bugs and limitations</li>
+<li>More flexibility.</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2024/02/26/Designing-Data-Intensive-Applications-Note-11/" data-id="clt3updpg00005ste7g4pgf4q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "Designing Data-Intensive-Applications-Note-11",
+        "image": "https://umiao.github.io/2024/02/26/Designing-Data-Intensive-Applications-Note-11/cover.png",
+        "keywords": "DataScience Data System",
+        "genre": "Data Science Data System",
+        "datePublished": "2024-02-26",
+        "dateCreated": "2024-02-26",
+        "dateModified": "2024-03-21",
+        "url": "https://umiao.github.io/2024/02/26/Designing-Data-Intensive-Applications-Note-11/",
+        "description": "Discussion on implementation and optimization of replication log.
+",
+        "wordCount": 918
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2024/03/21/Designing-Data-Intensive-Applications-Note-12/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Designing Data-Intensive-Applications-Note-12
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-10/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-10</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/21/Designing-Data-Intensive-Applications-Note-12/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/21/Designing-Data-Intensive-Applications-Note-12/cover.png)" alt="Designing Data-Intensive-Applications-Note-12" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/21/Designing-Data-Intensive-Applications-Note-12/" class="title">Designing Data-Intensive-Applications-Note-12</a></p>
+                            <p class="item-date"><time datetime="2024-03-21T23:27:44.000Z" itemprop="datePublished">2024-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/02/26/Designing-Data-Intensive-Applications-Note-11/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/02/26/Designing-Data-Intensive-Applications-Note-11/cover.png)" alt="Designing Data-Intensive-Applications-Note-11" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/02/26/Designing-Data-Intensive-Applications-Note-11/" class="title">Designing Data-Intensive-Applications-Note-11</a></p>
+                            <p class="item-date"><time datetime="2024-02-27T04:01:56.000Z" itemprop="datePublished">2024-02-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-10/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/02/25/Designing-Data-Intensive-Applications-Note-10/cover.png)" alt="Designing Data-Intensive-Applications-Note-10" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-10/" class="title">Designing Data-Intensive-Applications-Note-10</a></p>
+                            <p class="item-date"><time datetime="2024-02-26T04:37:34.000Z" itemprop="datePublished">2024-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-9/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/02/25/Designing-Data-Intensive-Applications-Note-9/cover.png)" alt="Designing Data-Intensive-Applications-Note-9" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-9/" class="title">Designing Data-Intensive-Applications-Note-9</a></p>
+                            <p class="item-date"><time datetime="2024-02-25T20:49:40.000Z" itemprop="datePublished">2024-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-8/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/02/25/Designing-Data-Intensive-Applications-Note-8/cover.png)" alt="Designing Data-Intensive-Applications-Note-8" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-8/" class="title">Designing Data-Intensive-Applications-Note-8</a></p>
+                            <p class="item-date"><time datetime="2024-02-25T18:58:40.000Z" itemprop="datePublished">2024-02-25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/Data-System/">Data System</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Investment/">Investment</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/" rel="tag">Apple Watch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLI/" rel="tag">CLI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate/" rel="tag">Certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-System/" rel="tag">Data System</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">39</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/" rel="tag">English</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IQ/" rel="tag">IQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyboard/" rel="tag">Keyboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOD/" rel="tag">OOD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented-Design/" rel="tag">Object Oriented Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Productivity/" rel="tag">Productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Term/" rel="tag">Term</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tips/" rel="tag">Tips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vocabulary/" rel="tag">Vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Frequency/" rel="tag">Word Frequency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/" rel="tag">futures</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/investment/" rel="tag">investment</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/options/" rel="tag">options</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trading/" rel="tag">trading</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Apple-Watch/" style="font-size: 10px;">Apple Watch</a> <a href="/tags/Brainteasers/" style="font-size: 10px;">Brainteasers</a> <a href="/tags/CLI/" style="font-size: 10px;">CLI</a> <a href="/tags/Certificate/" style="font-size: 10px;">Certificate</a> <a href="/tags/Cyber-Security/" style="font-size: 10px;">Cyber Security</a> <a href="/tags/Data-System/" style="font-size: 16px;">Data System</a> <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/IQ/" style="font-size: 10px;">IQ</a> <a href="/tags/Keyboard/" style="font-size: 10px;">Keyboard</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 14px;">Machine Learning</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/OOD/" style="font-size: 10px;">OOD</a> <a href="/tags/Object-Oriented-Design/" style="font-size: 10px;">Object Oriented Design</a> <a href="/tags/Productivity/" style="font-size: 10px;">Productivity</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/SQL/" style="font-size: 18px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Software-Engineering/" style="font-size: 12px;">Software Engineering</a> <a href="/tags/Term/" style="font-size: 10px;">Term</a> <a href="/tags/Tips/" style="font-size: 10px;">Tips</a> <a href="/tags/UCLA/" style="font-size: 12px;">UCLA</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 10px;">Vocabulary</a> <a href="/tags/Word-Frequency/" style="font-size: 10px;">Word Frequency</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a> <a href="/tags/futures/" style="font-size: 12px;">futures</a> <a href="/tags/investment/" style="font-size: 12px;">investment</a> <a href="/tags/options/" style="font-size: 12px;">options</a> <a href="/tags/trading/" style="font-size: 12px;">trading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2024 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2024/02/26/Designing-Data-Intensive-Applications-Note-11/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
