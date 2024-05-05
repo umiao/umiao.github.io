@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Designing Data-Intensive-Applications-Note-16 | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="DataScience,Data System" />
+    
+    <meta name="description" content="Discussion on challenges with distributed systems.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Designing Data-Intensive-Applications-Note-16">
+<meta property="og:url" content="https://umiao.github.io/2024/04/21/Designing-Data-Intensive-Applications-Note-16/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Discussion on challenges with distributed systems.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2024/04/21/Designing-Data-Intensive-Applications-Note-16/cover.png">
+<meta property="article:published_time" content="2024-04-21T16:54:34.000Z">
+<meta property="article:modified_time" content="2024-04-27T18:27:12.126Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="Data System">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2024/04/21/Designing-Data-Intensive-Applications-Note-16/cover.png">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/Data-System/">Data System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Investment/">Investment</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Productivity/">Productivity</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/Data-System/">Data System</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Designing-Data-Intensive-Applications-Note-16" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Designing Data-Intensive-Applications-Note-16
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="article-date">
+       <time datetime="2024-04-21T16:54:34.000Z" itemprop="datePublished">2024-04-21</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="article-date">
+     <time datetime="2024-04-27T18:27:12.126Z" itemprop="dateModified">2024-04-27</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Data-System/" rel="tag">Data System</a>, <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Discussion on challenges with distributed systems.</p>
+<img src="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/cover.png" class="" title="ML_note">
+<span id="more"></span>
+
+<h3 id="Faults-and-Partial-Failure"><a href="#Faults-and-Partial-Failure" class="headerlink" title="Faults and Partial Failure"></a>Faults and Partial Failure</h3><p>We expect outcomes of program running on a single computer either returns correct result, or crash (without returning wrong results)<br><strong>Idealized system model</strong>: operates with perfection, <strong>CPU instruction</strong> does the same thing, data in <strong>memory and disk</strong> remains intact and not randomly corrupted.</p>
+<p>However, in distributed system, we can easily find <strong>partial failure</strong> that some parts of the system that are broken in unpredicatable ways but remaining parts working fine.<br>You may not even know if something succeeded or not, as the time it takes for message traveling across netowrk is <strong>nondeterministic</strong></p>
+<p>Large-scale computing systems’ design logic is between <strong>High-performance Computing (HPC)</strong> and <strong>Cloud Computing</strong>. </p>
+<p>The prior is more like a single node computer (if failure happens, fix it and restart entire cluster workload from checkpoint [can be expensive]]). Also, it has node communication through shared memory and <strong>Remote Direct Momoery Acess (RDMA)</strong>, use specialized hardware and more reliable. Also, having its nodes close together.</p>
+<p>The latter focuses on high availability, based on IP and Ethernet, arranged in Clos topologies to provide high bisection bandwidth.<br>System with fault tolerance can do things like <strong>rolling upgrade</strong>, or kill-n-restart virtual node.</p>
+<hr>
+<p><strong>Fault Tolerance</strong>: It is important to consider wide range of possible faults, even fairly unlikely ones. Fault handling mech should be part of the software design.</p>
+<p>You can construct a more reoliable system from a less reliable underlying base. E.g., using <strong>error-correcting</strong> codes to detect random bit error during transmission, and use <strong>Transmission Control Protocol</strong> (TCP) to form more reliable transport layter on top of IP (<strong>Internet Protocol</strong>)<br>However, these methods have their own limit of how much error can be detected and handled, and TCP cannot resolve network latency issue.</p>
+<hr>
+<p><strong>Unreliable Network</strong>: Usually, one node can send a message &#x2F; packet to another node, but there is <strong>no guarantee</strong> when it will arrive, or whether it will arrive at all.<br>Sender cannot tell if the packet was delivered, because recipent’s response message can be lost. Usual way of handling this is setting a <strong>timeout</strong>.<br>* Redundancy in data center setting cannot prevent <strong>human error</strong>, which is a main reason for outage.</p>
+<p><strong>Detecting Faults</strong>: Many systems need to detect faulty nodes, e.g., load balancer stop sending request to dead node, and new leader may need to be elected in single-leader setting database.<br>However, it is still hard to get response, or get to know how much data is processed before failure happened. If node’s operating system is still running, another node may be able to take over.</p>
+<hr>
+<h3 id="Timeout-and-Unbounded-Delays"><a href="#Timeout-and-Unbounded-Delays" class="headerlink" title="Timeout and Unbounded Delays"></a>Timeout and Unbounded Delays</h3><ol>
+<li><strong>Timeout</strong> can be the only sure way of detecting a fault, but the limit is hard to set.</li>
+<li>Falsely declaring a <strong>node dead</strong> is problematic, may ended up performing actions twice. Also, extra load would be placed on other nodes, and cause <strong>cascading failure</strong> (extremely all nodes can be declared dead and stop working).</li>
+<li>If delivery time is bounded by $d$ and request processing time is bounded by $r$, then we can set timeout limit as $2d+r$. Unfortunately, most systems have <strong>unbounded delays</strong>.</li>
+</ol>
+<p><strong>Network Congestion</strong>: Multiple different nodes <strong>simultaneously</strong> try to send packets to the <strong>same destination</strong>, the network switch must queue them up and feed them into the destination network link one by one. Then packet may need to wait for a slot.<br>* Packet may be dropped if switch queue is full.</p>
+<p>Also, even a packet reaches the destination machine, we may still need to be queued by the <strong>operating system</strong> if the system is busy, or need to wait to get a CPU core in a <strong>virtualized</strong> environment.<br><strong>TCP</strong> performs <strong>flow control</strong> (also known as <strong>congestion avoidance</strong> or <strong>backpressure</strong>), in which a node limits its own rate of sending in order to avoid overloading a network link or the receiving node (additional queueing will be needed). </p>
+<p>* <strong>TCP</strong> would consider a packet to be lost if it is not acknowledged within the timeout. Application will not see the loss and retreansmission, but will see the latency.</p>
+<p><strong>TCP v.s. UDP</strong>: In <strong>latency-sensitive</strong> application, like video conferencing, use UDP rather than TCP because delayed data will be worthless. UDP does <strong>not</strong> perform flow control and does not retransmit loss packets. Human can ask for retransmission instead.</p>
+<p><strong>Determine timeout</strong>: Queueing delays have especially wide range when a system is close to its max capacity and long queue can be built.<br>You can only choose timeouts <strong>experimentally</strong> to learn the distribution of expected <strong>variability of delays</strong>.</p>
+<p>More ideally, systems can continually measure response times and their variability (<strong>jitter</strong>), and automatically <strong>adjust</strong> timeouts according to the observed response time distribution.<br>This can be done with a <strong>Phi Accrual failure detector</strong></p>
+<h3 id="Phi-Accural-Failure-Detector"><a href="#Phi-Accural-Failure-Detector" class="headerlink" title="Phi Accural Failure Detector"></a>Phi Accural Failure Detector</h3><p>Traditionally, we can use <strong>heartbeat</strong> for failure detector. Rather than setting the heartbeat timeout to a <strong>constant</strong> value, we assume the heartbeat message matches certain type of probability model. E.g., the interval obeys the normal distribution.<br>Then, we can use the history data in the <strong>sliding window</strong>, to estimate the probability parameters with <strong>maximum likelihood</strong> estimation and calculates the probability of receiving heartbeat message at this moment.</p>
+<ul>
+<li>If the node is invalid, we want the $\lim_{t \rightarrow \infty}\phi(t)&#x3D;\infty$</li>
+<li>$\exists t_0$ such that $\forall x_1 \ge x_2 \ge t_0, \phi(x_1) \ge \phi(x_2)$.</li>
+<li>If the node is valid, then $\phi(t)$ is bounded.</li>
+<li>If the node is valid, then $\exists t_0$ such that $\forall x \ge t_0, \phi(x) &#x3D;0$.</li>
+</ul>
+<p>$\phi(t_{now})$ is defined as $-\log_{10}(P_{later} (t_{now} - T_{last}) )$<br>$P_{later} (t) &#x3D; \frac{1}{\sigma \sqrt{2 \pi}} \int_t^{+\infty} e^{-\frac{(x-\mu)^2}{2\sigma ^2}}dx $</p>
+<p>Here, $\mu$ and $\sigma$ can be estimated with the data in the <strong>sampling window</strong>.</p>
+<p>Each node &#x2F; subprocess can use their own threshold to compare with (other node’s) $\phi(t)$ shared by the failure detector.</p>
+<hr>
+<p>* When you make a call over the <strong>telephone network</strong>, it would establish a <strong>fixed</strong>, <strong>guaranteed</strong> amount of bandwidth through the entire route between callers.<br> This kind of network is <strong>synchronous</strong>: even as data passes through several routers, it does not suffer from queueing, because the 16 bits of space for the call have already been reserved in the <strong>next hop</strong> of the network. And because there is no queueing, the maximum end-to-end latency of the network is fixed. We call this a <strong>bounded delay</strong>.</p>
+<p>The packets of a TCP connection <strong>opportunistically</strong> use whatever network bandwidth is available.<br>They are <strong>packet switching</strong>, instead of <strong>circuit-switched</strong> networks, as they are optimized for <strong>bursty traffic</strong>. It can be hard to <strong>guess</strong> a proper bandwidth allocation. TCP can adapt the rate <strong>dynamically</strong>.</p>
+<p><strong>Static</strong> resource allocation can provide <strong>latency guarantees</strong>, but at the cost of <strong>reduced utilization</strong>.</p>
+<hr>
+<h3 id="Unreliable-Clocks"><a href="#Unreliable-Clocks" class="headerlink" title="Unreliable Clocks"></a>Unreliable Clocks</h3><p>Usually each machine has its own clock, which makes determining the <strong>order</strong> difficult in case of concurrency.<br>This makes figuring request <strong>timeout</strong> &#x2F; getting <strong>timestamps</strong> &#x2F; scheduling services… more challenging.</p>
+<p>We can <strong>synchronize</strong> clocks to some degree with <strong>Network Time Protocol (NTP)</strong>.<br>NTP uses <strong>hierarchical</strong>, <strong>semi-layered</strong> system of time sources. Each level of hierachy is termerd a <strong>stratum</strong>, assigned with a number starting from 0. A server synchronized to a stratum $n$ server runs at stratum $n+1$.<br>* Stratum is <strong>not</strong> always an indication of quality or reliability</p>
+<ul>
+<li>Stratum 0: High-precision timekeeping devices such as <strong>atomic clocks</strong>, <strong>GNSS</strong> (including GPS) or other radio clocks,</li>
+<li>Stratum 1: Synced within a few microseconds of stratum 0 devices. </li>
+<li>Stratum 2: Synced with the above level.</li>
+</ul>
+<p>The NTP algorithms on each computer interact to construct a <strong>Bellman–Ford</strong> shortest-path spanning tree, to minimize the accumulated round-trip delay to the stratum 1 servers for all the clients.</p>
+<p>The <strong>upper limit</strong> for stratum is 15; stratum 16 is used to indicate that a device is <strong>unsynchronized</strong></p>
+<p><strong>Example</strong>: We will have 4 timestamps $T_1, … T_4$. Here, client send a request on $T_1$, it reaches the server on $T_2$, response is sent on $T_3$ and arrives on $T_4$.<br>We can estimate $delay &#x3D; \frac{T_4 - T_1 - (T_3 - T_2)}{2}$, and the offset satisfies: $\text{offset} + T_4 &#x3D; T_3 + \text{delay}$, so we can figure out the offset and adjust the clock.</p>
+<hr>
+<p>Modern computers have at least 2 kinds of clocks: a <strong>time-of-day clock</strong> (returns date and time according to some calendar, known as <strong>wall-clock time</strong>, like seconds since the epoch:midnight on 1st Jan 1970, might jump back) and a <strong>monotonic clock</strong> (for measuring a <strong>duration</strong>, never jumps back, the unit might be in nano-seconds).</p>
+<p><strong>NTP</strong> may adjust the frequency at which the monotonic clock moves forward, if the local quartz is moving faster or slower (allow error up to 0.05%). Such error is tolerable in distributed systems.</p>
+<p>There lies some challenges in getting the clock synchronized:</p>
+<ol>
+<li>Quartz clock in a computer can <strong>drift</strong>, depending on the temperature. It may be a 17 seconds drift for a clock resynchronized once a day.</li>
+<li>Local clock may refure to synchronize if it differs too much from an <strong>NTP</strong> server, or local clock be forcibly reset.</li>
+<li><strong>NTP</strong> synchronization can only be as good as the network delay. Itself may go wrong as well.</li>
+<li><strong>Leap seconds</strong> result in a minute has 59 &#x2F; 61 seconds. NTP server can perform the leap second adjustment gradually over the course of a day (called <strong>smearing</strong>)</li>
+<li>Hardware clock can be virtualized in virtual machines, and each VM can <strong>pause</strong> for tens of miliseconds and clock jumps forward.</li>
+<li>You cannot trust user device’s clock setting.</li>
+</ol>
+<p>Inaccurate clock can casue lost of updates, under setting of <strong>Last Write Wins</strong>.<br>A node with <strong>lagging</strong> clock cannot overwrite values previously written by a node with a <strong>fast</strong> clock, casuing data be <strong>silently</strong> dropped.<br><strong>LWW</strong> cannot distinguish truly <strong>concurrent</strong> writes (writes are not aware of each other) and writes that occurred <strong>sequentially</strong> in quick succession (writers are aware of others).<br>Clock reading should be viewed as a range within a <strong>confidence interval</strong>, rather than a point in time.</p>
+<p>We may need <strong>tie breaker</strong>, if two nodes generate the same timestamp.<br><strong>Logical clocks</strong> based on <strong>incrementing counters</strong> may be a better solution, only measuring the relative ordering of events.</p>
+<hr>
+<h3 id="Synchronized-clocks-for-global-snapshots"><a href="#Synchronized-clocks-for-global-snapshots" class="headerlink" title="Synchronized clocks for global snapshots"></a>Synchronized clocks for global snapshots</h3><p>The most common implementation of snapshot isolation requires a <strong>monotonically increasing</strong> transaction ID.<br>On single node, this can be generated by a counter.<br>However, it is challenging for database distributed across many machines &#x2F; data centers, because transaction ID must reflect <strong>causality</strong>, but we have <strong>clock accuracy</strong> concern. </p>
+<ol>
+<li><strong>TrueTime API</strong> can report clock’s <strong>confidence interval</strong>, and we can use it to determine if two time reading overlap.</li>
+<li>We can wait the length of the confidence interval before committing a <strong>read-write</strong> transaction.<br>Above is used in <strong>Google</strong> only</li>
+</ol>
+<hr>
+<h3 id="Process-Pauses"><a href="#Process-Pauses" class="headerlink" title="Process Pauses"></a>Process Pauses</h3><p>In single leader setting database, leader has to know if it is <strong>not</strong> declared by others and safely accept writes.<br>one options is let leader obtain a <strong>lease</strong> from other nodes, which is similar to a lock with a timeout. If the leader dies, it will not renew the lease and another node can take over.</p>
+<p>However, if we want to use a timer in the implementation, we will have the clock issue (if different nodes’ clocks go out-of-sync).</p>
+<p>Even we use a <strong>local monotinic clock</strong>, it is still possible that an <strong>unexpected pause</strong> happens after the leader checked that it still hold the lease. Another node may become the leader during this time, but the old leader is not aware of that.</p>
+<p><strong>Potential Reasons of such pause</strong>:</p>
+<ol>
+<li>(Stop the world) <strong>Garbage Collection</strong>, may stop all running threads. [One emerging idea is to treat <strong>GC</strong> pause like brief planned outages of a node, used in some <strong>latency-sensitive</strong> financial trading systems]</li>
+<li>Suspended <strong>virtual machine</strong> (to migrate to another node, for example).</li>
+<li>In end-user devices like latops, execution can be suspended.</li>
+<li><strong>Context Switch</strong> between threads or virtual machines. CPU time spent in other virtual machines is known as <strong>steal time</strong>.</li>
+<li>Slow <strong>I&#x2F;O</strong>, or delay caused by <strong>paging</strong> (swaping to disk). Servers can disable paging to avoid <strong>thrashing</strong> (spend most of the time swapping pages)</li>
+</ol>
+<p>You can’t assume anything about timing, because arbitrary <strong>context switches</strong> and <strong>parallelism</strong> may occur (just like making multi-threaded code).<br>For distributed systems, we do not have tools like <strong>mutexes</strong>, <strong>semaphores</strong>, <strong>atomic counters</strong>, <strong>lock-free</strong> data structures, <strong>blocking queues</strong>, and so on.</p>
+<hr>
+<p><strong>Response time guarantees</strong>: In some systems (like rocket, called <strong>hard real-time systems</strong>), we have a deadline by which the software <strong>must</strong> respond. </p>
+<p>In <strong>embedded systems</strong>, real-time means that a system is carefully designed and tested to meet specified <strong>timing guarantees</strong> in all circumstances.<br>In <strong>network</strong>, real-time means servers pushing data to clients and stream processing without hard response time constraints</p>
+<p>Providing real-time guarantees in a systems can be challenging, as it requires: a <strong>real-time operating system</strong> (RTOS) that allows processes to be scheduled with a guaranteed allocation of CPU time in specified intervals is needed; library functions must document their <strong>worst-case</strong> execution times; dynamic memory allocation may be <strong>restricted</strong> or disallowed entirely (real-time garbage collectors exist, but the application must still ensure that it doesn’t give the GC too much work to do); and an enormous amount of testing and measurement must be done.</p>
+<hr>
+<p>It should be noted that even if a node believes that it is leader (or hold the lease, etc), that doesn’t necessarily mean a <strong>quorum</strong> of nodes agrees!<br>* We should not do the validation only on application end. We need the resource &#x2F; data itself in checking tokens.</p>
+<p><strong>Fencing</strong>: Every time the lock server grants a lock or lease, it also returns a <strong>fencing token</strong>, which is a number that increases every time a lock is granted (e.g., incremented by the lock service). We can then require that every time a client sends a write request to the storage service, it must <strong>include</strong> its current fencing token.<br>If server ever processed a write with a higher token number, it rejects the write with old token.</p>
+<p>If <strong>ZooKeeper</strong> is used as lock service, the transaction ID <strong>zxid</strong> or the node version <strong>cversion</strong> can be used as fencing token. Since they are guaranteed to be <strong>monotonically increasing</strong></p>
+<h3 id="Byzantine-Faults"><a href="#Byzantine-Faults" class="headerlink" title="Byzantine Faults"></a>Byzantine Faults</h3><p>Fencing tokens can work well (with <strong>honest</strong> but <strong>unreliable</strong> assumption). However, if it is not honest, it could fake such token and cause <strong>Byzantine fault</strong> (reaching <strong>consensus</strong> in this <strong>untrusting</strong> environment).</p>
+<p>The problem needs $n$ generals who need to agree, but we have some traitors among them sending fake messages.<br>A system is <strong>Byzantine fault-tolerant</strong> if it can tolerate nodes which are <strong>malfunctioning</strong> and <strong>not</strong> obeying the protocol, or if <strong>malicious</strong> attackers are interfering with the network.</p>
+<p>We can safely assume there is no Byzantine fault in most datacenters &#x2F; databases. Such solution can be complicated ted and need support from hardware level.<br>Usually, the server has <strong>central authority</strong> to determine what kind of behavior is allowed and do protection with <strong>authentication</strong>, <strong>access control</strong>, <strong>encryption</strong>, <strong>firewalls</strong>, and so on. </p>
+<p>Also, if you deploy same software to all nodes, <strong>Byzantine fault-tolerant algorithm</strong> may not help, because we expect the error to be independent so that we can some nodes functioning correctly.</p>
+<hr>
+<h3 id="Timing-Assumption-Model"><a href="#Timing-Assumption-Model" class="headerlink" title="Timing Assumption Model"></a>Timing Assumption Model</h3><ol>
+<li><strong>Synchronous model</strong>: bounded network delay, bounded process pauses,<br>and bounded clock error. Not very realistic as unbounded delays can occur.</li>
+<li><strong>Partially synchronous model</strong>: Behaves like a synchronous system most of the time, but exceeds the bounds sometimes. </li>
+<li><strong>Asynchronous model</strong>: No any timing assumptions, not even have a clock.</li>
+</ol>
+<p>Common Models of <strong>System (Node) Failure</strong>:</p>
+<ol>
+<li><strong>Crash-stop faults</strong>: Only crash may happen, then the node gone forever.</li>
+<li><strong>Crash-recovery faults</strong>: May recover after sometime if crashed. Nodes are assumed to have <strong>stable storage</strong> (i.e., non-volatile disk storage), while the <strong>in-memory</strong> state is assumed to be lost. Usually most useful.</li>
+<li><strong>Byzantine (arbitrary) faults</strong>: Node can do anything, including being <strong>dishonest</strong></li>
+</ol>
+<hr>
+<p>We may be interested in the following properties under the above failure models:</p>
+<ol>
+<li><strong>Correctness</strong>: We can write down the properties we want a distributed algorithm to have, to define correctness.</li>
+<li><strong>Safety and liveness</strong>: Usually we can distinguish <strong>liveness</strong> properties from <strong>safety</strong> properties, as prior usually include the word “eventually” in their definition. Safety means nothing bad happens, but liveness means something good eventually happens.</li>
+<li><strong>Formal Definition</strong>: If <strong>safety</strong> property is viloated, we can point out a particular time at which it was broken, and such violation cannot be undone. For <strong>liveness</strong> property, it may not hold at some point in time, but there is always hope that it may be satisfied in the future.</li>
+</ol>
+<p>For distributed algorithms, it is common to require safety properties always hold (to ensure it does not return a <strong>wrong</strong> result in terms of failure). For liveness properties, we can make caveats and state that only if majority of nodes have not crashed, we can say a request needs to receive a response.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" data-id="clv9rrnpk0000r4te8aoq7178" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "Designing Data-Intensive-Applications-Note-16",
+        "image": "https://umiao.github.io/2024/04/21/Designing-Data-Intensive-Applications-Note-16/cover.png",
+        "keywords": "DataScience Data System",
+        "genre": "Data Science Data System",
+        "datePublished": "2024-04-21",
+        "dateCreated": "2024-04-21",
+        "dateModified": "2024-04-27",
+        "url": "https://umiao.github.io/2024/04/21/Designing-Data-Intensive-Applications-Note-16/",
+        "description": "Discussion on challenges with distributed systems.
+",
+        "wordCount": 2684
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Designing Data-Intensive-Applications-Note-17
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-15</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png)" alt="Designing Data-Intensive-Applications-Note-17" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="title">Designing Data-Intensive-Applications-Note-17</a></p>
+                            <p class="item-date"><time datetime="2024-04-27T18:27:31.000Z" itemprop="datePublished">2024-04-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/21/Designing-Data-Intensive-Applications-Note-16/cover.png)" alt="Designing Data-Intensive-Applications-Note-16" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="title">Designing Data-Intensive-Applications-Note-16</a></p>
+                            <p class="item-date"><time datetime="2024-04-21T16:54:34.000Z" itemprop="datePublished">2024-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/29/Designing-Data-Intensive-Applications-Note-15/cover.png)" alt="Designing Data-Intensive-Applications-Note-15" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" class="title">Designing Data-Intensive-Applications-Note-15</a></p>
+                            <p class="item-date"><time datetime="2024-03-29T20:52:54.000Z" itemprop="datePublished">2024-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/24/Designing-Data-Intensive-Applications-Note-14/cover.png)" alt="Designing Data-Intensive-Applications-Note-14" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" class="title">Designing Data-Intensive-Applications-Note-14</a></p>
+                            <p class="item-date"><time datetime="2024-03-24T21:21:49.000Z" itemprop="datePublished">2024-03-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-13/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/24/Designing-Data-Intensive-Applications-Note-13/cover.png)" alt="Designing Data-Intensive-Applications-Note-13" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-13/" class="title">Designing Data-Intensive-Applications-Note-13</a></p>
+                            <p class="item-date"><time datetime="2024-03-24T16:31:49.000Z" itemprop="datePublished">2024-03-24</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">42</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/Data-System/">Data System</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Investment/">Investment</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/" rel="tag">Apple Watch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLI/" rel="tag">CLI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate/" rel="tag">Certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-System/" rel="tag">Data System</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/" rel="tag">English</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IQ/" rel="tag">IQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyboard/" rel="tag">Keyboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOD/" rel="tag">OOD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented-Design/" rel="tag">Object Oriented Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Productivity/" rel="tag">Productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Term/" rel="tag">Term</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tips/" rel="tag">Tips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vocabulary/" rel="tag">Vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Frequency/" rel="tag">Word Frequency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/" rel="tag">futures</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/investment/" rel="tag">investment</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/options/" rel="tag">options</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trading/" rel="tag">trading</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Apple-Watch/" style="font-size: 10px;">Apple Watch</a> <a href="/tags/Brainteasers/" style="font-size: 10px;">Brainteasers</a> <a href="/tags/CLI/" style="font-size: 10px;">CLI</a> <a href="/tags/Certificate/" style="font-size: 10px;">Certificate</a> <a href="/tags/Cyber-Security/" style="font-size: 10px;">Cyber Security</a> <a href="/tags/Data-System/" style="font-size: 18px;">Data System</a> <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/IQ/" style="font-size: 10px;">IQ</a> <a href="/tags/Keyboard/" style="font-size: 10px;">Keyboard</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 14px;">Machine Learning</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/OOD/" style="font-size: 10px;">OOD</a> <a href="/tags/Object-Oriented-Design/" style="font-size: 10px;">Object Oriented Design</a> <a href="/tags/Productivity/" style="font-size: 10px;">Productivity</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Software-Engineering/" style="font-size: 12px;">Software Engineering</a> <a href="/tags/Term/" style="font-size: 10px;">Term</a> <a href="/tags/Tips/" style="font-size: 10px;">Tips</a> <a href="/tags/UCLA/" style="font-size: 12px;">UCLA</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 10px;">Vocabulary</a> <a href="/tags/Word-Frequency/" style="font-size: 10px;">Word Frequency</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a> <a href="/tags/futures/" style="font-size: 12px;">futures</a> <a href="/tags/investment/" style="font-size: 12px;">investment</a> <a href="/tags/options/" style="font-size: 12px;">options</a> <a href="/tags/trading/" style="font-size: 12px;">trading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2024 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2024/04/21/Designing-Data-Intensive-Applications-Note-16/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

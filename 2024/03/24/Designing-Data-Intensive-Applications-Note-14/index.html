@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Designing Data-Intensive-Applications-Note-14 | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="DataScience,Data System" />
+    
+    <meta name="description" content="Discussion on partition related topics.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Designing Data-Intensive-Applications-Note-14">
+<meta property="og:url" content="https://umiao.github.io/2024/03/24/Designing-Data-Intensive-Applications-Note-14/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Discussion on partition related topics.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2024/03/24/Designing-Data-Intensive-Applications-Note-14/cover.png">
+<meta property="article:published_time" content="2024-03-24T21:21:49.000Z">
+<meta property="article:modified_time" content="2024-03-29T20:52:00.476Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="Data System">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2024/03/24/Designing-Data-Intensive-Applications-Note-14/cover.png">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/Data-System/">Data System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Investment/">Investment</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Productivity/">Productivity</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/Data-System/">Data System</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Designing-Data-Intensive-Applications-Note-14" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Designing Data-Intensive-Applications-Note-14
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" class="article-date">
+       <time datetime="2024-03-24T21:21:49.000Z" itemprop="datePublished">2024-03-24</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" class="article-date">
+     <time datetime="2024-03-29T20:52:00.476Z" itemprop="dateModified">2024-03-29</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Data-System/" rel="tag">Data System</a>, <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Discussion on partition related topics.</p>
+<img src="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/cover.png" class="" title="ML_note">
+<span id="more"></span>
+
+<p><strong>Partition</strong>: Known as <strong>Shard</strong> in MongoDB, Elasticsearch, and SolrCloud. Known as a <strong>region</strong> in HBase, a <strong>tablet</strong> in Bigtable, a <strong>vnode</strong> in Cassandra and Riak, and a <strong>vBucket</strong> in Couchbase. </p>
+<p>Partition aims to act as independent small, <strong>non-overlapping</strong> databases for better <strong>scalability</strong>.<br>Different partitions can be placed on different nodes for load balancing (on processor) and large dataset distribution. Each node should be able to independently querying their own partition, able to <strong>parallelize</strong> complex queries.</p>
+<p>Old partition databases: <strong>Teradata</strong>, <strong>Tandem NonStop SQL</strong>; Recently: <strong>Hadoop</strong> and <strong>NoSQL</strong> databases.</p>
+<p>Partition is usually combined with replication to have each partition stored on multiple nodes. If leader based replication setting is used, then leader and follower of the same partition should belong to different nodes.</p>
+<hr>
+<ul>
+<li>We expect partition to be spreading data and query <strong>evenly</strong>, so that our throughput and data volume being able to handle can grow linearly as we have more nodes (if we ignore the replication).</li>
+<li><strong>Skewed</strong>: the partitioning is unfair and some partitions have more data. Reduce the effectiveness of partition. A partition with high load is named a <strong>hot spot</strong>.</li>
+<li>We should try to assign records to node randomly, preferrably using <strong>primary key</strong>.</li>
+</ul>
+<p><strong>Partition by Key Range</strong>: </p>
+<ol>
+<li>assign a <strong>continuous</strong> range of keys (from some minimum to some maximum) to each partition (like encyclopedia)</li>
+<li>The range of keys are <strong>NOT</strong> guaranteed to be evenly spaced, need to adapt to the data. Some access pattern may lead to <strong>hot spots</strong>.</li>
+<li>We can keep the keys sorted in each partition to make scan easier and treat the keys as a <strong>concatenated index</strong>.</li>
+</ol>
+<p><strong>Partition by Hash of Key</strong>: </p>
+<ol>
+<li>Due to the risk of <strong>skew</strong> and <strong>hot spots</strong>, we can use hash function to determine partition (assign each partition a range of <strong>hashes</strong>).</li>
+<li>Good hash function can takes skewed data but still makes it <strong>uniformly</strong> distributed. </li>
+<li>Such function not have to be <strong>cryptographically</strong> strong if it is for partition purpose. E.g., <strong>MD5</strong> and <strong>Fowler–Noll–Vo</strong>. </li>
+<li>Some hash function (used for hash tables) are not suitable for partitioning, like <code>Object.hashCode()</code> in <strong>Java</strong> and <code>Object#hash</code> in <strong>Ruby</strong>, where same key may have different hash values across processes.</li>
+<li>The partition boundaries can be evenly spaced, or they can be chosen <strong>pseudorandomly</strong> (<strong>consistent hashing</strong> &#x2F; <strong>hash partitioning</strong>, randomly choose partition boundaries to avoid the need for <strong>central control</strong> &#x2F; <strong>distributed consensus</strong>. That is to say, also map nodes &#x2F; virtual nodes to a ring, then direct traffic to the next node on the ring).</li>
+<li>We can <strong>NOT</strong> do efficient range queries by hashing the keys. No primary key based range queries as queries have to be sent to all partitions.<br>* We can make a tradeoff by using <strong>compound primary key</strong> but just hash the first part to determine the partition, other columns used as <strong>concatenated index</strong>.<br>E.g., if you use compound key of <code>(user_id, updated_timestamp)</code>, you can effectively query posts of one user, in a certain time range. Each user’s data is guranteed to be stored in a single partition.</li>
+</ol>
+<p><strong>Relieving Hot Spots</strong>: </p>
+<ol>
+<li>Exactly the same keys would still be directed into the <strong>same</strong> partition, even with the partition on hash of keys (e.g., visits to certain celebrity).</li>
+<li>This is hard to be compensated by data systems, so should be done on the <strong>application level</strong>. The hotspots can be relieved by appending random numbers to the beginning &#x2F; end of the key. </li>
+<li>This only makes sense when you are adding <strong>salt</strong> for small number of hotspots.</li>
+</ol>
+<hr>
+<p><strong>Partition on Secondary Indexes</strong></p>
+<ol>
+<li><strong>Secondary Indexes</strong> usually cannot uniquely identify a record, more like searching occurences of a particular value. It is more <strong>complex</strong> and does not map neatly into partitions.</li>
+<li><strong>Document-based partitioning</strong> (also named as <strong>Local Index</strong>): Each partition is <strong>sepearate</strong> and owns its own secondary indexes covering the documents in that partition. E.g., you can add a qualified red car to each partition’s seondary index’s list of <code>color:red</code>. During query time, you should send query to all partitions and combine the result back (<strong>scatter &#x2F; gather</strong>, may make the secondary index more expensive and prone to <strong>tail latency amplification</strong>). It is widely used and ideally you can construct your schema to have secondary index queries served from a <strong>single</strong> partition.</li>
+<li><strong>Term-based partitioning</strong>: In this case, we are having <strong>global</strong> secondary indexes which cover data in all partitions. Such index can be stored in partitions in a <strong>non-overlap</strong> manner. E.g., <code>color:red</code> contains <strong>all</strong> indexes of qualified cars across partitions, but only got stored in <strong>single</strong> partition (called <strong>term-partitioned</strong> as the term we are looking for determines the partition of index).</li>
+<li><strong>Term &#x2F; Global secondary index</strong> is more efficient in <strong>read</strong>; <strong>write</strong> is slower and more complex (a write to single document may affect multiple partitions of the index).  Global secondary index also require a <strong>distributed transaction</strong> across all partitions<br>affected by a write, which is not supported in all databases. It is often <strong>asynchronous</strong> and the index may not be updated in real-time.</li>
+</ol>
+<hr>
+<h3 id="Rebalance-Partitions"><a href="#Rebalance-Partitions" class="headerlink" title="Rebalance Partitions"></a>Rebalance Partitions</h3><p><strong>Rebalancing</strong> (move data and requests from one node to another) may be needed due to increase of <strong>query throughput</strong> (to add more CPUs), increase of <strong>dataset size</strong> or <strong>machine failure</strong>.</p>
+<p>After rebalancing, we want:  </p>
+<ol>
+<li>Load (data storage, read and write requests) should be shared <strong>fairly</strong> between the nodes in the cluster.</li>
+<li>While rebalancing is happening, the database should continue accepting reads and writes.</li>
+<li>No more data than necessary should be moved between nodes, to make rebalancing fast and to <strong>minimize</strong> the network and disk I&#x2F;O load.</li>
+</ol>
+<p><strong>Strategies of rebalancing</strong>:</p>
+<ol>
+<li><strong>NOT</strong> recommended: <strong>hash mod N</strong> (N is number of new partitions). This is expensive as it over-moves the data. Instead, better divide hash into <strong>ranges</strong> in partitioning.</li>
+<li><strong>Fixed number of partitons</strong>: creating <strong>more</strong> partitions than number of nodes, assign several partitions to each node (maybe unevenly). Then partitions can be easily moved between nodes for node extension &#x2F; delete purpose. Number of partitions nor assignment of keys will chagne. Also, old partitions can still handle requests when transferring is in progress.</li>
+</ol>
+<hr>
+<h3 id="Dynamic-Partitioning"><a href="#Dynamic-Partitioning" class="headerlink" title="Dynamic Partitioning"></a>Dynamic Partitioning</h3><p>A <strong>fixed number</strong> of partitions with <strong>fixed boundaries</strong> may end up with all data in one partition, if you did not configure the boundaries properly.</p>
+<p><strong>Dynamic Partitioning</strong> (used in <strong>HBase</strong> &#x2F; <strong>RethinkDB</strong>): When a partition <strong>grows</strong> to exceed the configured size (e.g. 10GB), it is split into two partitions approximately half of the original size. If data is delted below same threshold, it can be merged with <strong>adjacent</strong> partition.</p>
+<p>It makes the number of partitions adapats to the total data volume to potentially save the overhead.</p>
+<p>An initial set of partitions can be configured on an empty database (this is called <strong>pre-splitting</strong>) to prevent the number of partitions to grow from 1, but it requires you to know the <strong>key distribution</strong>.</p>
+<hr>
+<h3 id="Partitioning-proportionally-to-nodes"><a href="#Partitioning-proportionally-to-nodes" class="headerlink" title="Partitioning proportionally to nodes"></a>Partitioning proportionally to nodes</h3><p><strong>Dynamic partitioning</strong>: number of partitions is proportional to the size of the dataset<br><strong>Fixed num‐ber of partitioning</strong>: the size of each partition is proportional to the size of the dataset.</p>
+<p><strong>Proportional Partitioning</strong>: Make each node having a fixed number of partitions, and the number of partitions proportional to the number of nodes.</p>
+<p>When a new node joins the cluster, it <strong>randomly</strong> (hash-based partitioning is required) chooses a fixed number of existing partitions to split, and then takes ownership of one <strong>half</strong> of each of those split partitions while leaving the other half of each partition in place. </p>
+<p>The randomization can produce <strong>unfair</strong> splits, but when averaged over a larger number of partitions (in <strong>Cassandra</strong>, 256 partitions per node by default), the new node ends up taking a fair share of the load from the existing nodes. </p>
+<hr>
+<p>* It may be good to loop human in partitioning to reach a <strong>tradeoff</strong> between automatic &#x2F; manual partitoning, e.g., data system suggests partition assignment but requires commit from admin.<br>Fully automated partitionings can be unpredictable and expensive, may cause <strong>overload</strong> of network &#x2F; nodes and <strong>cascading</strong> failure.</p>
+<hr>
+<h3 id="Request-Routing"><a href="#Request-Routing" class="headerlink" title="Request Routing"></a>Request Routing</h3><p><strong>Request Routing</strong> is an instance of <strong>service discovery</strong>, which is about how we route request to certain node &#x2F; port.</p>
+<ol>
+<li>Allow clients to contact <strong>any</strong> node (e.g., via a <strong>round-robin load balancer</strong>). If that node coincidentally owns the partition to which the request applies, it can handle the request directly; otherwise, it forwards the request to the appropriate node, receives the reply, and passes the reply along to the client.</li>
+<li>Send all requests from clients to a <strong>routing tier</strong> first, which determines the node that should handle each request and forwards it accordingly. This routing tier does <strong>NOT</strong> itself handle any requests; it only acts as a <strong>partition-aware load balancer</strong>.</li>
+<li>Require that clients be aware of the partitioning and the assignment of partitions to nodes. In this case, a client can connect <strong>directly</strong> to the appropriate node, without any intermediary.</li>
+</ol>
+<p>Coordination service like <strong>ZooKeeper</strong> can help in this process (as routing tier), but you can also have any node take &amp; forward requests.</p>
+<p>*  <strong>Massively Parallel Processing (MPP)</strong> relational database can be a lot more complex, as query needs to be broken into executive stages and partitions.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" data-id="clu60yd940000nwte1vspaud4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "Designing Data-Intensive-Applications-Note-14",
+        "image": "https://umiao.github.io/2024/03/24/Designing-Data-Intensive-Applications-Note-14/cover.png",
+        "keywords": "DataScience Data System",
+        "genre": "Data Science Data System",
+        "datePublished": "2024-03-24",
+        "dateCreated": "2024-03-24",
+        "dateModified": "2024-03-29",
+        "url": "https://umiao.github.io/2024/03/24/Designing-Data-Intensive-Applications-Note-14/",
+        "description": "Discussion on partition related topics.
+",
+        "wordCount": 1469
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Designing Data-Intensive-Applications-Note-15
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-13/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-13</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png)" alt="Designing Data-Intensive-Applications-Note-17" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="title">Designing Data-Intensive-Applications-Note-17</a></p>
+                            <p class="item-date"><time datetime="2024-04-27T18:27:31.000Z" itemprop="datePublished">2024-04-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/21/Designing-Data-Intensive-Applications-Note-16/cover.png)" alt="Designing Data-Intensive-Applications-Note-16" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="title">Designing Data-Intensive-Applications-Note-16</a></p>
+                            <p class="item-date"><time datetime="2024-04-21T16:54:34.000Z" itemprop="datePublished">2024-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/29/Designing-Data-Intensive-Applications-Note-15/cover.png)" alt="Designing Data-Intensive-Applications-Note-15" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" class="title">Designing Data-Intensive-Applications-Note-15</a></p>
+                            <p class="item-date"><time datetime="2024-03-29T20:52:54.000Z" itemprop="datePublished">2024-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/24/Designing-Data-Intensive-Applications-Note-14/cover.png)" alt="Designing Data-Intensive-Applications-Note-14" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" class="title">Designing Data-Intensive-Applications-Note-14</a></p>
+                            <p class="item-date"><time datetime="2024-03-24T21:21:49.000Z" itemprop="datePublished">2024-03-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-13/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/24/Designing-Data-Intensive-Applications-Note-13/cover.png)" alt="Designing Data-Intensive-Applications-Note-13" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-13/" class="title">Designing Data-Intensive-Applications-Note-13</a></p>
+                            <p class="item-date"><time datetime="2024-03-24T16:31:49.000Z" itemprop="datePublished">2024-03-24</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">42</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/Data-System/">Data System</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Investment/">Investment</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/" rel="tag">Apple Watch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLI/" rel="tag">CLI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate/" rel="tag">Certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-System/" rel="tag">Data System</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/" rel="tag">English</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IQ/" rel="tag">IQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyboard/" rel="tag">Keyboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOD/" rel="tag">OOD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented-Design/" rel="tag">Object Oriented Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Productivity/" rel="tag">Productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Term/" rel="tag">Term</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tips/" rel="tag">Tips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vocabulary/" rel="tag">Vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Frequency/" rel="tag">Word Frequency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/" rel="tag">futures</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/investment/" rel="tag">investment</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/options/" rel="tag">options</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trading/" rel="tag">trading</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Apple-Watch/" style="font-size: 10px;">Apple Watch</a> <a href="/tags/Brainteasers/" style="font-size: 10px;">Brainteasers</a> <a href="/tags/CLI/" style="font-size: 10px;">CLI</a> <a href="/tags/Certificate/" style="font-size: 10px;">Certificate</a> <a href="/tags/Cyber-Security/" style="font-size: 10px;">Cyber Security</a> <a href="/tags/Data-System/" style="font-size: 18px;">Data System</a> <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/IQ/" style="font-size: 10px;">IQ</a> <a href="/tags/Keyboard/" style="font-size: 10px;">Keyboard</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 14px;">Machine Learning</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/OOD/" style="font-size: 10px;">OOD</a> <a href="/tags/Object-Oriented-Design/" style="font-size: 10px;">Object Oriented Design</a> <a href="/tags/Productivity/" style="font-size: 10px;">Productivity</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Software-Engineering/" style="font-size: 12px;">Software Engineering</a> <a href="/tags/Term/" style="font-size: 10px;">Term</a> <a href="/tags/Tips/" style="font-size: 10px;">Tips</a> <a href="/tags/UCLA/" style="font-size: 12px;">UCLA</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 10px;">Vocabulary</a> <a href="/tags/Word-Frequency/" style="font-size: 10px;">Word Frequency</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a> <a href="/tags/futures/" style="font-size: 12px;">futures</a> <a href="/tags/investment/" style="font-size: 12px;">investment</a> <a href="/tags/options/" style="font-size: 12px;">options</a> <a href="/tags/trading/" style="font-size: 12px;">trading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2024 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2024/03/24/Designing-Data-Intensive-Applications-Note-14/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Designing Data-Intensive-Applications-Note-17 | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="DataScience,Data System" />
+    
+    <meta name="description" content="Discussion on challenges with consensus.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Designing Data-Intensive-Applications-Note-17">
+<meta property="og:url" content="https://umiao.github.io/2024/04/27/Designing-Data-Intensive-Applications-Note-17/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Discussion on challenges with consensus.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png">
+<meta property="article:published_time" content="2024-04-27T18:27:31.000Z">
+<meta property="article:modified_time" content="2024-05-05T05:45:10.827Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="Data System">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/Data-System/">Data System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Investment/">Investment</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Productivity/">Productivity</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/Data-System/">Data System</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Designing-Data-Intensive-Applications-Note-17" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Designing Data-Intensive-Applications-Note-17
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="article-date">
+       <time datetime="2024-04-27T18:27:31.000Z" itemprop="datePublished">2024-04-27</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="article-date">
+     <time datetime="2024-05-05T05:45:10.827Z" itemprop="dateModified">2024-05-04</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Data-System/" rel="tag">Data System</a>, <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Discussion on challenges with consensus.</p>
+<img src="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png" class="" title="ML_note">
+<span id="more"></span>
+
+<p><strong>Consensus</strong>: Get all nodes to agree on something, e.g., the election of new leader. If two nodes both believe that they are the leader, that situation is called <strong>split brain</strong> which can be prevented by consensus.</p>
+<p><strong>Eventually consistency</strong> &#x2F; <strong>coverage</strong> is a <strong>weak</strong> guarantee.<br><strong>Stronger</strong> consistency guarantee may be possible, but can be less fault-tolerant or with worse performance. </p>
+<h3 id="Linearizability"><a href="#Linearizability" class="headerlink" title="Linearizability"></a>Linearizability</h3><p>Database works as if there is only one replica, no replication lag.<br>Also known as <strong>atomic consistency</strong>, <strong>strong consistency</strong>, <strong>immediate consistency</strong>, or <strong>external consistency</strong>.<br>It is a <strong>recency guarantee</strong>, means that we always able to see the latest value written to the database.</p>
+<p>Considering that we have a write request to the database, while there are other client requesting the database to get the latest value.<br>Any read operations that <strong>overlap</strong> in time with the write operation might return either old or new value, because we don’t know whether or not the write has taken effect at the time when the read operation is processed.<br>These operations are <strong>concurrent</strong> with the write.</p>
+<p>However, that is not yet sufficient to fully describe linearizability: if reads that are concurrent with a write can return either the old or the new value, then readers could see a value <strong>flip</strong> back and forth between the old and the new value several times while a write is going on. That is not what we expect of a system that emulates a <strong>“single”</strong> copy of the data.</p>
+<p>In order to enforce <strong>Linearizability</strong>, we have to imagine that for some point in time, the above value <strong>flips</strong> from old value to new value. All subsequent reads must also return the new value, even if the write operations <strong>has not</strong> yet completed.<br>Also, we can add <strong>compare-and-set</strong> <code>cas</code> atomic operator, to make the read-write cycle works correctly. (Before write the value $v_{new}$, we can read the value $v_{old}$ which is previously read). Otherwise, return an <strong>error</strong>.</p>
+<hr>
+<p><strong>Solution</strong>: We assume each operator to happen at certain <strong>moment</strong> of time. We place <strong>markers</strong> on these moments, and we require such markers are joined up in a <strong>sequential</strong> order, and the result must be a valid sequence of reads and writes for a register (every read must return the value set by the <strong>most recent</strong> write) (new value should take effect, even the write is <strong>not completed</strong>).</p>
+<p>The requirement of <strong>linearizability</strong> is that the lines joining up the operation markers always move forward in time (from left to right), never backward. This requirement ensures the <strong>recency guarantee</strong> we discussed earlier: once a new value has been written or read, all subsequent reads see the value that was written, until it is overwritten again.</p>
+<p>It is possible (though computationally <strong>expensive</strong>) to test whether a system’s behavior is linearizable by recording the timings of all requests and responses, and checking whether they can be arranged into a <strong>valid sequential order</strong> </p>
+<hr>
+<p><strong>Linearizability</strong> Versus <strong>Serializability</strong>:</p>
+<p><strong>Serializability</strong> is an isolation property of <strong>transactions</strong>, each may read &#x2F; write multiple objects. It guarantees that transactions behave the same as if they had executed in some serial order (OK to be different from the order which transactions were actually run)</p>
+<p><strong>Linearizability</strong> is a <strong>recency guarantee</strong> on reads and writes of a register &#x2F; single object. </p>
+<p>When the above two are provided, it is called <strong>strict serializability</strong> or <strong>strong one-copy serializability</strong> <strong>(strong-1SR)</strong>. </p>
+<p>* Implementations of <strong>serializability</strong> based on <strong>two-phase locking</strong> (2PL) or <strong>actual serial execution</strong> are typically <strong>linearizable</strong>.<br>**  Serializable snapshot isolation is not linearizable, because read is made from consistent snapshot, does not include writes that are more recent than the snapshot.</p>
+<hr>
+<p>One way of electing a leader is to use a <strong>lock</strong>: every node that starts up tries to acquire the lock, and the one that succeeds becomes the leader. The lock must be <strong>linearizable</strong> to reach consensus.</p>
+<p>Distributed locking can be used in more granular level, e.g., in  <strong>Oracle Real Application Clusters (RAC)</strong>, lock is on disk page level, with multiple nodes sharing access to the same disk storage system.</p>
+<p><strong>Uniqueness guarantees</strong> is similar to lock (or <strong>compare-and-set</strong>), e.g., to solve naming conflicts. This can also be used to enforce <strong>constraints</strong>, like make sure bank account balance being non-negative, or inventory not below zero.<br>Such constraints do require linearizability. While foreign key or attribute constraints do not need such property.</p>
+<hr>
+<p><strong>Cross-channel timing dependencies</strong>: </p>
+<p>Race conditions may be possible between different channels, without linearizability.<br>E.g., a server would first store the full size picture and send message to generate a resized picture (<strong>thumbnail</strong>). If the latter is faster, it may receive NULL result, or a old-versioned picture.<br>This is due to me have two different communication channels between the web server and the resizer: the file storage and the message queue.</p>
+<hr>
+<h3 id="Implementations-of-Linearizability"><a href="#Implementations-of-Linearizability" class="headerlink" title="Implementations of Linearizability"></a>Implementations of Linearizability</h3><ul>
+<li><strong>Single Replica</strong>: linearizable, but vulnearable to data loss and failure</li>
+<li><strong>Single-leader replication</strong>: potentially linearizable if you read from the leader or synced followers. However, may not be linearizable due to design (snapshot isolation) or concurrency bugs. However, we need the assumption that everyone knows who is the leader. Otherwise we may have <strong>delusional leader</strong> continues to serve requests.</li>
+<li><strong>Consensus algorithms</strong>: Linearizable.</li>
+<li><strong>Multi-leader replication</strong>: Not Linearizable. Because usually the replication is done asynchronously, may need conflict resolution.</li>
+<li><strong>Leaderless replication</strong>: probably not linearizable. Such <strong>Dynamo style</strong> thing sometimes claimed that you can obtain <strong>strong consistency</strong> by requiring quorum reads and writes ($w + r &gt; n$) but this might not be true.</li>
+<li><strong>Last write wins</strong> conflict resolution methods based on <strong>time-of-day</strong> clocks are almost certainly <strong>nonlinearizable</strong>, because clock timestamps cannot be guaranteed to be consistent with actual event ordering due to <strong>clock skew</strong>.</li>
+</ul>
+<p><strong>Sloppy quorums</strong> also ruin any chance of linearizability.</p>
+<hr>
+<p>We can construct samples that even with quorum reads and writes ($w + r &gt; n$) met, the execution can be <strong>non-linearizable</strong>:</p>
+<p>Consider that $n&#x3D;3, w&#x3D;3, r&#x3D;2$, and we have replica A, B and C. First new value is written to replica A, then client X reads A, B to get the new value; Then client Y reads B, C to get the old value.</p>
+<p>This is non-linearizable as Y reads after X, but get the older value.</p>
+<p>Safest to assume a leaderless system with Dynamo-style replication does <strong>not</strong> provide linearizability.<br>With reduced performance, we can make it linearizable: a reader must perform <strong>read repair</strong> synchronously, before returning results to the application; a writer must read the latest state of a quorum of nodes before sending its writes.<br>Also, a linearizable <strong>compare-and-set</strong> operation cannot, because it requires a <strong>consensus</strong> algorithm</p>
+<hr>
+<p><strong>The CAP theorem</strong>： If your application requires <strong>linearizability</strong>, and some replicas are disconnected from others, then they must <strong>wait</strong> until the network is fixed, or return an error.<br>Otherwise (no linearizability needed), we can allow each replica to process requests indenpendently even disconnected (e.g., in a <strong>multi-leader</strong> setting)</p>
+<p>* <strong>CAP</strong> is sometimes presented as <strong>Consistency</strong>, <strong>Availability</strong>, <strong>Partition tolerance</strong>: pick 2 out of 3. </p>
+<p>However, network partition just happens as a kind of fault, and you do not have a choice. When this happens, we can provide either <strong>linearizability</strong> or <strong>total availability</strong>.<br>CAP cannot help us best understand the system (does not consider network delays, dead nodes, or other trade-offs) and better avoided.</p>
+<hr>
+<p>Few systems are actually <strong>linearizable</strong> in practice, not even RAM on a modern multi-core CPU, because each core has its own memory <strong>cache</strong> and store <strong>buffer</strong>. Memory access goes to cache by default, then written out to memory <strong>asynchronously</strong>.</p>
+<p>Thus, many systems give up providing linearizability, due to performance concern.<br>It is prove that if you want linearizability, the response time of read and write requests is at least <strong>proportional</strong> to the uncertainty of delays in the network. However, delays can be long in a network with highly variable delays.</p>
+<hr>
+<h3 id="Ordering"><a href="#Ordering" class="headerlink" title="Ordering"></a>Ordering</h3><p><strong>Causality</strong> imposes an ordering on events: cause comes before effect.<br>Something has to be created before updated, A and B should not have causal link between them to become concurrent. “Consistent” read also means that snapshot should contains answer as well as the question it trying to answer.</p>
+<p>If a system obeys the ordering imposed by causality, we say that it is <strong>causally consistent</strong>.</p>
+<p>The causal order is not a <strong>total order</strong> (arbitrary two elements can be compared). $\{a, b\}$ cannot be compared with $\{b, c\}$, being <strong>incomparable</strong> (unless one is subset of another)</p>
+<p>In a linearizable system, we have a <strong>total order</strong> of operations.<br>Therefore, no concurrent operation exists in such system. If there is any, we can only have a <strong>partial order</strong> such that they are incomparable (not causally related).<br>Linearizability is <strong>stronger</strong> than preserving causality.</p>
+<p><strong>Version control system</strong> like <strong>Git</strong> works as a graph of causal dependencies, where timeline <strong>branches</strong> and <strong>merges</strong>.</p>
+<p><strong>Conclusion</strong>: Causal consistency is the <strong>strongest</strong> possible consistency model that does not slow down due to network delays, and remains available in the face of network failures.<br>Implementation <strong>causality consistency</strong> requires tracking <strong>causal dependencies</strong> across the entire database, can be done with <strong>version vectors</strong> &#x2F; <strong>logical clock</strong>.</p>
+<hr>
+<h3 id="Noncausal-sequence-number-generator"><a href="#Noncausal-sequence-number-generator" class="headerlink" title="Noncausal sequence number generator"></a>Noncausal sequence number generator</h3><p>If there is not a single leader (due to multi-leader &#x2F; leaderless database), it is less clear about how to generate sequence numbers for operations. Potential solutions:</p>
+<ul>
+<li>Each node generate its own <strong>independent set</strong> of sequence numbers, e.g., only generate multiple of $k$ as version number, or reserve bits in binary representation as unique identifier</li>
+<li>Attach a <strong>timestamp</strong> from a time-of-day clock (e.g., last write win).</li>
+<li><strong>Preallocate</strong> blocks of sequence numbers, e.g. (1-1000) just for node A.</li>
+</ul>
+<p>However, these methods <strong>cannot</strong> capture the ordering of operations correctly.</p>
+<h3 id="Lamport-timestamps"><a href="#Lamport-timestamps" class="headerlink" title="Lamport timestamps"></a>Lamport timestamps</h3><p>Generating sequence numbers that is consistent with <strong>causality</strong><br>Represent timestamp as  <em><strong>(counter, node ID)</strong></em> so that each timestamp is unique. <code>counter</code> is used to determine order, and <code>node ID</code> work as tie-breaker.<br>Every node and every client keeps track of the <strong>maximum</strong> counter value it has seen so far, and includes that maximum on every request.<br>When a node receives a request or response with a maximum counter value greater than its own counter value, it immediately <strong>increases</strong> its own counter to that maximum (enforcing the timestamp to be in consistent with the causality).</p>
+<p>Difference between <strong>version vectors</strong>: Lamport time‐stamps are more <strong>compact</strong>, but cannot tell whether two operations are concurrent or whether they are causally dependent (<strong>total ordering</strong> is always enforced).</p>
+<hr>
+<h3 id="Total-order-broadcast"><a href="#Total-order-broadcast" class="headerlink" title="Total order broadcast"></a>Total order broadcast</h3><p>It should be noted that Lamport timestamps is not sufficient in some tasks like username creation, because we cannot determine whether concurrent requests are asking for the same name, and which one should win (need knowledge from other nodes). We need not only total ordering of operations, but also when that order is <strong>finalized</strong> (maybe with total <strong>order broadcast</strong>). </p>
+<p>Partitioned databases with a single leader per partition often maintain ordering only <strong>per partition</strong>, which means they cannot offer consistency guarantees (e.g., consistent snapshots, foreign key references) <strong>across partitions</strong>. </p>
+<p><strong>Total order broadcast</strong> or <strong>Atomic Broadcast</strong>: used to scale the system if the throughput is greater than a single leader can handle, and also how to handle failover if the leader fails.<br>Usually described as a <strong>protocol</strong> for exchanging messages between nodes.<br>Requires: <strong>Reliable delivery</strong> (No messages are lost: if a message is delivered to one node, it is delivered to all nodes.) and <strong>Totally ordered delivery</strong> (Messages are delivered to every node in the same order).</p>
+<p><strong>State machine replication</strong>: If every message represents a write to the database, and every replica processes the same writes in the same order, then the replicas will remain consistent with each other (aside from any temporary replication lag). </p>
+<hr>
+<p>An important aspect of total order broadcast is that the order is <strong>fixed</strong> at the time the messages are delivered: a node is not allowed to retroactively insert a message into an earlier position in the order if subsequent messages have already been delivered.<br>This fact makes total order broadcast <strong>stronger</strong> than timestamp ordering </p>
+<p>We can view it as a way of creating a log, delivering a message is like appending to the log.<br>Since all nodes must deliver the same messages in the same order, all nodes can read the log and see the same sequence of messages.</p>
+<p>Total order broadcast is also useful for implementing a <strong>lock</strong> service that provides <strong>fencing tokens</strong>. Every request to acquire the lock is appended as a message to the log, and all messages are sequentially numbered in the order they appear in the log.<br>The sequence number can then serve as a fencing<br>token, because it is monotonically increasing. In ZooKeeper, this sequence number is called <strong>zxid</strong></p>
+<hr>
+<p><strong>Total order broadcast</strong>: <strong>asynchronous</strong>: messages are guaranteed to be delivered reliably in a <strong>fixed order</strong>, but there is no guarantee about <strong>when</strong> a message will be delivered<br><strong>Equivalent</strong> to <strong>consensus</strong>.</p>
+<p><strong>linearizability</strong>: <strong>Recency guarantee</strong>: a read is guaranteed to see the latest value written.</p>
+<p>We can try to use <strong>Total order broadcast</strong> to implement a <strong>linearizable storage</strong> to resolve the username setting task:</p>
+<ol>
+<li>Append a message to the log, decalring the name you want to claim</li>
+<li>Read the log, wait for the message you appended to be delivered back to you.</li>
+<li>Check for any messages claiming the user name you want; If the first is your own message, then it is succesful, otherwise it is claimed by others.</li>
+</ol>
+<p>This is like a compare-and-set, each name initially with value <code>NULL</code> and you want to assigny your userID as value of the name. It is only legal to overwrite name with value <code>NULL</code></p>
+<hr>
+<ol>
+<li>Because log entries are delivered to all nodes in the same order, if there are several <strong>concurrent</strong> writes, all nodes will <strong>agree</strong> on which one came first. </li>
+<li>Choosing the first of the conflicting writes as the winner and aborting later ones ensures that all nodes agree on whether a write was committed or aborted. A similar approach can be used to implement <strong>serializable multi-object transactions</strong> on top of a log.</li>
+<li>Ensures linearizable writes, not <strong>linearizable reads</strong>. Data read from a store which is asynchronously updated from the log can be stale (this procedure provides <strong>sequential consistency</strong> &#x2F; <strong>timeline consistency</strong>, slightly weaker than linearizability).</li>
+</ol>
+<p>To make reads linearizable:</p>
+<ol>
+<li>Append a message to a log, read the log, performing the actual read when the message is delivered back to you so reads can be sequenced.</li>
+<li>If the log allows you to fetch the position of the latest log message in a linearizable way, you can query that position, wait for all entries up to that position to be delivered to you, and then perform the read. (ZooKeepter’s <code>sync()</code> operation)</li>
+<li>Read from a replica that is <strong>synchronously</strong> updated on writes,<br>and is thus sure to be up to date.</li>
+</ol>
+<hr>
+<p>We can also build <strong>total order broadcast</strong> from <strong>linearizable storage</strong>.<br>With a <strong>linearizable register</strong> (or atomic compare-and-set), you can increment and get the linearizable integer, and attach it in the message as sequence number. You can then send the message to all nodes (resend lost messages) and the recipents will deliver the messages consecutively.<br>Unlinke Lamport timestamps, the numbers must form sequence with <strong>no gaps</strong>, making it total order (you will know that you should wait for No.5 messages even you received No.4 and No.6). </p>
+<p>In order to restore the register value when network connections fails, you inevitably get a <strong>consensus</strong> algorithm.<br>Linearizable <strong>compare-and-set</strong> (or <strong>increment-and-get</strong>) register and <strong>total order broadcast</strong> are both equivalent to <strong>consensus</strong></p>
+<hr>
+<ul>
+<li><strong>Consesus</strong> is important in <strong>leader election</strong> (of database with single-leader replication) and <strong>Atomic commit</strong> (in database cross nodes or partitions).</li>
+</ul>
+<p><strong>FPL</strong> result: No algorithm can reach consensus with risk that a node may crash, in async system model and no clock and timeout is allowed.</p>
+<p>With <strong>timeouts</strong> or other methods (even use of random numbers) to detect crashed nodes, then consensus is solvable.</p>
+<h3 id="Atomic-Commit-and-Two-Phase-Commit-2PC"><a href="#Atomic-Commit-and-Two-Phase-Commit-2PC" class="headerlink" title="Atomic Commit and Two-Phase Commit (2PC)"></a>Atomic Commit and Two-Phase Commit (2PC)</h3><p>Atomicity prevents failed transactions from littering the database, and makes sure <strong>secondary index</strong> stays consistent with the primary data.</p>
+<p>For <strong>single</strong> node, a database usually makes the transaction’s write durable (writeahead log, e.g.) then append a commit record to the log on disk (2 phase commit). If node is crashed before commit record is written, then the writes are <strong>rolled back</strong>.</p>
+<p>For <strong>multiple</strong> nodes, we need to ensure all nodes either commit or abort. It is <strong>not</strong> allowed that some commit succeed and some fail.<br>Once committed, a commit is <strong>irrevocable</strong>.<br>However, we can undo a commit by another independent one: <strong>compensating transaction</strong>.</p>
+<hr>
+<p><strong>Implementation</strong>:<br><strong>2PC</strong> introduces a <strong>coordinator</strong> (also known as <strong>transaction manager</strong>) to arrange the commit on all nodes.<br>In 1st phase: Coordinator send request to all nodes and ask if they are able to commit. If anyone responses “no”, then coordinator sends an <strong>abort</strong> request to all nodes.<br>In 2nd phase: Coordinator send commit request, and commit actually takes place (and broadcasted).</p>
+<hr>
+<p><strong>Details</strong> of 2PC implementation:</p>
+<ol>
+<li>Before begin a distributed transaction, application needs to request a <strong>globally unique</strong> transaction ID.</li>
+<li>The application begins a <strong>single-node</strong> transaction on each of the participants (to do all reads and writes), and attaches the globally unique transaction ID. If anything go wrong, coordinator or any participant can abort.</li>
+<li>The coordinator sends a <strong>prepare request</strong> to all participants, tagged with the global transaction ID, when the application is ready to commit. If any request fails &#x2F; times out, the coordinator sends an abort request for that transaction ID to all nodes.</li>
+<li>When a participant receives the prepare request, it makes sure that it can definitely commit the transaction under <strong>all</strong> circumstances. This includes writing all transaction data to disk (a crash, a power failure, or running out of disk space is <strong>not</strong> an acceptable excuse for refusing to commit later), and checking for any conflicts or constraint violations. By replying “yes” to the coordinator, the node promises to commit the transaction without error if requested. In other words, the participant <strong>surrenders the right to abort</strong> the transaction, but without actually<br>committing it.</li>
+<li>When the coordinator has received responses to all prepare requests, it makes a <strong>definitive decision</strong> on whether to commit or abort the transaction (committing only if all participants voted “yes”). The coordinator must write that decision to its transaction log on disk so that it knows which way it decided in case it subsequently crashes. This is called the <strong>commit point</strong>.</li>
+<li>Once the coordinator’s decision has been written to disk, the commit or abort request is sent to all participants. If this request fails or times out, the coordinator <strong>must retry forever</strong> until it succeeds. There is no more going back: if the decision was to commit, that decision must be enforced, no matter how many retries it takes. If a participant has crashed in the meantime, the transaction will be committed when it recovers—since the participant voted “yes,” it cannot refuse to commit when it recovers.</li>
+</ol>
+<p>Thus, the protocol contains two crucial “<strong>points of no return</strong>”: when a participant votes “yes,” it promises that it will definitely be able to commit later (although the coordinator may still choose to abort); and once the coordinator decides, that decision is <strong>irrevocable</strong>.<br>Those promises ensure the <strong>atomicity of 2PC</strong>.<br>(Single-node atomic commit lumps these two events into one: writing the commit record to the transaction log.)</p>
+<hr>
+<p><strong>Coordinator failure</strong>:<br>If one of participant’s <strong>prepare requests</strong> fail or time out, coordinator aborts the transaction.<br>if any of the <strong>commit</strong> or <strong>abort</strong> requests fail, the coordinator retries them <strong>indefinitely</strong> (that is why <strong>2PC</strong> is called <strong>blocking</strong> atomic commit protocol).</p>
+<p>However, if coordinator failed, participants’s state is called <strong>in doubt</strong> or <strong>uncertain</strong>, as they have to wait forever (cannot abort).<br>In <strong>2PC</strong> protocol, the only way is to wait coordinator to <strong>recover</strong>.</p>
+<p>The commit point of 2PC comes down to a regular <strong>single-node atomic commit</strong> on the coordinator.</p>
+<hr>
+<p><strong>3PC</strong> is proposed to make an atomic commit protocol <strong>nonblocking</strong>, but we need assumption that having a network with <strong>bounded</strong> delay and nodes with <strong>bounded</strong> response times.<br>However, in a system without such assumption, <strong>3PC</strong> cannot guarantee atomicity (without a <strong>perfect</strong> failure detector)<br>That is why <strong>2PC</strong> is still in use</p>
+<hr>
+<h3 id="Heterogeneous-distributed-transactions"><a href="#Heterogeneous-distributed-transactions" class="headerlink" title="Heterogeneous distributed transactions"></a>Heterogeneous distributed transactions</h3><p><strong>Database-internal</strong> distributed transactions are easier to deal with, like distributed databases. All nodes (participants) run the <strong>same</strong> database software. They do not have to be compatible with other system, able to use any protocol and do specific optimization.</p>
+<p><strong>Heterogeneous</strong> distributed transactions are harder, e.g., message brokers. Atomic commit <strong>must</strong> be ensured.</p>
+<p><strong>Exactly-once message processing</strong>:  A message from a message queue can be acknowledged as processed if and only if the database transaction for processing the message was successfully committed<br>(<strong>atomically</strong> commit the message acknowledgment and database writes in a <strong>single</strong> transaction).<br>E.g., when a message processing is associlated with sending an email. If either one failed, we can roll back both and safely retry.</p>
+<h3 id="XA-transactions"><a href="#XA-transactions" class="headerlink" title="XA transactions"></a>XA transactions</h3><p><strong>X&#x2F;Open XA</strong> (short for <strong>eXtended Architecture</strong>) is a standard for implementing twophase commit across heterogeneous technologies。<br>The essence is <strong>C API</strong> for interfacing with a transaction coordinator.<br>Assumes that your application uses a network driver or client library to communicate with other participants &#x2F; services. If driver supports XA, then it calls the XA API to figure out if an operation is part of a distributed transaction, if so, sends necessary information to the database server. Driver also exposes <strong>callbacks</strong> through which the coordinatro can ask the participant to prepare, commit or abort.</p>
+<p>The transaction <strong>coordinator</strong> implements the XA API.<br>However, corrdinator is usually just a <strong>library</strong> loaded into the same process as the application issuing the transaction rather than a seperate service.<br>This is bit tricky as coordinator can go with died server.</p>
+<hr>
+<p>The reason that we really care about transaction in <strong>doubt</strong> is that they might be holding locks (if any <strong>exlusive</strong> lock or <strong>2PL</strong> is used).<br>These locks will be holded until coordinator recovers.</p>
+<p>In practice, <strong>orphaned in-doubt transactions</strong> do occur.<br>Coordinator cannot decide their outcome for whatever reason (transaction log may be lost or corrupted). They will sit forever in the database, hold locks and block other transactions.</p>
+<p>Only solution is for an administrator to <strong>manually</strong> decide whether to commit or roll back the transactions (a lot of work, and breaks the <strong>2PC</strong> constraints)</p>
+<p>XA implementation may have emergency escape hatch called <strong>heuristic decisions</strong>: allowing a participant to <strong>unilaterally</strong> decide to abort or commit an in-doubt transaction without a definitive decision from the coordinator. </p>
+<p>Heuristic here is a euphemism for probably breaking atomicity, since it violates the system of promises in two-phase commit.<br>Thus, heuristic decisions are intended only for getting out of <strong>catastrophic situations</strong>, and not for regular use.</p>
+<hr>
+<h3 id="Limitations-of-distributed-transactions"><a href="#Limitations-of-distributed-transactions" class="headerlink" title="Limitations of distributed transactions"></a>Limitations of distributed transactions</h3><ol>
+<li>Limitation of <strong>XA</strong>: transaction coordinator is itself a kind of database (in which transaction outcomes are stored)<br>If it runs on only one single machine, it is a <strong>single point</strong> of failure and do not even have high availability.</li>
+<li>Many server-side applications are developed in a <strong>stateless</strong> model. Coordinator’s logs will break such model.</li>
+<li>XA is a <strong>lowest common denominator</strong>, to be compatible with a wide range of data system. Cannot detect deadlocks across different systems (requiring knowledge on locks), does not work with <strong>Serializable Snapshot Isolation</strong>, SSI (require protocol to identify conflicts across different systems).</li>
+</ol>
+<p>Even for <strong>internal</strong> distributed transactions, where we can implement SSI, failures can still be amplified by <strong>2PC</strong> as we require all participants to respond.</p>
+<hr>
+<h3 id="Fault-Tolerant-Consensus"><a href="#Fault-Tolerant-Consensus" class="headerlink" title="Fault-Tolerant Consensus"></a>Fault-Tolerant Consensus</h3><p>Some properties we need consensus to have:</p>
+<ol>
+<li><strong>Uniform agreement</strong>: No two nodes decide differently.</li>
+<li><strong>Integrity</strong>: No node decides twice.</li>
+<li><strong>Validity</strong>: If a node decides value v, then v was proposed by some node.</li>
+<li><strong>Termination</strong>: Every node that does not crash eventually decides some value (usually, a majority is required as the <strong>quorum</strong>).</li>
+</ol>
+<p>The idea is that everyone decides on the same outcome, and once you have decided, you cannot change your mind.<br>Having a dictator can resolve most properties (except termination), but lacks <strong>fault tolerance</strong>.<br>In fact, the termination property requires that a consensus algorithm must <strong>make progress</strong>.<br>Any algorithm that has to wait for a node (like <strong>2PC</strong>) will NOT have the termination property.</p>
+<p>* It is possible to make consensus robust against <strong>Byzantine faults</strong> as long as fewer than <strong>one-third</strong> of the nodes are Byzantine-faulty</p>
+<hr>
+<p>The best-known fault-tolerant consensus algorithms are <strong>Viewstamped Replication</strong> (VSR), <strong>Paxos</strong>, <strong>Raft</strong> and <strong>Zab</strong>.</p>
+<p>They decide on a sequence of values, which makes them <strong>total order broadcast</strong> algorithms.<br>Remember that total order broadcast requires messages to be delivered <strong>exactly once</strong>, in the <strong>same order</strong>, to <strong>all</strong> nodes. This is equivalent to repeated rounds of <strong>consensus</strong> (decide what to send next, and decide on the next message to be delivered in total order)<br>Total order broadcast is more efficient than doing multiple <strong>value-at-a-time consensus</strong>.</p>
+<hr>
+<h3 id="Epoch-numbering-and-quorums"><a href="#Epoch-numbering-and-quorums" class="headerlink" title="Epoch numbering and quorums"></a>Epoch numbering and quorums</h3><p>Consensus protocols internally uses a leader, but leader is a result of <strong>consensus</strong>. Such protocols do not guarantee that the leader is unique.</p>
+<p>We can make a weaker guarantee with <strong>epoch numbering</strong> (<strong>ballot number &#x2F; view number &#x2F; term number</strong>), and guarantee that within each epoch, the leader is unique. Every time the current leader is thought to be dead, a vote is started among the nodes to elect a new leader.</p>
+<p> This election is given an <strong>incremented</strong> epoch number, and thus<br>epoch numbers are <strong>totally ordered</strong> and <strong>monotonically increasing</strong>. </p>
+<ol>
+<li>If there is a conflict between two different leaders in two different epochs (perhaps because the previous leader actually wasn’t dead after all), then the leader with the <strong>higher</strong> epoch number prevails (so we remove the previous leader even it recovers).</li>
+<li>For every decision that a leader wants to make, it must send the proposed value to the other nodes and wait for a <strong>quorum</strong> (usually a majority of nodes) of nodes to respond in favor of the proposal.</li>
+<li>A node votes in favor of a proposal only if it is <strong>not aware</strong> of any other leader with a higher epoch.</li>
+<li>Have two rounds of voting: once to choose a <strong>leader</strong>, and a second time to vote on a leader’s <strong>proposal</strong>. The key insight is that the quorums for those two votes must <em>overlap</em>: if a vote on a proposal succeeds, at least one of the nodes that voted for it must have also participated in the most recent leader election. </li>
+<li>The leader got to know if it is still holds the leadership.</li>
+<li>Consensus algorithms define a <strong>recovery process</strong> by which nodes can get into a consistent state after a new leader is elected, ensuring that the safety properties are always met.</li>
+</ol>
+<p><strong>Limitations of Consensus</strong>: </p>
+<ul>
+<li>Vote on proposal is actually <strong>synchronous</strong> replication, and can result in data loss.</li>
+<li>Needs <strong>strict majority</strong> to operate. Most consensus algorithms assume a <strong>fixed</strong> set of nodes participate in voting, means you cannot just add &#x2F; remove nodes in the cluster (may be resolved by dynamic membership).</li>
+<li><strong>Sensitive</strong> to network problems, relies on timeout for failure detection.</li>
+</ul>
+<hr>
+<p>Consesus Algorithm Projects like ZooKeepter are very useful for <strong>distributed coordination</strong>. It is limited as it can only hold small amount of data able to fit in memory, and replicated across all node using <strong>fault tolerant total order broadcast</strong> (also <strong>Linearizable atomic operations</strong> are implemented to implement lock).</p>
+<p><strong>Failure detection</strong>: Clients maintain and long-lived session on ZooKeeper servers to exchange <strong>heartbeats</strong>, if it cease for longer than the session timeout, session is declared to be dead and locks are released (ZooKeeper calls these <strong>ephemeral nodes</strong>).</p>
+<p><strong>Change notifications</strong>:  One client read locks and values that were created by another client, and can also watch them for changes. Then it can know if a client joins the cluster or fails, without frequently <strong>poll</strong> to find out.</p>
+<p>Only the linearizable atomic operations really require consensus.</p>
+<p><strong>Use Cases</strong>: <strong>ZooKeeper</strong> can be used for <strong>leader election</strong>, <strong>partition assigning</strong>, <strong>rebalancing</strong> and taking over <strong>failed</strong> node’s work (maybe even service discovery). It runs on fixed number of nodes, performs its majority votes among them and supports potentially large number of clients. Normally, the kind of data managed by ZooKeeper is quite <strong>slow-changing</strong> (not suitable to store runtime state of application)</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" data-id="clvig7q9i00001wte1wqo2np0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "Designing Data-Intensive-Applications-Note-17",
+        "image": "https://umiao.github.io/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png",
+        "keywords": "DataScience Data System",
+        "genre": "Data Science Data System",
+        "datePublished": "2024-04-27",
+        "dateCreated": "2024-04-27",
+        "dateModified": "2024-05-04",
+        "url": "https://umiao.github.io/2024/04/27/Designing-Data-Intensive-Applications-Note-17/",
+        "description": "Discussion on challenges with consensus.
+",
+        "wordCount": 4504
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-16</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png)" alt="Designing Data-Intensive-Applications-Note-17" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="title">Designing Data-Intensive-Applications-Note-17</a></p>
+                            <p class="item-date"><time datetime="2024-04-27T18:27:31.000Z" itemprop="datePublished">2024-04-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/21/Designing-Data-Intensive-Applications-Note-16/cover.png)" alt="Designing Data-Intensive-Applications-Note-16" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="title">Designing Data-Intensive-Applications-Note-16</a></p>
+                            <p class="item-date"><time datetime="2024-04-21T16:54:34.000Z" itemprop="datePublished">2024-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/29/Designing-Data-Intensive-Applications-Note-15/cover.png)" alt="Designing Data-Intensive-Applications-Note-15" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" class="title">Designing Data-Intensive-Applications-Note-15</a></p>
+                            <p class="item-date"><time datetime="2024-03-29T20:52:54.000Z" itemprop="datePublished">2024-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/24/Designing-Data-Intensive-Applications-Note-14/cover.png)" alt="Designing Data-Intensive-Applications-Note-14" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" class="title">Designing Data-Intensive-Applications-Note-14</a></p>
+                            <p class="item-date"><time datetime="2024-03-24T21:21:49.000Z" itemprop="datePublished">2024-03-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-13/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/24/Designing-Data-Intensive-Applications-Note-13/cover.png)" alt="Designing Data-Intensive-Applications-Note-13" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-13/" class="title">Designing Data-Intensive-Applications-Note-13</a></p>
+                            <p class="item-date"><time datetime="2024-03-24T16:31:49.000Z" itemprop="datePublished">2024-03-24</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">42</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/Data-System/">Data System</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Investment/">Investment</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/" rel="tag">Apple Watch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLI/" rel="tag">CLI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate/" rel="tag">Certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-System/" rel="tag">Data System</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/" rel="tag">English</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IQ/" rel="tag">IQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyboard/" rel="tag">Keyboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOD/" rel="tag">OOD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented-Design/" rel="tag">Object Oriented Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Productivity/" rel="tag">Productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Term/" rel="tag">Term</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tips/" rel="tag">Tips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vocabulary/" rel="tag">Vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Frequency/" rel="tag">Word Frequency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/" rel="tag">futures</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/investment/" rel="tag">investment</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/options/" rel="tag">options</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trading/" rel="tag">trading</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Apple-Watch/" style="font-size: 10px;">Apple Watch</a> <a href="/tags/Brainteasers/" style="font-size: 10px;">Brainteasers</a> <a href="/tags/CLI/" style="font-size: 10px;">CLI</a> <a href="/tags/Certificate/" style="font-size: 10px;">Certificate</a> <a href="/tags/Cyber-Security/" style="font-size: 10px;">Cyber Security</a> <a href="/tags/Data-System/" style="font-size: 18px;">Data System</a> <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/IQ/" style="font-size: 10px;">IQ</a> <a href="/tags/Keyboard/" style="font-size: 10px;">Keyboard</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 14px;">Machine Learning</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/OOD/" style="font-size: 10px;">OOD</a> <a href="/tags/Object-Oriented-Design/" style="font-size: 10px;">Object Oriented Design</a> <a href="/tags/Productivity/" style="font-size: 10px;">Productivity</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Software-Engineering/" style="font-size: 12px;">Software Engineering</a> <a href="/tags/Term/" style="font-size: 10px;">Term</a> <a href="/tags/Tips/" style="font-size: 10px;">Tips</a> <a href="/tags/UCLA/" style="font-size: 12px;">UCLA</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 10px;">Vocabulary</a> <a href="/tags/Word-Frequency/" style="font-size: 10px;">Word Frequency</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a> <a href="/tags/futures/" style="font-size: 12px;">futures</a> <a href="/tags/investment/" style="font-size: 12px;">investment</a> <a href="/tags/options/" style="font-size: 12px;">options</a> <a href="/tags/trading/" style="font-size: 12px;">trading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2024 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2024/04/27/Designing-Data-Intensive-Applications-Note-17/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
