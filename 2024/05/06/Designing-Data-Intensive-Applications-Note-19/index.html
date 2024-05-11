@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Designing Data-Intensive-Applications-Note-19 [END] | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="DataScience,Data System,Designing Data-Intensive-Applications" />
+    
+    <meta name="description" content="Discussion on challenges with stream processing.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Designing Data-Intensive-Applications-Note-19 [END]">
+<meta property="og:url" content="https://umiao.github.io/2024/05/06/Designing-Data-Intensive-Applications-Note-19/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Discussion on challenges with stream processing.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2024/05/06/Designing-Data-Intensive-Applications-Note-19/cover.png">
+<meta property="article:published_time" content="2024-05-06T21:51:50.000Z">
+<meta property="article:modified_time" content="2024-05-11T23:30:03.949Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="DataScience">
+<meta property="article:tag" content="Data System">
+<meta property="article:tag" content="Designing Data-Intensive-Applications">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2024/05/06/Designing-Data-Intensive-Applications-Note-19/cover.png">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/Data-System/">Data System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Investment/">Investment</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Productivity/">Productivity</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Science/Data-System/">Data System</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Designing-Data-Intensive-Applications-Note-19" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Designing Data-Intensive-Applications-Note-19 [END]
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2024/05/06/Designing-Data-Intensive-Applications-Note-19/" class="article-date">
+       <time datetime="2024-05-06T21:51:50.000Z" itemprop="datePublished">2024-05-06</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2024/05/06/Designing-Data-Intensive-Applications-Note-19/" class="article-date">
+     <time datetime="2024-05-11T23:30:03.949Z" itemprop="dateModified">2024-05-11</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Data-System/" rel="tag">Data System</a>, <a class="tag-link-link" href="/tags/DataScience/" rel="tag">DataScience</a>, <a class="tag-link-link" href="/tags/Designing-Data-Intensive-Applications/" rel="tag">Designing Data-Intensive-Applications</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Discussion on challenges with stream processing.</p>
+<img src="/2024/05/06/Designing-Data-Intensive-Applications-Note-19/cover.png" class="" title="ML_note">
+<span id="more"></span>
+
+<h3 id="Stream-Processing"><a href="#Stream-Processing" class="headerlink" title="Stream Processing"></a>Stream Processing</h3><p>Generalization of batch processing, which removes the assumption that the input is <strong>bounded</strong> of a known and <strong>finite</strong> size.</p>
+<p>Daily batch processes may be too slow to reflect chagnes, that is why we can process data continuously, abandoning the fixed time slices entirely and simply processing every event as it happens. That is the idea behind <strong>stream processing</strong>.</p>
+<p><strong>Stream</strong>: data that is incrementally made available over time.</p>
+<p><strong>Event</strong>: A small, self-contained, <strong>immutable</strong> object containing the details of something that happened at some point in time.<br>An event usually contains a <strong>timestamp</strong>, and may be encoded as a text string, JSON or in binary form.</p>
+<p>In streaming terminology, an event is generated once by a <strong>producer</strong> (also known as a <strong>publisher</strong> or <strong>sender</strong>), and then potentially processed by multiple <strong>consumers</strong> (<strong>subscribers</strong> or <strong>recipients</strong>)<br>Related events are usually grouped together into a topic or stream.<br>In case of <strong>continual</strong> processing with <strong>low</strong> delays, <strong>polling</strong> can be expensive without special optimization.<br>Lower the percentage of requests can return new events, and make the overhead high. </p>
+<hr>
+<p>Instead, it is better for consumers to be <strong>notified</strong> when new events appear (cannot be handled well by traditional DB).<br>A common solution is to use <strong>Messaging Systems</strong> (a producer sends a message containing the event, which is then pushed to consumers).<br>* Unix pipe and TCP connection are easy way to implement, but usually it is extended so that multiple producers &#x2F; consumers are allowed to send &#x2F; receive.</p>
+<ol>
+<li>In case producers send messages <strong>faster</strong> than the consumers can process them: <strong>drop</strong> message, store in <strong>queue</strong> or apply <strong>backpressure</strong> (a.k.a <strong>flow control</strong>, block the producer from sending more messages) [we can have a small fixed-size buffer, block sender if filled up].</li>
+<li>In case node <strong>crashes</strong> or <strong>temporarily</strong> go <strong>offline</strong>. Note that <strong>durability</strong> comes with cost of performance, and should be determined by need of application.</li>
+</ol>
+<p><strong>Direct messaging methods</strong>:</p>
+<ol>
+<li><strong>UDP multicast</strong>: low latency, unreliable, retransmit on demand</li>
+<li>Brokerless messaging libraries such as <strong>ZeroMQ</strong> and <strong>nanomsg</strong> take a similar approach, implementing publish&#x2F;subscribe messaging over <strong>TCP</strong> or <strong>IP</strong> multicast.</li>
+<li>Or we can use unreliable UDP messaging for collecting metrics (like <strong>counter</strong>) from all machines on the network and monitoring them.</li>
+<li>Consumer can expose service on network, producers can make direct <strong>HTTP</strong> or <strong>PRC</strong> request to push messages to the consumer.  A <strong>callback URL</strong> of one service is registered with another service, and it makes a request to that URL whenever an event occurs. (The idea of <strong>webhooks</strong>)</li>
+<li>However, we usually assume producer and consumers are constantly <strong>online</strong>. Otherwise, consumer can miss messages from producer if offline.</li>
+</ol>
+<hr>
+<h3 id="Message-Brokers"><a href="#Message-Brokers" class="headerlink" title="Message Brokers"></a>Message Brokers</h3><p>Also known as <strong>message queue</strong>, a kind of database optimized for handling <strong>message streams</strong> (consumers and producers connect as clients, read and write from the broker).</p>
+<p>Clients can come and go, <strong>durability</strong> is handled by the broker. <strong>Unbounded</strong> queueing can be allowed.</p>
+<p>The consuming is also <strong>asynchronous</strong>: producer will not wait till the message got consumed.</p>
+<p><strong>Difference with Database</strong>:</p>
+<ol>
+<li>Delivered message will be deleted.</li>
+<li>Will assume the working set to be small, the queue is <strong>short</strong>, can overflow to <strong>disk</strong>.</li>
+<li>Rather than secondary indexes, brokers usually support <strong>subscribing</strong> to a <strong>subset</strong> of topics matching some pattern.</li>
+<li>Do not support arbitrary queries (based on <strong>snapshot isolation</strong>), will notify clients when data changes.</li>
+</ol>
+<p>When serving <strong>multiple</strong> consumers, we can either do <strong>Load balancing</strong> (each message is delivered to one of the consumers, for them to share the work of processing) or <strong>Fan-out</strong> (each message is delivered to all consumers).<br>These patterns can be combined to be used.</p>
+<p><strong>Acknowledge</strong> from client is needed before deleting a message, otherwise it is <strong>redelivered</strong> to another consumer (<strong>atomic commit protocol</strong> is needed in case message is processed by lost in network).<br>* Note that combination of load balancing with redelivery inevitably leads to messages being <strong>reordered</strong>. If there are causal dependencies between messages, do not use load balancing.</p>
+<p>Messages stored in broker are regarded as temporary, and the acknowledgement is <strong>destructive</strong> as discussed above.</p>
+<hr>
+<p><strong>Log based</strong> message brokers aims at achieving low-latency notification and durability.<br>Producers append message to end of log, consumers read log sequentially, if it reaches the end, waits for the notification of a new message appended. (just like <code>tail -f</code> in unix)<br>Log can be partitioned on different machines by different topics, and achieve higher <strong>throughput</strong>.<br>Within each partition, each message has a <strong>monotonically</strong> increasing sequence number, or <strong>offset</strong> and messages are <strong>totally ordered</strong>. <strong>No</strong> ordering guarantee across different partitions<br>Examples: <strong>Apache Kafka</strong>, <strong>Amazon Kinesis Streams</strong>, and Twitter’s <strong>DistributedLog</strong></p>
+<p>Log based method usually supports <strong>fan-out</strong> messaging, as consumers can independently read the log.<br>Load balancing can be done on partition level (<strong>coarse grained</strong>), and consumer read partition using <strong>single-threaded</strong> manner.</p>
+<p><strong>Limitations</strong>: </p>
+<ol>
+<li>The number of nodes sharing the work of consuming a topic can be <strong>at most</strong> the number of log partitions in that topic.</li>
+<li>Single slow message can hold the processing of subsequent messages in the same partition.</li>
+</ol>
+<p>Consumer can maintain an <strong>offset</strong> to record which messages have been processed. In case of consumer failure, another node and restart from this offset.<br>Also, <strong>“append-only”</strong> log makes <strong>replaying</strong> and <strong>recovering</strong> easier.</p>
+<hr>
+<p><strong>Disk Usage</strong> of Log Based Broker:<br>To reclaim disk space, the log is divided into <strong>segments</strong> and old segments can be deleted or moved to archieve storage.<br>It is possible that a slow consumer fall behind and its consumer offset points to a deleted segments and miss some messages.</p>
+<p>Effectively, the log implements a <strong>bounded-size buffer</strong> that discards old messages when it gets full, also known as a <strong>circular buffer</strong> or <strong>ring buffer</strong> (the size can be large).<br>After the buffer is filled, old messages start to be overwritten.</p>
+<p>Each message will be written to disk anyway, making the throughput more <strong>constant</strong> (and relatively higher) than memory-disk based broker.</p>
+<hr>
+<h3 id="Stream-Data-Systems"><a href="#Stream-Data-Systems" class="headerlink" title="Stream Data Systems"></a>Stream Data Systems</h3><p>In practice, multiple technoligies can be used in applications (e.g., OLTP database, cache, index, data warehouse..).<br>Each has its own copy of data in different representation, so they need to be kept <strong>in sync</strong> with each other.</p>
+<p><strong>Dual writes</strong> (explicitly writes to <strong>each</strong> of the systems when data changes) are used in case periodic full database dumps are too slow.<br>However, it is prone to <strong>race conditions</strong>, the eventual result on each system may not be consistent (due to the order certain message arrives). Also, some write may fail.<br>We can use <strong>2PC</strong> to solve, but with high cost.</p>
+<hr>
+<p><strong>Change Data Capture</strong> has become an interesting topic, where we can take changes made in a database and replicate them to different storage technology like indexes or caches.<br>This can be hard, because there is a lot of internal implementation details of databased exposed in log.</p>
+<p><strong>Implementation</strong>:<br>We can make one database the leader and others as followers using log based message broker (without reordering issue).<br>Log consumers are <strong>derived</strong> data systems, just storing another <strong>view</strong> on the data and we ensure all changes also reflects in the derived data systems.<br>* Database trigger can be used, but with poor performance.</p>
+<p>Keep all the changes log for replay can be expensive, so we can have it <strong>truncated</strong> and create an <strong>initial snapshot</strong>.<br>Snapshot must correspond to a known <strong>position</strong> or <strong>offset</strong> in the change log.</p>
+<p><strong>Log Compaction</strong>: logs can be compacted by discarding duplicates, merge by key and only the latest value is preserved. Deleted keys (indicated by <strong>tombstone</strong>) would also be removed.<br>* This idea can be extended to log-based message brokers and change data capture, where we only keep the <strong>most recent</strong> write for a particular key.<br>When rebuilding data system, we can just start scaning from the beginning of a compacted log, without taking another snapshot of the CDC source database.</p>
+<hr>
+<p><strong>Event Sourcing</strong>: store all changes to the application state as a log of change events.</p>
+<p>For <strong>Change Data Capture</strong>, the application uses the database in a <strong>mutable</strong> way (also a low level way, like parsing change logs), and application writing to DB does not need to be aware of it.</p>
+<p>For Event Sourcing, we expect <strong>immutable</strong> events are written to an event log (append-only) to reflect things happened at application level, rather than on lower level.<br>This helps us better understand why things happen, like </p>
+<p>For example, storing the event “student cancelled their course enrollment” clearly expresses the intent of a single action in a neutral fashion, whereas the side effects “one entry was deleted from the enrollments table, and one cancellation reason was added to the student feedback table” embed a lot of assumptions about the way the data is later going to be used.</p>
+<p>New side effect to easily be <strong>chained</strong> off the existing event (like a place can be offered to next person).</p>
+<hr>
+<p>*It shoud be noted that user usually prefer seeing current states of system, rather than history of modifications.<br><strong>Change Data Capture</strong> can discard former events and only keep the latest value, but <strong>Event Sourcing</strong> usually needs the entire history as later event do not override prior events.<br>This is a <strong>limition of immutability</strong>, and can be optimized using <strong>snapshot</strong>.</p>
+<p>The philosophy of event sourcing is to distinguish <strong>events</strong> and <strong>commands</strong>.<br>User’s request is initially a command, and may fail due to violation of integrity condition. However, if it is accepted, it becomes a <strong>durable</strong> and <strong>immutable</strong> event. It cannot be rejected by consumer of the event stream.<br>Any validation must happen before a command is executed.</p>
+<p>It should be noted that <strong>mutable</strong> state (come with <strong>accoutability</strong>, and is good for analyzing) and append-only log of <strong>immutable</strong> events do not contradict each other.<br>Database is a cache of a subset of the log, containing the latest values.<br>* append only log is more friendly for achieving <strong>atomicity</strong> and removing <strong>non-determinism</strong>.</p>
+<p><strong>Command Query Responsibility Segregation</strong> (CQRS): Derive serval (<strong>read-oriented</strong>) views from the same event log. We can have separate read-optimized view for the new feature, without changing the existing system.<br>This breaks the <strong>design fallacy</strong> that data must be written in the same form as it will be queried. This can also help resolving the debate around normalization and <strong>denormalization</strong> (such view can be translated from event log).</p>
+<p>Limitation of <strong>event sourcing</strong> and <strong>change data capture</strong> is that the event log are usually <strong>asynchronous</strong>, so the read view may not be synced. We can either synchronously update the read view or use a <strong>total order broadcast</strong>.</p>
+<hr>
+<ul>
+<li>For small dataset with high rate of updates and deletes, Immutability may result in large history and performance of <strong>compaction</strong> and <strong>garbage collection</strong> becomes crucial for operational robustness </li>
+<li>For <strong>privacy &#x2F; compliance</strong> concern, we may want to remove erroneous ifnormation or contain accidental leakage. We may need to <strong>rewrite</strong> history and pretend that data was <strong>never written</strong> (called <strong>excision</strong> or <strong>shunning</strong>).<br>* Note that truly delete data can be challenging, because copies can live in many places rather than overwritten in place, we just try to make retrival of data harder.</li>
+</ul>
+<hr>
+<h3 id="Processing-Streams"><a href="#Processing-Streams" class="headerlink" title="Processing Streams"></a>Processing Streams</h3><p>A piece of code that processes streams to produce derived streams is known as an <strong>operator</strong> or a <strong>job</strong>.<br>The input is consumed in <strong>read-only</strong> fashion and writes to a different location in <strong>append-only</strong> fashion.</p>
+<p>Since stream is endless, we can <strong>NOT</strong> use mapping operations such as transforming and filtering (sort-merge) records. Also, it is impossible to restart from beginning after a crash.</p>
+<p>Stream is widely used for <strong>monitoring</strong> purpose requesting pattern matching and correlations.<br>Other applications include: </p>
+<ul>
+<li><strong>Complex event processing</strong> (search for certain patterns of events in a stream, such pattern may described using high-level declarative query language or GUI, then maintain a state machine. If detected, a complex event is emitted) In such cases, queries become <em>long-term</em>.</li>
+<li><strong>Stream analytics</strong>: towards <strong>aggregations</strong> and <strong>statistical</strong> metrics, usually over fixed time intervals (e.g., averaged request counts and latency in different percentiles). The time interval over which you aggregate is known as a <strong>window</strong>, and probabilistic algorithms are sometimes used like <strong>Bloom filters</strong> and <strong>HyperLogLog</strong></li>
+<li><strong>Maintaining materialized views</strong>: deriving an alternative view onto some dataset for query purpose, and update it whenever data changes. However, we may need to maintain all evenets forever, which is against the assumption of a time window.</li>
+<li><strong>Search on streams</strong>: we may also need to search individual events based on complex criteria (<strong>Elasticsearch</strong>‘s <strong>percolator</strong> can support this). We can store (potentially index) queries and ducuments to dynamically search individual events.</li>
+</ul>
+<p><strong>Clock</strong> can be a big challenge in stream processing, as we do not have a unified reliable clock to rely on, and we need timestamp to detemine window.</p>
+<p>One mitigation solution is to log three timestamps:<br>the time an event occured (<strong>device clock</strong>), the <strong>device clock</strong> when it was sent to the server and the <strong>server clock</strong> when it is received.<br>By subtracting the second timestamp from the third, you can estimate the <strong>offset</strong> between the device clock and the server clock </p>
+<hr>
+<p>Some different types of windows which got commonly used:</p>
+<ul>
+<li><strong>Tumbling window</strong>: fixed-lengthed, every event belongs to exactly one window. Can be implemented by taking each event timestamp and <strong>rounding</strong> it down to the nearest minute.</li>
+<li><strong>Hopping window</strong>: fixed-lengthed, allow windows to <strong>overlap</strong> to provide smoothing.</li>
+<li><strong>Sliding window</strong>: Contains all the events that occur within some interval of each other. Can be implemented by a <strong>buffer</strong> of events, and remove old events when they expire from the window.</li>
+<li><strong>Session window</strong>: No fixed duration, just group all events for the same user occur closely together in time. Ends when user become <strong>inactive</strong>.</li>
+</ul>
+<hr>
+<h3 id="Stream-Joins"><a href="#Stream-Joins" class="headerlink" title="Stream Joins"></a>Stream Joins</h3><ul>
+<li><strong>Stream-stream join</strong> (window join): We may need to link search and click activity (within certain time window) to let them sharing the same session ID (note that you need to learn accurate click-through rate, to learn searches which did not bring clicks events). We can use a stream processor to merge such activities by ID.</li>
+<li><strong>Stream-table join</strong> (stream enrichment): Enrich the activity events with information from the table. If the database querying is slow, consider loading the database copy (may need to be updated by <strong>change data capture</strong>) to the stream processor.</li>
+<li><strong>Table-table join</strong> (materialized view maintenance): Cache maintenance similar to the example provided at the beginning of this book. When celebrity tweets, sync it too all followers’ tiemlines. We can maintain a <strong>materialized view</strong> for a query that joins two tables</li>
+</ul>
+<p>For the aboce cases, <strong>time dependency</strong> is important, as data in certain DB can change (e.g., tax rate), which prevents us from getting the same result rerunning the same job.<br>In data warehouse, it is called <strong>Slowly Changing Dimension</strong> (SCD). We can use a <strong>unique</strong> identifier for a particular version of the joined record (e.g., whenever tax rate changes). This makes the join deterministic, but will also make log compaction impossible.</p>
+<hr>
+<h1 id="Fault-Tolerance"><a href="#Fault-Tolerance" class="headerlink" title="Fault Tolerance"></a>Fault Tolerance</h1><p><strong>Exactly-once Semantics &#x2F; Effectively-Once</strong>: though some tasks &#x2F; records may failed and processed multiple times, the visible effect is as if they have only been processed once.</p>
+<p>However, stream is <strong>infinite</strong>, so we cannot make output until finished.</p>
+<p><strong>Microbatching</strong>: break the stream into small blocks, and treat each block like a miniature batch process (in a implicit tumbling window).<br>Can generate <strong>rolling checkpoints</strong> of state and write them to durable storage (however, if message is sent to external message broker like email, checkpoint is not sufficient to make it effective once, and will need <strong>2PC</strong>)</p>
+<p><strong>Idempotence</strong>: We can require certain operation which can be performed multiple times, but effect only once.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2024/05/06/Designing-Data-Intensive-Applications-Note-19/" data-id="clvvhyi980000g4te6bwp4t0y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "Designing Data-Intensive-Applications-Note-19 [END]",
+        "image": "https://umiao.github.io/2024/05/06/Designing-Data-Intensive-Applications-Note-19/cover.png",
+        "keywords": "DataScience Data System Designing Data-Intensive-Applications",
+        "genre": "Data Science Data System",
+        "datePublished": "2024-05-06",
+        "dateCreated": "2024-05-06",
+        "dateModified": "2024-05-11",
+        "url": "https://umiao.github.io/2024/05/06/Designing-Data-Intensive-Applications-Note-19/",
+        "description": "Discussion on challenges with stream processing.
+",
+        "wordCount": 2465
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2024/05/05/Designing-Data-Intensive-Applications-Note-18/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Designing Data-Intensive-Applications-Note-18</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/05/06/Designing-Data-Intensive-Applications-Note-19/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/05/06/Designing-Data-Intensive-Applications-Note-19/cover.png)" alt="Designing Data-Intensive-Applications-Note-19 [END]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/05/06/Designing-Data-Intensive-Applications-Note-19/" class="title">Designing Data-Intensive-Applications-Note-19 [END]</a></p>
+                            <p class="item-date"><time datetime="2024-05-06T21:51:50.000Z" itemprop="datePublished">2024-05-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/05/05/Designing-Data-Intensive-Applications-Note-18/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/05/05/Designing-Data-Intensive-Applications-Note-18/cover.png)" alt="Designing Data-Intensive-Applications-Note-18" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/05/05/Designing-Data-Intensive-Applications-Note-18/" class="title">Designing Data-Intensive-Applications-Note-18</a></p>
+                            <p class="item-date"><time datetime="2024-05-05T19:00:33.000Z" itemprop="datePublished">2024-05-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png)" alt="Designing Data-Intensive-Applications-Note-17" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="title">Designing Data-Intensive-Applications-Note-17</a></p>
+                            <p class="item-date"><time datetime="2024-04-27T18:27:31.000Z" itemprop="datePublished">2024-04-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/21/Designing-Data-Intensive-Applications-Note-16/cover.png)" alt="Designing Data-Intensive-Applications-Note-16" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" class="title">Designing Data-Intensive-Applications-Note-16</a></p>
+                            <p class="item-date"><time datetime="2024-04-21T16:54:34.000Z" itemprop="datePublished">2024-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/03/29/Designing-Data-Intensive-Applications-Note-15/cover.png)" alt="Designing Data-Intensive-Applications-Note-15" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" class="title">Designing Data-Intensive-Applications-Note-15</a></p>
+                            <p class="item-date"><time datetime="2024-03-29T20:52:54.000Z" itemprop="datePublished">2024-03-29</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">44</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/Data-System/">Data System</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Investment/">Investment</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/" rel="tag">Apple Watch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLI/" rel="tag">CLI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate/" rel="tag">Certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-System/" rel="tag">Data System</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">46</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Designing-Data-Intensive-Applications/" rel="tag">Designing Data-Intensive-Applications</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/" rel="tag">English</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IQ/" rel="tag">IQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyboard/" rel="tag">Keyboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOD/" rel="tag">OOD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented-Design/" rel="tag">Object Oriented Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Productivity/" rel="tag">Productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Term/" rel="tag">Term</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tips/" rel="tag">Tips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vocabulary/" rel="tag">Vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Frequency/" rel="tag">Word Frequency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/" rel="tag">futures</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/investment/" rel="tag">investment</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/options/" rel="tag">options</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trading/" rel="tag">trading</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Apple-Watch/" style="font-size: 10px;">Apple Watch</a> <a href="/tags/Brainteasers/" style="font-size: 10px;">Brainteasers</a> <a href="/tags/CLI/" style="font-size: 10px;">CLI</a> <a href="/tags/Certificate/" style="font-size: 10px;">Certificate</a> <a href="/tags/Cyber-Security/" style="font-size: 10px;">Cyber Security</a> <a href="/tags/Data-System/" style="font-size: 18px;">Data System</a> <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/Designing-Data-Intensive-Applications/" style="font-size: 18px;">Designing Data-Intensive-Applications</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/IQ/" style="font-size: 10px;">IQ</a> <a href="/tags/Keyboard/" style="font-size: 10px;">Keyboard</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 14px;">Machine Learning</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/OOD/" style="font-size: 10px;">OOD</a> <a href="/tags/Object-Oriented-Design/" style="font-size: 10px;">Object Oriented Design</a> <a href="/tags/Productivity/" style="font-size: 10px;">Productivity</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Software-Engineering/" style="font-size: 12px;">Software Engineering</a> <a href="/tags/Term/" style="font-size: 10px;">Term</a> <a href="/tags/Tips/" style="font-size: 10px;">Tips</a> <a href="/tags/UCLA/" style="font-size: 12px;">UCLA</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 10px;">Vocabulary</a> <a href="/tags/Word-Frequency/" style="font-size: 10px;">Word Frequency</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a> <a href="/tags/futures/" style="font-size: 12px;">futures</a> <a href="/tags/investment/" style="font-size: 12px;">investment</a> <a href="/tags/options/" style="font-size: 12px;">options</a> <a href="/tags/trading/" style="font-size: 12px;">trading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2024 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2024/05/06/Designing-Data-Intensive-Applications-Note-19/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
