@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Introduction to Git | The blog of Blur</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Data System,Git,Version Control" />
+    
+    <meta name="description" content="Thorough analysis and learning note based on git documentation (https:&#x2F;&#x2F;git-scm.com&#x2F;book&#x2F;en&#x2F;v2).">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to Git">
+<meta property="og:url" content="https://umiao.github.io/2024/08/06/Introduction-to-Git/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Thorough analysis and learning note based on git documentation (https:&#x2F;&#x2F;git-scm.com&#x2F;book&#x2F;en&#x2F;v2).">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2024/08/06/Introduction-to-Git/cover.jpg">
+<meta property="article:published_time" content="2024-08-07T05:42:55.000Z">
+<meta property="article:modified_time" content="2024-08-14T07:48:43.670Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="Data System">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Version Control">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2024/08/06/Introduction-to-Git/cover.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="The blog of Blur" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/NLP/">NLP</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/">Data Science</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/Data-System/">Data System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Science/SQL/">SQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Investment/">Investment</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/">Job Search</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/SQL/">SQL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Productivity/">Productivity</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Research/">Research</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Research/Paper-Read/">Paper Read</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/">UCLA</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/UCLA/Course-Study/">Course Study</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+		// ROOT_URL: 'https://umiao.github.io/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Introduction-to-Git" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Introduction to Git
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2024/08/06/Introduction-to-Git/" class="article-date">
+       <time datetime="2024-08-07T05:42:55.000Z" itemprop="datePublished">2024-08-06</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2024/08/06/Introduction-to-Git/" class="article-date">
+     <time datetime="2024-08-14T07:48:43.670Z" itemprop="dateModified">2024-08-14</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Data-System/" rel="tag">Data System</a>, <a class="tag-link-link" href="/tags/Git/" rel="tag">Git</a>, <a class="tag-link-link" href="/tags/Version-Control/" rel="tag">Version Control</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Thorough analysis and learning note based on git documentation (<a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2">https://git-scm.com/book/en/v2</a>).</p>
+<img src="/2024/08/06/Introduction-to-Git/cover.jpg" class="" title="ML_note">
+<span id="more"></span>
+
+<ul>
+<li><strong>Patches set</strong>: the differences between files &#x2F; versions; can be used to recreate files</li>
+<li><strong>Centralized Version Control Systems</strong>: single server contains all versioned files. Clients checkout file from central place. Prone to <em>single point failure</em>.</li>
+<li><strong>Distributed Version Control Systems</strong>: clients fully mirror the repository and history.</li>
+</ul>
+<hr>
+<p>Git is <strong>snapshot</strong> based (store and index changed files), rather than difference based (storing the delta &#x2F; change of files).<br>Near all operation is local.<br>Integrity is enforced by <strong>checksum</strong> (empowered by <strong>SHA-1</strong> hash). Git will be able to detect change &#x2F; corruption.<br>Git generally only adds data. committed changes are hard to lost.</p>
+<h3 id="Three-status"><a href="#Three-status" class="headerlink" title="Three status"></a>Three status</h3><ol>
+<li><strong>Modified</strong>: file changed, not committed</li>
+<li><strong>Staged</strong>: marked a modified file in its current version to go into your next commit snapshot</li>
+<li><strong>Committed</strong>: data is safely stored in your local database</li>
+</ol>
+<p>These states lead us to main sections of git project: <strong>working tree</strong>, <strong>staging area</strong>, <strong>git directory</strong>.</p>
+<img src="/2024/08/06/Introduction-to-Git/1.jpg" class="" title="ML_note">
+
+<hr>
+<p>Installation: refer to this <a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">link</a>.</p>
+<hr>
+<h3 id="Git-Config"><a href="#Git-Config" class="headerlink" title="Git Config"></a>Git Config</h3><ol>
+<li><strong>Configuration Overwrite</strong>: <code>.git/config</code> (local project) will overwrite (<code>~/.gitconfig </code> &#x2F; <code> ~/.config/git/config</code>, current user) and will overwrite <code>/etc/gitconfig</code> (system level).</li>
+<li>Show where setting comes from: <code>git config --list --show-origin</code></li>
+<li>Setting up user email:<br><code>git config --global user.name &quot;John Doe&quot;</code><br><code>git config --global user.email johndoe@example.com</code><br>(remove <code>--global</code> to make local setting only)</li>
+<li>Check all configuration: <code>git config --list</code></li>
+</ol>
+<hr>
+<p>Use <code>git help</code> for help page.<br>You can use <code>git COMMAND -h</code> for brief help message, like <code>git add -h</code>.  <code>git help add</code> will be more comprehensive.</p>
+<hr>
+<h3 id="Git-Repository-Initialize"><a href="#Git-Repository-Initialize" class="headerlink" title="Git Repository Initialize"></a>Git Repository Initialize</h3><ul>
+<li>Create repository from scratch:</li>
+</ul>
+<p><code>cd /Users/user/my_project</code><br><code>cd /Users/user/my_project</code><br><code>git add *.c</code><br><code>git add LICENSE</code><br><code>git commit -m &#39;initial project version&#39;</code></p>
+<hr>
+<ul>
+<li>Clone existing repo:<br><code>git clone https://github.com/libgit2/libgit2 (optional_alias)</code></li>
+</ul>
+<hr>
+<h3 id="Git-Status"><a href="#Git-Status" class="headerlink" title="Git Status"></a>Git Status</h3><p>Use <code>git status</code> to check the status of your files.<br>You can check if any file is <code>untracked</code> (can be tracked via <code>git add</code>) or change <code>uncommitted</code>.</p>
+<p>You can use <code>git status -s</code> to get more <strong>compacted</strong> output.</p>
+<hr>
+<h3 id="Git-Add"><a href="#Git-Add" class="headerlink" title="Git Add"></a>Git Add</h3><p><strong>Example</strong>: <code>git add &lt;files&gt;</code>, the input can be either directory or file name.<br>This command can <strong>track</strong> new files, <strong>stage</strong> files and mark merge-conflict files as <strong>resolved</strong>.<br>*Note that <code>git add</code> will only stage the snapshot of a file by the time “add” command is executed. If changes happended later, we need to add again.</p>
+<p><strong>Ignoring files</strong>: for log or temp files which we do not want Git to automatically add or even show as “untracked”, we can configure in <strong>.gitignore</strong> file.</p>
+<p>Rules of writing <code>.gitignore</code> file:</p>
+<ol>
+<li>Blank lines or lines starting with # are ignored.</li>
+<li>Standard glob (shell simplified regular expression) patterns work, and will be applied recursively throughout the entire working tree.</li>
+<li>You can start patterns with a forward slash (&#x2F;) to avoid recursivity.</li>
+<li>You can end patterns with a forward slash (&#x2F;) to specify a directory.</li>
+<li>You can negate a pattern by starting it with an exclamation point (!).</li>
+</ol>
+<p>For more examples of <code>.gitignore</code>, please check <a target="_blank" rel="noopener" href="https://github.com/github/gitignore">here</a>.</p>
+<hr>
+<h3 id="Git-Diff"><a href="#Git-Diff" class="headerlink" title="Git Diff"></a>Git Diff</h3><ol>
+<li><code>git diff</code>:<br>Inspect what have <strong>changed</strong> but not yet <strong>staged</strong>.</li>
+<li><code>git diff --staged</code> or <code>git diff --cached</code>:<br>Inspect what you’ve <strong>staged</strong> that will go into your next <strong>commit</strong>.</li>
+</ol>
+<hr>
+<h3 id="Git-Commit"><a href="#Git-Commit" class="headerlink" title="Git Commit"></a>Git Commit</h3><ol>
+<li><code>git commit</code>: will run the default text editor for creating a message for the commit, and the changes to be committed will be shown.</li>
+<li>Use: <code>git commit -m &quot;YOUR MESSAGE&quot;</code> can create the commit with message in one line.</li>
+<li><code>git commit -a -m &#39;YOUR MESSAGE&#39;</code> can skip the stage area without manually adding all the changed files. However, we should be careful before doing this (should check <code>git status</code>).</li>
+</ol>
+<hr>
+<h3 id="Removing-Files"><a href="#Removing-Files" class="headerlink" title="Removing Files"></a>Removing Files</h3><ol>
+<li><code>git rm</code> will remove a file from your tracked files (more accurately, remove it from your staging area) and then commit. The file will also be removed from your working directory.<br> <strong>Example</strong>: <code>git rm YOUR_FILE_NAME</code></li>
+<li>To remove a <strong>edited &#x2F; staged</strong> file, we need to add <code>-f</code> (force removal) to prevent accidental removal of data that hasn’t been recorded in a snapshot.</li>
+<li><code>git rm --cached YOUR_FILE_NAME</code> can remove (accidentally staged) files from <strong>staging area</strong> but keep the file in the working tree.<br> <strong>Example</strong>: If you forget to add log files or compiled files to the <code>.gitignore</code> file and accidentally staged.</li>
+<li>You can pass files, directories, and file-glob patterns to the git rm command.<br> <strong>Example</strong>: <code>git rm log/\*.log</code> and <code>git rm \*~</code>. Note that the <code>\</code> is needed because Git does its own filename expansion in addition to shell’s filename expansion.</li>
+<li>We can rename file with: <code>git mv file_from file_to</code><br> This is actually equivalent to running 3 commands of: <code>mv README.md README</code>, <code>git rm README.md</code> and <code>git add README</code></li>
+</ol>
+<hr>
+<h3 id="Check-commit-history"><a href="#Check-commit-history" class="headerlink" title="Check commit history"></a>Check commit history</h3><ol>
+<li><code>git log</code>: by default,  this command lists each commit with its SHA-1 checksum, the author’s name and email, the date written, and the commit message.</li>
+<li>Use the <code>-p</code> or <code>--patch</code> mode to show the difference of each commit in the format of <strong>patches</strong> : <code>git log -p -NUM</code>. Here <code>NUM</code> restricts to show only <code>NUM</code> entries.</li>
+<li>Use the <code>git log --stat</code> to show some <strong>abbreviated stats</strong>.</li>
+<li>Use <code>git log --pretty=oneline</code> to show the commit history in different <strong>formats</strong>. (also have other options like <code>short</code>, <code>full</code> and <code>fuller</code>). </li>
+<li>We can use <code>git log --pretty=format:&quot;%h - %an, %ar : %s&quot;</code> to format the commit history and extract the information you need. E.g. <code>%h</code> shows the <strong>abbreviated hash</strong>, <code>%an</code> shows the <strong>author name</strong> and <code>%ar</code> is <strong>Author date, relative</strong> and <code>%s</code> is the subject.</li>
+<li>Use <code>--graph</code> option to <strong>visualize</strong> the branch and merge history.<br> <strong>Example</strong>: <code>git log --pretty=format:&quot;%h %s&quot; --graph</code></li>
+<li><strong>Time limiting</strong> options such as <code>--since</code> and <code>--until</code>. E.g., <code>git log --since=2.weeks</code>.</li>
+<li><code>-S</code> &#x2F; <strong>pickaxe</strong> option. By using <code>git log -S function_name</code>, we will show only those commits that changed the number of occurrences of that string.</li>
+</ol>
+<hr>
+<h3 id="Undo-things"><a href="#Undo-things" class="headerlink" title="Undo things"></a>Undo things</h3><ol>
+<li>Use <code>git commit --amend</code> takes your staging area and use it for the commit. This will <strong>overwrite</strong> your previous commit.</li>
+<li>Use <code>git reset HEAD &lt;file&gt;…</code> to <strong>unstage</strong>. In this case, it will be removed from the staging area but changes kept in working tree.<br> * It should be noted that <code>reset</code> is a dangerous command. In git, almost all <strong>commited</strong> data can be recovered. However, <strong>uncommited</strong> changes may lost forever.</li>
+</ol>
+<hr>
+<h3 id="Working-with-Remotes"><a href="#Working-with-Remotes" class="headerlink" title="Working with Remotes"></a>Working with Remotes</h3><ol>
+<li><code>git remove -v</code>: shows you the URLs that Git has stored for the shortname to be used when reading and writing to that remote.</li>
+<li><code>git remote add &lt;shortname&gt; &lt;url&gt;</code> will add a new remote explicitly.</li>
+<li><code>git fetch &lt;remote&gt;</code>: goes out to that remote project and pulls down all the data from that remote project that you don’t have yet. (If you used <code>clone</code> to copy a remote, it will be automatically added as remote “origin”). Also, <code>git fetch</code> will do the data downloading only without changing your work.</li>
+<li><code>git pull</code>: automatically <strong>fetch</strong> and then <strong>merge</strong> that remote branch into your current branch.</li>
+<li><code>git push &lt;remote&gt; &lt;branch&gt;</code> will push your changes to the upstream. (This command works only if you cloned from a server to which you have <strong>write access</strong> and if nobody has pushed in the meantime)</li>
+<li><code>git remote show &lt;remote&gt;</code> to check more information a remote.</li>
+<li><code>git remote rename &lt;old_name&gt; &lt;new_name&gt;</code> to <strong>rename</strong> a remote. <code>git remote remove &lt;remote&gt;</code> to <strong>remove</strong> a remote.</li>
+</ol>
+<hr>
+<h3 id="Tagging"><a href="#Tagging" class="headerlink" title="Tagging"></a>Tagging</h3><p>Git has the ability to tag specific points in a repository’s history as being <strong>important</strong>.</p>
+<ul>
+<li><strong>Lightweight tag</strong>: a pointer to a specific commit</li>
+<li><strong>Annotated tag</strong>: full objects, checksummed, with the tagger name, email and date and message.</li>
+</ul>
+<p><strong>Example</strong>: </p>
+<ol>
+<li>Annotated: <code>git tag -a v1.4 -m &quot;my version 1.4&quot;</code></li>
+<li>Light-weighted: <code>git tag v1.4-lw</code></li>
+</ol>
+<p>Use <code>git show</code> to check the tagger information, data the commit was tagged and theannotation message. </p>
+<p>Use <code>git tag -d &lt;tagname&gt;</code> to <strong>remove</strong> a tag.</p>
+<p>* By default, <code>git push</code> will not transfer tags to remote. We need to do that explicityly: <code>git push origin &lt;tagname&gt;</code><br>Or we can use <code>git push origin --tags</code> to push <strong>ALL</strong> tags.<br>** if you <code>checkout</code> to a tag, your repo will be at <strong>detached HEAD</strong> status. In such case, if you make changes and then created a commit, the tag will stay the same, but your new commit will not belong to any branch and become <strong>unreachable</strong>.</p>
+<hr>
+<h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><p>We can create <strong>alias</strong> for git commands for convenience, examples:<br><code>git config --global alias.co checkout</code><br><code>git config --global alias.br branch</code><br><code>git config --global alias.unstage &#39;reset HEAD --&#39;</code><br><code>git config --global alias.last &#39;log -1 HEAD&#39;</code></p>
+<p>To run an external command, rather than a Git subcommand, start the command with a <code>!</code> character.</p>
+<p><code>git config --global alias.visual &#39;!gitk&#39;</code></p>
+<hr>
+<h1 id="Branch"><a href="#Branch" class="headerlink" title="Branch"></a>Branch</h1><p>Git stores <strong>snapshots</strong> (as <strong>BLOB</strong> objects) for files, rather than patches or diffs.</p>
+<p>When making a commit, Git stores a commit object that contains a <strong>pointer</strong> to the snapshot of the content you staged. Also contains the author’s name and email address, the message that you typed, and pointers to the commit or commits that directly came before this commit (its <strong>parent</strong> or <strong>parents</strong>):<br>* <strong>0</strong> parents for the initial commit, <strong>1</strong> parent for a normal commit, and <strong>multiple</strong> parents for a commit that results from a merge of two or more branches.<br>** Aside from the commit information and blob obj, a <strong>tree object</strong> is used to record the directory structure and blob object reference.</p>
+<p>A branch in Git is a <strong>movable pointer</strong> to one commit. The default branch name in Git is <code>master</code>.</p>
+<hr>
+<p><strong>Commands</strong>:</p>
+<ul>
+<li>Run <code>git branch</code> without parameters, you will see a list of branches, with the current branch marked with <code>*</code>.</li>
+<li><code>git branch --merged</code> &#x2F; <code>git branch --no-merged</code> can show the branches which are already merged (can be safely deleted) &#x2F; not yet merged by the current branch (cannot be deleted by <code>git branch -d</code>, need to use <code>git branch -D</code>).</li>
+</ul>
+<h3 id="Create-a-new-branch"><a href="#Create-a-new-branch" class="headerlink" title="Create a new branch"></a>Create a new branch</h3><ol>
+<li><code>git branch &lt;name&gt;</code>: creates a new pointer to the same commit you are currently on.</li>
+<li>A speical pointer <code>HEAD</code> marks the current branch.<br>* Note that with <code>git branch</code>, you just created a new branch, do not checkout to that branch by default.</li>
+<li>You can use <code>git log --decorate</code> to check which commit objects the branch pointers are pointing to.</li>
+</ol>
+<hr>
+<h3 id="Checkout-to-branch"><a href="#Checkout-to-branch" class="headerlink" title="Checkout to branch"></a>Checkout to branch</h3><ol>
+<li>Use <code>git checkout &lt;name&gt;</code> to have <code>HEAD</code> pointing to another branch (for checking out).</li>
+<li>You can create a new branch, and checkout to that branch with: <code>git checkout -b &lt;name&gt;</code></li>
+</ol>
+<p>A branch in Git is actually a simple file that contains the 40 character <strong>SHA-1</strong> checksum of the commit it points to. This makes the branch creating &amp; checkout extremely efficient.</p>
+<p>* You do not need to provide the entire 40-character SHA-1. You just need to provide <strong>at least 4 beginning characters</strong> (by default 7) (have to be <strong>unambiguous</strong>).<br>** <strong>Branch reference</strong>:  If a commit is at the tip of a branch, you can refer to it with <code>git show &lt;commit_id&gt;</code> or <code>git show &lt;branch_name&gt;</code></p>
+<h3 id="Merge-of-branch"><a href="#Merge-of-branch" class="headerlink" title="Merge of branch"></a>Merge of branch</h3><ol>
+<li>In case you want to switch to the master branch to add some fix while shelving the changes in your current dev branch, you can first <strong>commit</strong> and the changes and then <strong>checkout</strong> to master.</li>
+<li>When the fix is finished, and the dev is finished after that, you can checkout to master and use <code>git merge &lt;dev_branch&gt;</code> to merge the changes.</li>
+</ol>
+<h3 id="Rename-of-branch"><a href="#Rename-of-branch" class="headerlink" title="Rename of branch"></a>Rename of branch</h3><ol>
+<li>Locally: <code>git branch --move bad-branch-name corrected-branch-name</code></li>
+<li>Globally: <code>git push --set-upstream origin corrected-branch-name</code><br>We can use <code>git branch --all</code> to check if the <strong>renaming</strong> is successful.</li>
+</ol>
+<hr>
+<h2 id="Remote-branches"><a href="#Remote-branches" class="headerlink" title="Remote branches"></a>Remote branches</h2><ol>
+<li><p>Remote-tracking branches are <strong>references</strong> to the <strong>state</strong> of remote branches. Git moves such local references (pointers) for you whenever you do network communications to make them up-to-date.</p>
+</li>
+<li><p>Remote-tracking branch names take the form <code>&lt;remote&gt;/&lt;branch&gt;</code></p>
+</li>
+<li><pre><code>Remote-tracking branches (pointers) will not move if you do **NOT** connect to remote server and pull.
+</code></pre>
+</li>
+<li><p>Use <code>git remote add &lt;remote_alia&gt; &lt;remote_url&gt;</code> to <strong>add</strong> a new remote repository for your project.</p>
+</li>
+<li><p><code>git checkout -b &lt;branch&gt; &lt;remote&gt;/&lt;branch&gt;</code> or <code>git checkout --track &lt;remote&gt;/&lt;branch&gt;</code>, to create a local branch which tracks the remote branch.<br> * To set the local branch to use a <strong>different</strong> name, use <code>git checkout -b local_name remote/branch</code><br> ** Use <code>-u</code> or <code>--set-upstream-to</code> to set &#x2F; update the upstream branch for an existing local branch.</p>
+</li>
+<li><p>Use <code>git branch -vv</code> for <strong>ALL</strong> tracked branches.<br> * This may not be updated. Run <code>git fetch --all</code> ahead.</p>
+</li>
+<li><p>Use <code>git push origin --delete remote_branch</code> to <strong>remove</strong> a branch from server. This can usually be recovered before garbage collection.</p>
+</li>
+</ol>
+<hr>
+<h1 id="Rebasing"><a href="#Rebasing" class="headerlink" title="Rebasing"></a>Rebasing</h1><ol>
+<li>If <code>merge</code> is used in branch merging, a <strong>three-way merge</strong> will be performed on the 2 latest branch snapshots, and the most recent common ancestor of them 2.<br> * This will result in a <strong>new</strong> snapshot and commit.</li>
+<li><strong>Rebasing</strong>: take the <strong>patch</strong> of the change that are introduced in dev branch, and <strong>reapply</strong> it on top of the master branch.</li>
+<li>Rebasing works by:<br> a. Going to the common ancestor of the two branches<br> b. Getting the <strong>diff</strong> introduced by each commit of the branch you’re on<br> c. Saving those diffs to temporary files<br> d. Resetting the current branch to the same commit as the branch you are rebasing onto<br> e. Finally applying each change in turn.</li>
+<li>Rebasing makes the commits apply <strong>cleanly</strong> and appears as the work happened in <strong>series</strong> though they are originally in parallel.</li>
+<li>Rebasing enables a <strong>fast-forward</strong> and a clean apply.</li>
+</ol>
+<hr>
+<p>It is possible to apply the generated replays &#x2F; patches to a <strong>different</strong> branch than the target branch.</p>
+<p><code>git rebase --onto master server client</code> will:</p>
+<ol>
+<li>Take the client branch, figure out the patches since it <strong>diverged</strong> from the server branch</li>
+<li>Replay these patches in the client branch as if it was based directly off the master branch instead.</li>
+</ol>
+<hr>
+<h3 id="The-Perils-of-Rebasing"><a href="#The-Perils-of-Rebasing" class="headerlink" title="The Perils of Rebasing"></a>The Perils of Rebasing</h3><p>Do <strong>NOT</strong> rebase commits that exist outside your repository and that people may have based work on.</p>
+<p>In that case, you’re <strong>abandoning</strong> existing commits and creating new ones that are similar but different.<br>If you changed the submission history in a public repo, you and cowork may face confusing results (<strong>duplicates</strong> of commit, and the deprecated commits can be found back).</p>
+<p><strong>Solution</strong>: Ask your coworkers to <code>git pull --rebase</code>. You should not remove commits where others may be doing development on.<br><strong>* !</strong> Rebase <strong>local</strong> changes before pushing to clean up your work, but <strong>never</strong> rebase anything that you’ve <strong>pushed</strong> somewhere.</p>
+<hr>
+<h1 id="Git-protocols-on-Server"><a href="#Git-protocols-on-Server" class="headerlink" title="Git protocols on Server"></a>Git protocols on Server</h1><ol>
+<li><strong>Local</strong>: shared file system based, remote drive may be slow and inconvenient. Each user will gain complete shell acess of the remote directory.</li>
+<li><strong>HTTP</strong>: “Smart HTTP” works similar to SSH and Git, just on HTTP&#x2F;S port with autentication mechanisms. Fast and easy, can provide encrption and pass firewalls. Setting up the server end can be less convenient. We also have “Dumb HTTP” which expects the bare Git repo to be served like normal files.</li>
+<li><strong>SSH (Secure Shell)</strong>: More common, safe and efficient. However, it does not support anonymous access to your Git repository. </li>
+<li><strong>Git</strong>: Based on a special port 9418, <strong>NO</strong> authentication or cryptography. It is difficult to set up and requires firewall access to port 9418.</li>
+</ol>
+<hr>
+<h3 id="Reflog"><a href="#Reflog" class="headerlink" title="Reflog"></a>Reflog</h3><p><strong>reflog</strong>: a log of your <code>HEAD</code> and branch references, kept for a few months. It should be noted that it is stored only <strong>locally</strong>. When a new repo is cloned, it is going to be emppty.</p>
+<ul>
+<li>Every time your branch tip is updated for any reason, Git stores that information for you in this temporary history. </li>
+<li>Refer to older commits: <code>git show HEAD@&#123;5&#125;</code> to show the <strong>fifth</strong> prior value of the <code>HEAD</code> for your repo.</li>
+<li>Use <code>git show master@&#123;yesterday&#125;</code> to check the commits which are pointed by your master branch yesterday.</li>
+<li>Use <code>git log -g</code> to check the content of <strong>reflog</strong>, but using the format of <code>git log</code> output.</li>
+</ul>
+<hr>
+<h3 id="Ancestry-References"><a href="#Ancestry-References" class="headerlink" title="Ancestry References"></a>Ancestry References</h3><ul>
+<li>If you place a <strong>^</strong> (caret) at the end of a reference, Git resolves it to mean the <strong>parent</strong> of that commit.</li>
+<li>git show <code>HEAD^</code> will show the parent of <code>HEAD</code>.</li>
+<li>You can specify a number to identify which parent you want. <code>d921970^2</code> means the <strong>second parent</strong> of d921970.</li>
+<li><code>~</code> refer to the first parent. Thus, <code>HEAD~</code> is equivalent to <code>HEAD^</code>.</li>
+</ul>
+<hr>
+<h3 id="Commit-Ranges"><a href="#Commit-Ranges" class="headerlink" title="Commit Ranges"></a>Commit Ranges</h3><ol>
+<li><strong>Double Dot</strong>: Show all commits reachable from experiment that aren’t reachable from master: <code>git log master..experiment</code>. Similarly, <code>git log experiment..master</code> shows everything in master not reachable from experiment.<br> * <code>git log origin/master..HEAD</code> Shows what is about to push to remote.</li>
+<li><strong>Multiple Points</strong>: See what commits are in any of several branches that aren’t in the branch you’re currently on: use <code>^</code> or <code>--not</code> before any reference from which you <strong>don’t</strong> want to see reachable commits.<br> <strong>Equivalent</strong> expressions:<br> 1. <code>git log refA..refB</code><br> 2. <code>git log ^refA refB</code><br> 3. <code>git log refB --not refA</code><br> Use <code>git log refA refB ^refC</code> to see commits reachable from refA and refB, but not from refC.</li>
+<li><strong>Triple Dot</strong>: specifies all the commits that are reachable by <strong>either</strong> of two references but not by both of them.<br> <code>git log --left-right master...experiment</code> shows which commit is unique and belongs to which branch.</li>
+</ol>
+<hr>
+<h3 id="Stashing-and-Cleaning"><a href="#Stashing-and-Cleaning" class="headerlink" title="Stashing and Cleaning"></a>Stashing and Cleaning</h3><ul>
+<li><code>git stash</code> can preserve the half-done work so you can work on other things and come back later.<br>  * <code>git stash save</code> is to be migrated to: <code>git stash push</code></li>
+<li>Use <code>git status</code> to see if the stash command takes effect (working tree clean)</li>
+<li><code>git stash list</code> to <strong>check</strong> the stored stashes.</li>
+<li><code>git stash apply</code> to <strong>apply</strong> the recently stashed work (by default the <strong>most recent</strong> one)<br>  * To apply an older change, you can specify the name like <code>git stash apply stash@&#123;2&#125;</code><br>  Also the working tree should be <strong>clean</strong>; Stashed changes can be apply to another branch, if not, merge conflicts.<br>  ** The staged files will <strong>NOT</strong> be <strong>restaged</strong>. To do that, run <code>git stash apply --index</code></li>
+<li>The <code>git stash apply</code> will not remove your stash.<br>  To <strong>remove</strong>, use <code>git stash drop stash@&#123;0&#125;</code> to drop stash by name (0 is the most recent one)<br>  <code>git stash pop</code> will apply &amp; delete the most recent stash.</li>
+<li>By default, only <strong>tracked</strong> files will be stashed.<br>  To stash untracked files: <code>git stash -u / --include-untracked</code><br>  To stash <strong>ignored</strong> files, <code>git stash -a \ --all</code></li>
+<li>Use <code>git stash --patch</code> to <strong>interactively</strong> determine what to stash.</li>
+<li><code>git stash branch &lt;new branchname&gt;</code> to create a <strong>NEW</strong> branch based on the stash.</li>
+</ul>
+<hr>
+<h3 id="Git-Clean"><a href="#Git-Clean" class="headerlink" title="Git Clean"></a>Git Clean</h3><ol>
+<li>Use <code>git clean</code> to remove redundant files &#x2F; clean up working directory which are <strong>NOT ignored</strong><br> (remove <strong>untracked</strong> files &#x2F; <strong>empty</strong> dir by <code> git clean -f -d</code>)<br> (remvoe <strong>ignored</strong> files using <code>-x</code>)<br> Better <code>git stash --all</code> first, because such files may not be able to be retrieved.</li>
+<li>Use <code>git clean -d -n / --dry-run</code> to see what it <strong>will</strong> do.</li>
+</ol>
+<hr>
+<h2 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h2><ol>
+<li>Use <code>git grep keyword</code> to search <strong>files</strong> in your working directory.</li>
+<li><code>git grep -n keyword</code> to search the <strong>line number</strong>.</li>
+<li>Use <code>-c / --count</code> to <strong>summarize</strong> the output.</li>
+<li>Use <code>-p /  --show-function</code> to display the enclosing <strong>method or function</strong> for each matching string.</li>
+</ol>
+<hr>
+<h2 id="Log-Searching"><a href="#Log-Searching" class="headerlink" title="Log Searching"></a>Log Searching</h2><ul>
+<li>To see <strong>when</strong> a term existed or was introduced, we can use <code>-S</code>:<br><code>git log -S keyword --oneline</code>.</li>
+<li>We can use <code>-G</code> to search with <strong>regular expression</strong>.</li>
+<li>Use <code>-L</code> to trigger <strong>Line Log Search</strong>.<br>   <code>git log -L :FunctionName:FileName</code><br>   Git will try to figure out what the bounds of that function are and then look through the history and show us every change that was made to the function as a series of patches back to when the function was first created.</li>
+</ul>
+<hr>
+<h3 id="Rewrite-History"><a href="#Rewrite-History" class="headerlink" title="Rewrite History"></a>Rewrite History</h3><ol>
+<li><code>git commit --amend</code> to rewrite the <strong>last</strong> commit changes and message.</li>
+<li>Use <code>git rebase -i HEAD~3</code> to rewrite the <strong>last three</strong> commits. You can also specify a <strong>branch</strong> to rewrite all the diverging commits.<br> When entering the text editor, you can change “pick” into “edit” to edit a commit, or use “squash” to merge a commit.<br> After making the changes, run <code>git commit --amend</code> and <code>git rebase --continue</code><br> You can use this method to <strong>reorder</strong> commits, or <strong>eliminate</strong> some entirely.</li>
+<li>To rewrite huge swaths of history, you can use <strong>filter-branch</strong>, or just use the more recommended <a target="_blank" rel="noopener" href="https://github.com/newren/git-filter-repo">git-filter-repo</a>.</li>
+</ol>
+<hr>
+<h3 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h3><p><strong>Mental frame</strong> of Git: Managing 3 <strong>trees</strong> (collections of files).</p>
+<ol>
+<li><strong>HEAD</strong>: Last commit snapshot, next parent</li>
+<li><strong>Index</strong>: Proposed next commit snapshot</li>
+<li><strong>Working Directory</strong>: Sand box.</li>
+</ol>
+<p>After <code>git add</code>, content in working tree will be added to index. With <code>git commit</code>, content in index will be further saved as a permanent <strong>snapshot</strong>, create a commit object pointing to that snapshot and update the current <strong>branch</strong>. </p>
+<ol>
+<li><code>git reset --soft</code>: Move <code>HEAD</code> only to <strong>revert</strong> the last commit. This can be used to <strong>compact</strong> the commits.</li>
+<li><code>git reset --mixed</code>: Move <code>HEAD</code> and update index to be aligned with the current <code>HEAD</code>. Aside from reverting the commit, we <strong>unstaged</strong> everything.</li>
+<li><code>git reset --hard</code>: the working directory is eventually overwritten with the commit we reset to.<br> It is <strong>dangerous</strong> because it destroys data.</li>
+<li>If a path is set, <code>git reset</code> will skip the moving of <code>HEAD</code> but update the index and working directory partially.</li>
+</ol>
+<hr>
+<ul>
+<li><code>git checkout &lt;branch&gt;</code> can be very similar with <code>git reset --hard &lt;branch&gt;</code>. However, for checkout, the working directory is safe, and will try to do a trivial merge in the working directory.<br>  Also, <code>reset</code> will change a commit a branch pointing to, but <code>checkout</code> will change the branch itself.</li>
+<li>If a path is attached, checkout works like <code>git reset --hard [branch] file</code>. It will not move <code>HEAD</code> and is not safe for working directory.</li>
+</ul>
+<hr>
+<h3 id="Tips-About-Merge"><a href="#Tips-About-Merge" class="headerlink" title="Tips About Merge"></a>Tips About Merge</h3><ol>
+<li>If you <strong>revert</strong>ed a merged change, but later want to merge again, it will not work because the original merge is still reachable.<br> In that case, you will also need to revert the revert.</li>
+<li><code>git config --global rerere.enabled true</code> can trigger the rerere function.<br> After merging, how conflicts are resolved will be recorded and can be check using <code>git rerere status</code>.<br> <code>git rerere diff</code> will raise the text editor so that conflicts will be resolved. After resolving that, the solution will be kept and remembered.<br> In the future, we can see something like <code>Resolved &#39;hello.rb&#39; using previous resolution.</code><br> * if you have the solution, just use <code>git rerere</code> to reuse solution for resolving.</li>
+<li><code>git blame -L Line_range_beg,Line_range_end &lt;FileName&gt;</code> can check who introduced certain change.</li>
+<li><code>git bisect</code> can be used to detect when failure is introduced.<br> a. <code>git bisect start</code>: start searching<br> b. <code>git bisect bad</code>: current commit is <strong>bad</strong><br> c. <code>git bisect good &lt;good_commit&gt;</code>: certain commit is good<br> We can keep giving “good” and “bad” feedbacks to figure out the first bad one.<br> After all, use <code>git bisect reset</code> to reset the <code>HEAD</code>pointer.</li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://umiao.github.io/2024/08/06/Introduction-to-Git/" data-id="clzjffvbh000024teefxxa7c4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Blur - Shenghui Xu"
+        },
+        "headline": "Introduction to Git",
+        "image": "https://umiao.github.io/2024/08/06/Introduction-to-Git/cover.jpg",
+        "keywords": "Data System Git Version Control",
+        "genre": "Job Search Software Engineering",
+        "datePublished": "2024-08-06",
+        "dateCreated": "2024-08-06",
+        "dateModified": "2024-08-14",
+        "url": "https://umiao.github.io/2024/08/06/Introduction-to-Git/",
+        "description": "Thorough analysis and learning note based on git documentation (https://git-scm.com/book/en/v2).
+",
+        "wordCount": 3661
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/profile.php?id=100073921278130" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/umiao" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2024/05/14/14th-May-Researcher-Paper-Work-Group/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">14th_May_Researcher_Paper_Work_Group</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/08/06/Introduction-to-Git/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/08/06/Introduction-to-Git/cover.jpg)" alt="Introduction to Git" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Job-Search/">Job Search</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a></p>
+                            <p class="item-title"><a href="/2024/08/06/Introduction-to-Git/" class="title">Introduction to Git</a></p>
+                            <p class="item-date"><time datetime="2024-08-07T05:42:55.000Z" itemprop="datePublished">2024-08-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/05/14/14th-May-Researcher-Paper-Work-Group/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Research/">Research</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Research/Paper-Read/">Paper Read</a></p>
+                            <p class="item-title"><a href="/2024/05/14/14th-May-Researcher-Paper-Work-Group/" class="title">14th_May_Researcher_Paper_Work_Group</a></p>
+                            <p class="item-date"><time datetime="2024-05-15T06:43:14.000Z" itemprop="datePublished">2024-05-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/05/06/Designing-Data-Intensive-Applications-Note-19/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/05/06/Designing-Data-Intensive-Applications-Note-19/cover.png)" alt="Designing Data-Intensive-Applications-Note-19 [END]" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/05/06/Designing-Data-Intensive-Applications-Note-19/" class="title">Designing Data-Intensive-Applications-Note-19 [END]</a></p>
+                            <p class="item-date"><time datetime="2024-05-06T21:51:50.000Z" itemprop="datePublished">2024-05-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/05/05/Designing-Data-Intensive-Applications-Note-18/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/05/05/Designing-Data-Intensive-Applications-Note-18/cover.png)" alt="Designing Data-Intensive-Applications-Note-18" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/05/05/Designing-Data-Intensive-Applications-Note-18/" class="title">Designing Data-Intensive-Applications-Note-18</a></p>
+                            <p class="item-date"><time datetime="2024-05-05T19:00:33.000Z" itemprop="datePublished">2024-05-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2024/04/27/Designing-Data-Intensive-Applications-Note-17/cover.png)" alt="Designing Data-Intensive-Applications-Note-17" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Science/">Data Science</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Science/Data-System/">Data System</a></p>
+                            <p class="item-title"><a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" class="title">Designing Data-Intensive-Applications-Note-17</a></p>
+                            <p class="item-date"><time datetime="2024-04-27T18:27:31.000Z" itemprop="datePublished">2024-04-27</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/NLP/">NLP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/">Data Science</a><span class="category-list-count">44</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/Data-System/">Data System</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/General-Knowledge/">General Knowledge</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Science/SQL/">SQL</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Investment/">Investment</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/">Job Search</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Financial-Firm/">Financial Firm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/SQL/">SQL</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Job-Search/Software-Engineering/">Software Engineering</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Research/">Research</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Research/Paper-Read/">Paper Read</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/">UCLA</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/">Course Study</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UCLA/Course-Study/ECE209-in-2022-spring/">ECE209 in 2022 spring</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">17</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/" rel="tag">Apple Watch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteasers/" rel="tag">Brainteasers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLI/" rel="tag">CLI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate/" rel="tag">Certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-System/" rel="tag">Data System</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataScience/" rel="tag">DataScience</a><span class="tag-list-count">46</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Designing-Data-Intensive-Applications/" rel="tag">Designing Data-Intensive-Applications</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/" rel="tag">English</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GBM/" rel="tag">GBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IQ/" rel="tag">IQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyboard/" rel="tag">Keyboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Naive-Bayes/" rel="tag">Naive Bayes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOD/" rel="tag">OOD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented-Design/" rel="tag">Object Oriented Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Productivity/" rel="tag">Productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/" rel="tag">Random Forest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regularization/" rel="tag">Regularization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Research/" rel="tag">Research</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/" rel="tag">SVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Term/" rel="tag">Term</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tips/" rel="tag">Tips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UCLA/" rel="tag">UCLA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Version-Control/" rel="tag">Version Control</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vocabulary/" rel="tag">Vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Frequency/" rel="tag">Word Frequency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XGBoost/" rel="tag">XGBoost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/" rel="tag">futures</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/investment/" rel="tag">investment</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/options/" rel="tag">options</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trading/" rel="tag">trading</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Apple-Watch/" style="font-size: 10px;">Apple Watch</a> <a href="/tags/Brainteasers/" style="font-size: 10px;">Brainteasers</a> <a href="/tags/CLI/" style="font-size: 10px;">CLI</a> <a href="/tags/Certificate/" style="font-size: 10px;">Certificate</a> <a href="/tags/Cyber-Security/" style="font-size: 10px;">Cyber Security</a> <a href="/tags/Data-System/" style="font-size: 18.33px;">Data System</a> <a href="/tags/DataScience/" style="font-size: 20px;">DataScience</a> <a href="/tags/Designing-Data-Intensive-Applications/" style="font-size: 16.67px;">Designing Data-Intensive-Applications</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/GBM/" style="font-size: 10px;">GBM</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IQ/" style="font-size: 10px;">IQ</a> <a href="/tags/Keyboard/" style="font-size: 10px;">Keyboard</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 13.33px;">Machine Learning</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/NLP/" style="font-size: 11.67px;">NLP</a> <a href="/tags/Naive-Bayes/" style="font-size: 10px;">Naive Bayes</a> <a href="/tags/OOD/" style="font-size: 10px;">OOD</a> <a href="/tags/Object-Oriented-Design/" style="font-size: 10px;">Object Oriented Design</a> <a href="/tags/Productivity/" style="font-size: 10px;">Productivity</a> <a href="/tags/Random-Forest/" style="font-size: 10px;">Random Forest</a> <a href="/tags/Regularization/" style="font-size: 10px;">Regularization</a> <a href="/tags/Research/" style="font-size: 10px;">Research</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Software-Engineering/" style="font-size: 11.67px;">Software Engineering</a> <a href="/tags/Term/" style="font-size: 10px;">Term</a> <a href="/tags/Tips/" style="font-size: 10px;">Tips</a> <a href="/tags/UCLA/" style="font-size: 11.67px;">UCLA</a> <a href="/tags/Version-Control/" style="font-size: 10px;">Version Control</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 10px;">Vocabulary</a> <a href="/tags/Word-Frequency/" style="font-size: 10px;">Word Frequency</a> <a href="/tags/XGBoost/" style="font-size: 10px;">XGBoost</a> <a href="/tags/futures/" style="font-size: 11.67px;">futures</a> <a href="/tags/investment/" style="font-size: 11.67px;">investment</a> <a href="/tags/options/" style="font-size: 11.67px;">options</a> <a href="/tags/trading/" style="font-size: 11.67px;">trading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+<!--             <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2024 Blur - Shenghui Xu</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div> -->
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+  <script src='https://unpkg.com/mermaid@8.11.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://umiao.github.io/2024/08/06/Introduction-to-Git/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
