@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.1.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Learning note of Alex Xu’s system design interview book.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="System-Design-Interview (Alex Xu) Notes - Chapter 10 - 16">
+<meta property="og:url" content="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Learning note of Alex Xu’s system design interview book.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/cover.jpg">
+<meta property="og:image" content="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/chat_app.png">
+<meta property="og:image" content="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/video_upload.png">
+<meta property="og:image" content="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/drive.png">
+<meta property="og:image" content="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/fb_chat.png">
+<meta property="og:image" content="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/Netflix_ab_test.png">
+<meta property="article:published_time" content="2025-06-23T21:35:37.000Z">
+<meta property="article:modified_time" content="2025-08-24T05:43:14.373Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="Interview">
+<meta property="article:tag" content="Alex Xu">
+<meta property="article:tag" content="System Design">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/cover.jpg">
+
+
+<link rel="canonical" href="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/","path":"2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/","title":"System-Design-Interview (Alex Xu) Notes - Chapter 10 - 16"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>System-Design-Interview (Alex Xu) Notes - Chapter 10 - 16 | The blog of Blur</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">The blog of Blur</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hearing the fall of snow.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Design-a-Notification-System"><span class="nav-number">1.</span> <span class="nav-text">Design a Notification System</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Understand-the-problem-and-establish-design-scope"><span class="nav-number">1.1.</span> <span class="nav-text">Understand the problem and establish design scope</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Design-Deep-Dive"><span class="nav-number">1.2.</span> <span class="nav-text">Design Deep Dive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reliability"><span class="nav-number">1.2.1.</span> <span class="nav-text">Reliability</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Design-a-News-Feed-System"><span class="nav-number">2.</span> <span class="nav-text">Design a News Feed System</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#High-Level-Design"><span class="nav-number">2.1.</span> <span class="nav-text">High Level Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#News-Feeding"><span class="nav-number">2.1.1.</span> <span class="nav-text">News Feeding</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Design-a-Chat-System"><span class="nav-number">3.</span> <span class="nav-text">Design a Chat System</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#High-Level-Design-1"><span class="nav-number">3.1.</span> <span class="nav-text">High Level Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Models"><span class="nav-number">3.1.1.</span> <span class="nav-text">Data Models</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Design-Deep-Dive-1"><span class="nav-number">3.2.</span> <span class="nav-text">Design Deep Dive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-Discovery"><span class="nav-number">3.2.1.</span> <span class="nav-text">Service Discovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Message-Flows"><span class="nav-number">3.2.2.</span> <span class="nav-text">Message Flows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extensive-Discussion-TOpics"><span class="nav-number">3.2.3.</span> <span class="nav-text">Extensive Discussion TOpics</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Design-a-Search-Autocomplete-System"><span class="nav-number">4.</span> <span class="nav-text">Design a Search Autocomplete System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-Formulation"><span class="nav-number">4.0.1.</span> <span class="nav-text">Problem Formulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High-Level-Design-2"><span class="nav-number">4.0.2.</span> <span class="nav-text">High Level Design</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extension-and-Discussion-Topics"><span class="nav-number">4.1.</span> <span class="nav-text">Extension and Discussion Topics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Design-Youtube"><span class="nav-number">5.</span> <span class="nav-text">Design Youtube</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#High-Level-Design-3"><span class="nav-number">5.0.1.</span> <span class="nav-text">High Level Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video-streaming-flow"><span class="nav-number">5.0.2.</span> <span class="nav-text">Video streaming flow:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video-Transcoding"><span class="nav-number">5.0.3.</span> <span class="nav-text">Video Transcoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-Optimization"><span class="nav-number">5.0.4.</span> <span class="nav-text">System Optimization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-handling"><span class="nav-number">5.0.5.</span> <span class="nav-text">Error handling</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Design-Google-Drive"><span class="nav-number">6.</span> <span class="nav-text">Design Google Drive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Design-Deep-Dive-2"><span class="nav-number">6.0.1.</span> <span class="nav-text">Design Deep Dive</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Real-world-systems"><span class="nav-number">7.</span> <span class="nav-text">Real world systems</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Blur - Shenghui Xu</p>
+  <div class="site-description" itemprop="description">Personal blog of blur.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/umiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;umiao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i>Facebook</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://umiao.github.io/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Blur - Shenghui Xu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The blog of Blur">
+      <meta itemprop="description" content="Personal blog of blur.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="System-Design-Interview (Alex Xu) Notes - Chapter 10 - 16 | The blog of Blur">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          System-Design-Interview (Alex Xu) Notes - Chapter 10 - 16
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-06-23 14:35:37" itemprop="dateCreated datePublished" datetime="2025-06-23T14:35:37-07:00">2025-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-23 22:43:14" itemprop="dateModified" datetime="2025-08-23T22:43:14-07:00">2025-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Job-Search/" itemprop="url" rel="index"><span itemprop="name">Job Search</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Job-Search/Software-Engineering/" itemprop="url" rel="index"><span itemprop="name">Software Engineering</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Learning note of Alex Xu’s system design interview book.</p>
+<img src="/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/cover.jpg" class="" title="ML_note">
+<span id="more"></span>
+
+<h1 id="Design-a-Notification-System"><a href="#Design-a-Notification-System" class="headerlink" title="Design a Notification System"></a>Design a Notification System</h1><p>We may need to have various types of notifications, like mobile push &#x2F; SMS message &#x2F; Email.</p>
+<h2 id="Understand-the-problem-and-establish-design-scope"><a href="#Understand-the-problem-and-establish-design-scope" class="headerlink" title="Understand the problem and establish design scope"></a>Understand the problem and establish design scope</h2><p>We expect it to be soft real-time, while receiving notifications as soon as possible. We want to support iOS devices &#x2F; Android deivce &#x2F; laptop &amp; desktop. Notification should be triggered by client application or can be scheduled from the server side. User should be able to choose to opt-out and estimate the number (e.g. 10M mobile push, 1M SMS messages and 5M emails)</p>
+<ol>
+<li><p><strong>iOS push Provider</strong>: builds and sends notification requests to <em>Apple Push Notification Service</em>, given the Device token and a JSON like Payload. Finally, iOS sys can receive the notification.</p>
+</li>
+<li><p><strong>Android push notification</strong>: Firebase Cloud Messaging is commonly used.</p>
+</li>
+<li><p><strong>SMS Message</strong>: Consider using third party SMS services like Twilio &#x2F; Nexmo, etc.</p>
+</li>
+<li><p><strong>Email</strong>: Companies can homebrew their email services or opt for commercial services like Sendgrid or Mailchimp.</p>
+</li>
+<li><p><strong>Contact info gathering flow</strong>:  When user installs app or signs first time, API servers collect user contact info and stores in database (request -&gt; load balancer -&gt; API servers -&gt; Database).<br> Note that user can have multiple devices, by splitting user - device table, a push notification can be sent to all user devices.</p>
+</li>
+<li><p><strong>Notification sending &#x2F; receiving flow</strong>:<br> For the high-level design, we consider multiple services going into the notification system and then distribute to different (internal or external) services for notification serving.<br><br> <strong>Service 1 to N</strong>: A service can be micro-servce &#x2F; cron job &#x2F; distribute system that triggers notification sending events.<br><br> The <strong>notification system</strong> provides API for service 1-N, and builds notification payloads for third party services.<br><br> <strong>Third-party services</strong>: The <strong>extensibility</strong> is important, making it easy to plugging or unplugging. E.g., if certain service is unavailable in new markets like China, we should find alternative.</p>
+</li>
+<li><p>A <strong>single</strong> notification server means single point of failure, and hard to scale the databases, caches and different notification processing components independently. Also, processing and sending notifications can be resource intensive. It may not be a good design to handle everything in a single system.<br> <em>Improved solution</em>: Move the database and cache out of the notification server; add more servers and set automatic horizontal scaling; introduce message queues to decouple the system components.</p>
+</li>
+</ol>
+<p>The <strong>process</strong> of notification sending:<br>[Service calls API provided by notification servers to send notifications] -&gt; [Server fetches meta data like user info &#x2F; device token &#x2F; setting from cache or DB] -&gt; [notification event to be sent to corresponding queue for processing] -&gt; [workers pull event from queue and send to 3rd party services] -&gt; [3rd party serve request and send to user devices]</p>
+<h2 id="Design-Deep-Dive"><a href="#Design-Deep-Dive" class="headerlink" title="Design Deep Dive"></a>Design Deep Dive</h2><h3 id="Reliability"><a href="#Reliability" class="headerlink" title="Reliability"></a>Reliability</h3><ol>
+<li><strong>Prevention of data loss</strong>: notification can be delayed or reordered, but never lost. We can implement a <strong>notification log</strong> database and have a <strong>retry mechanism</strong>.</li>
+<li>Recipients may receive notification for <strong>more than</strong> once. Deduplication may be needed due to the nature of distribted system. We can check the eventID when an notification event arrives, if it is seen before, discard it. [This may be unreliable, client end failure may cause stale notification be digested]</li>
+<li>We can utilize <strong>notification template</strong> to avoid building every notification from scratch. Then we can just customize params &#x2F; styling &#x2F; tracking links &#x2F; etc. Example: <code>You dreamed of it. We dared it. [ITEM NAME] is back — only until [DATE].</code><br>We can therefore reducing margin error and save time.<br> We may need notification setting to check if user is opted-in, before actually sending such notification.<br> Also, we may need to <strong>limit</strong> the notification frequency.</li>
+<li>In case of 3rd party service failure, we need <strong>retry</strong> mechanism. </li>
+<li>Also we need to enhance <strong>security</strong> in push notification API, e.g., with the native <code>appKey</code>, <code>appSecret</code> for <strong>authentication</strong>.</li>
+<li>We also need to <strong>monitor</strong> key metrics of the notification services, e.g., total number of queued notification. If it is too big, more workers are needed.</li>
+<li><strong>Event tracking</strong>: check the open rate &#x2F; click rate &#x2F; engagement, etc. We can also track potential errors and unsubscribe behavior.</li>
+</ol>
+<h1 id="Design-a-News-Feed-System"><a href="#Design-a-News-Feed-System" class="headerlink" title="Design a News Feed System"></a>Design a News Feed System</h1><p>News feed may include updates &#x2F; photos &#x2F; videos &#x2F; links &#x2F; app activity &#x2F; likes from people.<br><strong>Similar</strong> questions: design Facebook news feed &#x2F; Instagram feed &#x2F; Twitter timeline, etc</p>
+<p>Align on problem stating and scoping: </p>
+<ol>
+<li>Check if it is mobile &#x2F; web app, or both.</li>
+<li>Core features should be publishing and seeing posts on news feed page. It should be in certain order like <strong>reverse chronological</strong> order. Feed may contain media files.</li>
+<li>Clarify on how many friends a user can have (5K), and the traffic volumn (10M DAU).</li>
+</ol>
+<h2 id="High-Level-Design"><a href="#High-Level-Design" class="headerlink" title="High Level Design"></a>High Level Design</h2><ol>
+<li><strong>Feed publishing</strong>: when user writes a post, write into caches and database. Then populate to all friends’ news feed.</li>
+<li><strong>Newsfeed building</strong>: Just aggregate all friends’ posts in reverse chronological order for simplicity.</li>
+</ol>
+<p><strong>API design</strong>: should be HTTP based, allow clients to post &#x2F; retrieve news feed &#x2F; add friends, etc</p>
+<ol>
+<li>Feed publishing: <code>POST /v1/me/feed</code>, with params: <code>content</code>(text of post) and <code>auth_token</code>(to authenticate) </li>
+<li>Retrievel: <code>GET /v1/me/feed</code>, also has <code>auth_token</code> as params.</li>
+</ol>
+<p>Such requests should be sent to load balancer from client, then web servers can handle such requests with modules: <strong>Post Service</strong> (write into post cache and database), <strong>Fanout Service</strong> (write into news feed cache) and <strong>Notification Service</strong>.</p>
+<h3 id="News-Feeding"><a href="#News-Feeding" class="headerlink" title="News Feeding"></a>News Feeding</h3><p>A user sends a request to receive news feed, portal should looks like <code>v1/me/feed</code>. Through load balancer the traffic is directed to the webserver; then query through Newsfeed service and cache to get the news feed.<br>For a deep dive, Web servers will further call the <strong>Post Service</strong> (broadcast through post cache and DB) and <strong>Fanout Service</strong> (delivering a post to all friends).</p>
+<p>Web server should also enforce authentication and rate-limiting. Only allow users with valid <code>auth_token</code> to make post.</p>
+<p><strong>Fanout Service</strong>:</p>
+<ol>
+<li>We have two modes, fanout on write (<strong>push</strong> mode) or fanout on read (<strong>pull</strong> mode).</li>
+<li>For Fanout on write, news feed is pre-computed during write time, and a new post is delivered to friends cache immediately after it is published.<br> <strong>Pros</strong>: generated in real-time, pushed immediately; fast news feed<br> <strong>Cons</strong>: If one has many friends, it will be slow and time consuming. (<strong>hotkey</strong> problem); for inactive users, such strategy causes waste.</li>
+<li>For Fanout on read: a on-demand model, posts are pulled when user loads home page.<br> <strong>Pros</strong>: save resource for inactive usres; no hotkey problem<br> <strong>Cons</strong>: Fetching news feed will be slow</li>
+<li>Recommend a hybrid approach; use push model for majority of users and for celebrities, we use the pull model to make sure it is on-demand. Consisstent hashing is also useful. </li>
+<li><strong>Service design</strong>: The service can get friend ids from graph db (managing friend relationship &amp; recommendation); friends data can be stored (User - DB) (we can later filter on friends using user setting); Then we can go through the message queue - fanout workers - News feed cache (sending the friends list and new post ID (storing the post content may be too large) to the message queue, and use cache for optimizing the news feed).<br>* Uses are more likely to browse latest feeds and scrolling to thousands of news feed’s chance is low.</li>
+</ol>
+<hr>
+<p><em><strong>News feed retrieval</strong></em></p>
+<ol>
+<li><strong>User journey</strong>: User sends request through load balancer and web servers, then servers call the news feed service to fetch news feeds. The service will get a list of Post IDs from the cache to serve the request. A user’s news feed should also contains useranme &#x2F; profile picture &#x2F; post content, image, etc. We can then fetch and complete post objects from cache, and return in JSON format to the client.</li>
+</ol>
+<p>The cache can be further tier into 5 layers:</p>
+<ul>
+<li>Layer 1: News Feed: [News Feed <em>(storing IDs of News feed)</em>]</li>
+<li>Layer 2: Content: [Hot Cache <em>(popular content)</em>, Normal]</li>
+<li>Layer 3: Social Graph: [follower, following <em>(user relationship data)</em>]</li>
+<li>Layer 4: Action: [like, reply, others]</li>
+<li>Layer 5: Counters: [like counter, reply counter, other counters]</li>
+</ul>
+<p><strong>Scaling</strong> methods: Vertical scaling v.s. horizontal; SQL v.s. NoSQL; Master - slave replication; read replicas; consistency models &amp; dataset sharding. </p>
+<p><strong>Other topics</strong>:</p>
+<ol>
+<li>Keep web tier stateless.</li>
+<li>Cache data as much as you can</li>
+<li>Support multiple data centers</li>
+<li>Loose couple components with message queues</li>
+<li>Kry metrics monitoring, like user behavior related performance metrics.</li>
+</ol>
+<h1 id="Design-a-Chat-System"><a href="#Design-a-Chat-System" class="headerlink" title="Design a Chat System"></a>Design a Chat System</h1><p>Whatsapp &#x2F; Facebook messenger &#x2F; Wechat &#x2F; Line &#x2F; Google Hangout and Discord are some popular chat systems.<br>It is important to nail down the exact requirement (like solo chat v.s. group chat).</p>
+<p><strong>Example design scope estmatblishment</strong>:<br>It should support both 1-1 and group chat (with low latency); use multiple channels, support 50M DAU, allow 100 people in a group;<br>Aside from that, text length should be $\le$ 100K characters long, check if end-to-end encrption is required. Should store chat history forever.</p>
+<h2 id="High-Level-Design-1"><a href="#High-Level-Design-1" class="headerlink" title="High Level Design"></a>High Level Design</h2><p>Clients should not chat to each other but should connects to a chat service.<br><strong>Related functions</strong>: receive messages from other clients; find right recipents, and if a recipient is not online, hold messages on server until it is back.</p>
+<p>For staring a chat, connects the chats service using one or more network <strong>protocols</strong>. For a chat service, the choice of network protocols is important.</p>
+<p>It is commmon for clients to use HTTP protocol (a fine option on the sender side) to send messages to each other, informing the service to send message to the receiver.<br>* <code>Keep-alive</code> header allows a client to maintain connection with the chat service, and reduces number of TCP handshakes.</p>
+<p>** Receiver end may be more complicated. HTTP is client-initiated, and not tirvial to send messages from server. We can simulate server-initiated connects using: <strong>polling</strong> &#x2F; <strong>long polling</strong> &#x2F; <strong>webSocket</strong>.</p>
+<ol>
+<li><strong>Polling</strong>: Periodically asks the server is there are messages available. Can be costly depending on the frequency. </li>
+<li><strong>Long Polling</strong>: a client holds the connection open until there are actually new messages or a timeout threshold reached. Once the client receives new messages, it immediately sends another request to ther server to restart the process.<br> <strong>Drawbacks</strong>: sender and receiver may not connect to the same chat server, such servers are usually stateless. E.g. if use round robin for load balancing, server received message may not have a long-polling connection with the client.<br> Also, a server has no good way to tell if a client is disconnected and it is inefficient.</li>
+<li><strong>WebSocket</strong>: bi-directional and persisent, initiated by the client. Starts as HTTP connection and “upgraded” via well-defined handshake.<br> *It can even work when firewall is in place, using port 80 or 332 which are used by HTTP&#x2F;HTTPS connections.</li>
+</ol>
+<p>It should be noted that Websocket is implemented by serialized dataframes, with <code>opcode</code>, <code>payload length</code> and <code>payload data</code> defined. Also, client-server data must be masked while server-client data must <strong>NOT</strong> be masked. If not satisfying, send close frame to close connection.<br>For the payload length, if equals 126 then the actual length is the 2 byte (16bits) int; otherwise if it s 127 then it is 8 bytes (64bits) </p>
+<hr>
+<p>Then we can move to the design stage, and have<br>Note that sign up &#x2F; loging &#x2F; user profile, etc can just use traditional request &#x2F; response. We can further break down the chat system into three major cateogories: stateless service, stateful service, third-party integration. </p>
+<img src="/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/chat_app.png" class="" title="chat_design">
+
+<ol>
+<li><strong>Stateless Service</strong>: Manage the login &#x2F; signup &#x2F; user profile, etc. Sits behind <em>load balancer</em>, can be monolithic or individual microservices.<br> <strong>Service discovery</strong>: give the client a list of DNS host names of chat servers which client could connect to</li>
+<li><strong>Stateful Service</strong>: Chat service, which require a persistent network connection to the chat server. Since the connection usually do not switch, we need service discovery to avoid server overloading.</li>
+<li><strong>Third party integration</strong>: <em>Push notification</em> is the most important third-party integration.</li>
+<li><strong>Scalability</strong>: The number of concurrent connections that a server can handle will most likely be the limiting factor. For 1M concurrent users, each needs 10K memory on server (depending on language choice), only needs 10GB of memory.<br> However, such design is usually deal breaker mainly due to <strong>single point of failure</strong> concern.</li>
+</ol>
+<p>Client should maintain a persistent <em>WebSocket</em> connection to chat server for real-time messaging.<br>Chat servers facilitate message sending &#x2F; receiving, presence servers manage online &#x2F; offline status. API services handle login &#x2F; signup &#x2F; profile and notification sends push. <strong>KV storage</strong> is used to store chat history, so when offline user comes online she can check history.</p>
+<p><strong>Storage</strong>:</p>
+<ol>
+<li><strong>Data types</strong>: <strong>generic data</strong> (user profile &#x2F; setting &#x2F; friend list..) and <strong>chat history</strong> (big amount, only recent chats are accessed frequently; need random access of data for search, mentions or jump to specific messages).</li>
+<li>Use data type and read - write patterns to support the data access layer. Read - write ratio should be ~1:1 for 1-1 chat apps.</li>
+<li>We recommend <strong>KV store</strong> because:<br> Enables easy horizontal scaling; low latency; handle long tail data well and random access; adopted by existing chat applications, like <code>HBase</code> and <code>Cassandra</code></li>
+</ol>
+<hr>
+<h3 id="Data-Models"><a href="#Data-Models" class="headerlink" title="Data Models"></a>Data Models</h3><ol>
+<li>For 1-1 message, should contain <code>message_id</code> (bigint), <code>message_from</code>, <code>message_to</code>, <code>content</code> (text) and <code>created_at</code> (timestamp)</li>
+<li>For group chat, we should instead have <code>channel_id</code> aside from the message id.</li>
+<li><code>message_id</code> should be <strong>unique</strong> and <strong>increase</strong> by time.</li>
+<li>For simplicity, we can run a local sequence generator, becuase we only need <em>local</em> IDs when maintaining 1-1 channel or group channel.</li>
+</ol>
+<h2 id="Design-Deep-Dive-1"><a href="#Design-Deep-Dive-1" class="headerlink" title="Design Deep Dive"></a>Design Deep Dive</h2><h3 id="Service-Discovery"><a href="#Service-Discovery" class="headerlink" title="Service Discovery"></a>Service Discovery</h3><p>Recommend the best chat server for a client, based on geographical location, server capacity, etc.</p>
+<p><strong>Apache Zookeeper</strong> is popular open-source solution for service discovery. It registers and picks best chat server for predefined critieria.<br>First time login will go thorugh load balancer and API servers, then Zookeeper will pick the best server which will build <strong>WebSocket</strong> connection with the client.</p>
+<h3 id="Message-Flows"><a href="#Message-Flows" class="headerlink" title="Message Flows"></a>Message Flows</h3><p>For <strong>1-1</strong> Chat case:<br>    User A sends a message, and the server will obtain a message ID from generator, then sends to message sync queue (across chat servers). Message will also be stored in key-value store. If user B is online, message will be forwared to server where B locates; otherwise a push notification is sent to <strong>Push Notification</strong> (PN) server.</p>
+<p>Multiple Device Message <strong>Synchronization</strong>:<br>    Each device will build a WebSocket connection with the same chat server. Each device maintains a variable named <code>cur_max_message_id</code> and use that to track the latest messageID on the device. When message arrives and recipient ID is equal to currently logged-in user and the message ID is greater than &#96;&#96;cur_max_message_id&#96;, forwarding will happen.</p>
+<p><strong>Group Chat</strong>:<br>    Message from sender will be copied to each group member’s message sync queues.<br>    * This design only works for small group chat (to store a copy in each recipient’s inbox). <strong>Wechat</strong> therefore limits group to be 500 members.</p>
+<pre><code>On recipient side, a recipient can receive messages from multiple useres, and has an inbox storing messages from different senders.
+</code></pre>
+<p><strong>Online Presence Indicator</strong>:<br>    Show a green dot next to a user’s profile picture or username. After a WebSocket connection is built, user’s online status and <code>last_active_at</code> timestamp can be stored into KV store. Presence Indicator shows the user is online.<br>    When user logs out, the API servers will notify the presence servers and change to offline in KV store.</p>
+<p><strong>User disconnection</strong>:<br>    When user disconnects, it may not be a good idea to immediately marks him as offline (e.g., when going through a tunnel). Therefore, we should avoid changing presence indicator too often.<br>    We can introduce a <strong>heartbeat</strong> mechanism to solve this. Online client can send a heartbeat periodically to presence servers, and use that to determine online status.<br>    <strong>Online status fanout</strong>: With a <strong>publish-subscribe</strong> model, each friend maintains a channel. When a friend’s status changes, events will be published to channels which are subscribed by friends.<br>    For very big group, we can fetch online status only when a user enters a group or manually refreshes the friend list.</p>
+<h3 id="Extensive-Discussion-TOpics"><a href="#Extensive-Discussion-TOpics" class="headerlink" title="Extensive Discussion TOpics"></a>Extensive Discussion TOpics</h3><ol>
+<li>Support for media files. Can discuss compression &#x2F; cloud storage &#x2F; thumbnails for large files.</li>
+<li>End-end encryption.</li>
+<li>Caching messages on the client-side is effective to reduce the data transfer.</li>
+<li>Improve load time. Slack built a geographically distributed network to cache user’s data, channels for better loading time.</li>
+<li>Error handling: including chat server error and message resent mechanism (retrying &amp; queueing)</li>
+</ol>
+<h1 id="Design-a-Search-Autocomplete-System"><a href="#Design-a-Search-Autocomplete-System" class="headerlink" title="Design a Search Autocomplete System"></a>Design a Search Autocomplete System</h1><p>Auto-complete: during search, show more related search terms. Also called typeahead, search-as-you-type, incremental search. </p>
+<h3 id="Problem-Formulation"><a href="#Problem-Formulation" class="headerlink" title="Problem Formulation"></a>Problem Formulation</h3><p>The matching should only be supported at the beginning of a search query, rather than in the middle (?), and top K suggestions should be returned by the system, ranking by historical query frequency. We can also consider if spell check may be needed, and if we need multi-language support &#x2F; upper-lower case &#x2F; special character support. This product may expect 10M DAU.</p>
+<p>Take Facebook as an example, we usually needs an SLA of 100ms to avoid stuttering. Suggestions should be <strong>relevant</strong>, sorted by <strong>popularity</strong> and <strong>scalable</strong> to handle high traffic volume. Such system should be highly available even part of the system is offline. </p>
+<p><strong>Numbers</strong>: for 10M DAU, 10 searches per user per day, 20 bytes for average query string size (assume 1 character&#x3D;1byte, query contains 4 words each with a length of 5).<br>For every character entered into the search box, a client sends a request to the backend for autocomplete, then we may have 10M * 10 (queries per day) * 20 characters &#x2F; 24 hrs &#x2F; 3600 &#x3D; 24K QPS.<br>Peak QPS ~ 48K. Assume 20% of daily queries are new, then we will have 0.4GB new data added to storage daily.</p>
+<h3 id="High-Level-Design-2"><a href="#High-Level-Design-2" class="headerlink" title="High Level Design"></a>High Level Design</h3><p>We can break the system into: <strong>data gathering</strong> service (gather user inputs for triage) and <strong>query</strong> service (return 5 most frequently searched terms given a prefix). </p>
+<p>For a prototype, we can write a SQL to get the most frequent complement like: <code>WHERE query LIKE prefix% ORDER BY frequency DESC</code>. However, this solution only works when dataset is small.</p>
+<p>Further optimization will be discussed below:</p>
+<p><strong>Trie data structure</strong>:<br>Trie - prefix tree can be used for optimization. With the above assumptions, we can let each tree node storing a character and has 26 children (the lower class chars). Each tree node can thus represents a single word or a prefix string.<br>Also query frequency needs to be included in nodes.</p>
+<p>For a prefix with length $p$, and total number of $n$ nodes in a trie, we first find the prefix using $O(p)$. Then we can get the children and sort them using complexity of $O(c) + O(clogc)$ (c is the number of children).<br>However, in worst case, we will need to traverse all the childrens of root! We can then:</p>
+<ol>
+<li>Limit max length of a prefix, e.g., 50.</li>
+<li>Cache top search queries at each node (as 5 or 10 completion is good enough) (using prefix as key).</li>
+</ol>
+<p>After the optimization, we should have $O(1)$ complexity for finding prefix, and another $O(1)$ retriving from cache. If there is a miss, we still need $O(clogc)$</p>
+<p><strong>Data Gathering Service</strong>:<br>Update data in real-time may not make sense, as users may enter a lot of queries per day, and top suggestions may not have hugely on a daily basis (for Google).<br>* For twitter, it still makes sense to do it in real time.<br>The underlying foundation remains the same, usually from analytics or logging services.</p>
+<pre class="mermaid">flowchart LR
+    A[Analytic Logs] --> B[Aggregators]
+    B --> C[Aggregated Records]
+    C --> D[Workers]
+    D -- Weekly Update --> E[Trie DB]
+    E -- Weekly Snapshot --> F[Weekly Cache Refresh]</pre>
+
+<ul>
+<li><em>Analytic logs</em>: append-only, not indexed.</li>
+<li><em>Aggregators</em>: merge and format data (adding frequency column). If real-time is needed, we can aggregate data in a shorter time interval. Now we assume these data to be refreshed weekly (trie to be rebuilt)</li>
+<li><em>Workers</em>: perform asynchronous jobs, build trie data structure and store in trie db.</li>
+<li><em>Trie Cache</em>: distributed cache system, keeps trie in memory, takes a weekly snapshot of DB.</li>
+<li><em>Trie db</em>: persistent storage. Can choose between <strong>document</strong> storage (serialized data like MongoDB) or <strong>key-value</strong> storage (map to hash table). Every prefix is then mapped to a key in hash.</li>
+</ul>
+<p>To provide such service, user’s query goes through load balancer into API servers, trie caceh and eventually into trie DB.<br>Query service requires fast reaction, we propose the following optimization:</p>
+<ol>
+<li>AJAX request: sending or receiving a request&#x2F;response does not refresh the whole web page.</li>
+<li>Browser caching: if the auto-complete suggestion won’t change a lot, we can just save it in browser cache (stay for sth like 1 hour).</li>
+<li>Data sampling: we do not need to record all the logs but only a sample of it.</li>
+</ol>
+<p><strong>Trie operations</strong>:<br>Usually the trie has to be refreshed as a whole (weekly).This is slow in most cases.<br>We can only update individual trie node (and all its ancestors in cache).</p>
+<p><strong>Delete</strong>: we can use a filter layer to flexibly remove data from trie. Meanwhile, we can remove unwanted suggestions physically from the database asynchronically.</p>
+<p><strong>Scale the storage</strong>:<br>For lower class english words, we can naturlaly shard based on first character. This leads to uneven distribution. Then we can analyze historical distribution and then apply smarter sharding (to have a shard map &#x2F; lookup service). E.g., u to z may be combined.</p>
+<h2 id="Extension-and-Discussion-Topics"><a href="#Extension-and-Discussion-Topics" class="headerlink" title="Extension and Discussion Topics"></a>Extension and Discussion Topics</h2><ol>
+<li>To support multiple languages, we can use Unicode as the encoding format.</li>
+<li>If the distribution differs for different countries, we can store tries in CDNs.</li>
+<li>Real time update: we can reduce the working dataset by sharding; change the ranking model and assign more weight to recent search quries; data may be streaming, so we can use specialized systems for that.</li>
+</ol>
+<hr>
+<h1 id="Design-Youtube"><a href="#Design-Youtube" class="headerlink" title="Design Youtube"></a>Design Youtube</h1><p>As of 2020, it has 2B users and 5B videos watched per day. 50M creators on youtube and 73% of US adults use Youtube, takes 37% of all mobile internet traffic, available in 80 languages.</p>
+<p><strong>Requirements</strong>: large, internatial user groups. Should be able to upload videos fast, smooth video streaming, change between video quality, low infra cost, high availability, scalability, reliabitliy; multiple channel supports.</p>
+<p><strong>Back of the envelop estimation</strong>: 5M DAU, watch 5 videos per day, 10% users upload 1 video perday; average video size&#x3D;300M, total daily storage: 5M * 10% * 300 M &#x3D; 150TB</p>
+<p>CDN cost: charge by data transferred out of the CDN, $0.002 per GB (AWS). 5M * 5 * 0.3GB * $ 0.02&#x3D;$150,000 daily.</p>
+<h3 id="High-Level-Design-3"><a href="#High-Level-Design-3" class="headerlink" title="High Level Design"></a>High Level Design</h3><p>Why we cannot build everything from scratch?</p>
+<ol>
+<li>Interviewing timeframe is limited; for storage of videos, mentioning blob storage is good enough (no need to further discuss the detailed design)</li>
+<li>Building scalable blob storage &#x2F; CDN is extremely complex and costly. Even large companies do not build everything themselves.</li>
+</ol>
+<p>In high level, <strong>Clients</strong> watch Youtube on computer, mobile phone and smart TV; <strong>CDN</strong> stores the video and streams it; <strong>API services</strong> handles everything else except video streaming, like feed recommendation; video upload URL; database meta data. caching, user sign up.</p>
+<p><strong>Video Uploading Flow</strong>:</p>
+<img src="/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/video_upload.png" class="" title="video_upload">
+
+<p>Through load balancer and API servers, the request reaches metadata cache (we can cache video metadata as well as user objects) and DB.<br><strong>Original storage</strong> is a blob (Binary Large Object) storage system storing original videos. It transfers data to <strong>Trasncoding &#x2F; Encoding</strong> Servers for format converting and provides video streams for different device &#x2F; bandwidth capabilities.<br>The encoded results can be stored in <strong>Transcoded</strong> storage and then sent to <strong>CDN</strong>.<br>After the encoding &#x2F; transcoding finisihes, a message queue sends completion event to completion handler to update metadata cache and database.</p>
+<p>Video uploading includes: a. Upload the actual video b. Update video meta data, including video URL, size, resolution, format, user info, etc.<br>API servers can inform client after the video is successfully uploaded and ready for streaming. </p>
+<h3 id="Video-streaming-flow"><a href="#Video-streaming-flow" class="headerlink" title="Video streaming flow:"></a>Video streaming flow:</h3><p>Users should be able to load a little bit of data at a time to watch videos immediately and continuously. </p>
+<p><strong>Streaming protocals</strong>:</p>
+<ul>
+<li>MPEG-DASH: (Moving Picture Experts Group) and (Dynamic Adaptive Streaming over HTTP)</li>
+<li>Apple HLS (HTTP Live Streaming)</li>
+<li>Microsoft Smooth Streaming</li>
+<li>Adote HTTP Dynamic Streaming (HDS)</li>
+</ul>
+<p>Different protocols support different video encodings and playback players. We need to choose the right streaming protocol to support the use case.<br>When streaming, edge server closest to you will deliver the video.</p>
+<h3 id="Video-Transcoding"><a href="#Video-Transcoding" class="headerlink" title="Video Transcoding"></a>Video Transcoding</h3><ol>
+<li>Inspection: make sure videos have good quality and not malformed</li>
+<li>Encoding: convert to support different resolution, codec, bitrates, etc (360&#x2F;480&#x2F;720&#x2F;1080&#x2F;2k&#x2F;4k).</li>
+<li>Thumbnail: upload by user or generated by system</li>
+<li>Watermark: identifying information about the video.</li>
+</ol>
+<p>Component - <strong>Preprocessor</strong>:</p>
+<ol>
+<li><p>Video splitting (into Group of Pictures, GoP). It is a chunk of frames arranged in specific order, each chunk is an independent playable unit, usually a few seconds in length.</p>
+</li>
+<li><p>If supported, we can just split into smaller videos.</p>
+</li>
+<li><p>Generate DAG: based on configuration files, we can do the workflow like download -&gt; transcode. </p>
+</li>
+<li><p>Cache data. Preprocessor can store GoPs or metadata intemporary storage, so that it can retry in case of video failure.</p>
+</li>
+</ol>
+<p>Component - <strong>DAG Scheduler</strong>:</p>
+<ol>
+<li>Given a DAG graph, scheduler splits it to stages of tasks, and put into task queue in resource manager.</li>
+</ol>
+<p><em>Example</em>: original video goes 3 ways into: video, audio and metadata output (1st Stage); after that we further encode video&#x2F;audio and generate thumbnail (2nd Stage).</p>
+<p>Component - <strong>Resource manager</strong>:<br>Manage the efficiency of resource allocation, containing 3 queues:<br><em>Task queue</em>: Priority queue contains tasks to be executed<br><em>Worker queue</em>: Priority queue contains worker utilization info<br><em>Running queue</em>: Priority queue contains current running tasks &#x2F; workers running the tasks<br><em>Task Scheduler</em>: picks optimal task-worker pair to execute</p>
+<p>Component - <strong>Task Workers</strong>:<br>We may have different workers specialized in different tasks like watermark &#x2F; encoder &#x2F; thumbnail &#x2F; merger.</p>
+<p>* Before creating the final encoded videos, we can save preprocessor &amp; task workers outputs to temporary storage.<br>The choice of storage system depends on data type, size &#x2F; access frequency &#x2F; data life span.<br>Thus caching metadata in memory is good for case of small files.</p>
+<h3 id="System-Optimization"><a href="#System-Optimization" class="headerlink" title="System Optimization"></a>System Optimization</h3><ol>
+<li><strong>Parallelize</strong> video uploading: when spliting video into smalller chunks, we can upload them in parallel and accelerate &amp; resumable.</li>
+<li>Place upload centers close to users (regional data center).</li>
+<li>Build loosely coupled system and enable high parallelism.<br> We have a flow with dependency, causing parallelism difficult.</li>
+</ol>
+<pre class="mermaid">flowchart TD
+    A[Original Storage] -->|download original segmented videos| B[Download Module]
+    B -->|original segmented videos| C[Encoding Module]
+    C -->|encoded videos| D[Upload Module]
+    D -->|upload encoded videos| E[Encoded Storage]
+    E -->|upload encoded videos| F[CDN]</pre>
+<p>After introducing the message queues, workers do not have to wait for the prior module to finish.</p>
+<ol start="4">
+<li>Safety with pre-signed upload URL<br> When clients makes HTTP request to fetch the pre-signed URL (uploading to Amazon S3). [“Shared Access Signature” for Microsoft Azure blob storage]<br> Then the user can upload with that URL (so that only authorized user can upload to right position)</li>
+<li>Video protection<br> <strong>Digital Rights Management</strong> (DRM) system:<br> <strong>AES ENcryption</strong>: decript upon playback, only authorized user can watch<br> <strong>Visual watermarking</strong>: put identification on the video</li>
+<li>Save cost on CDN:<br> Only serve most popular videos from CDN, others from high capacity storage video servers.<br> Also, for less popular &#x2F; short videos, they can be encoded on demand.<br> Certain videos are only popular in specific region, no need to distribute to all regions<br> Consider build your own CDN &#x2F; partner with Internet Service Providers (ISPs).</li>
+</ol>
+<hr>
+<h3 id="Error-handling"><a href="#Error-handling" class="headerlink" title="Error handling"></a>Error handling</h3><p>For those recoverable errors, we can simply retry; later if it still fails, send error code.<br>If error is non-recoverable (like malformed video format), stop task running and return proper error code.</p>
+<p>Examples:</p>
+<ol>
+<li>Upload err &#x2F; transcode err: retry</li>
+<li>Split video error: if older version client cannot do that, upload full video and do it on server-side.<br>…</li>
+</ol>
+<p><strong>Potential Discussion topcis</strong>:</p>
+<ol>
+<li>Scale by API tier horizontally (as API servers are stateless)</li>
+<li>Scale the database (through replication and sharding)</li>
+<li>Live streaming: referring to how video is recorded and broadcasted in real time. It has higher latency requriement, lower requirement of paralleism (chunks of data already processed in real-time); needs different, efficient error handling.</li>
+<li>Video takedown: we can discover during upload process, or use falgging and filtering.</li>
+</ol>
+<h1 id="Design-Google-Drive"><a href="#Design-Google-Drive" class="headerlink" title="Design Google Drive"></a>Design Google Drive</h1><p>Cloud storage, allowing you to access and share files from different devices.</p>
+<p><strong>Demand and back-of-envelop estimation</strong>:<br>Should support multiple clients (mobile &#x2F; app), support all file types, needs encription, &lt;&#x3D; 10GB, having 10M DAU.<br>We need features of adding &amp; downloading files, sync across multiple devices; see file revision; sharing; send notification.</p>
+<p>Not discussed features including:<br>editing and collaboration between multiple users.</p>
+<p><strong>Non-function requirements</strong>:<br>Reliability (no data loss); fast sync speed; bandwidth usage (only use when necessary); scalability (able to handle high volumes of traffic); high availability.</p>
+<p>Users get 10GB free space; upload 2 files per day, average size 500K; 1:1 read-write ratio.<br>Space allocation: 50M * 10 GB &#x3D; 500 PB; QPS &#x3D; 10M * 2 &#x2F; 24 hr &#x2F; 3600s &#x3D; 240 QPS; Peak QPS estimated to be 2x average QPS.</p>
+<p><strong>High level design</strong>:<br>Starting with single machine solution; We need a web server to upload and download files; a database to keep track of meta data like user data &#x2F; login info &#x2F; files info, etc. Also need a storage system to store files, with 1TB allocated.</p>
+<p><strong>API design</strong>:</p>
+<ul>
+<li>When file is small, use simple upload; otherwise, use resumable upload. <code>https://api.example.com/files/upload?uploadType=resumable</code>, while the <code>data</code> field stores local file to be uploaded.</li>
+<li>For downloading, we can use parameter <code>path</code> to store the file path to be downloaded.</li>
+<li>List revision: call the <code>path</code> to the file as parameter, and use <code>limit</code> to specify the maximum number of revisions to return.</li>
+</ul>
+<p><strong>Scaling</strong>:<br>We can use sharding based on user ID.<br>For usages of AWS S3, data can be replicated on same-region or cross-region. Redundant files can be stored in multiple regions to guard against data loss and ensure availability.<br>A bucket in S3 is like a folder in file system.</p>
+<p>Similar to other system, request goes through load balancer to API servers, then goes into metadata DB (move database outside of server to avoid single point of failure, and setup replication and sharding for availability and scalability) and file storage (using AWS S3 service, for example).</p>
+<p><strong>Sync Conflict</strong>:<br>We let the first version which got processed wins, and the later one receives a conflict. The user then have the option to merge or overwrite. For multiple users editing the same document at the same time, it is challenging to keep the document synchronized.</p>
+<img src="/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/drive.png" class="" title="drive">
+<ol>
+<li><strong>Block servers</strong> upload block to cloud storage (spliting files into blocks, each with a unique hash value and stored in metadata database). Each block (max size 4MB) is treated as independent, and later joined back in order to reconstruct file.</li>
+<li><strong>Cold storage</strong>: storing inactive data, not accessed for a long time.</li>
+<li><strong>API server</strong>: responsible everything except the uploading flow.</li>
+<li><strong>Metadata DB</strong> &#x2F; cache: stores metadata of users, files, blocks, versions, etc. Note that files are stored in cloud and metadata DB contains metadata only. </li>
+<li><strong>Notification service</strong>: publisher &#x2F; subscriber system in case events happen.</li>
+<li><strong>Offline backup queue</strong>: offline changes can be saved and synced when client is back online.</li>
+</ol>
+<hr>
+<h3 id="Design-Deep-Dive-2"><a href="#Design-Deep-Dive-2" class="headerlink" title="Design Deep Dive"></a>Design Deep Dive</h3><p><strong>Block Servers</strong>:<br>    1. <strong>Delta sync</strong>: only sync the modified blocks.<br>    2. <strong>Compression</strong>. E.g., <code>gzip</code> and <code>bzip2</code><br>    3. A typical flow: split - (block) - compress - encrypt - upload</p>
+<p><strong>High consistency Requirement</strong><br>Our system by default needs strong consistency for metadata cache and database layers.<br>Memory cache adopt eventual consistency model by default (data may be inconsistent)</p>
+<p>We should <strong>invalidate</strong> caches on database write to ensure cache and database hold the same value.</p>
+<p>* Due to <strong>ACID</strong> (Atomicity, Consistency, Isolation, Durability) properties, it is easy to achieve strong consistency in a relational DB. However, NoSQL database do not support ACID properties by default. In this case, we tend to choose relational DB.</p>
+<p><strong>Metadata DB Design</strong>:<br>Including fields: user, device, namespace. file, file_version, block (block_ids of a file)</p>
+<p><strong>Upload flow</strong>:<br>Client upload file to block server; then it goes to cloud storage and metadata is updated; then API servers upload status and refresh metadata DB; finally notification service notify changes.<br>For metadata changes, it is sent to API servers directly.</p>
+<p><strong>Download flow</strong>:<br>When a client is online when a file is changed by another client, we can notify it directly (to pull new data). Otherwise, the data can be saved in cache for offline client to pull later.</p>
+<p>Client receives notification - get changes from API server; get changes from Metadata DB; the metadata returns to API server, and changes returned to client.<br>Then client starts block downloading and assembling from cloud storage.</p>
+<p><strong>Notification service</strong>:</p>
+<ol>
+<li>Dropbox uses long polling.<br> For cloud storage use case, server does not have to receive from clients, and update from client is infrequent</li>
+<li>Websocket provides persistent connection; bi-directional.</li>
+</ol>
+<p><strong>Save Storage Space</strong>:</p>
+<ol>
+<li>Dedupe blocks by hash value.</li>
+<li>Smart data backup strategy. We can set a <strong>limit</strong> for the number of versions to store (let new one replaces old one);  Keep valuable versions only (for frequently edited files). We can also give more weight to recent versions.</li>
+<li>Move infrequently used data to cold storage. (AWS S3 glacier) is much cheaper.</li>
+</ol>
+<p><strong>Failure Handling</strong>:<br>Load Balancer failure: monitor each other using a heartbeat, and we can use sencondary server to backup.<br>Block server failure: other servers for backup<br>Cloud storage failure: S3 will store them in different regions<br>API server failure: stateless service, just direct to different API server<br>Metadata cache failure: replicated multiple times<br>Metadata DB failure: for master, elect a new master; for slave, use another slave for read operations.<br>Notification failure: all the long poll connections will be lost, client must reconnect to different server. Reconnecting can be slow.<br>Offline backup queue failure: queues are also replicated. Consumer of queue may need to re-subscribe.</p>
+<p><strong>Discussion topic</strong>:<br>When using <strong>server-end</strong> chunk transfer, we need to use the same chunking &#x2F; compression &#x2F; encription logic on different platforms. It is error-prone and requires engineering effort. A client can be hacked or manipulated, thus we should not implement it on client end.</p>
+<p>Also we can move online &#x2F; offline logic to separate service (<strong>presence service</strong>) out of notification service, so that it can be integrated by other services.</p>
+<h1 id="Real-world-systems"><a href="#Real-world-systems" class="headerlink" title="Real world systems"></a>Real world systems</h1><ul>
+<li><p>Facebook Timeline: Brought To You By The Power Of Denormalization:<br><a target="_blank" rel="noopener" href="https://goo.gl/FCNrbm">https://goo.gl/FCNrbm</a></p>
+<blockquote>
+<p>For facebook, many data are “cold”. Denorm helps reducing random IO. All metadata can be bring together in one format. Also keep different kinds of long-term (e.g., all activities in 2010) &#x2F; short-term caches. The development team was split into design, front-end engineering, infrastructure engineering, and data migrations and works in parallel.</p>
+</blockquote>
+</li>
+<li><p>Scale at Facebook: <a target="_blank" rel="noopener" href="https://goo.gl/NGTdCs">https://goo.gl/NGTdCs</a></p>
+<blockquote>
+<p>Speech given by Aditya Agarwal. Scale globally, allowing anyont to be friend with each other rather than keeping regional seperate network. Uses memcache &#x2F; distributed hash table, get hot data from mysql stored in the cache; supports get&#x2F;set&#x2F;incr&#x2F;decr and multiget&#x2F;multiset operations. Very high service rate &#x2F; easy to correct&#x2F; needs to be reliable for like &#x2F; hate relationship. Successful by using MySQL. Takeaway: No joins in prod; logical migration is tough; just load balance among physical nodes. Do not store non-static data in a central db.</p>
+</blockquote>
+</li>
+<li><p>Building Timeline: Scaling up to hold your life story: <a target="_blank" rel="noopener" href="https://goo.gl/8p5wDV">https://goo.gl/8p5wDV</a></p>
+<blockquote>
+<p>Build of facebook’s timeline: <strong>MySQL&#x2F;InnoDB</strong> for storage and replication; <strong>Multifeed</strong> (for news feed) for ranking; <strong>Thrift</strong> for communications, and <strong>memcached</strong> for caching. <strong>Denormalization</strong> helps storing data in more centralized way to reduce cost of IO (more centralized). Also hacked read-only mysql for read performance, flash DB to accelerate random IO; parallelized query proxy to query entire join tier in parallel.<br>  Timeline aggregator: run on top of DB locally, fully use disk; big queries like all events in a year can be cached. For recent activities, it may not worth caching it, so we can use raw cache &#x2F; regenerate recent activities.</p>
+</blockquote>
+</li>
+<li><p>Erlang at Facebook (Facebook chat): <a target="_blank" rel="noopener" href="https://goo.gl/zSLHrj">https://goo.gl/zSLHrj</a></p>
+</li>
+<li><p>Facebook Chat: <a target="_blank" rel="noopener" href="https://goo.gl/qzSiWC">https://goo.gl/qzSiWC</a></p>
+<blockquote>
+<p>Mix of client-side JS &#x2F; server side Php; regular AJAX for sending message, periodic AJOX polling for online status; AJAX long-polling for messages. “queue” messages in each user’s channel, deliver as response to long polling.</p>
+  <img src="/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/fb_chat.png" class="" title="fb_chat">
+<p>Channel servers maintain one channel peruser, web tier delivers messages to that user; channel is short queue for sequenced messages, long poll for streaming. For long poll, clients make HTTP request, server replies when a message is ready, one active request per browser tab.</p>
+</blockquote>
+</li>
+<li><p>Finding a needle in Haystack: Facebook’s photo storage: <a target="_blank" rel="noopener" href="https://goo.gl/edj4FL">https://goo.gl/edj4FL</a></p>
+<blockquote>
+<p>Haystack and the property of image storage: data written once, read often, never modified, rarely deleted. NFS resulted in waste of storing metadata. (filename -&gt; inode number -&gt; read file itself ) CDN is also expensive. <strong>Solution</strong>: storing metadata in memory. Also avoid storing too many files in each dir of NFS volume, which will lead to excessive disk operations. (<em>Example</em>: load metadata, inode, file content).<br>  We can also consider cache the file handle, however for long tail images this is not very useful, and we should not focusing on cache only. By owning the storage system and reduce the metadata, expanding main memory is then cost-effective. We can also store multiple images in the same file to save in metadata storage. Also we can further group physical volumes on different machines into logical volumes, when logical volume receive a write, all corresponding physical volume will be written. When machine capacity is exhausted, we mark it as read-only.<br>  Caching strategy: cache recent write from user (not from CDN), which is also fetched from a writeenable store machine. The reason is that if a photo missed CDN, it will likely also miss the cache; also photos are mostly visited right after uploading.<br>  Core Idea: physical volme as 100GB single file (haystack), then we need a needle to find a photo in the haystack. The write op will be append only, we can only edit photo by writing with same key &#x2F; alternate key, and identify the latest version using the key with highest offset. Deletion is made by setting a flag (can reclaimed later using compacting).<br>  <strong>Async index update issue</strong>: if machine crashes before index write finishes, needle already exists but not in index file (becomes orphan) or deleted files will still exist in index.</p>
+</blockquote>
+</li>
+<li><p>Serving Facebook Multifeed: Efficiency, performance gains through redesign:<br><a target="_blank" rel="noopener" href="https://goo.gl/adFVMQ">https://goo.gl/adFVMQ</a></p>
+<blockquote>
+<p>Core idea: disaggregation is beneficial, having each server pool focusing on a single resource type like compute &#x2F; memory &#x2F; HDD storage, etc, boosts hardware replacement &amp; (CPU) utilization efficiencies.<br>  Multi-feed building blocks:</p>
+</blockquote>
+<ol>
+<li>Aggregator: accept query, retrieve news feed from backend storage; aggregation, ranking and filteint. CPU intensive only.</li>
+<li>Leaf: indexes most recent news feed actions, store in memory; usually 20 leafs work as a group, make up a full replica containing the index data, memory intensive only.</li>
+<li>Tailer: directs user actions and feedback into leaf storage layer; persistent storage: log raw logs and snapshots for reloading a leaf from scratch.</li>
+</ol>
+<p>  <strong>Concerns</strong>: Peak in aggregator CPU usage may cause leaf nodes on same server become unstable; increased number of replica caused memory overbuild. Tailer forwards user action to leaf node, causing 10% of CPU; aggregator may compete with leaf threads for CPU cache, leading to cache conflict and resource contention, more context switches.<br>  <strong>Solution</strong>: design certain servers to be CPU intensive (aggregator) and some other to be memory intensive (leaf nodes).</p>
+</li>
+<li><p>Scaling Memcache at Facebook: <a target="_blank" rel="noopener" href="https://goo.gl/rZiAhX">https://goo.gl/rZiAhX</a></p>
+<blockquote>
+<p>User consumes more contents than they create, we should prioritize read (from various sources like MySQL &#x2F; HDFS &#x2F; backend services).  Optimization having limited scope are rarely considered; treat the probability of reading transient stale data as param &#x2F; trade off.</p>
+</blockquote>
+<p>  Items distributed across memcached servers through consistent hashing; A page may need data from multiple caches and cause incast congestion.<br>  Reduce latency by memcache client runs on every web server; serves serialization; compression; request routing; err handling.<br>  Construct DAG representing dependencies between data, maximize the number of items can be fetched concurrently. memcache servers do <strong>NOT</strong> talk with each other (complexity into stateless clients). Use UDP for <code>get</code> requests (connectionless, can bypass proxy), reduce latency and overhead.<br>  It is feasible to just drop lost &#x2F; out of order data without recovery, skip entries insertion in case of get error.<br>  For state changes (update and delete), use a TCP to alleviates the need to retry. Can also merge connections between web thread - memcached servers.<br>  Use <strong>sliding window</strong> to control number of outstanding requests (grows upon successful request, shrinks for unanswered requests). Such a size should be just right, to avoid number of serially executed memcache requests, and incast congestion.<br>  <strong>stale set</strong>: server did not set latest value to be cached. (we can grant a “lease” as a token, allowing clients to write back to cache and arbitrate concurrent writes) <strong>Thundering herd</strong>: specific key undergoes heavy read and write activity (we can rate limit the lease mech). We can also accept to return data marked as stale (cache value is usually monotonically increasing snapshot of the DB)<br>  <strong>Memcache pool</strong> setting strategy: Set a default “wildcard” pool, provide separate pools for keys being problematic (like separating the low-churn and high-churn keys).<br>  We can also use <strong>replication</strong> if multiple keys simultaneously fetched, entire dataset can fit into 1-2 memcached server or the request rate is too high (requires invalidation for consistency).<br>  Set up special <code>gutter</code> pool (have short expiry time) for client to request if no response is heard.<br>  For invalidation, we should avoid just broadcasting to frontend clusters. Instead embed it to SQL statements (avoids systematic invalidation problem). Also multiple frontend clusters can share the same memcached pool to reduce number of replicas. Needs to decide whether a key needs to be replicated across all frontend clusters or have a single replica per region<br>  <strong>Cold</strong> clusters can read from “<strong>warm</strong> cluster” rather than persistent storage. * Should avoid inconsistencies due to race conditions (if read key from a warm cluster after a data update in cold cluster). Memcached supports non-zero hold-off times which rejects <code>add</code> operations for a hold-off time (like 2s), preventing stale data to be added back after deleted. Therefore if we re-request warm cluster, get value but failed when adding it, we should fallback to querying the DB.<br>  Require storage cluster to invalidate data via <strong>daemons</strong>, avoiding invalidation arrives before replication. Cache refill should only be allowed after the replication stream has caught up.<br>  <strong>Remote marker</strong>: If present, local replica of DB may be stale, should be redirected to master region. When client updating a value, it will set the remote marker, performs the write and embed marker &amp; key in SQL statement, finally deletes key in local cluster. For a subsequent query, it will find the key not in cache; then it check for the marker, if it presents, we should forward to master region (write in progress); otherwise we can query locally. In such a tradeoff, we will have extra latency in case of cache miss but reduce the probability of reading stale data. (In reality, the remote marker is rarely falsely deleted)<br>  <strong>Optimization</strong>: auto-expansion of hash table size, avoid look up times drifting to O(n); make server multi-threaded using a global lock; each thread has its own UDP port to reduce contention; also uses adaptive <strong>slab</strong>, allocator for memory management (grow adaptively (1.07x) and starting at 64KB), use LRU strategy to refresh&#x2F;evict. For the adaptive part, we try to balance the <strong>age</strong> of the data entries (allocate more memory if the to-be evicted data’s age &gt;&#x3D; 120% of average).<br>  For keys with short lifespans, put them into a <strong>circular buffer of linked list</strong> (indexed by seconds till expiration) to evict them in advance.</p>
+</li>
+<li><p>TAO: Facebook’s Distributed Data Store for the Social Graph: <a target="_blank" rel="noopener" href="https://goo.gl/Tk1DyH">https://goo.gl/Tk1DyH</a></p>
+<blockquote>
+<p>Serving social graph. Uses MySQL as persistent storage, mediates access to DB and uses its own graph-aware cache. Due to the nature of facebook, aggregation&#x2F;filtering&#x2F;privacy check should be done on view time. We want to find a way handling the concurrent incremental updates to cached list, rather than refreshing the full edge list everytime. “Lease” is proposed to resolve thundering herds issue. As discussed above, “remote markers” is used to track keys that are known to be stale, forwarding such reads to master region to solve the “read-after-write” consistency.<br>  We can update replica’s cache at write time, then use <strong>graph semantics</strong> to interpret cache maintenance messages from concurrent updates. Efficiency and availability are over consistency.<br>  Entity and relationships are modeled as edges and nodes. Social graph usually includes users, relationships, actions and location, etc (will be queried every time post is rendered; aggregated contents and privacy checks cannot be reused).<br>  TAO objects are typed nodes, TAO assocations are typed directed edges (source, dest, association type) between objects (identified by 64 bit unique integer). Two objects can have <strong>at most</strong> one association. All associations have an <strong>inverse</strong> except for the link type of COMMENT.<br>  TAO’s <strong>API</strong> provides operation to allocate a new object and ID to retrieve, update (can do partial update) or delete the object associated with an ID. Mutual relationship can be symmetric (friends) or asymmetric (authored &#x2F; authored by) and modeled as separate associations but can be synced. Query of association starts with an object &amp; association type. Time locality: most of data is old, most queries on newest subset.<br>  <strong>Architecture</strong>: 2 caching layers and a storage layer. MySQL as the persistent storage, can map to simple SQL query &#x2F; range scan in non-SQL. Data will be separated into logic shards, mapping to DB, association binded to the same server. <strong>In-memory cache</strong> contains objects, association lists and association counts. Since TAO may access DB, use <strong>out-of-order</strong> response to resolve head-of-line blocking.<br>  Single &#x2F; big cache is prone to hotspot issue, so cache layer can be splitted into a leader &#x2F; multiple follower (forward the cache misses and writes to a leader, and failover to another follower only). Provides eventual consistency by asynchronously sending cache maintenance messages from leader to followers. Leaders serialize concurrent writes, enforce a limit of the max number of pending queries to a shard.<br>  * Invalidating an association may truncate the list and discard many edges, thus we do refill to notify followers about an assocation write (followers trigger query to update their stale association list)<br>  If followers are distant from each other, we can tradeoff availability over data freshness (by handling data misses locally, and still send write requests to leader)<br>  Social graph is also tightly interconnected, not possible to group users to reduce cross-partition requests. Solution is to gather data centers, keep one copy of social graph per region.<br>  Shards are mapped onto cache servers within a tier using consistent hashing, but may prone to load imbalance (certain followers shoulder a larger portion of request). TAO uses shard cloning, to have reads  to a shard served by multiple followers. For hot item exceeding certain threshold, TAO caches the data and ver and can omit the data in replies if it has not changed since previous version.</p>
+</blockquote>
+</li>
+<li><p>Amazon Architecture: <a target="_blank" rel="noopener" href="https://goo.gl/k4feoW">https://goo.gl/k4feoW</a></p>
+<blockquote>
+<p>It should be noted that this article was shared in 2007. Moving from 2-tier monolith to fully distributed and decentralized. To scale, database becomes shared resource, front-back end are loosely coupled and built around services.</p>
+</blockquote>
+<ul>
+<li>C++ to process requests, perl&#x2F;manson to build content. Not prefer middleware but smaller tools. Use special infra for managing dependencies and doing deployment, target to have all services deployed on a box (app codes, monitoring, licensing).</li>
+<li>Output of deployment process as virtual machine, can use EC2 to run.</li>
+<li>Start with a press release of what features the user will see, to make sure valuable features are built. Do a minimal as possible design.</li>
+<li>Not all operations are stateful, checkout steps are statefull. Recommendation based on session IDs. Keep track of everything anyway, no need to keep state. For <strong>Add to cart</strong> (use high availability), for <strong>checkout</strong> use consistency.</li>
+<li><strong>Lessons learnt</strong>: assume errors happen and go with fast reboot&#x2F;recovery or similar methods. Use <strong>share-nothing</strong> infra to avoid locking&#x2F;blocking&#x2F;deadlock. Open system with API. Avoid hidden dependencies and not necessary complexity.<br>  Use SLAs internally to manage services, use a infra allowing fast build of services.<br>  A robust, clustered, replicated, distributed file system is perfect for read-only data by web servers. Needs to have rollback methods.<br>  Prohibit direct database acess by clients. Use single unified service-access mechanism.</li>
+</ul>
+</li>
+<li><p>Dynamo: Amazon’s Highly Available Key-value Store: <a target="_blank" rel="noopener" href="https://goo.gl/C7zxDL">https://goo.gl/C7zxDL</a></p>
+<blockquote>
+<p>Sacrifices consistency under certain failure scenarios for availability.</p>
+</blockquote>
+<p>  To meet reliability and scaling needs, Amazon developed <strong>Amazon Simple Storage Service (Amazon S3)</strong>.<br>  Many service on Amazon only need primary-key access (not in favor of relational DB); <strong>Dynamo</strong> is used to manage services have high reliability requirement and control over tradeoff between availability &#x2F; consistency &#x2F; cost-effectiveness and performance, also a gossip based distributed failure detection and membership protocol.</p>
+<p>  Uses consistent hashing for partition and replication; consistency faciliated by object versioning; consistency among replicas during updates is maintained by quorum-like tech &#x2F; decentralized replica synchronization protocol.</p>
+<p>  Dynamo features: simple k-v interface, highly available with clearly defined consistency window; efficient in resource suage, simple scale out schema to address growth in dataset size &#x2F; request reates. Each service uses Dynamo runs its <em>own</em> Dynamo instances. <code>primary key</code> maps to blob value.</p>
+<p>  <strong>SLA</strong>: peak RPS of 500 can be served  within 300ms for 99.9% cases, per client.* Note that when dependencies are numerous mean &#x2F; median latency cannot well represent actual loss of user experience.<br>  Optimisitic replication can cope with network failure, but it introduces the problem of conflict resolving. Traditional DB resolve conflict at write time but Dynamo do it at <strong>read-time</strong> to provide “always writable” store.<br>  All nodes of Dynamo should be symmetric (with the same role) and support incremental scalability and Decentralization. Dynamo can be defined as a <strong>zero-hop</strong> DHT (for pinpoint routing).<br>  <em>Interface</em>: exposes <code>get</code>(returns single object or list of objects with conflicting versions &#x2F; context) and <code>put</code> (determines replica location and write to disk). Context is stored with object, key is MD5 hashed to determine node to store.<br>  Consistent hash details: applies virtual nodes, and also replicate data to the subsequent $N-1$ nodes (such list of nodes called <em>preference list</em>, ensuring that virtual nodes corresponding to all unique physical nodes via skipping).<br>  Data versioning details: view result of each modification as a new and immutable ver. For operation on old version, we can reflect it on old version (not a new version). Vector clock is used for causal inference (list of <code>(node, counter)</code> for versioning). Each node handling a write will increment corresponding node’s counter by 1, and such a list will subject to capping.<br>  Client request strategy: load balancer or partition aware client library (skip the forwarding step, can pull router mapping info). Nodes with smaller rank comes with higher priority, and “consistency protocol” is used (quorum like system, requiring $R+W&gt;N$)<br>  <strong>Sloppy quorum</strong>: allowing writes to be sent to first N healthy nodes; a node out of the first N nodes on the hash ring can temporarily hold the data and later send it back.</p>
+<p>  <strong>Merkle tree</strong> for replica synchronization and detection of inconsistency (each node storing hash value of its children &#x2F; document content)<br>  External discovery: certain nodes work as seeds to prevent logical partitions, known to all nodes. Use gossip protocol for decentralized failure detection. </p>
+</li>
+<li><p>A 360 Degree View Of The Entire Netflix Stack: <a target="_blank" rel="noopener" href="https://goo.gl/rYSDTz">https://goo.gl/rYSDTz</a></p>
+<blockquote>
+<p>Languages: Java, python, Javascript; Databases: MySQL, Cassandra, Oracle; Framework: Node.js; Cloud Hosting: Amazon EC2 (Elastic Compute Cloud); Js UI: React. SQL DB SaaS: Amazon RDS; NoSQL: Amazon DynamoDB. Open Connect CDN: FreeBSD as OS; Nginx as server; Bird daemon as routing. </p>
+</blockquote>
+<p>  The Netflix recommendation system consists of many algorithms. The two core algorithms used in their production system are Restricted Boltzmann Machines (RBM) and a form of Matrix Factorization called SVD++. These two algorithms are combined using a linear blend to produce a single higher accuracy estimate.</p>
+<p>  Restricted Boltzmann Machines are neural networks that have been modified to work in collaborative filtering. Each user has one RBM with the input node for each representing a movie the user has rated.</p>
+<p>  SVD++ is an asymmetric form of SVD (Singular Value Decomposition) that makes use of implicit information like RBMs. It was developed by the winning team in the Netflix Prize contest.</p>
+<p>  It is then followed with certain internal tools for data &#x2F; delivery and services, see link if interested.</p>
+</li>
+<li><p>It’s All A&#x2F;Bout Testing: The Netflix Experimentation Platform: <a target="_blank" rel="noopener" href="https://goo.gl/agbA4K">https://goo.gl/agbA4K</a></p>
+<blockquote>
+<p>Netflix usually needs to optimize streaming hours and retention. They also provide test schedule view to track similar tests. Traffic allocation can be in batch (fixed set) or in real-time.</p>
+  <img src="/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/Netflix_ab_test.png" class="" title="Netflix_ab_test"></blockquote>
+</li>
+<li><p>Netflix Recommendations: Beyond the 5 stars (Part 1): <a target="_blank" rel="noopener" href="https://goo.gl/A4FkYi">https://goo.gl/A4FkYi</a></p>
+</li>
+<li><p>Netflix Recommendations: Beyond the 5 stars (Part 2): <a target="_blank" rel="noopener" href="https://goo.gl/XNPMXm">https://goo.gl/XNPMXm</a></p>
+<blockquote>
+<p>High level of customization of “genre” (different granularity, prioritize the customized one). Also we want to go beyond of just predicting a movie’s rating. Starting point is scoring function, then to pair-wise &#x2F; ranking set -wise scoring. Also listed potential methods may be useful for personalizations, like: linear &amp; logistic regression, elastic nets, singular value decomposition, restricted Boltzman machine, Markov chains, latent Dirichlet allocation, association rules, gradient boosted decision trees, random forests &#x2F; clustering &#x2F; matrix factorization..  </p>
+</blockquote>
+<p>  Eventually it is still about AB testing. This article summarized how we build hypothesis, go through offline evaluation and AB testing to see if that is a sucess &#x2F; or needs reformulation.</p>
+</li>
+<li><p>Google Architecture: <a target="_blank" rel="noopener" href="https://goo.gl/dvkDiY">https://goo.gl/dvkDiY</a></p>
+<blockquote>
+<p>Old article from 2008.</p>
+</blockquote>
+</li>
+<li><p>The Google File System (Google Docs): <a target="_blank" rel="noopener" href="https://goo.gl/xj5n9R">https://goo.gl/xj5n9R</a></p>
+<blockquote>
+<p>Google visualizes their infra as 3-layer stack. Products (search, Ads, email, maps, vide, chat, blogger) Distributed System Infra: (GFS, MapReduce, Big Table). Computing Platforms: machines in different data centers.</p>
+</blockquote>
+<p>  <strong>Google File System</strong>: large distributed log structured file system. Requires high reliability across data centers, scalability to thousands of network nodes, huge read&#x2F;write bandwidth requirements and support for large blocks of data (in GB), efficient distribution of operations.<br>  System has master and chunk servers. Master keep metadata on various data files, stored in 64MB chunks. Clients locate to chunk server with that. Chunk servers store the actual data on disk, replicated across 3 different chunk servers for redundancy.<br>  <strong>Map Reduce</strong>: GFS -&gt; Map -&gt; Shuffle -&gt; Reduction -&gt; Store back to GFS. Concerns with stragglers falling behind. Can run multiple same computation and when one is done, kill the rest. Data transferring between map and reduce servers are compressed. </p>
+<p>  <strong>BigTable</strong>: distributed hash mech built on top of GFS (non-relational). Data item stored in a cell which can be accessed using a row key, column key or timestamp. Each row stored in tablets (sequence of 64KB blocks, formatted by SSTable).<br>  Master server assign tablets to tablet servers, tablet servers process read &#x2F; write (split tablet when exceeding size limits); lock servers (writing, master arbitration, access control requires mutual exclusion).<br>  Locality group can be used to physically store related bits together; Tablets are cached in RAM.<br>  Hardware: should build reliability on top of unreliable hardware. Use linux &#x2F; in house rack design, PC class mother boards and low end storage, and a mix of collocation and own data centers.<br>  Push changes quickly rather wait for QA; use libraries to build programs; provide certain applications like crawling as services; have infra handling versioning.</p>
+<p>  <strong>Future directions</strong>: create single global namespace for all data; automated migration of data and computation; solve consistency issues that happen when cope with area replication with network partitioning.<br>  <strong>Lessons learnt</strong>: Infra can be competitive advantage; Hadoop may be a good distributed open-source implementation; build self-managing systems that work without having to take the system down; Create a Darwinian infrastructure. Perform time consuming operation in parallel and take the winner; consider compression (when rich in computation resources but limited IO resources) </p>
+</li>
+<li><p>Differential Synchronization (Google Docs): <a target="_blank" rel="noopener" href="https://goo.gl/9zqG7x">https://goo.gl/9zqG7x</a></p>
+<blockquote>
+<p>Solves the problem of keep 2 or more copies of the same document synchronized with each other in real time, and keeping scalability, fault tolerance, responsive collaborative across unreliable network.</p>
+</blockquote>
+<ol>
+<li><em>Locking</em>: may be edited by one user at a time, others have read only access. Can be refined to dynamically lock&#x2F;release subsection of documents. (Shortcomings: for small document it still restricts editability; fine-grained locking have to be explicitly built into application; under unstable env, lock &#x2F; unlock signals or owner can be lost) </li>
+<li><em>Event passing</em>: have to capture all user actions.</li>
+</ol>
+</li>
+<li><p>YouTube Architecture: <a target="_blank" rel="noopener" href="https://goo.gl/mCPRUF">https://goo.gl/mCPRUF</a></p>
+</li>
+<li><p>Seattle Conference on Scalability: YouTube Scalability: <a target="_blank" rel="noopener" href="https://goo.gl/dH3zYq">https://goo.gl/dH3zYq</a></p>
+</li>
+<li><p>Bigtable: A Distributed Storage System for Structured Data: <a target="_blank" rel="noopener" href="https://goo.gl/6NaZca">https://goo.gl/6NaZca</a></p>
+</li>
+<li><p>Instagram Architecture: 14 Million Users, Terabytes Of Photos, 100s Of Instances, Dozens<br>Of Technologies: <a target="_blank" rel="noopener" href="https://goo.gl/s1VcW5">https://goo.gl/s1VcW5</a></p>
+</li>
+<li><p>The Architecture Twitter Uses To Deal With 150M Active Users: <a target="_blank" rel="noopener" href="https://goo.gl/EwvfRd">https://goo.gl/EwvfRd</a></p>
+</li>
+<li><p>Scaling Twitter: Making Twitter 10000 Percent Faster: <a target="_blank" rel="noopener" href="https://goo.gl/nYGC1k">https://goo.gl/nYGC1k</a></p>
+</li>
+<li><p>Announcing Snowflake (Snowflake is a network service for generating unique ID numbers at<br>high scale with some simple guarantees): <a target="_blank" rel="noopener" href="https://goo.gl/GzVWYm">https://goo.gl/GzVWYm</a></p>
+</li>
+<li><p>Timelines at Scale: <a target="_blank" rel="noopener" href="https://goo.gl/8KbqTy">https://goo.gl/8KbqTy</a></p>
+</li>
+<li><p>How Uber Scales Their Real-Time Market Platform: <a target="_blank" rel="noopener" href="https://goo.gl/kGZuVy">https://goo.gl/kGZuVy</a></p>
+</li>
+<li><p>Scaling Pinterest: <a target="_blank" rel="noopener" href="https://goo.gl/KtmjW3">https://goo.gl/KtmjW3</a></p>
+</li>
+<li><p>Pinterest Architecture Update: <a target="_blank" rel="noopener" href="https://goo.gl/w6rRsf">https://goo.gl/w6rRsf</a></p>
+</li>
+<li><p>A Brief History of Scaling LinkedIn: <a target="_blank" rel="noopener" href="https://goo.gl/8A1Pi8">https://goo.gl/8A1Pi8</a></p>
+</li>
+<li><p>Flickr Architecture: <a target="_blank" rel="noopener" href="https://goo.gl/dWtgYa">https://goo.gl/dWtgYa</a></p>
+</li>
+<li><p>How We’ve Scaled Dropbox: <a target="_blank" rel="noopener" href="https://goo.gl/NjBDtC">https://goo.gl/NjBDtC</a></p>
+</li>
+<li><p>The WhatsApp Architecture Facebook Bought For $19 Billion: <a target="_blank" rel="noopener" href="https://bit.ly/2AHJnFn">https://bit.ly/2AHJnFn</a></p>
+</li>
+</ul>
+<hr>
+<p><strong>Company Engineering blogs</strong>:<br>Airbnb: <a target="_blank" rel="noopener" href="https://medium.com/airbnb-engineering">https://medium.com/airbnb-engineering</a><br>Amazon: <a target="_blank" rel="noopener" href="https://developer.amazon.com/blogs">https://developer.amazon.com/blogs</a><br>Asana: <a target="_blank" rel="noopener" href="https://blog.asana.com/category/eng">https://blog.asana.com/category/eng</a><br>Atlassian: <a target="_blank" rel="noopener" href="https://developer.atlassian.com/blog">https://developer.atlassian.com/blog</a><br>Bittorrent: <a target="_blank" rel="noopener" href="http://engineering.bittorrent.com/">http://engineering.bittorrent.com</a><br>Cloudera: <a target="_blank" rel="noopener" href="https://blog.cloudera.com/">https://blog.cloudera.com</a><br>Docker: <a target="_blank" rel="noopener" href="https://blog.docker.com/">https://blog.docker.com</a><br>Dropbox: <a target="_blank" rel="noopener" href="https://blogs.dropbox.com/tech">https://blogs.dropbox.com/tech</a><br>eBay: <a target="_blank" rel="noopener" href="http://www.ebaytechblog.com/">http://www.ebaytechblog.com</a><br>Facebook: <a target="_blank" rel="noopener" href="https://code.facebook.com/posts">https://code.facebook.com/posts</a><br>GitHub: <a target="_blank" rel="noopener" href="https://githubengineering.com/">https://githubengineering.com</a><br>Google: <a target="_blank" rel="noopener" href="https://developers.googleblog.com/">https://developers.googleblog.com</a><br>Groupon: <a target="_blank" rel="noopener" href="https://engineering.groupon.com/">https://engineering.groupon.com</a><br>Highscalability: <a target="_blank" rel="noopener" href="http://highscalability.com/">http://highscalability.com</a><br>Instacart: <a target="_blank" rel="noopener" href="https://tech.instacart.com/">https://tech.instacart.com</a><br>Instagram: <a target="_blank" rel="noopener" href="https://engineering.instagram.com/">https://engineering.instagram.com</a><br>Linkedin: <a target="_blank" rel="noopener" href="https://engineering.linkedin.com/blog">https://engineering.linkedin.com/blog</a><br>Mixpanel: <a target="_blank" rel="noopener" href="https://mixpanel.com/blog">https://mixpanel.com/blog</a><br>Netflix: <a target="_blank" rel="noopener" href="https://medium.com/netflix-techblog">https://medium.com/netflix-techblog</a><br>Nextdoor: <a target="_blank" rel="noopener" href="https://engblog.nextdoor.com/">https://engblog.nextdoor.com</a><br>PayPal: <a target="_blank" rel="noopener" href="https://www.paypal-engineering.com/">https://www.paypal-engineering.com</a><br>Pinterest: <a target="_blank" rel="noopener" href="https://engineering.pinterest.com/">https://engineering.pinterest.com</a><br>Quora: <a target="_blank" rel="noopener" href="https://engineering.quora.com/">https://engineering.quora.com</a><br>Reddit: <a target="_blank" rel="noopener" href="https://redditblog.com/">https://redditblog.com</a><br>Salesforce: <a target="_blank" rel="noopener" href="https://developer.salesforce.com/blogs/engineering">https://developer.salesforce.com/blogs/engineering</a><br>Shopify: <a target="_blank" rel="noopener" href="https://engineering.shopify.com/">https://engineering.shopify.com</a><br>Slack: <a target="_blank" rel="noopener" href="https://slack.engineering/">https://slack.engineering</a><br>Soundcloud: <a target="_blank" rel="noopener" href="https://developers.soundcloud.com/blog">https://developers.soundcloud.com/blog</a><br>Spotify: <a target="_blank" rel="noopener" href="https://labs.spotify.com/">https://labs.spotify.com</a><br>Stripe: <a target="_blank" rel="noopener" href="https://stripe.com/blog/engineering">https://stripe.com/blog/engineering</a><br>System design primer: <a target="_blank" rel="noopener" href="https://github.com/donnemartin/system-design-primer">https://github.com/donnemartin/system-design-primer</a><br>Twitter: <a target="_blank" rel="noopener" href="https://blog.twitter.com/engineering/en_us.html">https://blog.twitter.com/engineering/en_us.html</a><br>Thumbtack: <a target="_blank" rel="noopener" href="https://www.thumbtack.com/engineering">https://www.thumbtack.com/engineering</a><br>Uber: <a target="_blank" rel="noopener" href="http://eng.uber.com/">http://eng.uber.com</a><br>Yahoo: <a target="_blank" rel="noopener" href="https://yahooeng.tumblr.com/">https://yahooeng.tumblr.com</a><br>Yelp: <a target="_blank" rel="noopener" href="https://engineeringblog.yelp.com/">https://engineeringblog.yelp.com</a><br>Zoom: <a target="_blank" rel="noopener" href="https://medium.com/zoom-developer-blog">https://medium.com/zoom-developer-blog</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Interview/" rel="tag"><i class="fa fa-tag"></i> Interview</a>
+              <a href="/tags/Alex-Xu/" rel="tag"><i class="fa fa-tag"></i> Alex Xu</a>
+              <a href="/tags/System-Design/" rel="tag"><i class="fa fa-tag"></i> System Design</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/11/System-Design-Interview-Alex-Xu-Notes-1/" rel="prev" title="System-Design-Interview (Alex Xu) Notes - Chapter 1 - 9">
+                  <i class="fa fa-angle-left"></i> System-Design-Interview (Alex Xu) Notes - Chapter 1 - 9
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Blur - Shenghui Xu</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
