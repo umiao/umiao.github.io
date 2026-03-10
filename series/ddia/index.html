@@ -20,24 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Personal blog of blur.">
+    <meta name="description" content="A 19-part series of reading notes on Martin Kleppmann’s Designing Data-Intensive Applications (DDIA). The book covers the fundamental ideas behind reliable, scalable, and maintainable data systems – f">
 <meta property="og:type" content="website">
-<meta property="og:title" content="The blog of Blur">
-<meta property="og:url" content="https://umiao.github.io/tags/Alex-Xu/index.html">
+<meta property="og:title" content="Designing Data-Intensive Applications: Reading Notes">
+<meta property="og:url" content="https://umiao.github.io/series/ddia/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Personal blog of blur.">
+<meta property="og:description" content="A 19-part series of reading notes on Martin Kleppmann’s Designing Data-Intensive Applications (DDIA). The book covers the fundamental ideas behind reliable, scalable, and maintainable data systems – f">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-09T08:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-10T00:58:34.481Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://umiao.github.io/tags/Alex-Xu/">
+<link rel="canonical" href="https://umiao.github.io/series/ddia/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"tags/Alex-Xu/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"https://umiao.github.io/series/ddia/index.html","path":"series/ddia/index.html","title":"Designing Data-Intensive Applications: Reading Notes"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Tag: Alex Xu | The blog of Blur</title>
+<title>Designing Data-Intensive Applications: Reading Notes | The blog of Blur
+</title>
   
 
 
@@ -114,7 +117,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -152,7 +155,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -165,6 +168,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Topic-Overview"><span class="nav-number">1.</span> <span class="nav-text">Topic Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reading-Notes"><span class="nav-number">2.</span> <span class="nav-text">Reading Notes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-I-Foundations-of-Data-Systems"><span class="nav-number">2.1.</span> <span class="nav-text">Part I: Foundations of Data Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-II-Distributed-Data"><span class="nav-number">2.2.</span> <span class="nav-text">Part II: Distributed Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-III-Derived-Data"><span class="nav-number">2.3.</span> <span class="nav-text">Part III: Derived Data</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -177,7 +181,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -186,7 +190,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -210,70 +214,90 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner page posts-expand">
 
 
-  
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">Alex Xu
-          <small>Tag</small>
-        </h1>
-      </div>
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Designing Data-Intensive Applications: Reading Notes
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/series/">SERIES</a></li>
+          <li>DDIA</li>
+  </ul>
+</div>
+
+</header>
 
       
-    <div class="collection-year">
-      <span class="collection-header">2025</span>
+      
+      
+      <div class="post-body">
+          <p>A 19-part series of reading notes on Martin Kleppmann’s <em>Designing Data-Intensive Applications</em> (DDIA). The book covers the fundamental ideas behind reliable, scalable, and maintainable data systems – from single-node storage engines to distributed architectures and stream processing pipelines.</p>
+<p>These notes follow the book’s three-part structure: foundations of data systems, distributed data, and derived data. Each note captures the key concepts, trade-offs, and design patterns from one or two chapters.</p>
+<hr>
+<h2 id="Topic-Overview"><a href="#Topic-Overview" class="headerlink" title="Topic Overview"></a>Topic Overview</h2><pre class="mermaid">mindmap
+  root((DDIA))
+    Part I: Foundations
+      Reliability, Scalability, Maintainability
+      Data Models and Query Languages
+      Storage and Retrieval
+      Encoding and Evolution
+    Part II: Distributed Data
+      Replication
+      Partitioning
+      Transactions
+      Distributed System Challenges
+      Consistency and Consensus
+    Part III: Derived Data
+      Batch Processing
+      Stream Processing</pre>
+
+<hr>
+<h2 id="Reading-Notes"><a href="#Reading-Notes" class="headerlink" title="Reading Notes"></a>Reading Notes</h2><h3 id="Part-I-Foundations-of-Data-Systems"><a href="#Part-I-Foundations-of-Data-Systems" class="headerlink" title="Part I: Foundations of Data Systems"></a>Part I: Foundations of Data Systems</h3><ol>
+<li><a href="/2024/02/23/Designing-Data-Intensive-Applications-Note-1/" title="Note 1: Reliability and Key Concepts">Note 1: Reliability and Key Concepts</a></li>
+<li><a href="/2024/02/23/Designing-Data-Intensive-Applications-Note-2/" title="Note 2: Scalability and Performance">Note 2: Scalability and Performance</a></li>
+<li><a href="/2024/02/23/Designing-Data-Intensive-Applications-Note-3/" title="Note 3: Maintainability">Note 3: Maintainability</a></li>
+<li><a href="/2024/02/23/Designing-Data-Intensive-Applications-Note-4/" title="Note 4: Data Models and Query Languages">Note 4: Data Models and Query Languages</a></li>
+<li><a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-5/" title="Note 5: Storage and Retrieval (Log-Structured)">Note 5: Storage and Retrieval (Log-Structured)</a></li>
+<li><a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-6/" title="Note 6: Storage and Retrieval (Indexes)">Note 6: Storage and Retrieval (Indexes)</a></li>
+<li><a href="/2024/02/24/Designing-Data-Intensive-Applications-Note-7/" title="Note 7: OLTP vs OLAP and Data Warehousing">Note 7: OLTP vs OLAP and Data Warehousing</a></li>
+<li><a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-8/" title="Note 8: Encoding and Evolution">Note 8: Encoding and Evolution</a></li>
+<li><a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-9/" title="Note 9: Data Flow (Databases, REST, RPC)">Note 9: Data Flow (Databases, REST, RPC)</a></li>
+</ol>
+<h3 id="Part-II-Distributed-Data"><a href="#Part-II-Distributed-Data" class="headerlink" title="Part II: Distributed Data"></a>Part II: Distributed Data</h3><ol start="10">
+<li><a href="/2024/02/25/Designing-Data-Intensive-Applications-Note-10/" title="Note 10: Replication and Scaling">Note 10: Replication and Scaling</a></li>
+<li><a href="/2024/02/26/Designing-Data-Intensive-Applications-Note-11/" title="Note 11: Replication Strategies">Note 11: Replication Strategies</a></li>
+<li><a href="/2024/03/21/Designing-Data-Intensive-Applications-Note-12/" title="Note 12: Replication Lag and Consistency">Note 12: Replication Lag and Consistency</a></li>
+<li><a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-13/" title="Note 13: Multi-Leader and Leaderless Replication">Note 13: Multi-Leader and Leaderless Replication</a></li>
+<li><a href="/2024/03/24/Designing-Data-Intensive-Applications-Note-14/" title="Note 14: Partitioning">Note 14: Partitioning</a></li>
+<li><a href="/2024/03/29/Designing-Data-Intensive-Applications-Note-15/" title="Note 15: Transactions and ACID">Note 15: Transactions and ACID</a></li>
+<li><a href="/2024/04/21/Designing-Data-Intensive-Applications-Note-16/" title="Note 16: Distributed System Faults">Note 16: Distributed System Faults</a></li>
+<li><a href="/2024/04/27/Designing-Data-Intensive-Applications-Note-17/" title="Note 17: Consistency and Linearizability">Note 17: Consistency and Linearizability</a></li>
+</ol>
+<h3 id="Part-III-Derived-Data"><a href="#Part-III-Derived-Data" class="headerlink" title="Part III: Derived Data"></a>Part III: Derived Data</h3><ol start="18">
+<li><a href="/2024/05/05/Designing-Data-Intensive-Applications-Note-18/" title="Note 18: Batch Processing">Note 18: Batch Processing</a></li>
+<li><a href="/2024/05/06/Designing-Data-Intensive-Applications-Note-19/" title="Note 19: Stream Processing">Note 19: Stream Processing</a></li>
+</ol>
+
+      </div>
+      
+      
+      
     </div>
+  <ul class="breadcrumb">
+            <li><a href="/series/">SERIES</a></li>
+          <li>DDIA</li>
+  </ul>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2025-06-23T14:35:37-07:00"
-              content="2025-06-23">
-          06-23
-        </time>
-      </div>
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/06/23/System-Design-Interview-Alex-Xu-Notes-2/" itemprop="url">
-            <span itemprop="name">System-Design-Interview (Alex Xu) Notes - Chapter 10 - 16</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2025-05-11T22:29:48-07:00"
-              content="2025-05-11">
-          05-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/05/11/System-Design-Interview-Alex-Xu-Notes-1/" itemprop="url">
-            <span itemprop="name">System-Design-Interview (Alex Xu) Notes - Chapter 1 - 9</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
-  </div>
-  
-  
-  
 
 </div>
   </main>

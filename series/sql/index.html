@@ -20,24 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Personal blog of blur.">
+    <meta name="description" content="A 16-part series of study notes covering SQL from the ground up. Starting with basic syntax and data manipulation, the series progresses through functions, views, stored procedures, triggers, transact">
 <meta property="og:type" content="website">
-<meta property="og:title" content="The blog of Blur">
-<meta property="og:url" content="https://umiao.github.io/archives/2024/10/index.html">
+<meta property="og:title" content="SQL Study Notes">
+<meta property="og:url" content="https://umiao.github.io/series/sql/index.html">
 <meta property="og:site_name" content="The blog of Blur">
-<meta property="og:description" content="Personal blog of blur.">
+<meta property="og:description" content="A 16-part series of study notes covering SQL from the ground up. Starting with basic syntax and data manipulation, the series progresses through functions, views, stored procedures, triggers, transact">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-09T09:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-10T01:00:42.211Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://umiao.github.io/archives/2024/10/">
+<link rel="canonical" href="https://umiao.github.io/series/sql/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"archives/2024/10/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"https://umiao.github.io/series/sql/index.html","path":"series/sql/index.html","title":"SQL Study Notes"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Archive | The blog of Blur</title>
+<title>SQL Study Notes | The blog of Blur
+</title>
   
 
 
@@ -98,7 +101,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">The blog of Blur</h1>
+      <p class="site-title">The blog of Blur</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Hearing the fall of snow.</p>
@@ -114,7 +117,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -152,7 +155,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -165,6 +168,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Topic-Overview"><span class="nav-number">1.</span> <span class="nav-text">Topic Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Study-Notes"><span class="nav-number">2.</span> <span class="nav-text">Study Notes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fundamentals"><span class="nav-number">2.1.</span> <span class="nav-text">Fundamentals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Database-Objects"><span class="nav-number">2.2.</span> <span class="nav-text">Database Objects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Management"><span class="nav-number">2.3.</span> <span class="nav-text">Data Management</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advanced-Querying"><span class="nav-number">2.4.</span> <span class="nav-text">Advanced Querying</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimization"><span class="nav-number">2.5.</span> <span class="nav-text">Optimization</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -177,7 +181,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -186,7 +190,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -210,50 +214,98 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner page posts-expand">
 
 
-  
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        
-        <span class="collection-header">Nice! 63 posts in total. Keep on posting.</span>
-      </div>
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2024<span class="collection-year-count">23</span></span>
-    </div>
+<h1 class="post-title" itemprop="name headline">SQL Study Notes
+</h1>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-10-26T12:09:07-07:00"
-              content="2024-10-26">
-          10-26
-        </time>
-      </div>
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/series/">SERIES</a></li>
+          <li>SQL</li>
+  </ul>
+</div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/10/26/Behavioral-Interview-Questions-Crack/" itemprop="url">
-            <span itemprop="name">Behavioral Interview Questions Crack</span>
-          </a>
-      </div>
+</header>
 
       
-    </header>
-  </article>
+      
+      
+      <div class="post-body">
+          <p>A 16-part series of study notes covering SQL from the ground up. Starting with basic syntax and data manipulation, the series progresses through functions, views, stored procedures, triggers, transactions, data types, data modeling, indexing, user management, CTEs, and window functions.</p>
+<p>The final three notes focus on query optimization – covering index usage strategies, SELECT tuning, data manipulation performance, and best practices for conditions and table design.</p>
+<hr>
+<h2 id="Topic-Overview"><a href="#Topic-Overview" class="headerlink" title="Topic Overview"></a>Topic Overview</h2><pre class="mermaid">mindmap
+  root((SQL))
+    Fundamentals
+      Syntax Basics
+      Insert, Update, Delete
+      Functions and Aggregates
+    Database Objects
+      Views
+      Stored Procedures and UDFs
+      Triggers and Events
+    Data Management
+      Transactions
+      Data Types
+      Data Modeling and Normalization
+    Advanced Querying
+      Indexes
+      User and Privilege Management
+      CTEs and UNION
+      Window Functions
+    Optimization
+      Index Usage Strategies
+      SELECT and Data Manipulation
+      Conditions and Table Design</pre>
 
+<hr>
+<h2 id="Study-Notes"><a href="#Study-Notes" class="headerlink" title="Study Notes"></a>Study Notes</h2><h3 id="Fundamentals"><a href="#Fundamentals" class="headerlink" title="Fundamentals"></a>Fundamentals</h3><ol>
+<li><a href="/2022/04/16/SQL-Study-Note-1/" title="Note 1: Syntax Basics">Note 1: Syntax Basics</a></li>
+<li><a href="/2022/04/16/SQL-Study-Note-2/" title="Note 2: Insert, Update, Delete">Note 2: Insert, Update, Delete</a></li>
+<li><a href="/2022/04/16/SQL-Study-Note-3/" title="Note 3: Functions and Aggregate Functions">Note 3: Functions and Aggregate Functions</a></li>
+</ol>
+<h3 id="Database-Objects"><a href="#Database-Objects" class="headerlink" title="Database Objects"></a>Database Objects</h3><ol start="4">
+<li><a href="/2022/04/16/SQL-Study-Note-4/" title="Note 4: Views">Note 4: Views</a></li>
+<li><a href="/2022/04/16/SQL-Study-Note-5/" title="Note 5: Stored Procedures and UDFs">Note 5: Stored Procedures and UDFs</a></li>
+<li><a href="/2022/04/16/SQL-Study-Note-6/" title="Note 6: Triggers and Events">Note 6: Triggers and Events</a></li>
+</ol>
+<h3 id="Data-Management"><a href="#Data-Management" class="headerlink" title="Data Management"></a>Data Management</h3><ol start="7">
+<li><a href="/2022/04/16/SQL-Study-Note-7/" title="Note 7: Transactions">Note 7: Transactions</a></li>
+<li><a href="/2022/04/16/SQL-Study-Note-8/" title="Note 8: Data Types (MySQL)">Note 8: Data Types (MySQL)</a></li>
+<li><a href="/2022/04/20/SQL-Study-Note-9/" title="Note 9: Data Modeling, Constraints, and Normalization">Note 9: Data Modeling, Constraints, and Normalization</a></li>
+</ol>
+<h3 id="Advanced-Querying"><a href="#Advanced-Querying" class="headerlink" title="Advanced Querying"></a>Advanced Querying</h3><ol start="10">
+<li><a href="/2022/04/21/SQL-Study-Note-10/" title="Note 10: Indexes">Note 10: Indexes</a></li>
+<li><a href="/2022/04/21/SQL-Study-Note-11/" title="Note 11: User and Privilege Management">Note 11: User and Privilege Management</a></li>
+<li><a href="/2022/05/04/SQL-Study-Note-12/" title="Note 12: CTEs and UNION">Note 12: CTEs and UNION</a></li>
+<li><a href="/2022/05/05/SQL-Study-Note-13/" title="Note 13: Window Functions">Note 13: Window Functions</a></li>
+</ol>
+<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><ol start="14">
+<li><a href="/2022/05/13/SQL-Study-Note-14/" title="Note 14: Optimization 1 -- Index Usage Strategies">Note 14: Optimization 1 -- Index Usage Strategies</a></li>
+<li><a href="/2022/05/14/SQL-Study-Note-15/" title="Note 15: Optimization 2 -- SELECT and Data Manipulation">Note 15: Optimization 2 -- SELECT and Data Manipulation</a></li>
+<li><a href="/2022/05/14/SQL-Study-Note-16/" title="Note 16: Optimization 3 -- Conditions and Table Design">Note 16: Optimization 3 -- Conditions and Table Design</a></li>
+</ol>
 
+      </div>
+      
+      
+      
     </div>
-  </div>
-  
-  
-  
+  <ul class="breadcrumb">
+            <li><a href="/series/">SERIES</a></li>
+          <li>SQL</li>
+  </ul>
+
+    
+    
+
 
 </div>
   </main>
