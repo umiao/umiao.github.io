@@ -2,18 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://umiao.github.io/2026/03/09/Cake-Inspiration-Gallery/</loc>
+    <loc>https://umiao.github.io/about/index.html</loc>
     
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-11</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://umiao.github.io/about/index.html</loc>
+    <loc>https://umiao.github.io/categories/index.html</loc>
     
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/index.html</loc>
+    
+    <lastmod>2026-03-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/2026/03/09/Cake-Inspiration-Gallery/</loc>
+    
+    <lastmod>2026-03-11</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -47,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/04/16/SQL-Study-Note-5/</loc>
+    <loc>https://umiao.github.io/2022/04/16/SQL-Study-Note-4/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -56,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/04/16/SQL-Study-Note-4/</loc>
+    <loc>https://umiao.github.io/2022/04/16/SQL-Study-Note-5/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -74,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/04/16/SQL-Study-Note-2/</loc>
+    <loc>https://umiao.github.io/2022/05/14/SQL-Study-Note-16/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -83,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/05/14/SQL-Study-Note-16/</loc>
+    <loc>https://umiao.github.io/2022/04/16/SQL-Study-Note-2/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -101,6 +119,15 @@
   </url>
   
   <url>
+    <loc>https://umiao.github.io/2022/05/13/SQL-Study-Note-14/</loc>
+    
+    <lastmod>2026-03-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://umiao.github.io/2022/05/14/SQL-Study-Note-15/</loc>
     
     <lastmod>2026-03-10</lastmod>
@@ -110,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/05/13/SQL-Study-Note-14/</loc>
+    <loc>https://umiao.github.io/2022/04/21/SQL-Study-Note-11/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -137,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/04/21/SQL-Study-Note-11/</loc>
+    <loc>https://umiao.github.io/2022/04/21/SQL-Study-Note-10/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -155,15 +182,6 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/04/21/SQL-Study-Note-10/</loc>
-    
-    <lastmod>2026-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://umiao.github.io/2022/05/01/Missing-Values-Patterns-in-Time-Series-Data/</loc>
     
     <lastmod>2026-03-10</lastmod>
@@ -173,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2023/09/09/Options-Futures-and-Other-Derivatives-Note-1/</loc>
+    <loc>https://umiao.github.io/2023/09/10/Options-Futures-and-Other-Derivatives-Note-2/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -182,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2023/09/10/Options-Futures-and-Other-Derivatives-Note-2/</loc>
+    <loc>https://umiao.github.io/2023/09/09/Options-Futures-and-Other-Derivatives-Note-1/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -209,15 +227,6 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/</loc>
-    
-    <lastmod>2026-03-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-8/</loc>
     
     <lastmod>2026-03-10</lastmod>
@@ -227,7 +236,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-5/</loc>
+    <loc>https://umiao.github.io/2024/02/25/Designing-Data-Intensive-Applications-Note-9/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -237,6 +246,15 @@
   
   <url>
     <loc>https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-6/</loc>
+    
+    <lastmod>2026-03-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/2024/02/24/Designing-Data-Intensive-Applications-Note-5/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -353,7 +371,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2024/02/23/Designing-Data-Intensive-Applications-Note-1/</loc>
+    <loc>https://umiao.github.io/2024/09/15/Data-Security-Training/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -362,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2024/09/15/Data-Security-Training/</loc>
+    <loc>https://umiao.github.io/2024/02/23/Designing-Data-Intensive-Applications-Note-1/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -380,7 +398,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/05/03/DS-Study-Note-8/</loc>
+    <loc>https://umiao.github.io/2022/05/25/DS-Study-Note-9/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -389,7 +407,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/05/25/DS-Study-Note-9/</loc>
+    <loc>https://umiao.github.io/2022/05/03/DS-Study-Note-8/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -479,7 +497,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2022/06/20/NLP-2/</loc>
+    <loc>https://umiao.github.io/2023/09/17/Name-of-Every-Keyboard-s-Key/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -488,7 +506,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2023/09/17/Name-of-Every-Keyboard-s-Key/</loc>
+    <loc>https://umiao.github.io/2022/06/20/NLP-2/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -506,7 +524,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2023/09/15/Learn-English-Vocabulary-by-Frequency/</loc>
+    <loc>https://umiao.github.io/2023/09/04/Make-Full-Use-of-Apple-Watch/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -515,7 +533,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/2023/09/04/Make-Full-Use-of-Apple-Watch/</loc>
+    <loc>https://umiao.github.io/2023/09/15/Learn-English-Vocabulary-by-Frequency/</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -596,14 +614,7 @@
 
   
   <url>
-    <loc>https://umiao.github.io/tags/Cyber-Security/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Software-Engineering/</loc>
+    <loc>https://umiao.github.io/tags/Research/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -631,27 +642,6 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/tags/Data-Science/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Machine-Learning/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Research/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://umiao.github.io/tags/Cake/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -673,6 +663,34 @@
   </url>
   
   <url>
+    <loc>https://umiao.github.io/tags/Data-Science/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Machine-Learning/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Cyber-Security/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Software-Engineering/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://umiao.github.io/tags/SVM/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -687,7 +705,14 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/tags/Random-Forest/</loc>
+    <loc>https://umiao.github.io/tags/Data-System/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Data-Security/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -708,20 +733,6 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/tags/Naive-Bayes/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Data-System/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://umiao.github.io/tags/Designing-Data-Intensive-Applications/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -729,42 +740,14 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/tags/Data-Security/</loc>
+    <loc>https://umiao.github.io/tags/Random-Forest/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://umiao.github.io/tags/English/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Vocabulary/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Word-Frequency/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Git/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Version-Control/</loc>
+    <loc>https://umiao.github.io/tags/Naive-Bayes/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -792,7 +775,35 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/tags/NLP/</loc>
+    <loc>https://umiao.github.io/tags/Git/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Version-Control/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/English/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Vocabulary/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Word-Frequency/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -806,28 +817,7 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/tags/Options/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Futures/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Trading/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/tags/Investment/</loc>
+    <loc>https://umiao.github.io/tags/NLP/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -856,6 +846,34 @@
   
   <url>
     <loc>https://umiao.github.io/tags/Object-Oriented-Design/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Options/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Futures/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Trading/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/tags/Investment/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -899,20 +917,6 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/categories/Job-Search/Software-Engineering/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://umiao.github.io/categories/Data-Science/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://umiao.github.io/categories/Research/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -927,14 +931,14 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/categories/Data-Science/General-Knowledge/</loc>
+    <loc>https://umiao.github.io/categories/Job-Search/Software-Engineering/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://umiao.github.io/categories/Data-Science/Data-System/</loc>
+    <loc>https://umiao.github.io/categories/Data-Science/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -955,6 +959,20 @@
   </url>
   
   <url>
+    <loc>https://umiao.github.io/categories/Data-Science/Data-System/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://umiao.github.io/categories/Data-Science/General-Knowledge/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://umiao.github.io/categories/Productivity/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -962,14 +980,14 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/categories/AI/</loc>
+    <loc>https://umiao.github.io/categories/UCLA/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://umiao.github.io/categories/UCLA/</loc>
+    <loc>https://umiao.github.io/categories/AI/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -990,14 +1008,14 @@
   </url>
   
   <url>
-    <loc>https://umiao.github.io/categories/AI/NLP/</loc>
+    <loc>https://umiao.github.io/categories/UCLA/Course-Study/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://umiao.github.io/categories/UCLA/Course-Study/</loc>
+    <loc>https://umiao.github.io/categories/AI/NLP/</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
