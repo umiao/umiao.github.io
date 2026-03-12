@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.1.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Essential security concepts covering common threats like SQL Injection, XSS, and OS Command Injection with practical prevention strategies.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Need-To-Knows For Software Security Engineer">
+<meta property="og:url" content="https://umiao.github.io/need-to-knows-for-software-security-engineer/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Essential security concepts covering common threats like SQL Injection, XSS, and OS Command Injection with practical prevention strategies.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://umiao.github.io/need-to-knows-for-software-security-engineer/cover.jpg">
+<meta property="og:image" content="https://umiao.github.io/need-to-knows-for-software-security-engineer/SQL.jpg">
+<meta property="article:published_time" content="2023-09-01T02:35:51.000Z">
+<meta property="article:modified_time" content="2026-03-12T08:27:51.342Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta property="article:tag" content="Cyber Security">
+<meta property="article:tag" content="Software Engineering">
+<meta property="article:tag" content="Certificate">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://umiao.github.io/need-to-knows-for-software-security-engineer/cover.jpg">
+
+
+<link rel="canonical" href="https://umiao.github.io/need-to-knows-for-software-security-engineer/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://umiao.github.io/need-to-knows-for-software-security-engineer/","path":"/need-to-knows-for-software-security-engineer/","title":"Need-To-Knows For Software Security Engineer"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Need-To-Knows For Software Security Engineer | The blog of Blur</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="The blog of Blur" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">The blog of Blur</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hearing the fall of snow.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-interview"><a href="/interview/" rel="section"><i class="fa fa-briefcase fa-fw"></i>interview</a></li><li class="menu-item menu-item-cheatsheets"><a href="/cheatsheet/" rel="section"><i class="fa fa-file-alt fa-fw"></i>cheatsheets</a></li><li class="menu-item menu-item-knowledge-map"><a href="/knowledge-map/" rel="section"><i class="fa fa-project-diagram fa-fw"></i>knowledge-map</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL-Injection"><span class="nav-number">1.</span> <span class="nav-text">SQL Injection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-of-attack"><span class="nav-number">1.1.</span> <span class="nav-text">Example of attack:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cross-Site-Scripting-XSS"><span class="nav-number">2.</span> <span class="nav-text">Cross-Site Scripting (XSS)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OS-Command-Injection"><span class="nav-number">3.</span> <span class="nav-text">OS Command Injection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weak-Session-Token-Generation"><span class="nav-number">4.</span> <span class="nav-text">Weak Session Token Generation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Missing-Function-Level-Access-Control"><span class="nav-number">5.</span> <span class="nav-text">Missing Function Level Access Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.0.1.</span> <span class="nav-text">Related Reading</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Blur - Shenghui Xu</p>
+  <div class="site-description" itemprop="description">Personal blog of blur.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/umiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;umiao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i>Facebook</a>
+      </span>
+  </div>
+
+
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+      
+    
+  
+    
+  
+  
+    
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+
+
+<div class="life-sidebar-widget">
+  <h3 class="life-widget-title" style="margin: 20px 0 10px; font-size: 14px; font-weight: 600; color: #555; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+    Life
+  </h3>
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    
+    <li style="margin-bottom: 8px; font-size: 13px;">
+      <a href="/2026/03/09/Cake-Inspiration-Gallery/" style="color: #555; text-decoration: none;">
+        Cake Inspiration Gallery
+      </a>
+      <span style="color: #999; font-size: 11px; display: block;">
+        2026-03-09
+      </span>
+    </li>
+    
+  </ul>
+</div>
+
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://umiao.github.io/need-to-knows-for-software-security-engineer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Blur - Shenghui Xu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The blog of Blur">
+      <meta itemprop="description" content="Personal blog of blur.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Need-To-Knows For Software Security Engineer | The blog of Blur">
+      <meta itemprop="description" content="Essential security concepts covering common threats like SQL Injection, XSS, and OS Command Injection with practical prevention strategies.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Need-To-Knows For Software Security Engineer
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-08-31 19:35:51" itemprop="dateCreated datePublished" datetime="2023-08-31T19:35:51-07:00">2023-08-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-12 01:27:51" itemprop="dateModified" datetime="2026-03-12T01:27:51-07:00">2026-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Job-Search/" itemprop="url" rel="index"><span itemprop="name">Job Search</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Job-Search/Software-Engineering/" itemprop="url" rel="index"><span itemprop="name">Software Engineering</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Essential security concepts covering common threats like SQL Injection, XSS, and OS Command Injection with practical prevention strategies.</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>This post covers common software &#x2F; cyber-security threats and preventions. Including SQL Injection, Cross-Site Scripting (XSS), OS Command Injection, Weak Session Token Generation and Missing Function Level Access Control.</p>
+<img src="/need-to-knows-for-software-security-engineer/cover.jpg" class="" title="Software Security Engineer guide cover: common threats and prevention strategies">
+<span id="more"></span>
+
+
+
+<h1 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h1><img src="/need-to-knows-for-software-security-engineer/SQL.jpg" class="" title="SQL_Injection_Concept_Demonstration">
+
+<h2 id="Example-of-attack"><a href="#Example-of-attack" class="headerlink" title="Example of attack:"></a>Example of attack:</h2><p><code>SELECT * FROM Users WHERE Username = ‘admin’ AND Password = abc’ OR 1=1;—</code></p>
+<blockquote>
+<p>Here, “abc’ OR 1&#x3D;1;—” is the constructed malicious input. ‘—’ (double dashes) states end of line.</p>
+</blockquote>
+<p><strong>Solution</strong>:<br>Use parameterized query:</p>
+<p><strong>Wrong Code</strong>:<br>Straight forward concatenation (trust user’s input as part of the SQL command).<br><code>VALUES (request_user_name “,” + request_user_age + “”)</code></p>
+<p><strong>Correct Code</strong>:<br><strong>Parametrized query</strong>:<br><code>insert_user = db.prepare “INSERT INTO users (name, age) VALUES (?, ?)” insert_user.execute (request_user_name, request_user_age).</code></p>
+<hr>
+<p><strong>Other ways of injection attack</strong>:</p>
+<ul>
+<li><strong>Union attack</strong>: use <code>UNION</code> to extend the results returned by the original query.<br>  It requires both queries to contain the same amount of columns.</li>
+</ul>
+<p>	</p>
+<p><strong>Conclusion</strong>:</p>
+<ol>
+<li>All popular dev frameworks have secure construction of db queries.</li>
+<li>Use allowlist validation on all user input. (e.g., ban the <code>‘</code>)</li>
+<li>Apply least privilege principle on all backend db users.</li>
+<li>Consider <code>GET</code> and <code>POST</code> parameters, Cookies and other HTTP headers.</li>
+</ol>
+<hr>
+<h1 id="Cross-Site-Scripting-XSS"><a href="#Cross-Site-Scripting-XSS" class="headerlink" title="Cross-Site Scripting (XSS)"></a>Cross-Site Scripting (XSS)</h1><p><strong>Example</strong>: (<a target="_blank" rel="noopener" href="https://bank.com/search.html?keyword=&#60;script&gt;document.Location=%E2%80%9Chttps://phising.com%E2%80%9D&#60;/script&gt;">https://bank.com/search.html?keyword=&#60;script&gt;document.Location=“https://phising.com”&#60;/script&gt;</a>)<br>The user recognized a valid and known host name is the URL, clicks on the link. Surfs to the URL.</p>
+<p>The website (<a target="_blank" rel="noopener" href="http://bank.com/">http://bank.com</a>) does not validate or encode the params before rendering &#x2F; reflecting it back to the user.<br>Then, the browser may execute the injected JavaScript and redirects the user to a phishing site, tricking them into submitting their passed.</p>
+<p><strong>Prevention</strong>: you should never trust the user input. All user input that is rendered on the application output should be validated or encoded.<br>The essential is that, if you do not validate the user input, the unescaped input would be displayed in an immediate response to the user. This would allow attacker to perform actions within the application on behalf of other users. Frameworks offer specific API calls to protect the application from XSS by HTML encoding untrusted user input. Cookies should be securely configured. Set the <code>HttpOnly</code> flag to prevent scripts from accessing them.</p>
+<p>Note that you should not mark strings as “safe”, e.g., <code>&#123;&#123;recipe_searched|safe&#125;&#125;</code>. Otherwise, the engine would escape the user input so that they would not got executed &#x2F; interpreted as html &#x2F; js. Eliminating such dangerous use cases can help prevent <em><strong>Cross-Site Scripting</strong></em>, which should be already well prevented by the dev framework.</p>
+<hr>
+<h1 id="OS-Command-Injection"><a href="#OS-Command-Injection" class="headerlink" title="OS Command Injection"></a>OS Command Injection</h1><p>Such vulnerability can happen when user controlled input, through parameters, cookies, http headers, etc are passed to the system shell without any prior validation.	</p>
+<p><strong>Example</strong>: url&#x2F;delete?fileToDelete&#x3D;aFile.txt;&amp;#183;rm -rf &#x2F;var&#x2F;www&amp;#183;<br>If the application simply appends the <code>GET</code> params to the command string, the malicious command would got executed.<br>Note that in this case, the command would run with the privilege of the running application.<br>Note that many of the characters needs to be “url encoded” in order to be transferred and parsed correctly.</p>
+<p><strong>Solution</strong>: Use framework specific API calls instead of OS commands, If not possible, validate all user controlled output against a white-list before passing to the shell. Note that you should apply least privilege to the application.<br>Also,!!! Never set <code>shell=True</code>. This would bypass the validation and have it executed in the shell directly.<br>You can make use of “check_output” to validate if the user provided part is a shell parameter. If not, then you should fail it.</p>
+<p><strong>Remote File Inclusion</strong><br>Open any file &#x2F; Include in the page makes the application vulnerable to remote file inclusion injection. An adversary could upload a malicious script to be executed on the client-side server.<br>You can specify it as “text&#x2F;plain” also set security policy to solve the issue.</p>
+<p><strong>File Traverse</strong><br>Using the URL GET parameter to open local files makes the application vulnerable to Path Traversal attacks.<br>An adversary could modify the image parameter path to include any server file in the application page (e.g. <code>?image=/etc/paswd</code>).</p>
+<p><strong>Solution</strong>: Remove file response. Also not open server files from URL Get Params.</p>
+<hr>
+<h1 id="Weak-Session-Token-Generation"><a href="#Weak-Session-Token-Generation" class="headerlink" title="Weak Session Token Generation"></a>Weak Session Token Generation</h1><p>If the generation is too weak, an attacker may easily associate to another active user’s session with constructed ID.</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>Use built-in session management functionalities, instead of inventing your own.</li>
+<li>Store the session ID in a cookie and then protect session cookies. This can be done by setting an expiry timestamp, path,<br>“secure” and “HttpOnly” flag and invalidate on logout.</li>
+<li>Session ID properties must be secure. Make them unpredictable, time limited and single session.<br>Use a secure communication channel.</li>
+</ol>
+<hr>
+<h1 id="Missing-Function-Level-Access-Control"><a href="#Missing-Function-Level-Access-Control" class="headerlink" title="Missing Function Level Access Control"></a>Missing Function Level Access Control</h1><p><strong>Definition</strong>: user can perform functions that they are not authorized for, or when resources can be accessed by unauthorized users.<br>When access checks have not been implemented, or when a protection mechanism exists but is not properly configured.</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>Protect all business functions using a role based authorization mechanism, implemented on the server side.</li>
+<li>Authorization should be applied using centralized routines, provided by the framework or external modules.</li>
+<li>Deny access by default. Use least privilege principle.</li>
+<li>Implement function access control on the server, never the client.</li>
+</ol>
+<style>
+.related-posts { margin: 2em 0 1em; }
+.related-posts h3 { margin-bottom: 0.5em; }
+.related-posts ul { list-style: disc; padding-left: 1.5em; }
+.related-posts li { margin: 0.3em 0; }
+</style>
+
+<div class="related-posts">
+<hr>
+<h3>Related Reading</h3>
+<ul>
+  <li><a href="/2024/09/15/Data-Security-Training/">Data & Cyber Security Training Notes</a></li>
+  <li><a href="/2022/09/05/Object-Oriented-Design/">Object Oriented Design -- Principles and Practices</a></li>
+</ul>
+</div>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Cyber-Security/" rel="tag"><i class="fa fa-tag"></i> Cyber Security</a>
+              <a href="/tags/Software-Engineering/" rel="tag"><i class="fa fa-tag"></i> Software Engineering</a>
+              <a href="/tags/Certificate/" rel="tag"><i class="fa fa-tag"></i> Certificate</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/09/05/Object-Oriented-Design/" rel="prev" title="Object Oriented Design -- Principles and Practices">
+                  <i class="fa fa-angle-left"></i> Object Oriented Design -- Principles and Practices
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/04/Make-Full-Use-of-Apple-Watch/" rel="next" title="Make Full Use of Apple Watch">
+                  Make Full Use of Apple Watch <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Blur - Shenghui Xu</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

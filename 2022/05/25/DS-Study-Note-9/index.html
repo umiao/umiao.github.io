@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="Study notes on Gradient Boosting Machine Tree models including GBM and XGBoost algorithms.">
 <meta property="og:type" content="article">
@@ -31,13 +31,13 @@
 <meta property="og:image" content="https://umiao.github.io/2022/05/25/DS-Study-Note-9/hist.png">
 <meta property="og:image" content="https://umiao.github.io/2022/05/25/DS-Study-Note-9/hist2.jpg">
 <meta property="article:published_time" content="2022-05-26T02:54:23.000Z">
-<meta property="article:modified_time" content="2026-03-10T01:09:06.998Z">
+<meta property="article:modified_time" content="2026-03-12T08:25:17.029Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="Data Science">
 <meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="GBM">
 <meta property="article:tag" content="XGBoost">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://umiao.github.io/2022/05/25/DS-Study-Note-9/theory.jpg">
 
 
@@ -125,7 +125,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-interview"><a href="/interview/" rel="section"><i class="fa fa-briefcase fa-fw"></i>interview</a></li><li class="menu-item menu-item-cheatsheets"><a href="/cheatsheet/" rel="section"><i class="fa fa-file-alt fa-fw"></i>cheatsheets</a></li><li class="menu-item menu-item-knowledge-map"><a href="/knowledge-map/" rel="section"><i class="fa fa-project-diagram fa-fw"></i>knowledge-map</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -176,7 +176,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Boosting-Machine-Tree"><span class="nav-number">1.</span> <span class="nav-text">Gradient Boosting Machine Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Primary-Feature"><span class="nav-number">2.</span> <span class="nav-text">Primary Feature</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Math-Theory"><span class="nav-number">3.</span> <span class="nav-text">Math Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GBDT-Gradient-Boosting-Decision-Tree-Algorithm"><span class="nav-number">4.</span> <span class="nav-text">GBDT (Gradient Boosting Decision Tree) Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">5.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XGBoost"><span class="nav-number">6.</span> <span class="nav-text">XGBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Math-Theory-1"><span class="nav-number">6.1.</span> <span class="nav-text">Math Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Taylor-Expansion"><span class="nav-number">6.1.1.</span> <span class="nav-text">Taylor Expansion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unfold-regularization-term"><span class="nav-number">6.1.2.</span> <span class="nav-text">Unfold regularization term</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Organize-the-objective-function"><span class="nav-number">6.1.3.</span> <span class="nav-text">Organize the objective function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimal-Solution"><span class="nav-number">6.1.4.</span> <span class="nav-text">Optimal Solution</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LightGBM"><span class="nav-number">7.</span> <span class="nav-text">LightGBM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">7.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference-from-XGBoost"><span class="nav-number">7.2.</span> <span class="nav-text">Difference from XGBoost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Histogram-Algorithm"><span class="nav-number">7.3.</span> <span class="nav-text">Histogram Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Acceleration-of-Histogram-via-finding-difference"><span class="nav-number">7.3.1.</span> <span class="nav-text">Acceleration of Histogram via finding difference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Leaf-wise-Algorithm-with-Depth-Limit"><span class="nav-number">7.3.2.</span> <span class="nav-text">Leaf-wise Algorithm with Depth Limit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GOSS-Gradient-Based-One-Side-Sampling"><span class="nav-number">7.4.</span> <span class="nav-text">GOSS - Gradient Based One-Side Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EFB-Exclusive-Feature-Bundling"><span class="nav-number">7.5.</span> <span class="nav-text">EFB - Exclusive Feature Bundling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Decide-which-features-to-bundle"><span class="nav-number">7.5.1.</span> <span class="nav-text">Decide which features to bundle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implement-the-bundling"><span class="nav-number">7.5.2.</span> <span class="nav-text">Implement the bundling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">7.6.</span> <span class="nav-text">Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Categorical-Feature"><span class="nav-number">7.6.1.</span> <span class="nav-text">Categorical Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Code"><span class="nav-number">7.6.2.</span> <span class="nav-text">Source Code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary-on-Bagging-and-Boosting"><span class="nav-number">8.</span> <span class="nav-text">Summary on Bagging and Boosting</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Boosting-Machine-Tree"><span class="nav-number">1.</span> <span class="nav-text">Gradient Boosting Machine Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Primary-Feature"><span class="nav-number">2.</span> <span class="nav-text">Primary Feature</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Math-Theory"><span class="nav-number">3.</span> <span class="nav-text">Math Theory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GBDT-Gradient-Boosting-Decision-Tree-Algorithm"><span class="nav-number">4.</span> <span class="nav-text">GBDT (Gradient Boosting Decision Tree) Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">5.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XGBoost"><span class="nav-number">6.</span> <span class="nav-text">XGBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Math-Theory-1"><span class="nav-number">6.1.</span> <span class="nav-text">Math Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Taylor-Expansion"><span class="nav-number">6.1.1.</span> <span class="nav-text">Taylor Expansion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unfold-regularization-term"><span class="nav-number">6.1.2.</span> <span class="nav-text">Unfold regularization term</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Organize-the-objective-function"><span class="nav-number">6.1.3.</span> <span class="nav-text">Organize the objective function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimal-Solution"><span class="nav-number">6.1.4.</span> <span class="nav-text">Optimal Solution</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LightGBM"><span class="nav-number">7.</span> <span class="nav-text">LightGBM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">7.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference-from-XGBoost"><span class="nav-number">7.2.</span> <span class="nav-text">Difference from XGBoost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Histogram-Algorithm"><span class="nav-number">7.3.</span> <span class="nav-text">Histogram Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Acceleration-of-Histogram-via-finding-difference"><span class="nav-number">7.3.1.</span> <span class="nav-text">Acceleration of Histogram via finding difference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Leaf-wise-Algorithm-with-Depth-Limit"><span class="nav-number">7.3.2.</span> <span class="nav-text">Leaf-wise Algorithm with Depth Limit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GOSS-Gradient-Based-One-Side-Sampling"><span class="nav-number">7.4.</span> <span class="nav-text">GOSS - Gradient Based One-Side Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EFB-Exclusive-Feature-Bundling"><span class="nav-number">7.5.</span> <span class="nav-text">EFB - Exclusive Feature Bundling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Decide-which-features-to-bundle"><span class="nav-number">7.5.1.</span> <span class="nav-text">Decide which features to bundle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implement-the-bundling"><span class="nav-number">7.5.2.</span> <span class="nav-text">Implement the bundling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">7.6.</span> <span class="nav-text">Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Categorical-Feature"><span class="nav-number">7.6.1.</span> <span class="nav-text">Categorical Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Code"><span class="nav-number">7.6.2.</span> <span class="nav-text">Source Code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary-on-Bagging-and-Boosting"><span class="nav-number">8.</span> <span class="nav-text">Summary on Bagging and Boosting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">8.0.1.</span> <span class="nav-text">Related Reading</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -215,6 +215,14 @@
   </div>
 
 
+
+  
+  
+    
+  
+    
+  
+  
 
   
   
@@ -472,65 +480,11 @@
   
     
   
-  
-
-  
-  
-    
-  
     
   
   
 
   
-  
-    
-  
-  
-
-  
-  
-    
-  
-    
-  
-    
-  
-  
-
-  
-  
-    
-  
-    
-  
-  
-
-  
-  
-    
-  
-    
-  
-  
-
-  
-  
-    
-  
-  
-
-  
-  
-    
-  
-    
-  
-  
-
-  
-  
-    
   
     
   
@@ -556,23 +510,11 @@
   
     
   
-  
-
-  
-  
-    
-  
-    
-  
-    
-  
     
   
   
 
   
-  
-    
   
     
   
@@ -588,7 +530,57 @@
   
     
   
+  
+
+  
+  
     
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
   
     
   
@@ -743,6 +735,46 @@
     
   
     
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
   
     
   
@@ -836,7 +868,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-09 18:09:06" itemprop="dateModified" datetime="2026-03-09T18:09:06-07:00">2026-03-09</time>
+      <time title="Modified: 2026-03-12 01:25:17" itemprop="dateModified" datetime="2026-03-12T01:25:17-07:00">2026-03-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -865,7 +897,7 @@
     <div class="post-body" itemprop="articleBody"><h1 id="Gradient-Boosting-Machine-Tree"><a href="#Gradient-Boosting-Machine-Tree" class="headerlink" title="Gradient Boosting Machine Tree"></a>Gradient Boosting Machine Tree</h1><p><strong>GBMTree</strong> stands for <strong>Gradient Boosting Machine Tree</strong>.</p>
 <span id="more"></span>
 <p>The idea is to train multiple serial <strong>weak</strong> learner, while the objective of each learner is to fit the <strong>negative</strong> gradient of the loss function of the previous cumulative model.<br>Thus, after this weak learner is attached, the loss of the new cumulative model shall be maximally reduced. Also, each base (weak) learner can be linearly combined with different weights (so that those learners with higher performance would contribute more to the result). A common implementation of the base learner is Tree Model (<em>e.g.</em>, Decision Tree).</p>
-<img src="/2022/05/25/DS-Study-Note-9/theory.jpg" class="" title="ML_note">
+<img src="/2022/05/25/DS-Study-Note-9/theory.jpg" class="" title="DS Study Note 9 cover: Gradient Boosting Machine Tree theory">
 
 <h1 id="Primary-Feature"><a href="#Primary-Feature" class="headerlink" title="Primary Feature"></a>Primary Feature</h1><p>The primary feature of GBM (Gradient Bossting Machine) is that, it conduct <strong>Gradient Descent</strong> in the space of function, instead of the space of model parameters (e.g., Neural Network calculates the gradient of current loss to the model parameters for update).</p>
 <p>In Gradient Boosting, in each iteration, a weak learner is generated via <strong>fitting the negative gradient</strong> of loss function to the cumulative model formed by the learners generated before (this means that the previous model is left <strong>unchanged</strong>). Then, the current weak learner is added to the cumulative model to reduce the loss.</p>
@@ -917,11 +949,11 @@
 </ol>
 <h2 id="Histogram-Algorithm"><a href="#Histogram-Algorithm" class="headerlink" title="Histogram Algorithm"></a>Histogram Algorithm</h2><p><strong>Histogram Algorithm</strong> is proposed to substitute the <strong>pre-sorted algorithm</strong> of <strong>XGBoost</strong>. The pre-sorted algorithm would first sort the samples according to their feature values, then find the optimal split point from all the possible feature values. Thus, for each feature, the number of candidate split points is proportional to the <strong>number of samples</strong>.</p>
 <p>At the same time, <strong>Histogram Algorithm</strong> would discretize the continuous feature values into a constant number (<em>e.g.</em>, 255) of bins. Thus, the candidate split points would reduce to <strong>(num_bins - 1)</strong> from <strong>(num_unique_values - 1)</strong>.</p>
-<img src="/2022/05/25/DS-Study-Note-9/hist.png" class="" title="ML_note">
+<img src="/2022/05/25/DS-Study-Note-9/hist.png" class="" title="LightGBM histogram algorithm discretizing feature values into bins">
 
 <p>With this manner, instead of storing the feature values with <code>float_32</code>, we can now use <code>uint_8</code> to store the index of bucket (with hash algorithm). At the same time, there comes the tradeoff of <strong>losing accuracy</strong> to <strong>raise efficiency</strong> </p>
 <ul>
-<li>(However, single Decision Tree itself is a weak model, it is not that important for the split points to be accurate. Coarse split points may have the <strong>regularization</strong> effect and the result can <strong>stay robust</strong> under Gradient Boosting framework.).<h3 id="Acceleration-of-Histogram-via-finding-difference"><a href="#Acceleration-of-Histogram-via-finding-difference" class="headerlink" title="Acceleration of Histogram via finding difference"></a>Acceleration of Histogram via finding difference</h3>The histogram of a leaf can be found by solving the difference of its father node’s histogram and its brother’s histogram. <strong>LightGBM</strong> can solve the histogram of a leaf node (with small sample number) and quickly find the histogram of its brother.<img src="/2022/05/25/DS-Study-Note-9/hist2.jpg" class="" title="ML_note"></li>
+<li>(However, single Decision Tree itself is a weak model, it is not that important for the split points to be accurate. Coarse split points may have the <strong>regularization</strong> effect and the result can <strong>stay robust</strong> under Gradient Boosting framework.).<h3 id="Acceleration-of-Histogram-via-finding-difference"><a href="#Acceleration-of-Histogram-via-finding-difference" class="headerlink" title="Acceleration of Histogram via finding difference"></a>Acceleration of Histogram via finding difference</h3>The histogram of a leaf can be found by solving the difference of its father node’s histogram and its brother’s histogram. <strong>LightGBM</strong> can solve the histogram of a leaf node (with small sample number) and quickly find the histogram of its brother.<img src="/2022/05/25/DS-Study-Note-9/hist2.jpg" class="" title="LightGBM histogram acceleration via difference of sibling leaf histograms"></li>
 </ul>
 <p>It should be noted that <strong>XGB</strong> and <strong>LightGBM</strong> only consider non-zero values.</p>
 <h3 id="Leaf-wise-Algorithm-with-Depth-Limit"><a href="#Leaf-wise-Algorithm-with-Depth-Limit" class="headerlink" title="Leaf-wise Algorithm with Depth Limit"></a>Leaf-wise Algorithm with Depth Limit</h3><p>Most GBDT algorithms use the <strong>level-wise</strong> grow strategy, <em>i.e.</em>, all the leave nodes in the same level would be splitted, under a single traverse (then <strong>post-pruning</strong> would be executed). It is friendly for multi-thread optimization, controlling of model complexity and resist over-fitting. However, for many leaves, the <strong>split gain</strong> is very <strong>low</strong> and result in useless computational overhead. </p>
@@ -957,6 +989,40 @@
 <li><p><strong>Essence</strong>:<br> <strong>Bagging</strong>: Reduce variance (via voting).<br> <strong>Boosting</strong>: Reduce bias.</p>
 </li>
 </ol>
+<style>
+.related-posts { margin: 2em 0 1em; }
+.related-posts h3 { margin-bottom: 0.5em; }
+.related-posts ul { list-style: disc; padding-left: 1.5em; }
+.related-posts li { margin: 0.3em 0; }
+</style>
+
+<div class="related-posts">
+<hr>
+<h3>Related Reading</h3>
+<ul>
+  <li><a href="/2022/05/03/DS-Study-Note-8/">DS-Study-Note-8 Random Forest</a></li>
+  <li><a href="/2022/04/22/DS-Study-Note-1/">DS-Study-Note-1 Overfitting and Brief Introduction on Decomposition and Regularization</a></li>
+  <li><a href="/2022/04/23/DS-Study-Note-2/">DS-Study-Note-2 Bias VS Variance</a></li>
+  <li><a href="/2022/04/26/DS-Study-Note-3/">DS-Study-Note-3 Dimension Curse</a></li>
+  <li><a href="/2022/04/26/DS-Study-Note-4/">DS-Study-Note-4 Metrics</a></li>
+</ul>
+</div>
+<style>
+.series-nav { margin: 2em 0 1em; }
+.series-nav-title { margin-bottom: 0.5em; }
+.series-nav-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5em; }
+.series-nav-prev, .series-nav-next { max-width: 48%; }
+.series-nav-next { text-align: right; margin-left: auto; }
+</style>
+
+<div class="series-nav">
+<hr>
+<p class="series-nav-title"><strong>Data Science Series</strong> (Part 9 of 9)</p>
+<div class="series-nav-links">
+  <span class="series-nav-prev">&larr; <a href="/2022/05/03/DS-Study-Note-8/">Part 8: DS-Study-Note-8 Random Forest</a></span>
+  <span class="series-nav-next"></span>
+</div>
+</div>
 
     </div>
 

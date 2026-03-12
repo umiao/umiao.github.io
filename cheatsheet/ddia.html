@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.1.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Designing Data-Intensive Applications – Quick ReferenceA condensed reference of all 19 DDIA study notes. Use this for interview prep and concept review.  1. Foundations (Notes 1-3)Three Pillars of Dat">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DDIA Cheat Sheet">
+<meta property="og:url" content="https://umiao.github.io/cheatsheet/ddia.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="Designing Data-Intensive Applications – Quick ReferenceA condensed reference of all 19 DDIA study notes. Use this for interview prep and concept review.  1. Foundations (Notes 1-3)Three Pillars of Dat">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-12T07:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-12T08:53:26.605Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta name="twitter:card" content="summary_large_image">
+
+
+<link rel="canonical" href="https://umiao.github.io/cheatsheet/ddia">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"https://umiao.github.io/cheatsheet/ddia.html","path":"cheatsheet/ddia.html","title":"DDIA Cheat Sheet"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>DDIA Cheat Sheet | The blog of Blur
+</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="The blog of Blur" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">The blog of Blur</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hearing the fall of snow.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-interview"><a href="/interview/" rel="section"><i class="fa fa-briefcase fa-fw"></i>interview</a></li><li class="menu-item menu-item-cheatsheets"><a href="/cheatsheet/" rel="section"><i class="fa fa-file-alt fa-fw"></i>cheatsheets</a></li><li class="menu-item menu-item-knowledge-map"><a href="/knowledge-map/" rel="section"><i class="fa fa-project-diagram fa-fw"></i>knowledge-map</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Designing-Data-Intensive-Applications-%E2%80%93-Quick-Reference"><span class="nav-number">1.</span> <span class="nav-text">Designing Data-Intensive Applications – Quick Reference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Foundations-Notes-1-3"><span class="nav-number">1.1.</span> <span class="nav-text">1. Foundations (Notes 1-3)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Three-Pillars-of-Data-Systems"><span class="nav-number">1.1.1.</span> <span class="nav-text">Three Pillars of Data Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Measuring-Performance"><span class="nav-number">1.1.2.</span> <span class="nav-text">Measuring Performance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Data-Models-amp-Query-Languages-Note-4"><span class="nav-number">1.2.</span> <span class="nav-text">2. Data Models &amp; Query Languages (Note 4)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Storage-Engines-Notes-5-6"><span class="nav-number">1.3.</span> <span class="nav-text">3. Storage Engines (Notes 5-6)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LSM-Tree-vs-B-Tree"><span class="nav-number">1.3.1.</span> <span class="nav-text">LSM-Tree vs B-Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Index-Types"><span class="nav-number">1.3.2.</span> <span class="nav-text">Index Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Memory-Databases"><span class="nav-number">1.3.3.</span> <span class="nav-text">In-Memory Databases</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-OLTP-vs-OLAP-Note-7"><span class="nav-number">1.4.</span> <span class="nav-text">4. OLTP vs OLAP (Note 7)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Encoding-amp-Schema-Evolution-Note-8"><span class="nav-number">1.5.</span> <span class="nav-text">5. Encoding &amp; Schema Evolution (Note 8)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Data-Flow-Patterns-Note-9"><span class="nav-number">1.6.</span> <span class="nav-text">6. Data Flow Patterns (Note 9)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Replication-Notes-10-13"><span class="nav-number">1.7.</span> <span class="nav-text">7. Replication (Notes 10-13)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication-Strategies"><span class="nav-number">1.7.1.</span> <span class="nav-text">Replication Strategies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication-Lag-Problems-amp-Solutions"><span class="nav-number">1.7.2.</span> <span class="nav-text">Replication Lag Problems &amp; Solutions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication-Log-Types"><span class="nav-number">1.7.3.</span> <span class="nav-text">Replication Log Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quorum-Formula"><span class="nav-number">1.7.4.</span> <span class="nav-text">Quorum Formula</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conflict-Resolution-Multi-leader-x2F-Leaderless"><span class="nav-number">1.7.5.</span> <span class="nav-text">Conflict Resolution (Multi-leader &#x2F; Leaderless)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chain-Replication-CRAQ"><span class="nav-number">1.7.6.</span> <span class="nav-text">Chain Replication (CRAQ)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Partitioning-x2F-Sharding-Note-14"><span class="nav-number">1.8.</span> <span class="nav-text">8. Partitioning &#x2F; Sharding (Note 14)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Secondary-Indexes-on-Partitions"><span class="nav-number">1.8.1.</span> <span class="nav-text">Secondary Indexes on Partitions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rebalancing-Approaches"><span class="nav-number">1.8.2.</span> <span class="nav-text">Rebalancing Approaches</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Transactions-Note-15"><span class="nav-number">1.9.</span> <span class="nav-text">9. Transactions (Note 15)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID-vs-BASE"><span class="nav-number">1.9.1.</span> <span class="nav-text">ACID vs BASE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Isolation-Levels"><span class="nav-number">1.9.2.</span> <span class="nav-text">Isolation Levels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serializability-Implementations"><span class="nav-number">1.9.3.</span> <span class="nav-text">Serializability Implementations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Preventing-Lost-Updates"><span class="nav-number">1.9.4.</span> <span class="nav-text">Preventing Lost Updates</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Distributed-System-Challenges-Note-16"><span class="nav-number">1.10.</span> <span class="nav-text">10. Distributed System Challenges (Note 16)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unreliable-Components"><span class="nav-number">1.10.1.</span> <span class="nav-text">Unreliable Components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-Models"><span class="nav-number">1.10.2.</span> <span class="nav-text">System Models</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Consensus-amp-Linearizability-Note-17"><span class="nav-number">1.11.</span> <span class="nav-text">11. Consensus &amp; Linearizability (Note 17)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linearizability-vs-Serializability"><span class="nav-number">1.11.1.</span> <span class="nav-text">Linearizability vs Serializability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAP-Theorem-Simplified"><span class="nav-number">1.11.2.</span> <span class="nav-text">CAP Theorem (Simplified)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Two-Phase-Commit-2PC"><span class="nav-number">1.11.3.</span> <span class="nav-text">Two-Phase Commit (2PC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consensus-Algorithms"><span class="nav-number">1.11.4.</span> <span class="nav-text">Consensus Algorithms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ordering-amp-Causality"><span class="nav-number">1.11.5.</span> <span class="nav-text">Ordering &amp; Causality</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-Batch-Processing-Note-18"><span class="nav-number">1.12.</span> <span class="nav-text">12. Batch Processing (Note 18)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unix-Philosophy-Applied-to-Data"><span class="nav-number">1.12.1.</span> <span class="nav-text">Unix Philosophy Applied to Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MapReduce-Pipeline"><span class="nav-number">1.12.2.</span> <span class="nav-text">MapReduce Pipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Join-Strategies"><span class="nav-number">1.12.3.</span> <span class="nav-text">Join Strategies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MapReduce-vs-Dataflow-Engines-Spark-Flink-Tez"><span class="nav-number">1.12.4.</span> <span class="nav-text">MapReduce vs Dataflow Engines (Spark, Flink, Tez)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-Stream-Processing-Note-19"><span class="nav-number">1.13.</span> <span class="nav-text">13. Stream Processing (Note 19)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Message-Delivery-Models"><span class="nav-number">1.13.1.</span> <span class="nav-text">Message Delivery Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Window-Types-for-Aggregation"><span class="nav-number">1.13.2.</span> <span class="nav-text">Window Types for Aggregation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-Joins"><span class="nav-number">1.13.3.</span> <span class="nav-text">Stream Joins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Change-Data-Capture-CDC"><span class="nav-number">1.13.4.</span> <span class="nav-text">Change Data Capture (CDC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exactly-Once-Semantics"><span class="nav-number">1.13.5.</span> <span class="nav-text">Exactly-Once Semantics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Sourcing"><span class="nav-number">1.13.6.</span> <span class="nav-text">Event Sourcing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Decision-Guide"><span class="nav-number">1.14.</span> <span class="nav-text">Quick Decision Guide</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Blur - Shenghui Xu</p>
+  <div class="site-description" itemprop="description">Personal blog of blur.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/umiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;umiao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i>Facebook</a>
+      </span>
+  </div>
+
+
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+      
+    
+  
+    
+  
+  
+    
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+
+
+<div class="life-sidebar-widget">
+  <h3 class="life-widget-title" style="margin: 20px 0 10px; font-size: 14px; font-weight: 600; color: #555; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+    Life
+  </h3>
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    
+    <li style="margin-bottom: 8px; font-size: 13px;">
+      <a href="/2026/03/09/Cake-Inspiration-Gallery/" style="color: #555; text-decoration: none;">
+        Cake Inspiration Gallery
+      </a>
+      <span style="color: #999; font-size: 11px; display: block;">
+        2026-03-09
+      </span>
+    </li>
+    
+  </ul>
+</div>
+
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">DDIA Cheat Sheet
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="Designing-Data-Intensive-Applications-–-Quick-Reference"><a href="#Designing-Data-Intensive-Applications-–-Quick-Reference" class="headerlink" title="Designing Data-Intensive Applications – Quick Reference"></a>Designing Data-Intensive Applications – Quick Reference</h1><p>A condensed reference of all 19 DDIA study notes. Use this for interview prep and concept review.</p>
+<hr>
+<h2 id="1-Foundations-Notes-1-3"><a href="#1-Foundations-Notes-1-3" class="headerlink" title="1. Foundations (Notes 1-3)"></a>1. Foundations (Notes 1-3)</h2><h3 id="Three-Pillars-of-Data-Systems"><a href="#Three-Pillars-of-Data-Systems" class="headerlink" title="Three Pillars of Data Systems"></a>Three Pillars of Data Systems</h3><table>
+<thead>
+<tr>
+<th>Pillar</th>
+<th>Goal</th>
+<th>Key Techniques</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Reliability</td>
+<td>System works correctly despite faults</td>
+<td>Redundancy (HW&#x2F;SW), process isolation, crash-restart, monitoring</td>
+</tr>
+<tr>
+<td>Scalability</td>
+<td>Handle growing load gracefully</td>
+<td>Horizontal scaling, caching, fan-out strategies</td>
+</tr>
+<tr>
+<td>Maintainability</td>
+<td>Easy to operate, understand, evolve</td>
+<td>Good abstractions, monitoring, automation, simple design</td>
+</tr>
+</tbody></table>
+<p><strong>Fault vs Failure</strong>: A fault is a component deviation; a failure is system-wide service loss.</p>
+<h3 id="Measuring-Performance"><a href="#Measuring-Performance" class="headerlink" title="Measuring Performance"></a>Measuring Performance</h3><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>What It Tells You</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>p50 (median)</td>
+<td>Typical user experience</td>
+</tr>
+<tr>
+<td>p95</td>
+<td>Worst case for 1 in 20 requests</td>
+</tr>
+<tr>
+<td>p99</td>
+<td>Tail latency; important for SLAs</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Use <strong>percentiles</strong>, not averages, for response time</li>
+<li><strong>Head-of-line blocking</strong>: one slow request delays all queued behind it</li>
+<li><strong>Fan-out-on-write</strong> (precompute) vs <strong>fan-out-on-read</strong> (compute at read time)</li>
+</ul>
+<hr>
+<h2 id="2-Data-Models-amp-Query-Languages-Note-4"><a href="#2-Data-Models-amp-Query-Languages-Note-4" class="headerlink" title="2. Data Models &amp; Query Languages (Note 4)"></a>2. Data Models &amp; Query Languages (Note 4)</h2><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Best For</th>
+<th>Weakness</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Relational</td>
+<td>Many-to-many relationships, joins</td>
+<td>Schema rigidity, impedance mismatch</td>
+</tr>
+<tr>
+<td>Document (JSON)</td>
+<td>Self-contained records, nested data</td>
+<td>Poor joins, deep nesting limits</td>
+</tr>
+<tr>
+<td>Graph</td>
+<td>Relationships as important as entities</td>
+<td>Complexity, fewer mature tools</td>
+</tr>
+</tbody></table>
+<p><strong>Query Paradigms</strong>: Declarative (SQL) &gt; Imperative (IMS) for optimization. MapReduce sits between (pure functions, no side effects).</p>
+<hr>
+<h2 id="3-Storage-Engines-Notes-5-6"><a href="#3-Storage-Engines-Notes-5-6" class="headerlink" title="3. Storage Engines (Notes 5-6)"></a>3. Storage Engines (Notes 5-6)</h2><h3 id="LSM-Tree-vs-B-Tree"><a href="#LSM-Tree-vs-B-Tree" class="headerlink" title="LSM-Tree vs B-Tree"></a>LSM-Tree vs B-Tree</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>LSM-Tree</th>
+<th>B-Tree</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Optimized for</td>
+<td>Writes (sequential I&#x2F;O)</td>
+<td>Reads (in-place updates)</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>Memtable + SSTables on disk</td>
+<td>Fixed-size pages (4KB), branching factor ~500</td>
+</tr>
+<tr>
+<td>Compaction</td>
+<td>Background merge of sorted runs</td>
+<td>Page splits on overflow</td>
+</tr>
+<tr>
+<td>Write amplification</td>
+<td>From compaction</td>
+<td>From WAL + page writes</td>
+</tr>
+<tr>
+<td>Crash recovery</td>
+<td>WAL + memtable rebuild</td>
+<td>WAL replay</td>
+</tr>
+</tbody></table>
+<h3 id="Index-Types"><a href="#Index-Types" class="headerlink" title="Index Types"></a>Index Types</h3><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hash index</td>
+<td>Exact key lookup (in-memory)</td>
+</tr>
+<tr>
+<td>B-tree &#x2F; B+ tree</td>
+<td>Range queries, general purpose</td>
+</tr>
+<tr>
+<td>LSM + Bloom filter</td>
+<td>Write-heavy with occasional reads</td>
+</tr>
+<tr>
+<td>R-tree</td>
+<td>Geospatial &#x2F; multi-dimensional</td>
+</tr>
+<tr>
+<td>Full-text (Lucene)</td>
+<td>Synonym, proximity, fuzzy search</td>
+</tr>
+<tr>
+<td>Clustered index</td>
+<td>Frequent primary key lookups (stores row in index)</td>
+</tr>
+<tr>
+<td>Covering index</td>
+<td>Query answered entirely from index</td>
+</tr>
+</tbody></table>
+<h3 id="In-Memory-Databases"><a href="#In-Memory-Databases" class="headerlink" title="In-Memory Databases"></a>In-Memory Databases</h3><ul>
+<li>Faster not because they avoid disk reads (OS caches anyway) but because they skip encoding overhead</li>
+<li>Enable data structures hard on disk: priority queues, sets (Redis)</li>
+</ul>
+<hr>
+<h2 id="4-OLTP-vs-OLAP-Note-7"><a href="#4-OLTP-vs-OLAP-Note-7" class="headerlink" title="4. OLTP vs OLAP (Note 7)"></a>4. OLTP vs OLAP (Note 7)</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>OLTP</th>
+<th>OLAP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Query pattern</td>
+<td>Small reads&#x2F;writes by key</td>
+<td>Aggregate scans over many rows</td>
+</tr>
+<tr>
+<td>Users</td>
+<td>End users via application</td>
+<td>Internal analysts</td>
+</tr>
+<tr>
+<td>Data size</td>
+<td>GB-TB</td>
+<td>TB-PB</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Row-oriented</td>
+<td>Column-oriented (Parquet)</td>
+</tr>
+</tbody></table>
+<p><strong>Star Schema</strong>: Central fact table (events) + dimension tables (who&#x2F;what&#x2F;where&#x2F;when&#x2F;why).</p>
+<p><strong>Column Storage Optimizations</strong>: Bitmap encoding, run-length encoding, sort order as index, vectorized processing (SIMD), materialized aggregates &#x2F; OLAP cubes.</p>
+<hr>
+<h2 id="5-Encoding-amp-Schema-Evolution-Note-8"><a href="#5-Encoding-amp-Schema-Evolution-Note-8" class="headerlink" title="5. Encoding &amp; Schema Evolution (Note 8)"></a>5. Encoding &amp; Schema Evolution (Note 8)</h2><table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Schema</th>
+<th>Size</th>
+<th>Evolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSON&#x2F;XML</td>
+<td>Optional</td>
+<td>Verbose</td>
+<td>Flexible but no guarantees</td>
+</tr>
+<tr>
+<td>Protocol Buffers</td>
+<td>Required (field tags)</td>
+<td>Compact (varint)</td>
+<td>Add optional fields; never reuse deleted tags</td>
+</tr>
+<tr>
+<td>Avro</td>
+<td>Writer + Reader schemas</td>
+<td>Most compact</td>
+<td>Match by field name; add&#x2F;remove fields with defaults</td>
+</tr>
+<tr>
+<td>Thrift</td>
+<td>Required (field tags)</td>
+<td>Compact</td>
+<td>Similar to Protobuf</td>
+</tr>
+</tbody></table>
+<p><strong>Compatibility Rules</strong>:</p>
+<ul>
+<li><strong>Backward</strong>: New code reads old data (add optional fields with defaults)</li>
+<li><strong>Forward</strong>: Old code reads new data (ignore unknown fields)</li>
+</ul>
+<hr>
+<h2 id="6-Data-Flow-Patterns-Note-9"><a href="#6-Data-Flow-Patterns-Note-9" class="headerlink" title="6. Data Flow Patterns (Note 9)"></a>6. Data Flow Patterns (Note 9)</h2><table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REST</td>
+<td>Simple, good tooling, cacheable</td>
+<td>Synchronous, coupled</td>
+</tr>
+<tr>
+<td>RPC</td>
+<td>Looks like local call</td>
+<td>Network is NOT local (timeouts, retries, type mismatches)</td>
+</tr>
+<tr>
+<td>Message Broker</td>
+<td>Decoupled, buffered, redelivery</td>
+<td>Added infrastructure complexity</td>
+</tr>
+<tr>
+<td>Actor Model</td>
+<td>No shared state, location transparent</td>
+<td>Learning curve, migration complexity</td>
+</tr>
+</tbody></table>
+<p><strong>RPC pitfalls</strong>: Network unpredictable, requests may execute multiple times, large objects serialize poorly. Design idempotent operations.</p>
+<hr>
+<h2 id="7-Replication-Notes-10-13"><a href="#7-Replication-Notes-10-13" class="headerlink" title="7. Replication (Notes 10-13)"></a>7. Replication (Notes 10-13)</h2><h3 id="Replication-Strategies"><a href="#Replication-Strategies" class="headerlink" title="Replication Strategies"></a>Replication Strategies</h3><table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Writes</th>
+<th>Consistency</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Single-leader</td>
+<td>Leader only</td>
+<td>Strong (if sync)</td>
+<td>Default for most systems</td>
+</tr>
+<tr>
+<td>Multi-leader</td>
+<td>Multiple leaders</td>
+<td>Eventual</td>
+<td>Multi-datacenter, offline clients</td>
+</tr>
+<tr>
+<td>Leaderless (Dynamo)</td>
+<td>Any node</td>
+<td>Configurable (quorum)</td>
+<td>High availability, partition tolerance</td>
+</tr>
+</tbody></table>
+<h3 id="Replication-Lag-Problems-amp-Solutions"><a href="#Replication-Lag-Problems-amp-Solutions" class="headerlink" title="Replication Lag Problems &amp; Solutions"></a>Replication Lag Problems &amp; Solutions</h3><table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Symptom</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read-after-write</td>
+<td>User doesn’t see own update</td>
+<td>Read from leader for recently-modified data</td>
+</tr>
+<tr>
+<td>Monotonic reads</td>
+<td>Data appears to go backward</td>
+<td>Route same user to same replica</td>
+</tr>
+<tr>
+<td>Consistent prefix</td>
+<td>Effect before cause</td>
+<td>Keep causally-related writes on same partition</td>
+</tr>
+</tbody></table>
+<h3 id="Replication-Log-Types"><a href="#Replication-Log-Types" class="headerlink" title="Replication Log Types"></a>Replication Log Types</h3><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Mechanism</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Statement-based</td>
+<td>Forward SQL statements</td>
+<td>Breaks with RAND(), NOW(), triggers</td>
+</tr>
+<tr>
+<td>WAL shipping</td>
+<td>Send storage engine log</td>
+<td>Couples to storage format; blocks version upgrades</td>
+</tr>
+<tr>
+<td>Logical (row-based)</td>
+<td>Row-level change log</td>
+<td>Decoupled; enables zero-downtime upgrades</td>
+</tr>
+<tr>
+<td>Trigger-based</td>
+<td>Application-level hooks</td>
+<td>Flexible but slow and error-prone</td>
+</tr>
+</tbody></table>
+<h3 id="Quorum-Formula"><a href="#Quorum-Formula" class="headerlink" title="Quorum Formula"></a>Quorum Formula</h3><p><strong>w + r &gt; n</strong> guarantees overlap for reading latest write. Sloppy quorum + hinted handoff trades consistency for availability.</p>
+<h3 id="Conflict-Resolution-Multi-leader-x2F-Leaderless"><a href="#Conflict-Resolution-Multi-leader-x2F-Leaderless" class="headerlink" title="Conflict Resolution (Multi-leader &#x2F; Leaderless)"></a>Conflict Resolution (Multi-leader &#x2F; Leaderless)</h3><table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>How It Works</th>
+<th>Data Loss?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Last-Write-Wins (LWW)</td>
+<td>Highest timestamp wins</td>
+<td>Yes (concurrent writes lost)</td>
+</tr>
+<tr>
+<td>Version Vectors</td>
+<td>Track causality per replica</td>
+<td>No (keeps siblings)</td>
+</tr>
+<tr>
+<td>CRDTs</td>
+<td>Auto-merge data structures</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Operational Transform</td>
+<td>3-way merge (Google Docs)</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<h3 id="Chain-Replication-CRAQ"><a href="#Chain-Replication-CRAQ" class="headerlink" title="Chain Replication (CRAQ)"></a>Chain Replication (CRAQ)</h3><p>HEAD receives writes, propagates down chain, TAIL confirms. Any node serves reads (version vector + tail check). Tolerates n-1 failures.</p>
+<hr>
+<h2 id="8-Partitioning-x2F-Sharding-Note-14"><a href="#8-Partitioning-x2F-Sharding-Note-14" class="headerlink" title="8. Partitioning &#x2F; Sharding (Note 14)"></a>8. Partitioning &#x2F; Sharding (Note 14)</h2><table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Key range</td>
+<td>Efficient range queries</td>
+<td>Hot spots on sequential keys</td>
+</tr>
+<tr>
+<td>Hash of key</td>
+<td>Even distribution</td>
+<td>No range queries</td>
+</tr>
+<tr>
+<td>Compound key</td>
+<td>Hash first part, range on rest</td>
+<td>Application must design key</td>
+</tr>
+</tbody></table>
+<h3 id="Secondary-Indexes-on-Partitions"><a href="#Secondary-Indexes-on-Partitions" class="headerlink" title="Secondary Indexes on Partitions"></a>Secondary Indexes on Partitions</h3><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Write</th>
+<th>Read</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Document-partitioned (local)</td>
+<td>Fast (update local index)</td>
+<td>Scatter&#x2F;gather across all partitions</td>
+</tr>
+<tr>
+<td>Term-partitioned (global)</td>
+<td>Slow (distributed transaction)</td>
+<td>Single partition read</td>
+</tr>
+</tbody></table>
+<h3 id="Rebalancing-Approaches"><a href="#Rebalancing-Approaches" class="headerlink" title="Rebalancing Approaches"></a>Rebalancing Approaches</h3><ul>
+<li><strong>Fixed partitions</strong>: More partitions than nodes; move whole partitions</li>
+<li><strong>Dynamic</strong>: Split&#x2F;merge based on size (HBase)</li>
+<li><strong>Proportional</strong>: Fixed partitions per node; new node splits random existing</li>
+</ul>
+<p><strong>Request Routing</strong>: (1) Any node forwards, (2) Routing tier, (3) Client-aware. ZooKeeper for coordination.</p>
+<hr>
+<h2 id="9-Transactions-Note-15"><a href="#9-Transactions-Note-15" class="headerlink" title="9. Transactions (Note 15)"></a>9. Transactions (Note 15)</h2><h3 id="ACID-vs-BASE"><a href="#ACID-vs-BASE" class="headerlink" title="ACID vs BASE"></a>ACID vs BASE</h3><table>
+<thead>
+<tr>
+<th>ACID</th>
+<th>BASE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Atomicity, Consistency, Isolation, Durability</td>
+<td>Basically Available, Soft state, Eventual consistency</td>
+</tr>
+<tr>
+<td>Strong guarantees, higher cost</td>
+<td>Weaker guarantees, higher availability</td>
+</tr>
+</tbody></table>
+<h3 id="Isolation-Levels"><a href="#Isolation-Levels" class="headerlink" title="Isolation Levels"></a>Isolation Levels</h3><table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Dirty Read</th>
+<th>Non-repeatable Read</th>
+<th>Phantom Read</th>
+<th>Performance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read Uncommitted</td>
+<td>Possible</td>
+<td>Possible</td>
+<td>Possible</td>
+<td>Fastest</td>
+</tr>
+<tr>
+<td>Read Committed</td>
+<td>Prevented</td>
+<td>Possible</td>
+<td>Possible</td>
+<td>Good</td>
+</tr>
+<tr>
+<td>Snapshot Isolation (MVCC)</td>
+<td>Prevented</td>
+<td>Prevented</td>
+<td>Possible</td>
+<td>Good</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td>Prevented</td>
+<td>Prevented</td>
+<td>Prevented</td>
+<td>Slowest</td>
+</tr>
+</tbody></table>
+<h3 id="Serializability-Implementations"><a href="#Serializability-Implementations" class="headerlink" title="Serializability Implementations"></a>Serializability Implementations</h3><table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>How</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Serial execution</td>
+<td>Single-threaded, stored procedures</td>
+<td>Simple but limited throughput</td>
+</tr>
+<tr>
+<td>Two-Phase Locking (2PL)</td>
+<td>Shared&#x2F;exclusive locks held until commit</td>
+<td>Deadlock risk, high contention</td>
+</tr>
+<tr>
+<td>SSI (Serializable Snapshot Isolation)</td>
+<td>Optimistic; abort on stale read detection</td>
+<td>Best performance; abort overhead</td>
+</tr>
+</tbody></table>
+<h3 id="Preventing-Lost-Updates"><a href="#Preventing-Lost-Updates" class="headerlink" title="Preventing Lost Updates"></a>Preventing Lost Updates</h3><ul>
+<li><strong>Atomic operations</strong>: <code>UPDATE t SET v = v + 1</code></li>
+<li><strong>Compare-and-set</strong>: <code>UPDATE t SET v = new WHERE v = old</code></li>
+<li><strong>Explicit locks</strong>: <code>SELECT ... FOR UPDATE</code></li>
+</ul>
+<p><strong>Write Skew</strong>: Two transactions read same data, update different rows, violating a constraint. Only serializable isolation prevents this.</p>
+<hr>
+<h2 id="10-Distributed-System-Challenges-Note-16"><a href="#10-Distributed-System-Challenges-Note-16" class="headerlink" title="10. Distributed System Challenges (Note 16)"></a>10. Distributed System Challenges (Note 16)</h2><h3 id="Unreliable-Components"><a href="#Unreliable-Components" class="headerlink" title="Unreliable Components"></a>Unreliable Components</h3><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Problem</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Network</td>
+<td>Packets lost, delayed, duplicated</td>
+<td>Timeouts (but duration uncertain)</td>
+</tr>
+<tr>
+<td>Clocks</td>
+<td>Wall clocks jump (NTP); drift ~17s&#x2F;day</td>
+<td>Use monotonic clocks for duration; logical clocks for ordering</td>
+</tr>
+<tr>
+<td>Processes</td>
+<td>GC pauses, VM suspension, context switches</td>
+<td>Fencing tokens for leader leases</td>
+</tr>
+</tbody></table>
+<p><strong>Phi Accrual Failure Detector</strong>: Adaptive timeout based on heartbeat probability distribution.</p>
+<p><strong>Fencing Tokens</strong>: Lock service issues monotonically-increasing tokens; storage rejects writes with old tokens.</p>
+<h3 id="System-Models"><a href="#System-Models" class="headerlink" title="System Models"></a>System Models</h3><table>
+<thead>
+<tr>
+<th>Network</th>
+<th>Node Failures</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Synchronous (bounded delay – unrealistic)</td>
+<td>Crash-stop (permanent)</td>
+</tr>
+<tr>
+<td>Partially synchronous (usually bounded)</td>
+<td>Crash-recovery (resume with disk)</td>
+</tr>
+<tr>
+<td>Asynchronous (no timing guarantees)</td>
+<td>Byzantine (arbitrary behavior)</td>
+</tr>
+</tbody></table>
+<p><strong>Safety</strong> &#x3D; nothing bad happens. <strong>Liveness</strong> &#x3D; something good eventually happens.</p>
+<hr>
+<h2 id="11-Consensus-amp-Linearizability-Note-17"><a href="#11-Consensus-amp-Linearizability-Note-17" class="headerlink" title="11. Consensus &amp; Linearizability (Note 17)"></a>11. Consensus &amp; Linearizability (Note 17)</h2><h3 id="Linearizability-vs-Serializability"><a href="#Linearizability-vs-Serializability" class="headerlink" title="Linearizability vs Serializability"></a>Linearizability vs Serializability</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Linearizability</th>
+<th>Serializability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scope</td>
+<td>Single object recency</td>
+<td>Multi-object transaction isolation</td>
+</tr>
+<tr>
+<td>Guarantee</td>
+<td>Reads see latest write</td>
+<td>Transactions appear serial</td>
+</tr>
+<tr>
+<td>Combined</td>
+<td>Strict Serializability (strong-1SR)</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="CAP-Theorem-Simplified"><a href="#CAP-Theorem-Simplified" class="headerlink" title="CAP Theorem (Simplified)"></a>CAP Theorem (Simplified)</h3><p>During a network partition, choose: <strong>Linearizability</strong> (wait for network) OR <strong>Availability</strong> (serve possibly stale data). Not a general design guide.</p>
+<h3 id="Two-Phase-Commit-2PC"><a href="#Two-Phase-Commit-2PC" class="headerlink" title="Two-Phase Commit (2PC)"></a>Two-Phase Commit (2PC)</h3><ol>
+<li><strong>Prepare</strong>: Coordinator asks all participants “can you commit?”</li>
+<li><strong>Commit&#x2F;Abort</strong>: If all say yes, commit; otherwise abort</li>
+</ol>
+<ul>
+<li><strong>Blocking protocol</strong>: If coordinator fails after prepare, participants stuck in-doubt</li>
+<li>Participants surrender abort right after voting “yes”</li>
+</ul>
+<h3 id="Consensus-Algorithms"><a href="#Consensus-Algorithms" class="headerlink" title="Consensus Algorithms"></a>Consensus Algorithms</h3><p>Raft, Paxos, Viewstamped Replication, Zab – all implement total order broadcast. Require strict majority (2f+1 nodes tolerate f failures).</p>
+<h3 id="Ordering-amp-Causality"><a href="#Ordering-amp-Causality" class="headerlink" title="Ordering &amp; Causality"></a>Ordering &amp; Causality</h3><ul>
+<li><strong>Causal consistency</strong>: Strongest model that doesn’t require waiting for network</li>
+<li><strong>Lamport timestamps</strong>: (counter, node_id) pairs for total ordering</li>
+<li><strong>Total order broadcast</strong>: Reliable + totally ordered delivery &#x3D; repeated consensus</li>
+</ul>
+<hr>
+<h2 id="12-Batch-Processing-Note-18"><a href="#12-Batch-Processing-Note-18" class="headerlink" title="12. Batch Processing (Note 18)"></a>12. Batch Processing (Note 18)</h2><h3 id="Unix-Philosophy-Applied-to-Data"><a href="#Unix-Philosophy-Applied-to-Data" class="headerlink" title="Unix Philosophy Applied to Data"></a>Unix Philosophy Applied to Data</h3><p>Compose single-purpose tools via pipes. Input&#x2F;output &#x3D; immutable files. Enables experimentation and restart at any stage.</p>
+<h3 id="MapReduce-Pipeline"><a href="#MapReduce-Pipeline" class="headerlink" title="MapReduce Pipeline"></a>MapReduce Pipeline</h3><ol>
+<li><strong>Map</strong>: Input record -&gt; key-value pairs</li>
+<li><strong>Shuffle</strong>: Hash by key, route to reducers</li>
+<li><strong>Reduce</strong>: Process all values for a key -&gt; output</li>
+</ol>
+<h3 id="Join-Strategies"><a href="#Join-Strategies" class="headerlink" title="Join Strategies"></a>Join Strategies</h3><table>
+<thead>
+<tr>
+<th>Join Type</th>
+<th>When to Use</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sort-merge (reduce-side)</td>
+<td>General case</td>
+<td>Both inputs sorted by join key</td>
+</tr>
+<tr>
+<td>Broadcast hash (map-side)</td>
+<td>One input small</td>
+<td>Load small dataset into mapper memory</td>
+</tr>
+<tr>
+<td>Partitioned hash (map-side)</td>
+<td>Pre-partitioned identically</td>
+<td>Each mapper joins its own partition</td>
+</tr>
+</tbody></table>
+<h3 id="MapReduce-vs-Dataflow-Engines-Spark-Flink-Tez"><a href="#MapReduce-vs-Dataflow-Engines-Spark-Flink-Tez" class="headerlink" title="MapReduce vs Dataflow Engines (Spark, Flink, Tez)"></a>MapReduce vs Dataflow Engines (Spark, Flink, Tez)</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>MapReduce</th>
+<th>Dataflow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Intermediate data</td>
+<td>Materialized to HDFS</td>
+<td>Pipelined (memory&#x2F;local disk)</td>
+</tr>
+<tr>
+<td>Operators</td>
+<td>Strict map + reduce</td>
+<td>Flexible (any function)</td>
+</tr>
+<tr>
+<td>Fault tolerance</td>
+<td>Rerun failed tasks</td>
+<td>Lineage tracking (RDD), recompute</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Slower (materialization overhead)</td>
+<td>Faster (less I&#x2F;O)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="13-Stream-Processing-Note-19"><a href="#13-Stream-Processing-Note-19" class="headerlink" title="13. Stream Processing (Note 19)"></a>13. Stream Processing (Note 19)</h2><h3 id="Message-Delivery-Models"><a href="#Message-Delivery-Models" class="headerlink" title="Message Delivery Models"></a>Message Delivery Models</h3><table>
+<thead>
+<tr>
+<th>System</th>
+<th>Ordering</th>
+<th>Replay</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Traditional broker (RabbitMQ)</td>
+<td>Per-consumer</td>
+<td>No (ACK deletes)</td>
+<td>Load balance or fan-out</td>
+</tr>
+<tr>
+<td>Log-based broker (Kafka)</td>
+<td>Per-partition</td>
+<td>Yes (offset-based)</td>
+<td>Fan-out; load balance per partition</td>
+</tr>
+</tbody></table>
+<h3 id="Window-Types-for-Aggregation"><a href="#Window-Types-for-Aggregation" class="headerlink" title="Window Types for Aggregation"></a>Window Types for Aggregation</h3><table>
+<thead>
+<tr>
+<th>Window</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tumbling</td>
+<td>Fixed-size, non-overlapping</td>
+</tr>
+<tr>
+<td>Hopping</td>
+<td>Fixed-size, overlapping (slide &lt; size)</td>
+</tr>
+<tr>
+<td>Sliding</td>
+<td>All events within interval of each event</td>
+</tr>
+<tr>
+<td>Session</td>
+<td>Same user, gap-based grouping</td>
+</tr>
+</tbody></table>
+<h3 id="Stream-Joins"><a href="#Stream-Joins" class="headerlink" title="Stream Joins"></a>Stream Joins</h3><table>
+<thead>
+<tr>
+<th>Join</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Stream-stream</td>
+<td>Match events within a time window</td>
+</tr>
+<tr>
+<td>Stream-table</td>
+<td>Enrich events with database lookup (CDC-updated local copy)</td>
+</tr>
+<tr>
+<td>Table-table</td>
+<td>Materialized view maintenance</td>
+</tr>
+</tbody></table>
+<h3 id="Change-Data-Capture-CDC"><a href="#Change-Data-Capture-CDC" class="headerlink" title="Change Data Capture (CDC)"></a>Change Data Capture (CDC)</h3><p>Capture database changes, replicate to derived systems (indexes, caches, warehouses). Log compaction keeps latest value per key.</p>
+<h3 id="Exactly-Once-Semantics"><a href="#Exactly-Once-Semantics" class="headerlink" title="Exactly-Once Semantics"></a>Exactly-Once Semantics</h3><p>Achieve through <strong>idempotent operations</strong> (preferred) or microbatching&#x2F;checkpoints. Avoid dual writes (race condition risk).</p>
+<h3 id="Event-Sourcing"><a href="#Event-Sourcing" class="headerlink" title="Event Sourcing"></a>Event Sourcing</h3><p>Immutable append-only log of application events. Derive multiple read views (CQRS). Supports new features via new views without system changes.</p>
+<hr>
+<h2 id="Quick-Decision-Guide"><a href="#Quick-Decision-Guide" class="headerlink" title="Quick Decision Guide"></a>Quick Decision Guide</h2><p><strong>Storage engine?</strong> Write-heavy -&gt; LSM-tree. Read-heavy -&gt; B-tree.</p>
+<p><strong>Data model?</strong> Joins needed -&gt; Relational. Self-contained docs -&gt; Document. Complex relationships -&gt; Graph.</p>
+<p><strong>Replication?</strong> Single datacenter -&gt; Single-leader. Multi-DC -&gt; Multi-leader. Max availability -&gt; Leaderless.</p>
+<p><strong>Partitioning?</strong> Range queries -&gt; Key range. Even distribution -&gt; Hash. Both -&gt; Compound key.</p>
+<p><strong>Isolation level?</strong> Most workloads -&gt; Snapshot Isolation. Need serializability -&gt; SSI. Max throughput -&gt; Read Committed.</p>
+<p><strong>Processing?</strong> Bounded data -&gt; Batch (Spark). Unbounded &#x2F; real-time -&gt; Stream (Kafka + Flink). Mixed -&gt; Lambda&#x2F;Kappa architecture.</p>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Blur - Shenghui Xu</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

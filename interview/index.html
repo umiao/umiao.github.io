@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.1.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="A structured study guide for technical interviews, organized by topic area. Each section links to detailed blog posts with concepts, examples, and takeaways you can review before interviews.  System D">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Interview Prep Hub">
+<meta property="og:url" content="https://umiao.github.io/interview/index.html">
+<meta property="og:site_name" content="The blog of Blur">
+<meta property="og:description" content="A structured study guide for technical interviews, organized by topic area. Each section links to detailed blog posts with concepts, examples, and takeaways you can review before interviews.  System D">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-12T08:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-12T08:47:37.457Z">
+<meta property="article:author" content="Blur - Shenghui Xu">
+<meta name="twitter:card" content="summary_large_image">
+
+
+<link rel="canonical" href="https://umiao.github.io/interview/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"https://umiao.github.io/interview/index.html","path":"interview/index.html","title":"Interview Prep Hub"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Interview Prep Hub | The blog of Blur
+</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="The blog of Blur" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">The blog of Blur</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hearing the fall of snow.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-interview"><a href="/interview/" rel="section"><i class="fa fa-briefcase fa-fw"></i>interview</a></li><li class="menu-item menu-item-cheatsheets"><a href="/cheatsheet/" rel="section"><i class="fa fa-file-alt fa-fw"></i>cheatsheets</a></li><li class="menu-item menu-item-knowledge-map"><a href="/knowledge-map/" rel="section"><i class="fa fa-project-diagram fa-fw"></i>knowledge-map</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-Design-DDIA"><span class="nav-number">1.</span> <span class="nav-text">System Design (DDIA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Storage-and-Retrieval"><span class="nav-number">1.1.</span> <span class="nav-text">Data Storage and Retrieval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication-and-Consistency"><span class="nav-number">1.2.</span> <span class="nav-text">Replication and Consistency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partitioning-and-Scaling"><span class="nav-number">1.3.</span> <span class="nav-text">Partitioning and Scaling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transactions-and-Fault-Tolerance"><span class="nav-number">1.4.</span> <span class="nav-text">Transactions and Fault Tolerance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Pipelines"><span class="nav-number">1.5.</span> <span class="nav-text">Data Pipelines</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-Design-Alex-Xu"><span class="nav-number">2.</span> <span class="nav-text">System Design (Alex Xu)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#System-Design-Interview-Checklist"><span class="nav-number">2.1.</span> <span class="nav-text">System Design Interview Checklist</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL"><span class="nav-number">3.</span> <span class="nav-text">SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quick-Reference"><span class="nav-number">3.1.</span> <span class="nav-text">Quick Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Interview-Patterns"><span class="nav-number">3.2.</span> <span class="nav-text">Common Interview Patterns</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Science-and-ML"><span class="nav-number">4.</span> <span class="nav-text">Data Science and ML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithms-to-Know"><span class="nav-number">4.1.</span> <span class="nav-text">Algorithms to Know</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Foundational-Concepts"><span class="nav-number">4.2.</span> <span class="nav-text">Foundational Concepts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-ML-Interview-Questions"><span class="nav-number">4.3.</span> <span class="nav-text">Common ML Interview Questions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Behavioral-Interviews"><span class="nav-number">5.</span> <span class="nav-text">Behavioral Interviews</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STAR-Method"><span class="nav-number">5.1.</span> <span class="nav-text">STAR Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Themes-to-Prepare"><span class="nav-number">5.2.</span> <span class="nav-text">Common Themes to Prepare</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-Oriented-Design-OOD"><span class="nav-number">6.</span> <span class="nav-text">Object-Oriented Design (OOD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SOLID-Principles"><span class="nav-number">6.1.</span> <span class="nav-text">SOLID Principles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OOD-Interview-Approach"><span class="nav-number">6.2.</span> <span class="nav-text">OOD Interview Approach</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Brainteasers-and-Puzzles"><span class="nav-number">7.</span> <span class="nav-text">Brainteasers and Puzzles</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-Categories"><span class="nav-number">7.1.</span> <span class="nav-text">Problem Categories</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Approach"><span class="nav-number">7.2.</span> <span class="nav-text">General Approach</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Study-Plan"><span class="nav-number">8.</span> <span class="nav-text">Study Plan</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Week-Sprint"><span class="nav-number">8.1.</span> <span class="nav-text">1-Week Sprint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Pages"><span class="nav-number">8.2.</span> <span class="nav-text">Key Pages</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Blur - Shenghui Xu</p>
+  <div class="site-description" itemprop="description">Personal blog of blur.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/umiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;umiao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i>Facebook</a>
+      </span>
+  </div>
+
+
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+      
+    
+  
+    
+  
+  
+    
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+
+
+<div class="life-sidebar-widget">
+  <h3 class="life-widget-title" style="margin: 20px 0 10px; font-size: 14px; font-weight: 600; color: #555; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+    Life
+  </h3>
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    
+    <li style="margin-bottom: 8px; font-size: 13px;">
+      <a href="/2026/03/09/Cake-Inspiration-Gallery/" style="color: #555; text-decoration: none;">
+        Cake Inspiration Gallery
+      </a>
+      <span style="color: #999; font-size: 11px; display: block;">
+        2026-03-09
+      </span>
+    </li>
+    
+  </ul>
+</div>
+
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Interview Prep Hub
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p>A structured study guide for technical interviews, organized by topic area. Each section links to detailed blog posts with concepts, examples, and takeaways you can review before interviews.</p>
+<hr>
+<h2 id="System-Design-DDIA"><a href="#System-Design-DDIA" class="headerlink" title="System Design (DDIA)"></a>System Design (DDIA)</h2><p>Core distributed systems concepts from <em>Designing Data-Intensive Applications</em> by Martin Kleppmann, organized by interview theme.</p>
+<h3 id="Data-Storage-and-Retrieval"><a href="#Data-Storage-and-Retrieval" class="headerlink" title="Data Storage and Retrieval"></a>Data Storage and Retrieval</h3><table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Points</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LSM-Trees vs B-Trees</td>
+<td>LSM: write-optimized, append-only segments. B-Tree: read-optimized, in-place updates.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-5/">Note 5</a>, <a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-6/">Note 6</a></td>
+</tr>
+<tr>
+<td>Data Models</td>
+<td>Relational (tables + joins), Document (nested, schema-on-read), Graph (relationships)</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-4/">Note 4</a></td>
+</tr>
+<tr>
+<td>OLTP vs OLAP</td>
+<td>OLTP: row-oriented, low-latency queries. OLAP: column-oriented, analytical aggregations.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-7/">Note 7</a></td>
+</tr>
+<tr>
+<td>Encoding and Schema Evolution</td>
+<td>Protobuf, Avro, Thrift for forward&#x2F;backward compatibility. Schema registries.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-8/">Note 8</a>, <a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-9/">Note 9</a></td>
+</tr>
+</tbody></table>
+<h3 id="Replication-and-Consistency"><a href="#Replication-and-Consistency" class="headerlink" title="Replication and Consistency"></a>Replication and Consistency</h3><table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Points</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Leader-Based Replication</td>
+<td>Single leader handles writes, followers replicate. Tradeoff: simplicity vs write bottleneck.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-10/">Note 10</a>, <a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-11/">Note 11</a></td>
+</tr>
+<tr>
+<td>Replication Lag</td>
+<td>Read-after-write, monotonic reads, consistent prefix reads. Eventual consistency pitfalls.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-12/">Note 12</a></td>
+</tr>
+<tr>
+<td>Multi-Leader and Leaderless</td>
+<td>Multi-leader: multi-datacenter writes. Leaderless: quorum reads&#x2F;writes (R + W &gt; N).</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-13/">Note 13</a></td>
+</tr>
+<tr>
+<td>Consistency and Linearizability</td>
+<td>Linearizability &#x3D; behaves as if single copy. Needed for locks, leader election, uniqueness.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-17/">Note 17</a></td>
+</tr>
+</tbody></table>
+<h3 id="Partitioning-and-Scaling"><a href="#Partitioning-and-Scaling" class="headerlink" title="Partitioning and Scaling"></a>Partitioning and Scaling</h3><table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Points</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Partitioning Strategies</td>
+<td>Key-range (sorted, range scans) vs hash (uniform distribution). Compound keys for locality.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-14/">Note 14</a></td>
+</tr>
+<tr>
+<td>Hot Spots</td>
+<td>Skewed partitions from popular keys. Mitigate with salting, compound keys, or application-level sharding.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-14/">Note 14</a></td>
+</tr>
+<tr>
+<td>Scalability Patterns</td>
+<td>Vertical vs horizontal scaling. Shared-nothing architectures. Load descriptions via percentiles.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-1/">Note 1</a>, <a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-2/">Note 2</a></td>
+</tr>
+</tbody></table>
+<h3 id="Transactions-and-Fault-Tolerance"><a href="#Transactions-and-Fault-Tolerance" class="headerlink" title="Transactions and Fault Tolerance"></a>Transactions and Fault Tolerance</h3><table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Points</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACID vs BASE</td>
+<td>ACID: strong guarantees, single-node. BASE: relaxed consistency, higher availability.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-15/">Note 15</a></td>
+</tr>
+<tr>
+<td>Isolation Levels</td>
+<td>Read Committed, Snapshot Isolation (MVCC), Serializable. Each prevents different anomalies.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-15/">Note 15</a></td>
+</tr>
+<tr>
+<td>Two-Phase Commit (2PC)</td>
+<td>Coordinator-based distributed commit. Blocking if coordinator fails.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-15/">Note 15</a></td>
+</tr>
+<tr>
+<td>Distributed System Faults</td>
+<td>Network partitions, clock skew, process pauses. Design for partial failures.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-16/">Note 16</a></td>
+</tr>
+</tbody></table>
+<h3 id="Data-Pipelines"><a href="#Data-Pipelines" class="headerlink" title="Data Pipelines"></a>Data Pipelines</h3><table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Points</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Batch Processing</td>
+<td>MapReduce: map (extract) then reduce (aggregate). Fault tolerance via re-execution.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-18/">Note 18</a></td>
+</tr>
+<tr>
+<td>Stream Processing</td>
+<td>Event-driven, low-latency. Window types: tumbling, hopping, sliding, session.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-19/">Note 19</a></td>
+</tr>
+<tr>
+<td>Change Data Capture</td>
+<td>Capture DB changes as event stream. Enables derived views, search indexes, caches.</td>
+<td><a href="/2019/05/18/Designing-Data-Intensive-Applications-Note-19/">Note 19</a></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Full series: <a href="/series/ddia/">DDIA Reading Notes (19 parts)</a></p>
+</blockquote>
+<hr>
+<h2 id="System-Design-Alex-Xu"><a href="#System-Design-Alex-Xu" class="headerlink" title="System Design (Alex Xu)"></a>System Design (Alex Xu)</h2><p>Practical system design interview patterns from <em>System Design Interview</em> by Alex Xu.</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Key Patterns</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scaling to Millions</td>
+<td>CDN, load balancers, database replication, cache layers, message queues</td>
+<td><a href="/2023/10/07/System-Design-Interview-Alex-Xu-Notes-1/">Chapters 1-9</a></td>
+</tr>
+<tr>
+<td>Rate Limiting</td>
+<td>Token bucket, sliding window, fixed window algorithms</td>
+<td><a href="/2023/10/07/System-Design-Interview-Alex-Xu-Notes-1/">Chapters 1-9</a></td>
+</tr>
+<tr>
+<td>Notification Systems</td>
+<td>Fan-out, third-party service integration, retry strategies</td>
+<td><a href="/2024/01/08/System-Design-Interview-Alex-Xu-Notes-2/">Chapters 10-16</a></td>
+</tr>
+<tr>
+<td>Distributed Architecture</td>
+<td>Avoiding single points of failure, database sharding, consistent hashing</td>
+<td><a href="/2024/01/08/System-Design-Interview-Alex-Xu-Notes-2/">Chapters 10-16</a></td>
+</tr>
+</tbody></table>
+<h3 id="System-Design-Interview-Checklist"><a href="#System-Design-Interview-Checklist" class="headerlink" title="System Design Interview Checklist"></a>System Design Interview Checklist</h3><ol>
+<li><strong>Clarify requirements</strong>: Functional vs non-functional. Ask about scale, latency, consistency needs.</li>
+<li><strong>High-level design</strong>: Draw major components (clients, servers, databases, caches, queues).</li>
+<li><strong>Deep dive</strong>: Pick 1-2 components. Discuss data model, API design, scaling strategy.</li>
+<li><strong>Trade-offs</strong>: CAP theorem, consistency vs availability, cost vs performance.</li>
+<li><strong>Bottlenecks</strong>: Identify hotspots, single points of failure, and how to mitigate.</li>
+</ol>
+<hr>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><p>Key SQL concepts frequently tested in interviews, drawn from the <a href="/series/sql/">SQL Study Notes series (16 parts)</a>.</p>
+<h3 id="Quick-Reference"><a href="#Quick-Reference" class="headerlink" title="Quick Reference"></a>Quick Reference</h3><table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What to Know</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JOINs</td>
+<td>INNER, LEFT, RIGHT, FULL OUTER, SELF, CROSS. Know when to use each.</td>
+<td><a href="/2019/06/29/SQL-Study-Note-1/">Note 1</a></td>
+</tr>
+<tr>
+<td>Aggregation</td>
+<td>GROUP BY + HAVING for filtered aggregates. COUNT, SUM, AVG, MIN, MAX.</td>
+<td><a href="/2019/06/29/SQL-Study-Note-3/">Note 3</a></td>
+</tr>
+<tr>
+<td>Window Functions</td>
+<td>ROW_NUMBER, RANK, DENSE_RANK, NTILE. PARTITION BY + ORDER BY. Running totals, moving averages.</td>
+<td><a href="/2019/06/30/SQL-Study-Note-13/">Note 13</a></td>
+</tr>
+<tr>
+<td>CTEs</td>
+<td>WITH clause for readable subqueries. Recursive CTEs for hierarchies.</td>
+<td><a href="/2019/06/30/SQL-Study-Note-12/">Note 12</a></td>
+</tr>
+<tr>
+<td>Subqueries</td>
+<td>Correlated vs uncorrelated. EXISTS vs IN performance differences.</td>
+<td><a href="/2019/06/29/SQL-Study-Note-1/">Note 1</a></td>
+</tr>
+<tr>
+<td>Indexes</td>
+<td>B-Tree default, composite index column order matters, covering indexes avoid table lookups.</td>
+<td><a href="/2019/06/30/SQL-Study-Note-10/">Note 10</a></td>
+</tr>
+<tr>
+<td>Normalization</td>
+<td>1NF (atomic), 2NF (no partial deps), 3NF (no transitive deps). When to denormalize.</td>
+<td><a href="/2019/06/30/SQL-Study-Note-9/">Note 9</a></td>
+</tr>
+<tr>
+<td>Transactions</td>
+<td>BEGIN&#x2F;COMMIT&#x2F;ROLLBACK. Isolation levels. Deadlock detection.</td>
+<td><a href="/2019/06/29/SQL-Study-Note-7/">Note 7</a></td>
+</tr>
+<tr>
+<td>Query Optimization</td>
+<td>EXPLAIN plans, index selection, avoiding SELECT *, reducing subqueries.</td>
+<td><a href="/2019/06/30/SQL-Study-Note-14/">Note 14</a>, <a href="/2019/06/30/SQL-Study-Note-15/">Note 15</a>, <a href="/2019/06/30/SQL-Study-Note-16/">Note 16</a></td>
+</tr>
+</tbody></table>
+<h3 id="Common-Interview-Patterns"><a href="#Common-Interview-Patterns" class="headerlink" title="Common Interview Patterns"></a>Common Interview Patterns</h3><ul>
+<li><strong>Top-N per group</strong>: Use <code>ROW_NUMBER() OVER (PARTITION BY group_col ORDER BY rank_col) AS rn</code> then filter <code>WHERE rn &lt;= N</code>.</li>
+<li><strong>Running totals</strong>: <code>SUM(amount) OVER (ORDER BY date ROWS UNBOUNDED PRECEDING)</code>.</li>
+<li><strong>Duplicate detection</strong>: <code>GROUP BY columns HAVING COUNT(*) &gt; 1</code>.</li>
+<li><strong>Self-join for comparisons</strong>: Join a table to itself to compare rows (e.g., employees earning more than their manager).</li>
+<li><strong>Gap detection</strong>: Use <code>LAG()</code> or <code>LEAD()</code> window functions to find missing sequences.</li>
+</ul>
+<hr>
+<h2 id="Data-Science-and-ML"><a href="#Data-Science-and-ML" class="headerlink" title="Data Science and ML"></a>Data Science and ML</h2><p>Core ML concepts for data science interviews from the <a href="/series/ds/">DS Study Notes series (9 parts)</a>.</p>
+<h3 id="Algorithms-to-Know"><a href="#Algorithms-to-Know" class="headerlink" title="Algorithms to Know"></a>Algorithms to Know</h3><table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Type</th>
+<th>Key Interview Points</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Linear&#x2F;Logistic Regression</td>
+<td>Supervised</td>
+<td>Assumptions, regularization, coefficient interpretation</td>
+<td><a href="/2020/04/04/DS-Study-Note-7/">Note 7</a></td>
+</tr>
+<tr>
+<td>Decision Trees</td>
+<td>Supervised</td>
+<td>Gini vs entropy, pruning, overfitting risk</td>
+<td><a href="/2020/05/02/DS-Study-Note-8/">Note 8</a></td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td>Ensemble</td>
+<td>Bagging, feature importance, out-of-bag error</td>
+<td><a href="/2020/05/02/DS-Study-Note-8/">Note 8</a></td>
+</tr>
+<tr>
+<td>Gradient Boosting</td>
+<td>Ensemble</td>
+<td>Sequential learning, learning rate, shrinkage</td>
+<td><a href="/2020/05/20/DS-Study-Note-9/">Note 9</a></td>
+</tr>
+<tr>
+<td>SVM</td>
+<td>Supervised</td>
+<td>Maximum margin, kernel trick, soft margin (C parameter)</td>
+<td><a href="/2020/02/21/DS-Study-Note-5/">Note 5</a></td>
+</tr>
+<tr>
+<td>Naive Bayes</td>
+<td>Supervised</td>
+<td>Independence assumption, Laplace smoothing, text classification</td>
+<td><a href="/2020/03/04/DS-Study-Note-6/">Note 6</a></td>
+</tr>
+</tbody></table>
+<h3 id="Foundational-Concepts"><a href="#Foundational-Concepts" class="headerlink" title="Foundational Concepts"></a>Foundational Concepts</h3><table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Points</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bias-Variance Tradeoff</td>
+<td>High bias &#x3D; underfitting. High variance &#x3D; overfitting. Sweet spot minimizes total error.</td>
+<td><a href="/2019/10/11/DS-Study-Note-2/">Note 2</a></td>
+</tr>
+<tr>
+<td>Overfitting</td>
+<td>Causes: too many features, insufficient data, high model complexity. Fixes: regularization, cross-validation, early stopping.</td>
+<td><a href="/2019/08/17/DS-Study-Note-1/">Note 1</a></td>
+</tr>
+<tr>
+<td>Regularization</td>
+<td>L1 (Lasso): sparse features, feature selection. L2 (Ridge): shrinks all weights, handles multicollinearity.</td>
+<td><a href="/2020/04/04/DS-Study-Note-7/">Note 7</a></td>
+</tr>
+<tr>
+<td>Evaluation Metrics</td>
+<td>Precision (false positive cost), Recall (false negative cost), F1 (balanced), AUC-ROC (threshold-independent).</td>
+<td><a href="/2020/01/28/DS-Study-Note-4/">Note 4</a></td>
+</tr>
+<tr>
+<td>Cross-Validation</td>
+<td>K-fold: rotate held-out set. Stratified: preserve class balance. Prevents data leakage.</td>
+<td><a href="/2019/08/17/DS-Study-Note-1/">Note 1</a></td>
+</tr>
+<tr>
+<td>Curse of Dimensionality</td>
+<td>Distance metrics break down in high dimensions. Feature selection and PCA help.</td>
+<td><a href="/2019/10/16/DS-Study-Note-3/">Note 3</a></td>
+</tr>
+</tbody></table>
+<h3 id="Common-ML-Interview-Questions"><a href="#Common-ML-Interview-Questions" class="headerlink" title="Common ML Interview Questions"></a>Common ML Interview Questions</h3><ul>
+<li><strong>“When would you use Random Forest vs Gradient Boosting?”</strong> RF: parallel, less tuning, robust to noise. GBM: sequential, higher accuracy, needs careful tuning.</li>
+<li><strong>“How do you handle imbalanced classes?”</strong> Resampling (SMOTE, undersampling), class weights, adjusted thresholds, use precision-recall over accuracy.</li>
+<li><strong>“Explain the bias-variance tradeoff.”</strong> Model too simple &#x3D; high bias (misses patterns). Model too complex &#x3D; high variance (fits noise). Regularization and cross-validation help find the balance.</li>
+<li><strong>“L1 vs L2 regularization?”</strong> L1 drives coefficients to zero (feature selection). L2 shrinks all coefficients (stability). Elastic Net combines both.</li>
+</ul>
+<hr>
+<h2 id="Behavioral-Interviews"><a href="#Behavioral-Interviews" class="headerlink" title="Behavioral Interviews"></a>Behavioral Interviews</h2><p>Frameworks and strategies for behavioral questions, using the STAR method.</p>
+<blockquote>
+<p>Detailed guide: <a href="/2024/09/17/Behavioral-Interview-Questions-Crack/">Behavioral Interview Questions Crack</a></p>
+</blockquote>
+<h3 id="STAR-Method"><a href="#STAR-Method" class="headerlink" title="STAR Method"></a>STAR Method</h3><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What to Include</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>S</strong>ituation</td>
+<td>Set the scene. Team size, project type, timeline, stakes.</td>
+</tr>
+<tr>
+<td><strong>T</strong>ask</td>
+<td>Your specific responsibility. What was expected of you.</td>
+</tr>
+<tr>
+<td><strong>A</strong>ction</td>
+<td>What YOU did (not the team). Be specific about decisions and reasoning.</td>
+</tr>
+<tr>
+<td><strong>R</strong>esult</td>
+<td>Quantify impact. Metrics, outcomes, lessons learned.</td>
+</tr>
+</tbody></table>
+<h3 id="Common-Themes-to-Prepare"><a href="#Common-Themes-to-Prepare" class="headerlink" title="Common Themes to Prepare"></a>Common Themes to Prepare</h3><ul>
+<li><strong>Leadership&#x2F;influence</strong>: Times you drove a technical decision or mentored others.</li>
+<li><strong>Conflict resolution</strong>: Disagreements with teammates or stakeholders, and how you resolved them.</li>
+<li><strong>Failure and learning</strong>: Projects that went wrong and what you changed afterward.</li>
+<li><strong>Ambiguity</strong>: Situations with unclear requirements where you had to define the path forward.</li>
+<li><strong>Cross-team collaboration</strong>: Working across team boundaries, especially with non-technical stakeholders.</li>
+</ul>
+<hr>
+<h2 id="Object-Oriented-Design-OOD"><a href="#Object-Oriented-Design-OOD" class="headerlink" title="Object-Oriented Design (OOD)"></a>Object-Oriented Design (OOD)</h2><blockquote>
+<p>Detailed guide: <a href="/2023/07/09/Object-Oriented-Design/">Object Oriented Design – Principles and Practices</a></p>
+</blockquote>
+<h3 id="SOLID-Principles"><a href="#SOLID-Principles" class="headerlink" title="SOLID Principles"></a>SOLID Principles</h3><table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>One-Liner</th>
+<th>Interview Tip</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>S</strong>ingle Responsibility</td>
+<td>A class should have one reason to change.</td>
+<td>Name the class after its single job.</td>
+</tr>
+<tr>
+<td><strong>O</strong>pen&#x2F;Closed</td>
+<td>Open for extension, closed for modification.</td>
+<td>Use interfaces and strategy pattern.</td>
+</tr>
+<tr>
+<td><strong>L</strong>iskov Substitution</td>
+<td>Subtypes must be substitutable for base types.</td>
+<td>If it breaks when substituted, it is not a valid subtype.</td>
+</tr>
+<tr>
+<td><strong>I</strong>nterface Segregation</td>
+<td>No client should depend on methods it does not use.</td>
+<td>Split fat interfaces into focused ones.</td>
+</tr>
+<tr>
+<td><strong>D</strong>ependency Inversion</td>
+<td>Depend on abstractions, not concretions.</td>
+<td>Constructor injection, interface-based design.</td>
+</tr>
+</tbody></table>
+<h3 id="OOD-Interview-Approach"><a href="#OOD-Interview-Approach" class="headerlink" title="OOD Interview Approach"></a>OOD Interview Approach</h3><ol>
+<li><strong>Clarify scope</strong>: What entities, what operations, what constraints?</li>
+<li><strong>Identify core objects</strong>: Nouns in the problem become classes.</li>
+<li><strong>Define relationships</strong>: Has-a, is-a, uses-a between objects.</li>
+<li><strong>Assign behaviors</strong>: Verbs become methods on the appropriate class.</li>
+<li><strong>Apply patterns</strong>: Observer, Strategy, Factory, Singleton where they fit.</li>
+<li><strong>Discuss trade-offs</strong>: Flexibility vs complexity, inheritance vs composition.</li>
+</ol>
+<hr>
+<h2 id="Brainteasers-and-Puzzles"><a href="#Brainteasers-and-Puzzles" class="headerlink" title="Brainteasers and Puzzles"></a>Brainteasers and Puzzles</h2><blockquote>
+<p>Detailed guide: <a href="/2020/01/08/brainteaser-1/">Collection and Solution of Brainteasers</a></p>
+</blockquote>
+<h3 id="Problem-Categories"><a href="#Problem-Categories" class="headerlink" title="Problem Categories"></a>Problem Categories</h3><table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Example Topics</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Probability</strong></td>
+<td>Dice games, card draws, conditional probability, Bayes’ theorem</td>
+</tr>
+<tr>
+<td><strong>Logic</strong></td>
+<td>Truth-teller&#x2F;liar puzzles, process of elimination, invariants</td>
+</tr>
+<tr>
+<td><strong>Estimation</strong></td>
+<td>Fermi problems (how many piano tuners in Chicago?)</td>
+</tr>
+<tr>
+<td><strong>Game Theory</strong></td>
+<td>Backward induction, optimal strategies, Nash equilibrium</td>
+</tr>
+<tr>
+<td><strong>Math</strong></td>
+<td>Modular arithmetic, combinatorics, expected value calculations</td>
+</tr>
+</tbody></table>
+<h3 id="General-Approach"><a href="#General-Approach" class="headerlink" title="General Approach"></a>General Approach</h3><ol>
+<li><strong>Restate the problem</strong> to confirm understanding.</li>
+<li><strong>Identify the type</strong> (probability, logic, estimation, game theory).</li>
+<li><strong>Start with small cases</strong> – solve for N&#x3D;2, N&#x3D;3, then generalize.</li>
+<li><strong>State assumptions</strong> explicitly before calculating.</li>
+<li><strong>Think out loud</strong> – interviewers evaluate your reasoning process, not just the answer.</li>
+</ol>
+<hr>
+<h2 id="Study-Plan"><a href="#Study-Plan" class="headerlink" title="Study Plan"></a>Study Plan</h2><h3 id="1-Week-Sprint"><a href="#1-Week-Sprint" class="headerlink" title="1-Week Sprint"></a>1-Week Sprint</h3><table>
+<thead>
+<tr>
+<th>Day</th>
+<th>Focus</th>
+<th>Resources</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mon</td>
+<td>System Design fundamentals</td>
+<td>DDIA Notes 1-4, Alex Xu Ch 1-9</td>
+</tr>
+<tr>
+<td>Tue</td>
+<td>Distributed systems deep dive</td>
+<td>DDIA Notes 10-15 (replication, partitioning, transactions)</td>
+</tr>
+<tr>
+<td>Wed</td>
+<td>SQL practice</td>
+<td>SQL Notes 1, 3, 10, 12, 13 (joins, aggregation, indexes, CTEs, window functions)</td>
+</tr>
+<tr>
+<td>Thu</td>
+<td>ML algorithms and concepts</td>
+<td>DS Notes 1-4 (fundamentals), Notes 5-9 (algorithms)</td>
+</tr>
+<tr>
+<td>Fri</td>
+<td>Behavioral + OOD</td>
+<td>Behavioral Questions Crack, OOD Principles</td>
+</tr>
+<tr>
+<td>Sat</td>
+<td>System Design practice</td>
+<td>DDIA Notes 16-19 (faults, consistency, batch, stream) + Alex Xu Ch 10-16</td>
+</tr>
+<tr>
+<td>Sun</td>
+<td>Review weak areas</td>
+<td>Re-read concept index at <a href="/concepts/">&#x2F;concepts&#x2F;</a></td>
+</tr>
+</tbody></table>
+<h3 id="Key-Pages"><a href="#Key-Pages" class="headerlink" title="Key Pages"></a>Key Pages</h3><ul>
+<li><a href="/concepts/">Concept Index</a> – searchable index of all 87+ concepts across posts</li>
+<li><a href="/series/ddia/">DDIA Series</a> – 19-part distributed systems deep dive</li>
+<li><a href="/series/sql/">SQL Series</a> – 16-part SQL reference</li>
+<li><a href="/series/ds/">DS Series</a> – 9-part data science and ML review</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Blur - Shenghui Xu</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

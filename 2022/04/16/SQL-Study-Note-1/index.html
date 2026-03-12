@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"umiao.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"androidstudio","dark":"androidstudio"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="SQL syntax basics covering SELECT, WHERE, JOIN, and fundamental database query operations.">
 <meta property="og:type" content="article">
@@ -29,11 +29,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/sql.jpg">
 <meta property="article:published_time" content="2022-04-16T21:05:53.000Z">
-<meta property="article:modified_time" content="2026-03-10T01:09:07.012Z">
+<meta property="article:modified_time" content="2026-03-12T08:23:56.563Z">
 <meta property="article:author" content="Blur - Shenghui Xu">
 <meta property="article:tag" content="Data Science">
 <meta property="article:tag" content="SQL">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://umiao.github.io/2022/04/16/SQL-Study-Note-1/sql.jpg">
 
 
@@ -121,7 +121,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-series"><a href="/series/" rel="section"><i class="fa fa-book fa-fw"></i>series</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-interview"><a href="/interview/" rel="section"><i class="fa fa-briefcase fa-fw"></i>interview</a></li><li class="menu-item menu-item-cheatsheets"><a href="/cheatsheet/" rel="section"><i class="fa fa-file-alt fa-fw"></i>cheatsheets</a></li><li class="menu-item menu-item-knowledge-map"><a href="/knowledge-map/" rel="section"><i class="fa fa-project-diagram fa-fw"></i>knowledge-map</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -172,7 +172,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keywords-and-Syntax-Rules"><span class="nav-number">2.</span> <span class="nav-text">Keywords and Syntax Rules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-query-syntax"><span class="nav-number">2.1.</span> <span class="nav-text">The query syntax</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keywords-and-Syntax-Rules"><span class="nav-number">2.</span> <span class="nav-text">Keywords and Syntax Rules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-query-syntax"><span class="nav-number">2.1.</span> <span class="nav-text">The query syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.1.</span> <span class="nav-text">Related Reading</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -185,7 +185,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -196,7 +196,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -211,6 +211,14 @@
   </div>
 
 
+
+  
+  
+    
+  
+    
+  
+  
 
   
   
@@ -468,65 +476,11 @@
   
     
   
-  
-
-  
-  
-    
-  
     
   
   
 
   
-  
-    
-  
-  
-
-  
-  
-    
-  
-    
-  
-    
-  
-  
-
-  
-  
-    
-  
-    
-  
-  
-
-  
-  
-    
-  
-    
-  
-  
-
-  
-  
-    
-  
-  
-
-  
-  
-    
-  
-    
-  
-  
-
-  
-  
-    
   
     
   
@@ -552,23 +506,11 @@
   
     
   
-  
-
-  
-  
-    
-  
-    
-  
-    
-  
     
   
   
 
   
-  
-    
   
     
   
@@ -584,7 +526,57 @@
   
     
   
+  
+
+  
+  
     
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
   
     
   
@@ -739,6 +731,46 @@
     
   
     
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+
+  
+  
+    
+  
+    
+  
+  
+
+  
   
     
   
@@ -832,7 +864,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-09 18:09:07" itemprop="dateModified" datetime="2026-03-09T18:09:07-07:00">2026-03-09</time>
+      <time title="Modified: 2026-03-12 01:23:56" itemprop="dateModified" datetime="2026-03-12T01:23:56-07:00">2026-03-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -866,7 +898,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><img src="/2022/04/16/SQL-Study-Note-1/sql.jpg" class="" title="SQL Note of blur!">
+    <div class="post-body" itemprop="articleBody"><img src="/2022/04/16/SQL-Study-Note-1/sql.jpg" class="" title="SQL Study Note 1 cover: Syntax Basics">
 
 <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ol>
 <li>The core of database system is to interact with <strong>DB (DataBase)</strong> with <strong>DBMS (Database Management System)</strong>.<span id="more"></span></li>
@@ -1028,6 +1060,40 @@
  Concatenate multiple queried results together (on the direction of row). The column names should be exactly the same.<br> <strong>IT SHOULD BE NOTED</strong> that ORDER BY can be set only once, so union all the results before setting the ORDER clause.</li>
 </ol>
 <hr>
+<style>
+.related-posts { margin: 2em 0 1em; }
+.related-posts h3 { margin-bottom: 0.5em; }
+.related-posts ul { list-style: disc; padding-left: 1.5em; }
+.related-posts li { margin: 0.3em 0; }
+</style>
+
+<div class="related-posts">
+<hr>
+<h3>Related Reading</h3>
+<ul>
+  <li><a href="/2022/04/16/SQL-Study-Note-2/">SQL Study Note - 2 - The Update / Delete / Insert Syntax</a></li>
+  <li><a href="/2022/04/16/SQL-Study-Note-3/">SQL Study Note - 3 - Function and the Aggregate Function</a></li>
+  <li><a href="/2022/04/21/SQL-Study-Note-10/">SQL-Study-Note-10 Index</a></li>
+  <li><a href="/2022/04/21/SQL-Study-Note-11/">SQL-Study-Note-11 User and Privilege Management</a></li>
+  <li><a href="/2022/05/04/SQL-Study-Note-12/">SQL-Study-Note-12 Common Table Expression and Discussion on UNION</a></li>
+</ul>
+</div>
+<style>
+.series-nav { margin: 2em 0 1em; }
+.series-nav-title { margin-bottom: 0.5em; }
+.series-nav-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5em; }
+.series-nav-prev, .series-nav-next { max-width: 48%; }
+.series-nav-next { text-align: right; margin-left: auto; }
+</style>
+
+<div class="series-nav">
+<hr>
+<p class="series-nav-title"><strong>SQL Series</strong> (Part 1 of 16)</p>
+<div class="series-nav-links">
+  <span class="series-nav-prev"></span>
+  <span class="series-nav-next"><a href="/2022/04/16/SQL-Study-Note-2/">Part 2: SQL Study Note - 2 - The Update / Delete / Insert Syntax</a> &rarr;</span>
+</div>
+</div>
 
     </div>
 
